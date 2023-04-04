@@ -31,7 +31,7 @@
       systems = [ "x86_64-linux" ];
       # imports = [ ];
       
-      flake.nixosConfigurations = flake-parts.modules.withSystem "x86_64-linux" ({system, ...}: {
+      flake.nixosConfigurations = flake-parts.all-modules.withSystem "x86_64-linux" ({system, ...}: {
         zoidberg = inputs.nixpkgs.lib.nixosSystem {
           inherit system;
 
