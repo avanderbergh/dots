@@ -28,7 +28,7 @@
     pinentryFlavor = "gnome3";
   };
 
-  programs.ssh.startAgent = true;
+  programs.ssh.startAgent = false;
 
   services.pcscd.enable = false;
 
