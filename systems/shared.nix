@@ -22,31 +22,13 @@
     useXkbConfig = true;
   };
 
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    pinentryFlavor = "gnome3";
-  };
+  services.yubikey-agent.enable = true;
 
-  programs.ssh.startAgent = false;
-
-  services.pcscd.enable = false;
-
-  environment.shellInit = ''
-    gpg-connect-agent /bye
-    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-  '';
-  
-  services.udev.packages = [ pkgs.yubikey-personalization ];
   environment.systemPackages = with pkgs; [
     vim
     wget
     git
     neovim
-    pinentry-gnome
-    gnupg
-    yubikey-personalization
-
   ];
 
   services.xserver.enable = true;
