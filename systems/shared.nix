@@ -23,7 +23,7 @@
   };
 
   services.udev.packages = [ pkgs.yubikey-personalization ];
-
+  services.yubikey-agent.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
