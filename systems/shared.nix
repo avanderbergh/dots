@@ -27,6 +27,7 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
+    pinentryFlavor = "gnome3";
   };
   
   environment.systemPackages = with pkgs; [
@@ -34,6 +35,7 @@
     wget
     git
     neovim
+    pinentry-gnome
   ];
 
   services.xserver.enable = true;
