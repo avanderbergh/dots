@@ -22,7 +22,12 @@
     useXkbConfig = true;
   };
 
-  services.yubikey-agent.enable = true;
+  services.udev.packages = [ pkgs.yubikey-personalization ];
+
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   environment.systemPackages = with pkgs; [
     vim
