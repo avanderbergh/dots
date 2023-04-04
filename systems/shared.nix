@@ -27,9 +27,9 @@
     enableSSHSupport = true;
   };
 
-  programs.ssh.startAgent = false;
+  programs.ssh.startAgent = true;
 
-  services.pcscd.enable = true;
+  services.pcscd.enable = false;
 
   environment.shellInit = ''
     gpg-connect-agent /bye
