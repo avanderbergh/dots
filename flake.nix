@@ -29,17 +29,19 @@
   outputs = inputs@{ flake-parts, home-manager, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
-      imports = [ ({ withSystem, inputs, ... } : {
-        flake.nixosConfigurations = withSystem "x86_64-linux" ({system, ...}: {
-          zoidberg = inputs.nixpkgs.lib.nixosSystem {
-            inherit system;
+      imports = [
+        ({ withSystem, inputs, ... } : {
+          flake.nixosConfigurations = withSystem "x86_64-linux" ({system, ...}: {
+            zoidberg = inputs.nixpkgs.lib.nixosSystem {
+              inherit system;
 
-            modules = [
-              ./systems/shared.nix
-              ./systems/zoidberg.nix
-            ];
-          };
-        });
-      }) ];
+              modules = [
+                ./systems/shared.nix
+                ./systems/zoidberg.nix
+              ];
+            };
+          });
+        })
+      ];
     };
 }
