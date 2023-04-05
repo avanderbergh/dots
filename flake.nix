@@ -30,9 +30,12 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
       imports = [
-        ({ withSystem, inputs, ... } : {
+        ({ withSystem, inputs, ... }:
+        let 
+          inherit (inputs.nixpkgs.lib) nixosSystem;
+        in {
           flake.nixosConfigurations = withSystem "x86_64-linux" ({system, ...}: {
-            zoidberg = inputs.nixpkgs.lib.nixosSystem {
+            zoidberg = nixosSystem {
               inherit system;
 
               modules = [
