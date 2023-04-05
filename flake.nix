@@ -39,8 +39,8 @@
               inherit system;
 
               modules = [
-                inputs.impermanence.nixosModules.impermanence
-                ./modules/impermanence.nix
+                # inputs.impermanence.nixosModules.impermanence
+                # ./modules/impermanence.nix
                 ./systems/shared.nix
                 ./systems/zoidberg.nix
               ];
