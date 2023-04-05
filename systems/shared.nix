@@ -28,8 +28,8 @@
     enable = true;
     enableSSHSupport = true;
   };
-  
-  services.gnome3.gnome-keyring.enable = lib.mkForce false;
+
+  services.gnome.gnome-keyring.enable = lib.mkForce false;
 
   environment.systemPackages = with pkgs; [
     vim
