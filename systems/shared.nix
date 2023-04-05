@@ -1,8 +1,6 @@
 { config, lib, modulesPath, pkgs, ...}:
 
-{
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
-  
+{  
   users.users.avanderbergh = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
