@@ -32,6 +32,8 @@
       imports = [
         ({ withSystem, inputs, ... }:
         let 
+          inherit (home-manager.nixosModules) home-manager;
+          inherit (inputs.impermanence.nixosModules) impermanence;
           inherit (inputs.nixpkgs.lib) nixosSystem;
         in {
           flake.nixosConfigurations = withSystem "x86_64-linux" ({system, ...}: {
@@ -39,12 +41,18 @@
               inherit system;
 
               modules = [
-                inputs.impermanence.nixosModules.impermanence
+                impermanence
                 ./modules/impermanence.nix
                 # inputs.lanzaboote.nixosModules.lanzaboote
                 # ./modules/secureboot.nix
                 ./systems/shared.nix
                 ./systems/zoidberg.nix
+                home-manager
+                {
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                  home-manager.users.avanderbergh = import ./home;
+                }
               ];
             };
           });

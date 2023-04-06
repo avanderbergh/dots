@@ -12,7 +12,6 @@
       google-chrome
       firefox
       thunderbird
-      vscode-fhs
     ];
   };
 
