@@ -40,8 +40,7 @@
 
               modules = [
                 inputs.impermanence.nixosModules.impermanence
-                ./modules/test-impermanence.nix
-                # ./modules/impermanence.nix
+                ./modules/impermanence.nix
                 # inputs.lanzaboote.nixosModules.lanzaboote
                 # ./modules/secureboot.nix
                 ./systems/shared.nix

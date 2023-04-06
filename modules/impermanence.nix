@@ -75,21 +75,13 @@
       "/var/lib/bluetooth"
       "/var/lib/boltd/"
       "/var/lib/colord"
-      "/var/lib/NetworkManager/"
       "/var/lib/systemd/coredump"
-      "/var/lib/systemd/rfkill/"
       "/var/lib/upower"
     ];
     files = [
-      "/etc/group"
-      "/etc/machine-id"
-      "/etc/passwd"
-      "/etc/shadow"
-      "/etc/subgid"
-      "/etc/subuid"
-      "/etc/sudoers"
-      "/var/lib/alsa/asound.state"
-      "/var/lib/power-profiles-daemon/state.ini"
+      "/var/lib/NetworkManager/secret_key"
+      "/var/lib/NetworkManager/seen-bssids"
+      "/var/lib/NetworkManager/timestamps"
     ];
   };
 
