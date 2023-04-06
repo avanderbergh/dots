@@ -1,9 +1,13 @@
 { config, lib, modulesPath, pkgs, ...}:
 
 {  
+  users.mutableUsers = false;
+  users.users.root.passwordFile = "/persist/passwords/root";
+
   users.users.avanderbergh = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
+    passwordFile = "/persist/passwords/avanderbergh";
     packages = with pkgs; [
       google-chrome
       firefox
