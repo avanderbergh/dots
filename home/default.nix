@@ -6,6 +6,10 @@
 
   home.stateVersion = "22.11";
 
-  programs.home-manager.enable = true;
-  programs.vscode.enable = true;
+  programs = {
+    fish.enable = true;
+    home-manager.enable = true;
+    starship.enable = true;
+    vscode.enable = true;
+  };
 }
