@@ -12,6 +12,8 @@
     ];
   };
 
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+
   time.timeZone = "Europe/Berlin";
   
   i18n.defaultLocale = "en_US.UTF-8";
