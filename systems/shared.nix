@@ -1,6 +1,8 @@
 { config, lib, modulesPath, pkgs, ...}:
 
 {  
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+
   users.mutableUsers = false;
   users.users.root.passwordFile = "/persist/passwords/root";
 
@@ -14,8 +16,6 @@
       thunderbird
     ];
   };
-
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
   time.timeZone = "Europe/Berlin";
   
@@ -46,19 +46,26 @@
     wget
   ];
 
-  services.fprintd.enable = true;
-  services.fprintd.tod.enable = true;
+  services.fprintd = {
+    enable = true;
+    tod = {
+      enable = true;
+      driver = pkgs.libfprint-2-tod1-goodix;
+    }
+  };
+
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.layout = "us";
   services.openssh.enable = true;
   services.printing.enable = true;
+  services.xserver.libinput.enable = true;
+
   sound.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.enableAllFirmware = true;
 
-  services.xserver.libinput.enable = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
