@@ -33,7 +33,7 @@
   };
 
   programs.fish.enable = true;
-  users.users.yourname.shell = pkgs.fish;
+  users.users.avanderbergh.shell = pkgs.fish;
 
   services.gnome.gnome-keyring.enable = lib.mkForce false;
 
