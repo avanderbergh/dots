@@ -47,6 +47,7 @@
   services.printing.enable = true;
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  hardware.enableAllFirmware = true;
 
   services.xserver.libinput.enable = true;
 

@@ -71,12 +71,13 @@
   environment.persistence."/persist" = {
     directories = [
       "/etc/NetworkManager/system-connections"
+      "/etc/secureboot"
       "/var/lib/bluetooth"
       "/var/lib/boltd/"
       "/var/lib/colord"
+      "/var/lib/NetworkManager/"
       "/var/lib/systemd/coredump"
       "/var/lib/systemd/rfkill/"
-      "/var/lib/NetworkManager/"
       "/var/lib/upower"
     ];
     files = [

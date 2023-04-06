@@ -41,6 +41,8 @@
               modules = [
                 # inputs.impermanence.nixosModules.impermanence
                 # ./modules/impermanence.nix
+                inputs.lanzaboote.nixosModules.lanzaboote
+                ./modules/secureboot.nix
                 ./systems/shared.nix
                 ./systems/zoidberg.nix
               ];
