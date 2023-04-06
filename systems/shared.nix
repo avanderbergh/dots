@@ -32,10 +32,11 @@
   services.gnome.gnome-keyring.enable = lib.mkForce false;
 
   environment.systemPackages = with pkgs; [
-    vim
-    wget
     git
     neovim
+    sbctl
+    vim
+    wget
   ];
 
   services.xserver.enable = true;
