@@ -38,6 +38,7 @@
   services.gnome.gnome-keyring.enable = lib.mkForce false;
 
   environment.systemPackages = with pkgs; [
+    bitwarden
     git
     neovim
     sbctl
@@ -45,6 +46,7 @@
     wget
   ];
 
+  services.fprintd.enable = true;
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
