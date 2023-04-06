@@ -32,6 +32,9 @@
     enableSSHSupport = true;
   };
 
+  programs.fish.enable = true;
+  users.users.yourname.shell = pkgs.fish;
+
   services.gnome.gnome-keyring.enable = lib.mkForce false;
 
   environment.systemPackages = with pkgs; [
