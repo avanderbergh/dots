@@ -33,7 +33,16 @@ in
           wayland.windowManager.hyprland = {
             enable = true;
             extraConfig = ''
-              bind = SUPER, Return, exec, alacritty
+              $mod = SUPER
+
+              bind = $mod, Return, exec, alacritty
+              bind = $mod, Q, killactive,
+              bind = $mod SHIFT, Q, exit,
+
+              bind = $mod, left, movefocus, l
+              bind = $mod, right, movefocus, r
+              bind = $mod, up, movefocus, u
+              bind = $mod, down, movefocus, d
             '';
             # xwayland.hidpi = true;
           };
