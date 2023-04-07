@@ -8,6 +8,7 @@ in
       inherit pkgs;
 
       modules = [
+        inputs.hyprland.homeManagerModules.default
         {
           home.username = "avanderbergh";
           home.homeDirectory = "/home/avanderbergh";
