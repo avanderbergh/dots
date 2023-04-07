@@ -35,7 +35,7 @@ in
             extraConfig = ''
               bind = SUPER, Return, exec, run-as-service alacritty
             '';
-            xwayland.hidpi = true;
+            # xwayland.hidpi = true;
           };
         }
       ];
