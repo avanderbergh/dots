@@ -30,8 +30,10 @@ in
             };
             zathura.enable = true;
           };
-          
+
           wayland.windowManager.hyprland.enable = true;
+          
+          nixpkgs.config.allowUnfree = true;
         }
       ];
     };
