@@ -14,6 +14,8 @@ in
           home.homeDirectory = "/home/avanderbergh";
 
           home.stateVersion = "22.11";
+          
+          nixpkgs.config.allowUnfree = true;
 
           programs = {
             alacritty.enable = true;
@@ -33,7 +35,6 @@ in
 
           wayland.windowManager.hyprland.enable = true;
           
-          nixpkgs.config.allowUnfree = true;
         }
       ];
     };
