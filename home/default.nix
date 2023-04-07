@@ -15,7 +15,10 @@
     obs-studio.enable = true;
     starship.enable = true;
     tealdeer.enable = true;
-    vscode.enable = true;
+    vscode = {
+      enable = true;
+      package = pkgs.vscode.fhs;
+    };
     zathura.enable = true;
   };
 }

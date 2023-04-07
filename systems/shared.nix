@@ -58,6 +58,32 @@
   hardware.pulseaudio.enable = true;
   hardware.enableAllFirmware = true;
 
+  fonts = {
+    enableDefaultFonts = true;
+    fonts = with pkgs; [
+      victor-mono
+      roboto
+      roboto-slab
+      joypixels
+      (nerdfonts.override { fonts = [ "Victor Mono" "Roboto Slab" "CascadiaCode" "Noto" ]; })
+    ];
+
+    fontconfig = {
+      defaultFonts = {
+        serif = [ "Roboto Slab" ];
+        sansSerif = [ "Roboto" ];
+        monospace = [ "Victor Mono" "CascadiaCode" ];
+      };
+
+      antialias = true;
+      subpixel = {
+        rgba = "none";
+        lcdfilter = "none";
+      };
+    };
+  };
+
+
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
