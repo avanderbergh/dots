@@ -1,7 +1,10 @@
 { inputs, withSystem, ... }:
+let
+  inherit (inputs.home-manager.lib) homeManagerConfiguration;
+in
 {
   flake.homeConfigurations = withSystem "x86_64-linux" ({pkgs, ...} : {
-    avanderbergh = {
+    avanderbergh = homeManagerConfiguration {
       inherit pkgs;
 
       modules = [
