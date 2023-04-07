@@ -28,13 +28,13 @@ in
             tealdeer.enable = true;
             vscode = {
               enable = true;
-              package = pkgs.vscode.fhs;
+              # package = pkgs.vscode.fhs;
             };
             zathura.enable = true;
           };
 
           wayland.windowManager.hyprland.enable = true;
-          
+
         }
       ];
     };
