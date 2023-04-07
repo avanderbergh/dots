@@ -30,8 +30,13 @@ in
             zathura.enable = true;
           };
 
-          wayland.windowManager.hyprland.enable = true;
-
+          wayland.windowManager.hyprland = {
+            enable = true;
+            extraConfig = ''
+              bind = SUPER, Return, exec, run-as-service alacritty
+            '';
+            xwayland.hidpi = true;
+          };
         }
       ];
     };
