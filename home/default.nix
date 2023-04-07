@@ -6,7 +6,6 @@ in
   flake.homeConfigurations = withSystem "x86_64-linux" ({pkgs, ...} : {
     avanderbergh = homeManagerConfiguration {
       inherit pkgs;
-
       modules = [
         inputs.hyprland.homeManagerModules.default
         {
@@ -15,8 +14,6 @@ in
 
           home.stateVersion = "22.11";
           
-          nixpkgs.config.allowUnfree = true;
-
           programs = {
             alacritty.enable = true;
             fish.enable = true;
@@ -28,7 +25,7 @@ in
             tealdeer.enable = true;
             vscode = {
               enable = true;
-              # package = pkgs.vscode.fhs;
+              package = pkgs.vscode.fhs;
             };
             zathura.enable = true;
           };

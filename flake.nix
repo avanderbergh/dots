@@ -29,12 +29,20 @@
 
   };
 
-  outputs = inputs@{ flake-parts, ... }:
+  outputs = inputs@{ self, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
+      
       imports = [
         ./systems
         ./home
       ];
+
+      perSystem = { pkgs, system, ... } : {
+        _module.args.pkgs = import self.inputs.nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      };
     };
 }
