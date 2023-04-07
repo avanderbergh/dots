@@ -64,7 +64,7 @@
       victor-mono
       roboto
       roboto-slab
-      joypixels
+      noto-fonts-emoji
       (nerdfonts.override { fonts = [ "Victor Mono" "Roboto Slab" "CascadiaCode" "Noto" ]; })
     ];
 
