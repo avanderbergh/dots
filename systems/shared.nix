@@ -65,14 +65,14 @@
       roboto
       roboto-slab
       noto-fonts-emoji
-      (nerdfonts.override { fonts = [ "Victor Mono" "Roboto Slab" "CascadiaCode" "Noto" ]; })
+      (nerdfonts.override { fonts = [ "VictorMono" "Noto" ]; })
     ];
 
     fontconfig = {
       defaultFonts = {
         serif = [ "Roboto Slab" ];
         sansSerif = [ "Roboto" ];
-        monospace = [ "Victor Mono" "CascadiaCode" ];
+        monospace = [ "Victor Mono" ];
       };
 
       antialias = true;
