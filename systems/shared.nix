@@ -35,6 +35,8 @@
   programs.fish.enable = true;
   users.users.avanderbergh.shell = pkgs.fish;
 
+  programs.hyprland.enable = true;
+
   services.gnome.gnome-keyring.enable = lib.mkForce false;
 
   environment.systemPackages = with pkgs; [
@@ -46,13 +48,13 @@
     wget
   ];
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.layout = "us";
   services.openssh.enable = true;
   services.printing.enable = true;
-  services.xserver.libinput.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.enable = true;
+  # services.xserver.layout = "us";
+  # services.xserver.libinput.enable = true;
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -83,15 +85,19 @@
     };
   };
 
-
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   
   networking.useDHCP = lib.mkDefault true;
   networking.networkmanager.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
+
+
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "22.11";
 }

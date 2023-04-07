@@ -18,6 +18,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Window Manager
+    hyprland.url = "github:hyprwm/Hyprland";
+
     # Links persistent folders into system
     impermanence.url = "github:nix-community/impermanence";
 
@@ -26,35 +29,12 @@
 
   };
 
-  outputs = inputs@{ flake-parts, home-manager, impermanence, ... }:
+  outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
       imports = [
-        ({ withSystem, inputs, ... }:
-        let 
-          inherit (inputs.nixpkgs.lib) nixosSystem;
-        in {
-          flake.nixosConfigurations = withSystem "x86_64-linux" ({system, ...}: {
-            zoidberg = nixosSystem {
-              inherit system;
-
-              modules = [
-                impermanence.nixosModules.impermanence
-                ./modules/impermanence.nix
-                # inputs.lanzaboote.nixosModules.lanzaboote
-                # ./modules/secureboot.nix
-                ./systems/shared.nix
-                ./systems/zoidberg.nix
-                home-manager.nixosModules.home-manager
-                {
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-                  home-manager.users.avanderbergh = import ./home;
-                }
-              ];
-            };
-          });
-        })
+        ./systems
+        ./home
       ];
     };
 }
