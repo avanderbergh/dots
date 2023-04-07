@@ -33,7 +33,7 @@ in
           wayland.windowManager.hyprland = {
             enable = true;
             extraConfig = ''
-              bind = SUPER, Return, exec, run-as-service alacritty
+              bind = SUPER, Return, exec, alacritty
             '';
             # xwayland.hidpi = true;
           };
