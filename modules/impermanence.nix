@@ -75,6 +75,7 @@
       "/var/lib/bluetooth"
       "/var/lib/boltd/"
       "/var/lib/colord"
+      "/var/lib/fprint"
       "/var/lib/systemd/coredump"
       "/var/lib/upower"
     ];
