@@ -19,7 +19,6 @@ in
             alacritty.enable = true;
             fish.enable = true;
             home-manager.enable = true;
-            hyprland.enable = true;
             lf.enable = true;
             mpv.enable = true;
             obs-studio.enable = true;
@@ -31,6 +30,8 @@ in
             };
             zathura.enable = true;
           };
+          
+          wayland.windowManager.hyprland.enable = true;
         }
       ];
     };
