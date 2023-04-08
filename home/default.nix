@@ -30,19 +30,26 @@ in
             zathura.enable = true;
           };
 
+          home.packages = with pkgs; [
+            wofi
+          ];
+
           wayland.windowManager.hyprland = {
             enable = true;
             extraConfig = ''
               $mod = SUPER
 
-              bind = $mod, Return, exec, alacritty
-              bind = $mod, Q, killactive,
+              bind = $mod, W, killactive,
               bind = $mod SHIFT, Q, exit,
 
               bind = $mod, left, movefocus, l
               bind = $mod, right, movefocus, r
               bind = $mod, up, movefocus, u
               bind = $mod, down, movefocus, d
+
+              # Programs
+              bind = $mod, Return, exec, alacritty
+              bindr = $mod, SUPER_L, exec, pkill .wofi || run-as-service wofi
             '';
             # xwayland.hidpi = true;
           };
