@@ -34,6 +34,11 @@ in
             wofi
           ];
 
+          home.file.".config" = {
+            source = ./config;
+            recursive = true;
+          }
+
           wayland.windowManager.hyprland = {
             enable = true;
             extraConfig = ''
