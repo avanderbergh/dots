@@ -27,7 +27,7 @@
 
   programs.gnupg.agent = {
     enable = true;
-    pinentryFlavor = "curses";
+    pinentryFlavor = "tty";
     enableSSHSupport = true;
   };
 
@@ -64,6 +64,7 @@
     systemPackages = with pkgs; [
       sbctl
       pciutils
+      pinentry
       pinentry-gtk2
       pinentry-curses
       polkit_gnome
