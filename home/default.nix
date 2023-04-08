@@ -52,16 +52,14 @@ in
               bind = $mod, up, movefocus, u
               bind = $mod, down, movefocus, d
 
-              bind = #mod, S, submap, resize
+              bind = $mod, S, submap, resize
 
               submap = resize
-
               bind = , right, resizeactive, 10 0
               bind = , left, resizeactive, -10 0
               bind = , up, resizeactive, 0 -10
               bind = , down, resizeactive, 0 10
               bind = , escape, submap, reset
-              
               submap = reset
 
               # Programs
