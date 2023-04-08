@@ -35,7 +35,7 @@ in
           ];
 
           home.file.".config" = {
-            source = ./config;
+            source = ./files/config;
             recursive = true;
           };
 
