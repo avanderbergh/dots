@@ -55,10 +55,10 @@ in
               bind = $mod, S, submap, resize
 
               submap = resize
-              bind = , right, resizeactive, 10 0
-              bind = , left, resizeactive, -10 0
-              bind = , up, resizeactive, 0 -10
-              bind = , down, resizeactive, 0 10
+              binde = , right, resizeactive, 10 0
+              binde = , left, resizeactive, -10 0
+              binde = , up, resizeactive, 0 -10
+              binde = , down, resizeactive, 0 10
               bind = , escape, submap, reset
               submap = reset
 
