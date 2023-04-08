@@ -34,10 +34,10 @@ in
             wofi
           ];
 
-          home.file.".config" = {
-            source = ./files/config;
-            recursive = true;
-          };
+          # home.file.".config" = {
+          #   source = ./files/config;
+          #   recursive = true;
+          # };
 
           wayland.windowManager.hyprland = {
             enable = true;
