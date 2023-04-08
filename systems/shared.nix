@@ -27,6 +27,7 @@
 
   programs.gnupg.agent = {
     enable = true;
+    pinentryFlavor = "curses";
     enableSSHSupport = true;
   };
 
@@ -39,15 +40,8 @@
     blueman.enable = true;
     flatpak.enable = true;
     udev.packages = with pkgs; [
-      gnome.gnome-settings-daemon
       yubikey-personalization
     ];
-
-    gnome = {
-      gnome-keyring.enable = true;
-      gnome-browser-connector.enable = true;
-      sushi.enable = true;
-    };
 
     pipewire = {
       enable = true;
@@ -63,50 +57,17 @@
     xserver = {
       enable = true;
       videoDrivers = ["nvidia"];
-
-      displayManager = {
-        defaultSession = "gnome";
-        sessionPackages = [inputs.hyprland.packages.${pkgs.system}.default];
-
-        startx.enable = true;
-      };
-      desktopManager.gnome.enable = true;
     };
   };
 
   environment = {
-    gnome.excludePackages =
-      (with pkgs; [
-        gnome-photos
-        gnome-tour
-      ])
-      ++ (with pkgs.gnome; [
-        cheese
-        gnome-music
-        gnome-terminal
-        gedit
-        epiphany
-        geary
-        evince
-        gnome-characters
-        totem
-        tali
-        iagno
-        hitori
-        atomix
-        yelp
-      ]);
-
     systemPackages = with pkgs; [
       sbctl
       pciutils
+      pinentry-gtk2
+      pinentry-curses
+      polkit_gnome
     ];
-
-    loginShellInit = ''
-      dbus-update-activation-environment --systemd DISPLAY
-      eval $(ssh-agent)
-      eval $(gnome-keyring-daemon --start --daemonize --components=ssh)
-    '';
 
     variables = {
       CLUTTER_BACKEND = "wayland";
@@ -151,18 +112,14 @@
 
     nvidia = {
       modesetting.enable = true;
-      open = true;
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
       powerManagement.enable = true;
     };
 
     opengl = {
       enable = true;
-      driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [
-        vaapiVdpau
-        libvdpau-va-gl
         nvidia-vaapi-driver
       ];
     };
@@ -211,5 +168,5 @@
 
 
   nixpkgs.config.allowUnfree = true;
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 }

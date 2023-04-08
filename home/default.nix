@@ -12,7 +12,7 @@ in
           home = {
             username = "avanderbergh";
             homeDirectory = "/home/avanderbergh";
-            stateVersion = "22.11";
+            stateVersion = "23.05";
 
             file.".config" = {
               source = ./files/config;
@@ -92,13 +92,6 @@ in
             zathura.enable = true;
           };
 
-          services = {
-            gpg-agent = {
-              enable = true;
-              pinentryFlavor = "gnome3";
-            };
-          };
-
           wayland.windowManager.hyprland = {
             enable = true;
             extraConfig = ''
@@ -127,7 +120,6 @@ in
               bindr = $mod, SUPER_L, exec, pkill wofi || wofi --show=drun
             '';
             nvidiaPatches = true;
-            systemdIntegration = true;
           };
         }
       ];
