@@ -5,6 +5,7 @@ in {
   flake.nixosConfigurations = withSystem "x86_64-linux" ({system, ...}: {
     zoidberg = nixosSystem {
       inherit system;
+      specialArgs = {inherit inputs;};
 
       modules = [
         inputs.hyprland.nixosModules.default
