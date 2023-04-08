@@ -97,7 +97,10 @@
         yelp
       ]);
 
-    systemPackages = with pkgs; [sbctl ];
+    systemPackages = with pkgs; [
+      sbctl
+      pciutils
+    ];
 
     loginShellInit = ''
       dbus-update-activation-environment --systemd DISPLAY
