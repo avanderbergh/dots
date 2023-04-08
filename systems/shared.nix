@@ -25,8 +25,6 @@
     useXkbConfig = true;
   };
 
-  services.udev.packages = [ pkgs.yubikey-personalization ];
-
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -37,28 +35,140 @@
 
   programs.hyprland.enable = true;
 
-  services.gnome.gnome-keyring.enable = lib.mkForce false;
+  services = {
+    blueman.enable = true;
+    flatpak.enable = true;
+    udev.packages = with pkgs; [
+      gnome.gnome-settings-daemon
+      yubikey-personalization
+    ];
 
-  environment.systemPackages = with pkgs; [
-    bitwarden
-    git
-    neovim
-    sbctl
-    vim
-    wget
-  ];
+    gnome = {
+      gnome-keyring.enable = true;
+      gnome-browser-connector.enable = true;
+      sushi.enable = true;
+    };
 
-  services.openssh.enable = true;
-  services.printing.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.enable = true;
-  # services.xserver.layout = "us";
-  # services.xserver.libinput.enable = true;
+    pipewire = {
+      enable = true;
+      jack.enable = true;
+      pulse.enable = true;
 
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.enableAllFirmware = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+    };
+
+    xserver = {
+      enable = true;
+      videoDrivers = ["nvidia"];
+
+      displayManager = {
+        defaultSession = "gnome";
+        sessionPackages = [inputs.hyprland.packages.${pkgs.system}.default];
+
+        startx.enable = true;
+      };
+      desktopManager.gnome.enable = true;
+    };
+  };
+
+  environment = {
+    gnome.excludePackages =
+      (with pkgs; [
+        gnome-photos
+        gnome-tour
+      ])
+      ++ (with pkgs.gnome; [
+        cheese
+        gnome-music
+        gnome-terminal
+        gedit
+        epiphany
+        geary
+        evince
+        gnome-characters
+        totem
+        tali
+        iagno
+        hitori
+        atomix
+        yelp
+      ]);
+
+    systemPackages = with pkgs; [sbctl ];
+
+    loginShellInit = ''
+      dbus-update-activation-environment --systemd DISPLAY
+      eval $(ssh-agent)
+      eval $(gnome-keyring-daemon --start --daemonize --components=ssh)
+    '';
+
+    variables = {
+      CLUTTER_BACKEND = "wayland";
+      # DEFAULT_BROWSER = "${pkgs.firefox-nightly-bin}/bin/firefox";
+      DIRENV_LOG_FORMAT = "";
+      DISABLE_QT5_COMPAT = "0";
+      GBM_BACKEND = "nvidia-drm";
+      GDK_BACKEND = "wayland";
+      GDK_SCALE = "2";
+      GLFW_IM_MODULE = "ibus";
+      GPG_TTY = "$TTY";
+      LIBSEAT_BACKEND = "logind";
+      LIBVA_DRIVER_NAME = "nvidia";
+      NIXOS_OZONE_WL = "1";
+      NIXPKGS_ALLOW_UNFREE = "1";
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+      QT_QPA_PLATFORM = "wayland;xcb";
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      SDL_VIDEODRIVER = "wayland";
+      WINIT_UNIX_BACKEND = "x11";
+      WLR_BACKEND = "vulkan";
+      WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
+      WLR_DRM_NO_ATOMIC = "1";
+      WLR_NO_HARDWARE_CURSORS = "1";
+      WLR_RENDERER = "vulkan";
+      XCURSOR_SIZE = "48";
+      _JAVA_AWT_WM_NONREPARENTING = "1";
+      __GL_GSYNC_ALLOWED = "0";
+      __GL_VRR_ALLOWED = "0";
+      # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    };
+  };
+
+
+  hardware = {
+    enableAllFirmware = true;
+
+    bluetooth = {
+      enable = false;
+      package = pkgs.bluez;
+    };
+
+    nvidia = {
+      modesetting.enable = true;
+      open = true;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
+      powerManagement.enable = true;
+    };
+
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        vaapiVdpau
+        libvdpau-va-gl
+        nvidia-vaapi-driver
+      ];
+    };
+
+    video.hidpi.enable = true;
+
+    i2c.enable = true;
+    pulseaudio.enable = false;
+  };
 
   fonts = {
     enableDefaultFonts = true;
@@ -95,6 +205,7 @@
     experimental-features = [ "nix-command" "flakes" ];
     substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    trusted-users = [ "root" "avanderbergh"];
   };
 
 
