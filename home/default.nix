@@ -49,7 +49,7 @@ in
 
               # Programs
               bind = $mod, Return, exec, alacritty
-              bindr = $mod, SUPER_L, exec, pkill .wofi || run-as-service wofi
+              bindr = $mod, SUPER_L, exec, pkill .wofi-wrapped || run-as-service wofi
             '';
             # xwayland.hidpi = true;
           };
