@@ -3,7 +3,7 @@
 { inputs, config, lib, modulesPath, pkgs, ... }:
 
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ./wayland ];
 
   # 🖥 Hardware Settings
 
