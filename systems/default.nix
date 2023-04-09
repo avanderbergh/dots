@@ -1,11 +1,10 @@
 { withSystem, inputs, ... }:
-let 
-  inherit (inputs.nixpkgs.lib) nixosSystem;
+let inherit (inputs.nixpkgs.lib) nixosSystem;
 in {
-  flake.nixosConfigurations = withSystem "x86_64-linux" ({system, ...}: {
+  flake.nixosConfigurations = withSystem "x86_64-linux" ({ system, ... }: {
     zoidberg = nixosSystem {
       inherit system;
-      specialArgs = {inherit inputs;};
+      specialArgs = { inherit inputs; };
 
       modules = [
         inputs.hyprland.nixosModules.default

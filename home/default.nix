@@ -1,9 +1,7 @@
 { inputs, withSystem, ... }:
-let
-  inherit (inputs.home-manager.lib) homeManagerConfiguration;
-in
-{
-  flake.homeConfigurations = withSystem "x86_64-linux" ({pkgs, ...} : {
+let inherit (inputs.home-manager.lib) homeManagerConfiguration;
+in {
+  flake.homeConfigurations = withSystem "x86_64-linux" ({ pkgs, ... }: {
     avanderbergh = homeManagerConfiguration {
       inherit pkgs;
       modules = [
@@ -18,7 +16,7 @@ in
               source = ./files/config;
               recursive = true;
             };
-            
+
             packages = with pkgs; [
               alejandra
               brightnessctl
@@ -28,7 +26,7 @@ in
               wofi
             ];
           };
-          
+
           programs = {
             alacritty.enable = true;
             exa = {

@@ -4,16 +4,12 @@
   boot.initrd.systemd.enable = lib.mkDefault true;
   boot.initrd.systemd.services.rollback = {
     description = "Rollback BTRFS root subvolume to a pristine state";
-    wantedBy = [
-      "initrd.target"
-    ];
+    wantedBy = [ "initrd.target" ];
     after = [
       # LUKS/TPM process
       "systemd-cryptsetup@enc.service"
     ];
-    before = [
-      "sysroot.mount"
-    ];
+    before = [ "sysroot.mount" ];
     unitConfig.DefaultDependencies = "no";
     serviceConfig.Type = "oneshot";
     script = ''
@@ -53,12 +49,8 @@
   };
   boot.initrd.systemd.services.persisted-files = {
     description = "Hard-link persisted files from /persist";
-    wantedBy = [
-      "initrd.target"
-    ];
-    after = [
-      "sysroot.mount"
-    ];
+    wantedBy = [ "initrd.target" ];
+    after = [ "sysroot.mount" ];
     unitConfig.DefaultDependencies = "no";
     serviceConfig.Type = "oneshot";
     script = ''
