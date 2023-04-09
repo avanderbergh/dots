@@ -70,7 +70,6 @@
       pinentryFlavor = "tty";
       enableSSHSupport = true;
     };
-    hyprland.enable = true;
     users.users.avanderbergh.shell = pkgs.fish;
   };
 
