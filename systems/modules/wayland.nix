@@ -31,10 +31,7 @@ in {
       NIXOS_OZONE_WL = "1";
       QT_QPA_PLATFORM = "wayland";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-      VK_INSTANCE_LAYERS = "VK_LAYER_KHRONOS_validation";
-      VDPAU_DRIVER = "va_gl";
       WLR_BACKEND = "vulkan";
-      WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
       WLR_DRM_NO_ATOMIC = "1";
       WLR_NO_HARDWARE_CURSORS = "1";
       WLR_RENDERER = "vulkan";

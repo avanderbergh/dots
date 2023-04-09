@@ -33,13 +33,7 @@
 
     opengl = {
       enable = true;
-      extraPackages = with pkgs; [
-        intel-media-driver
-        libvdpau-va-gl
-        nvidia-vaapi-driver
-        vaapiIntel
-        vaapiVdpau
-      ];
+      extraPackages = with pkgs; [ nvidia-vaapi-driver vaapiVdpau ];
     };
 
     i2c.enable = true;
