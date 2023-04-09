@@ -29,7 +29,8 @@
 
   };
 
-  outputs = inputs@{ self, flake-parts, home-manager, hyprland, ... }:
+  outputs =
+    inputs@{ self, flake-parts, home-manager, hyprland, nixos-hardware, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
@@ -44,6 +45,7 @@
                   specialArgs = { inherit inputs; };
 
                   modules = [
+                    nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
                     ./systems
                     ./systems/zoidberg.nix
                     home-manager.nixosModules.home-manager

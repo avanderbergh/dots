@@ -33,7 +33,6 @@
 
     opengl = {
       enable = true;
-      driSupport32Bit = true;
       extraPackages = with pkgs; [ nvidia-vaapi-driver ];
     };
 
@@ -131,6 +130,8 @@
       };
     };
   };
+
+  security.polkit.enable = true;
 
   # ❄ Nix Settings
 
