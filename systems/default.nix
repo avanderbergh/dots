@@ -27,13 +27,17 @@
 
     nvidia = {
       modesetting.enable = true;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
       powerManagement.enable = true;
     };
 
     opengl = {
       enable = true;
-      extraPackages = with pkgs; [ nvidia-vaapi-driver ];
+      extraPackages = with pkgs; [
+        libvdpau-va-gl
+        nvidia-vaapi-driver
+        vaapiVdpau
+      ];
     };
 
     i2c.enable = true;
