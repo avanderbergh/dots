@@ -33,10 +33,10 @@ in {
       QT_QPA_PLATFORM = "wayland";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
       VK_INSTANCE_LAYERS = "VK_LAYER_KHRONOS_validation";
-      WLR_BACKEND = "vulkan";
-      WLR_DRM_NO_ATOMIC = "1";
+      # WLR_BACKEND = "vulkan";
+      # WLR_DRM_NO_ATOMIC = "1";
       WLR_NO_HARDWARE_CURSORS = "1";
-      WLR_RENDERER = "vulkan";
+      # WLR_RENDERER = "vulkan";
       XCURSOR_SIZE = "24";
       XDG_SESSION_TYPE = "wayland";
     };
