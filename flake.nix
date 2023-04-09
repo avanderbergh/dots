@@ -29,11 +29,37 @@
 
   };
 
-  outputs = inputs@{ self, flake-parts, ... }:
+  outputs = inputs@{ self, flake-parts, home-manager, hyprland, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
-      imports = [ ./systems ./home ];
+      imports = [
+        ({ withSystem, inputs, ... }:
+          let inherit (inputs.nixpkgs.lib) nixosSystem;
+          in {
+            flake.nixosConfigurations = withSystem "x86_64-linux"
+              ({ system, ... }: {
+                zoidberg = nixosSystem {
+                  inherit system;
+                  specialArgs = { inherit inputs; };
+
+                  modules = [
+                    ./systems
+                    ./systems/zoidberg.nix
+                    home-manager.nixosModules.home-manager
+                    {
+                      home-manager.useGlobalPkgs = true;
+                      home-manager.useUserPackages = true;
+                      home-manager.users.avanderbergh = {
+                        imports =
+                          [ hyprland.homeManagerModules.default ./home ];
+                      };
+                    }
+                  ];
+                };
+              });
+          })
+      ];
 
       perSystem = { pkgs, system, ... }: {
         _module.args.pkgs = import self.inputs.nixpkgs {

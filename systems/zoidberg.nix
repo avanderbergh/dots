@@ -1,59 +1,73 @@
-{ config, lib, pkgs, ... }:
+# Configuration for the 🦀 zoidberg laptop
+
+{ inputs, config, lib, pkgs, ... }:
 
 {
-
   networking.hostName = "zoidberg";
 
-  boot.initrd.availableKernelModules =
-    [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-  boot.initrd.kernelModules = [ "tpm_tis" ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  imports = [
+    inputs.impermanence.nixosModules.impermanence
+    ./modules/impermanence.nix
+    ./modules/fingerprint.nix
+  ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
-    fsType = "btrfs";
-    options = [ "subvol=root" "compress=zstd" "noatime" ];
+  boot = {
+    extraModulePackages = [ ];
+    initrd = {
+      availableKernelModules =
+        [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+      kernelModules = [ "tpm_tis" ];
+      luks.devices."enc".device =
+        "/dev/disk/by-uuid/b9237f83-f195-4545-9bad-ee84c018d8cd";
+    };
+    kernelModules = [ "kvm-intel" ];
   };
 
-  boot.initrd.luks.devices."enc".device =
-    "/dev/disk/by-uuid/b9237f83-f195-4545-9bad-ee84c018d8cd";
+  fileSystems = {
 
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
-    fsType = "btrfs";
-    options = [ "subvol=home" "compress=zstd" "noatime" ];
-  };
+    "/" = {
+      device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
+      fsType = "btrfs";
+      options = [ "subvol=root" "compress=zstd" "noatime" ];
+    };
 
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
-    fsType = "btrfs";
-    options = [ "subvol=nix" "compress=zstd" "noatime" ];
-  };
+    "/home" = {
+      device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
+      fsType = "btrfs";
+      options = [ "subvol=home" "compress=zstd" "noatime" ];
+    };
 
-  fileSystems."/persist" = {
-    device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
-    fsType = "btrfs";
-    options = [ "subvol=persist" "compress=zstd" "noatime" ];
-    neededForBoot = true;
-  };
+    "/nix" = {
+      device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
+      fsType = "btrfs";
+      options = [ "subvol=nix" "compress=zstd" "noatime" ];
+    };
 
-  fileSystems."/var/log" = {
-    device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
-    fsType = "btrfs";
-    options = [ "subvol=log" "compress=zstd" "noatime" ];
-    neededForBoot = true;
-  };
+    "/persist" = {
+      device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
+      fsType = "btrfs";
+      options = [ "subvol=persist" "compress=zstd" "noatime" ];
+      neededForBoot = true;
+    };
 
-  fileSystems."/swap" = {
-    device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
-    fsType = "btrfs";
-    options = [ "subvol=swap" "noatime" ];
-  };
+    "/var/log" = {
+      device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
+      fsType = "btrfs";
+      options = [ "subvol=log" "compress=zstd" "noatime" ];
+      neededForBoot = true;
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/246D-DA90";
-    fsType = "vfat";
+    "/swap" = {
+      device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
+      fsType = "btrfs";
+      options = [ "subvol=swap" "noatime" ];
+    };
+
+    "/boot" = {
+      device = "/dev/disk/by-uuid/246D-DA90";
+      fsType = "vfat";
+    };
+
   };
 
   swapDevices = [{
@@ -61,16 +75,13 @@
     size = (1024 * 32) + (1024 * 2);
   }];
 
-  services.fprintd = {
-    enable = true;
-    tod = {
-      enable = true;
-      driver = pkgs.libfprint-2-tod1-goodix;
-    };
-  };
+  # Enable the fingerprint reader
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+
   hardware.cpu.intel.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
+
 }

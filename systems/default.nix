@@ -1,20 +1,158 @@
-{ withSystem, inputs, ... }:
-let inherit (inputs.nixpkgs.lib) nixosSystem;
-in {
-  flake.nixosConfigurations = withSystem "x86_64-linux" ({ system, ... }: {
-    zoidberg = nixosSystem {
-      inherit system;
-      specialArgs = { inherit inputs; };
+# The Default Configuration for all my NixOS machines
 
-      modules = [
-        inputs.hyprland.nixosModules.default
-        inputs.impermanence.nixosModules.impermanence
-        ./modules/impermanence.nix
-        # inputs.lanzaboote.nixosModules.lanzaboote
-        # ./msecureboot.nix
-        ./shared.nix
-        ./zoidberg.nix
-      ];
+{ inputs, config, lib, modulesPath, pkgs, ... }:
+
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+
+  # 🖥 Hardware Settings
+
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    systemd-boot.enable = true;
+  };
+
+  networking = {
+    networkmanager.enable = true;
+    useDHCP = lib.mkDefault true;
+  };
+
+  hardware = {
+    enableAllFirmware = true;
+
+    bluetooth = {
+      enable = false;
+      package = pkgs.bluez;
     };
-  });
+
+    nvidia = {
+      modesetting.enable = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      powerManagement.enable = true;
+    };
+
+    opengl = {
+      enable = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [ nvidia-vaapi-driver ];
+    };
+
+    i2c.enable = true;
+    pulseaudio.enable = false;
+  };
+
+  # 💽 OS Settings
+
+  users = {
+    mutableUsers = false;
+    users = {
+      avanderbergh = {
+        isNormalUser = true;
+        extraGroups = [ "wheel" "networkmanager" ];
+        passwordFile = "/persist/passwords/avanderbergh";
+      };
+      root.passwordFile = "/persist/passwords/root";
+      time.timeZone = "Europe/Berlin";
+
+      i18n.defaultLocale = "en_US.UTF-8";
+    };
+  };
+
+  console = {
+    font = "Lat2-Terminus16";
+    useXkbConfig = true;
+  };
+
+  programs = {
+    fish.enable = true;
+    gnupg.agent = {
+      enable = true;
+      pinentryFlavor = "tty";
+      enableSSHSupport = true;
+    };
+    hyprland.enable = true;
+    users.users.avanderbergh.shell = pkgs.fish;
+  };
+
+  services = {
+    blueman.enable = true;
+    flatpak.enable = true;
+    udev.packages = with pkgs; [ yubikey-personalization ];
+
+    pipewire = {
+      enable = true;
+      jack.enable = true;
+      pulse.enable = true;
+
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+    };
+
+    xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+    };
+  };
+
+  environment = {
+    systemPackages = with pkgs; [
+      sbctl
+      pciutils
+      pinentry
+      pinentry-gtk2
+      pinentry-curses
+      polkit_gnome
+      pass
+    ];
+  };
+
+  fonts = {
+    enableDefaultFonts = true;
+    fonts = with pkgs; [
+      victor-mono
+      roboto
+      roboto-slab
+      noto-fonts-emoji
+      (nerdfonts.override { fonts = [ "VictorMono" "Noto" ]; })
+    ];
+
+    fontconfig = {
+      defaultFonts = {
+        serif = [ "Roboto Slab" ];
+        sansSerif = [ "Roboto" ];
+        monospace = [ "Victor Mono" ];
+      };
+
+      antialias = true;
+      subpixel = {
+        rgba = "none";
+        lcdfilter = "none";
+      };
+    };
+  };
+
+  # ❄ Nix Settings
+
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      substituters =
+        [ "https://hyprland.cachix.org" "" "https://cache.nixos.org" "" ];
+      trusted-public-keys = [
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      ];
+      trusted-users = [ "root" "avanderbergh" ];
+    };
+  };
+
+  nixpkgs.config.allowUnfree = true;
+  system.stateVersion = "23.05";
 }
