@@ -9,6 +9,7 @@
     inputs.impermanence.nixosModules.impermanence
     ./modules/impermanence.nix
     ./modules/fingerprint.nix
+    ./modules/wayland.nix
   ];
 
   boot = {
