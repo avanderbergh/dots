@@ -50,6 +50,7 @@
         isNormalUser = true;
         extraGroups = [ "wheel" "networkmanager" ];
         passwordFile = "/persist/passwords/avanderbergh";
+        shell = pkgs.fish;
       };
       root.passwordFile = "/persist/passwords/root";
       time.timeZone = "Europe/Berlin";
@@ -70,7 +71,6 @@
       pinentryFlavor = "tty";
       enableSSHSupport = true;
     };
-    users.users.avanderbergh.shell = pkgs.fish;
   };
 
   services = {
