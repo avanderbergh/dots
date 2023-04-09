@@ -29,12 +29,12 @@ in {
       LIBVA_DRIVER_NAME = "nvidia";
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
-      PATH = [ "$HOME/.local/bin/:$PATH" ];
       QT_QPA_PLATFORM = "wayland";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-      # VK_INSTANCE_LAYERS = "VK_LAYER_KHRONOS_validation";
+      VK_INSTANCE_LAYERS = "VK_LAYER_KHRONOS_validation";
       WLR_BACKEND = "vulkan";
-      # WLR_DRM_NO_ATOMIC = "1";
+      WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
+      WLR_DRM_NO_ATOMIC = "1";
       WLR_NO_HARDWARE_CURSORS = "1";
       WLR_RENDERER = "vulkan";
       XCURSOR_SIZE = "24";
@@ -49,6 +49,8 @@ in {
       swayidle
       swaylock-effects
       swww
+      vulkan-loader
+      vulkan-tools
       vulkan-validation-layers
       wayland
       wl-clipboard
