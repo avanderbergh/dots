@@ -49,6 +49,7 @@ in {
       swayidle
       swaylock-effects
       swww
+      vulkan-validation-layers
       wayland
       wl-clipboard
       wlogout
