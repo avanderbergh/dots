@@ -24,13 +24,9 @@
     # Links persistent folders into system
     impermanence.url = "github:nix-community/impermanence";
 
-    # Provides module support for specific vendor hardware
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-
   };
 
-  outputs =
-    inputs@{ self, flake-parts, home-manager, hyprland, nixos-hardware, ... }:
+  outputs = inputs@{ self, flake-parts, home-manager, hyprland, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
@@ -45,7 +41,6 @@
                   specialArgs = { inherit inputs; };
 
                   modules = [
-                    nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
                     ./systems
                     ./systems/zoidberg.nix
                     home-manager.nixosModules.home-manager
