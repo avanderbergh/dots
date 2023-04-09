@@ -17,11 +17,12 @@
     initrd = {
       availableKernelModules =
         [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-      kernelModules = [ "tpm_tis" ];
+      kernelModules = [ "i915" "tpm_tis" ];
       luks.devices."enc".device =
         "/dev/disk/by-uuid/b9237f83-f195-4545-9bad-ee84c018d8cd";
     };
     kernelModules = [ "kvm-intel" ];
+    kernelParams = [ "acpi_rev_override" ];
   };
 
   fileSystems = {
@@ -84,5 +85,7 @@
 
   hardware.cpu.intel.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  services.thermald.enable = true;
 
 }
