@@ -34,7 +34,7 @@ in {
       WLR_DRM_NO_ATOMIC = "1";
       WLR_NO_HARDWARE_CURSORS = "1";
       WLR_RENDERER = "vulkan";
-      #WLR_DRM_DEVICES = "/dev/dri/card0";
+      WLR_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1";
       XCURSOR_SIZE = "24";
       XDG_SESSION_TYPE = "wayland";
     };
