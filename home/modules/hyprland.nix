@@ -3,6 +3,12 @@
     enable = true;
     nvidiaPatches = true;
     extraConfig = ''
+      # Environment
+
+      exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
+      # Keybindings
+
       $mod = SUPER
 
       bind = $mod, W, killactive,
