@@ -96,13 +96,15 @@
 
   environment = {
     systemPackages = with pkgs; [
-      sbctl
+      dconf
+      gtk-engine-murrine
+      pass
       pciutils
       pinentry
-      pinentry-gtk2
       pinentry-curses
+      pinentry-gtk2
       polkit_gnome
-      pass
+      sbctl
     ];
   };
 
