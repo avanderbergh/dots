@@ -27,7 +27,6 @@
 
   programs = {
     alacritty.enable = true;
-    dconf.enable = true;
     exa = {
       enable = true;
       enableAliases = true;
