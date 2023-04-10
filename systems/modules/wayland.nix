@@ -65,13 +65,13 @@ in {
     dbus.enable = true;
     greetd = {
       enable = true;
-      # settings = rec {
-      #   initial_session = {
-      #     command = "Hyprland";
-      #     user = "avanderbergh";
-      #   };
-      #   default_session = initial_session;
-      # };
+      settings = rec {
+        initial_session = {
+          command = "$SHELL -l";
+          user = "avanderbergh";
+        };
+        default_session = initial_session;
+      };
     };
   };
 
