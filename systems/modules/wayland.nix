@@ -26,6 +26,7 @@ in {
       _JAVA_AWT_WM_NONREPARENTING = "1";
       GBM_BACKEND = "nvidia-drm";
       GDK_BACKEND = "wayland";
+      LIBSEAT_BACKEND = "logind";
       LIBVA_DRIVER_NAME = "nvidia";
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
@@ -34,7 +35,7 @@ in {
       WLR_DRM_NO_ATOMIC = "1";
       WLR_NO_HARDWARE_CURSORS = "1";
       WLR_RENDERER = "vulkan";
-      WLR_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1";
+     #  WLR_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1";
       XCURSOR_SIZE = "24";
       XDG_SESSION_TYPE = "wayland";
     };
