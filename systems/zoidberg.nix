@@ -13,6 +13,8 @@
   ];
 
   boot = {
+    blacklistedKernelModules = [ "i915" ];
+
     extraModulePackages = [ ];
     initrd = {
       availableKernelModules =
@@ -22,7 +24,7 @@
         "/dev/disk/by-uuid/b9237f83-f195-4545-9bad-ee84c018d8cd";
     };
     kernelModules = [ "kvm-intel" ];
-    kernelParams = [ "acpi_rev_override" ];
+    kernelParams = [ "acpi_rev_override" "i915.modeset=0" ];
   };
 
   fileSystems = {
