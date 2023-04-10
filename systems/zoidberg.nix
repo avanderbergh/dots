@@ -1,12 +1,18 @@
 # Configuration for the 🦀 zoidberg laptop
 
 { inputs, config, lib, pkgs, ... }:
-
-{
+let
+  inherit (inputs.nixos-hardware.nixosModules)
+    common-cpu-intel-cpu-only common-gpu-intel-disable
+    common-gpu-nvidia-nonprime common-pc-laptop;
+in {
   networking.hostName = "zoidberg";
 
   imports = [
-    inputs.nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
+    common-cpu-intel-cpu-only
+    common-gpu-intel-disable
+    common-gpu-nvidia-nonprime
+    common-pc-laptop
     inputs.impermanence.nixosModules.impermanence
     ./modules/impermanence.nix
     ./modules/fingerprint.nix
