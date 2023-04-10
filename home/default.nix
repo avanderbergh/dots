@@ -65,6 +65,6 @@
   qt = {
     enable = true;
     platFormTheme = "gtk";
-  }
+  };
 
 }
