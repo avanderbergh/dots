@@ -24,6 +24,8 @@
     # Links persistent folders into system
     impermanence.url = "github:nix-community/impermanence";
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
   };
 
   outputs = inputs@{ self, flake-parts, home-manager, hyprland, ... }:

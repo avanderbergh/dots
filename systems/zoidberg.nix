@@ -6,6 +6,7 @@
   networking.hostName = "zoidberg";
 
   imports = [
+    inputs.nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
     inputs.impermanence.nixosModules.impermanence
     ./modules/impermanence.nix
     ./modules/fingerprint.nix
@@ -13,8 +14,6 @@
   ];
 
   boot = {
-    blacklistedKernelModules = [ "i915" ];
-
     extraModulePackages = [ ];
     initrd = {
       availableKernelModules =
@@ -23,8 +22,6 @@
       luks.devices."enc".device =
         "/dev/disk/by-uuid/b9237f83-f195-4545-9bad-ee84c018d8cd";
     };
-    kernelModules = [ "kvm-intel" ];
-    kernelParams = [ "acpi_rev_override" "i915.modeset=0" ];
   };
 
   fileSystems = {
@@ -82,10 +79,5 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  services.thermald.enable = true;
 
 }
