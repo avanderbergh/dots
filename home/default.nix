@@ -64,7 +64,7 @@
 
   qt = {
     enable = true;
-    platFormTheme = "gtk";
+    platformTheme = "gtk";
   };
 
 }
