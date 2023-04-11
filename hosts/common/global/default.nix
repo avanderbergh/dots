@@ -1,4 +1,4 @@
-{ inputs, modulesPath, outputs, pkgs, ... }: {
+{ inputs, lib, modulesPath, outputs, pkgs, ... }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     inputs.home-manager.nixosModules.home-manager
@@ -18,7 +18,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   console = {
-    font = "Lat2-Terminus16";
+    font = lib.mkDefault "Lat2-Terminus16";
     useXkbConfig = true;
   };
 
