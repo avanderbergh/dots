@@ -32,11 +32,10 @@
         time = "%H:%M";
         label = "%time%  %date%";
       };
-      script = ''
-        polybar top & \n
-        echo "Polybar launched..."
-      '';
     };
+    script = ''
+      polybar top &"
+    '';
   };
   programs.rofi.enable = true;
 
