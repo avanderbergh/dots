@@ -5,6 +5,8 @@
 
     ../common/global
 
+    ../common/users/avanderbergh
+
     ../common/optional/desktop.nix
     ../common/optional/ephemeral-btrfs.nix
     ../common/optional/fingerprint.nix
