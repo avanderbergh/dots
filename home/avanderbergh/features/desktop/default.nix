@@ -34,7 +34,7 @@
       };
     };
     script = ''
-      polybar top &"
+      polybar top &
     '';
   };
   programs.rofi.enable = true;
