@@ -4,7 +4,6 @@
     inputs.home-manager.nixosModules.home-manager
     ./networking.nix
     ./nix.nix
-    ./nvidia.nix
     ./systemd-boot.nix
   ];
 
