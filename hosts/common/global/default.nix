@@ -1,4 +1,4 @@
-{ inputs, modulesPath, outputs, ... }: {
+{ inputs, modulesPath, outputs, pkgs, ... }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     inputs.home-manager.nixosModules.home-manager
