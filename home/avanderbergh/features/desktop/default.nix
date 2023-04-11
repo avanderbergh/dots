@@ -1,5 +1,4 @@
 { pkgs, ... }: {
-  xsession.windowManager.bspwm.enable = true;
 
   # services.polybar = {
   #   enable = true;
