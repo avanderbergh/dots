@@ -6,29 +6,23 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    # Secure Boot for NixOS
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # User profile manager based on Nix
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Window Manager
-    hyprland.url = "github:hyprwm/Hyprland";
-
-    # Links persistent folders into system
     impermanence.url = "github:nix-community/impermanence";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
   };
 
-  outputs = inputs@{ self, flake-parts, home-manager, hyprland, ... }:
+  outputs = inputs@{ self, flake-parts, home-manager, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
@@ -41,20 +35,7 @@
                 zoidberg = nixosSystem {
                   inherit system;
                   specialArgs = { inherit inputs; };
-
-                  modules = [
-                    ./systems
-                    ./systems/zoidberg.nix
-                    home-manager.nixosModules.home-manager
-                    {
-                      home-manager.useGlobalPkgs = true;
-                      home-manager.useUserPackages = true;
-                      home-manager.users.avanderbergh = {
-                        imports =
-                          [ hyprland.homeManagerModules.default ./home ];
-                      };
-                    }
-                  ];
+                  modules = [ ./hosts/zoidberg ];
                 };
               });
           })

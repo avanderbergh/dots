@@ -1,18 +1,10 @@
 { inputs, pkgs, ... }:
 
 {
-
-  imports = [ ./modules/hyprland.nix ];
-
   home = {
     username = "avanderbergh";
     homeDirectory = "/home/avanderbergh";
     stateVersion = "23.05";
-
-    file.".config" = {
-      source = ./files/config;
-      recursive = true;
-    };
 
     packages = with pkgs; [
       alejandra
@@ -49,22 +41,6 @@
       package = pkgs.vscode.fhs;
     };
     zathura.enable = true;
-  };
-
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Catppuccin-Mocha-Standard-Pink-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        accents = [ "pink" ];
-        variant = "mocha";
-      };
-    };
-  };
-
-  qt = {
-    enable = true;
-    platformTheme = "gtk";
   };
 
 }
