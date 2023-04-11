@@ -18,7 +18,7 @@
         time = "%H:%M";
         label = "%time%  %date%";
       };
-      script = "polybar top &";
+      script = [ "polybar top &" ];
     };
   };
   programs.rofi.enable = true;
