@@ -11,7 +11,7 @@
     enable = true;
     keybindings = {
       "super + space" = "rofi -show drun";
-      "super + enter" = "alacritty";
+      "super + Return" = "alacritty";
 
       # Move between windows
       "super + {h,j,k,l}" = "bspc node -f {west,south,north,east}";
