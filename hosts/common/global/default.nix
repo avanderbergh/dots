@@ -1,7 +1,15 @@
-{ inputs, lib, modulesPath, outputs, pkgs, ... }: {
+{
+  inputs,
+  lib,
+  modulesPath,
+  outputs,
+  pkgs,
+  ...
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     inputs.home-manager.nixosModules.home-manager
+    ./fonts.nix
     ./networking.nix
     ./nix.nix
     ./systemd-boot.nix
@@ -9,7 +17,7 @@
 
   home-manager = {
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs outputs; };
+    extraSpecialArgs = {inherit inputs outputs;};
   };
 
   users.users.root.passwordFile = "/persist/passwords/root";
