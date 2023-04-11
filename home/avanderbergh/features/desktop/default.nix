@@ -15,30 +15,29 @@
     keybindings = { "super + space" = "rofi -show drun"; };
   };
 
-  # services.polybar = {
-  #   enable = true;
-  #   config = {
-  #     "bar/top" = {
-  #       monitor = "eDP-1";
-  #       width = "100%";
-  #       height = "3%";
-  #       radius = 0;
-  #       modules-center = "date";
-  #     };
-  #     "module/date" = {
-  #       type = "internal/date";
-  #       internal = 5;
-  #       date = "%d.%m.%y";
-  #       time = "%H:%M";
-  #       label = "%time%  %date%";
-  #     };
-  #     script = ''
-  #       # polybar script
-  #       polybar top &
-
-  #     '';
-  #   };
-  # };
+  services.polybar = {
+    enable = true;
+    config = {
+      "bar/top" = {
+        monitor = "eDP-1";
+        width = "100%";
+        height = "3%";
+        radius = 0;
+        modules-center = "date";
+      };
+      "module/date" = {
+        type = "internal/date";
+        internal = 5;
+        date = "%d.%m.%y";
+        time = "%H:%M";
+        label = "%time%  %date%";
+      };
+      script = ''
+        polybar top & \n
+        echo "Polybar launched..."
+      '';
+    };
+  };
   programs.rofi.enable = true;
 
   gtk = {
