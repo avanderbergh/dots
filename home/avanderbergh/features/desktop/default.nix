@@ -1,5 +1,18 @@
 { pkgs, ... }: {
 
+  xsession.windowManager.bspwm = {
+    enable = true;
+    monitors = {
+      "eDP-1" = [ "web" "code" "term" "files" "music" "chat" "media" "misc" ];
+    };
+
+  };
+
+  services.sxhkd = {
+    enable = true;
+    keybindings = { "super + space" = "rofi -show drun"; };
+  };
+
   # services.polybar = {
   #   enable = true;
   #   config = {
