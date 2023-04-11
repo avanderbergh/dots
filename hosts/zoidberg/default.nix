@@ -10,6 +10,7 @@
     ../common/optional/desktop.nix
     ../common/optional/ephemeral-btrfs.nix
     ../common/optional/fingerprint.nix
+    ../common/optional/hidpi.nix
     ../common/optional/optin-persistence.nix
     ../common/optional/pipewire.nix
   ];
