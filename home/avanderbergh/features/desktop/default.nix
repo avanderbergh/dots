@@ -1,11 +1,13 @@
 { pkgs, ... }: {
 
-  xsession.windowManager.bspwm = {
+  xsession = {
     enable = true;
-    monitors = {
-      "eDP-1" = [ "web" "code" "term" "files" "music" "chat" "media" "misc" ];
+    windowManager.bspwm = {
+      enable = true;
+      monitors = {
+        "eDP-1" = [ "web" "code" "term" "files" "music" "chat" "media" "misc" ];
+      };
     };
-
   };
 
   services.sxhkd = {
