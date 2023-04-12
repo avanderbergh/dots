@@ -15,8 +15,9 @@
       "super + shift + f" = "bspc node --state fullscreen";
 
       # 🖥️ Desktop Management
-      "super + {1-9}" = "bspc desktop --focus ^{1-9}";
-      "super + tab" = "bspc desktop --layout next";
+      "super + {1-5}" = "bspc desktop --focus ^{1-5}";
+      "super + shift + {1-5}" = "bspc node --to-desktop ^{1-5}";
+      "super + Tab" = "bspc desktop --layout next";
 
       # 🔄 Reload Configurations
       "super + shift + r" = "pkill -USR1 polybar; notify-send 'Polybar' 'Configuration reloaded'";
