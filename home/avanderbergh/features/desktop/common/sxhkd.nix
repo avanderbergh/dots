@@ -16,7 +16,7 @@
 
       # 🖥️ Desktop Management
       "super + {1-5}" = "bspc desktop --focus ^{1-5}";
-      "super + shift + {1-5}" = "bspc node --to-desktop ^{1-5}";
+      "super + shift + {1-5}" = "bspc node --to-desktop ^{1-5} --follow";
       "super + Tab" = "bspc desktop --layout next";
 
       # 🔄 Reload Configurations
