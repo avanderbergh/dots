@@ -35,33 +35,37 @@ in {
         background = "${base00}";
         foreground = "${base05}";
 
-        modules-left = "bspwm";
-        modules-center = "date";
-        modules-right = "network battery backlight";
+        modules-left = "date";
+        modules-center = "bspwm";
+        modules-right = "network";
+
+        module-margin = 1;
       };
       "module/date" = {
         type = "internal/date";
         internal = 5;
-        format-prefix = "";
         date = "%a %d %b";
         time = "%H:%M";
-        label = "%date% %time%";
+        label = "%date% | %time%";
       };
       "module/bspwm" = {
         type = "internal/bspwm";
-        ws-icon-0 = "code;♚";
-        ws-icon-1 = "web;♛";
-        ws-icon-2 = "chat;♜";
-        ws-icon-3 = "music;♝";
-        ws-icon-4 = "prod;♞";
-        ws-icon-default = "♟";
         label-focused-underline = "${base0E}";
+        label-focused-foreground = "${base0E}";
+        label-dimmed-underline = "${base00}";
+        label-empty-foreground = "${base04}";
       };
       "module/network" = {
         type = "internal/network";
         interface = "wlp4s0";
         interface-type = "wireless";
-        label-connected = "%essid% %netspeed%";
+        label-connected = "%essid%";
+        format-connected = "<ramp-signal> <label-connected>";
+        ramp-signal-0 = "󰤨";
+        ramp-signal-1 = "󰤥";
+        ramp-signal-2 = "󰤢";
+        ramp-signal-3 = "󰤟";
+        ramp-signal-4 = "󰤫";
       };
       "module/battery" = {
         type = "internal/battery";
