@@ -1,6 +1,9 @@
-{ inputs, pkgs, ... }:
-
 {
+  inputs,
+  pkgs,
+  ...
+}: {
+  imports = [inputs.nix-colors.homeManagerModule];
   home = {
     username = "avanderbergh";
     homeDirectory = "/home/avanderbergh";
@@ -46,7 +49,7 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
     };
   };
 }

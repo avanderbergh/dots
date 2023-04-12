@@ -1,1 +1,5 @@
-{ imports = [ ./global ./features/desktop ]; }
+{inputs, ...}: {
+  imports = [./global ./features/desktop];
+
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
+}
