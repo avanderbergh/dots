@@ -12,6 +12,7 @@
     ./fonts.nix
     ./networking.nix
     ./nix.nix
+    ./security.nix
     ./systemd-boot.nix
   ];
 
@@ -48,7 +49,6 @@
       pinentry
       pinentry-curses
       pinentry-gtk2
-      polkit_gnome
       sbctl
     ];
   };
