@@ -28,14 +28,16 @@ in {
         height = "3%";
         dpi = 0;
         radius = 0;
-        modules-left = "bspwm";
-        modules-center = "date";
         scroll-up = "#bspwm.prev";
         scroll-down = "#bspwm.next";
         tray-position = "right";
         font-0 = "Victor Mono:size=14";
         background = "${base00}";
         foreground = "${base05}";
+
+        modules-left = "bspwm";
+        modules-center = "date";
+        modules-right = "network pulseaudio battery backlight";
       };
       "module/date" = {
         type = "internal/date";
@@ -52,8 +54,32 @@ in {
         ws-icon-3 = "music;♝";
         ws-icon-4 = "prod;♞";
         ws-icon-default = "♟";
+        label-focused-underline = "${base0E}";
+      };
+      "module/network" = {
+        type = "internal/network";
+        interface = "wlp4s0";
+      };
+      "module/battery" = {
+        type = "internal/battery";
+        battery = "BAT0";
+        adapter = "AC";
+      };
+      "module/pulseaudio" = {
+        type = "internal/pulseaudio";
+      };
+      "module/backlight" = {
+        type = "internal/backlight";
+        output = "eDP-1";
+        format = "<ramp>";
+        ramp-0 = "🌕";
+        ramp-1 = "🌔";
+        ramp-2 = "🌓";
+        ramp-3 = "🌒";
+        ramp-4 = "🌑";
       };
     };
+
     script = ''
       polybar top &
     '';

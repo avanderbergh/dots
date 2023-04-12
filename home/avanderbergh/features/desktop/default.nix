@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  imports = [./polybar.nix];
+  imports = [./common/polybar.nix ./common/pavucontrol.nix];
 
   xsession = {
     enable = true;
