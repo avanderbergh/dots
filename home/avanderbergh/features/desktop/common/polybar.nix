@@ -31,7 +31,7 @@ in {
         scroll-up = "#bspwm.prev";
         scroll-down = "#bspwm.next";
         tray-position = "right";
-        font-0 = "Victor Mono:size=14";
+        font-0 = "VictorMono Nerd Font:size=14";
         background = "${base00}";
         foreground = "${base05}";
 
@@ -42,9 +42,10 @@ in {
       "module/date" = {
         type = "internal/date";
         internal = 5;
-        date = "%d.%m.%y";
+        format-prefix = "";
+        date = "%a %d %b";
         time = "%H:%M";
-        label = "%time%  %date%";
+        label = "%date% %time%";
       };
       "module/bspwm" = {
         type = "internal/bspwm";
