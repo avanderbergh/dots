@@ -20,8 +20,11 @@
       "super + Tab" = "bspc desktop --layout next";
 
       # 🔄 Reload Configurations
-      "super + shift + r" = "pkill -USR1 polybar; notify-send 'Polybar' 'Configuration reloaded'";
-      "super + ctrl + r" = "bspc wm -r; notify-send 'bspwm' 'Configuration reloaded'";
+      "super + Escape" = ''
+        pkill -USR1 polybar;
+        pkill -USR1 -x sxhkd;
+        bspc wm -r;
+      '';
     };
   };
 }
