@@ -37,7 +37,7 @@ in {
 
         modules-left = "bspwm";
         modules-center = "date";
-        modules-right = "network pulseaudio battery backlight";
+        modules-right = "network battery backlight";
       };
       "module/date" = {
         type = "internal/date";
@@ -59,18 +59,17 @@ in {
       "module/network" = {
         type = "internal/network";
         interface = "wlp4s0";
+        interface-type = "wireless";
+        label-connected = "%essid% %netspeed%";
       };
       "module/battery" = {
         type = "internal/battery";
         battery = "BAT0";
         adapter = "AC";
       };
-      "module/pulseaudio" = {
-        type = "internal/pulseaudio";
-      };
       "module/backlight" = {
         type = "internal/backlight";
-        output = "eDP-1";
+        card = "intel_backlight";
         format = "<ramp>";
         ramp-0 = "🌕";
         ramp-1 = "🌔";
