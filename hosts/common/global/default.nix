@@ -34,7 +34,7 @@
     fish.enable = true;
     gnupg.agent = {
       enable = true;
-      pinentryFlavor = "tty";
+      pinentryFlavor = "gtk2";
       enableSSHSupport = true;
     };
   };
