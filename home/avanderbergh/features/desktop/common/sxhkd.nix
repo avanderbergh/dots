@@ -13,8 +13,6 @@
       "super + {_,shift + }w" = "bspc node --{close,kill}";
       "super + {f,t}" = "bspc node --state {floating, tiled}";
       "super + shift + f" = "bspc node --state fullscreen";
-      "super + button1" = "bspc node -m";
-      "super + button3" = "bspc node -r";
 
       # 🖥️ Desktop Management
       "super + {1-9}" = "bspc desktop --focus ^{1-9}";
