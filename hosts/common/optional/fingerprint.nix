@@ -6,4 +6,6 @@
       driver = pkgs.libfprint-2-tod1-goodix;
     };
   };
+
+  environment.persistence."/persist".directories = [ "/var/lib/fprintd" ];
 }
