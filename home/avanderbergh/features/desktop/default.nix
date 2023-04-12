@@ -1,30 +1,10 @@
 {pkgs, ...}: {
-  imports = [./common/polybar.nix ./common/pavucontrol.nix];
-
-  xsession = {
-    enable = true;
-    windowManager.bspwm = {
-      enable = true;
-      monitors = {"eDP-1" = ["code" "web" "chat" "music" "prod"];};
-    };
-  };
-
-  services.sxhkd = {
-    enable = true;
-    keybindings = {
-      "super + space" = "rofi -show drun";
-      "super + Return" = "alacritty";
-
-      # Move between windows
-      "super + {h,j,k,l}" = "bspc node -f {west,south,north,east}";
-      # Swap windows
-      "super + shift + {h,j,k,l}" = "bspc node --swap {west,south,north,east} --follow";
-      # Resize windows
-      "super + ctrl + {h,j,k,l}" = "bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}";
-      # Close or kill focused window
-      "super + {_,shift + }w" = "bspc node -{c,k}";
-    };
-  };
+  imports = [
+    ./common/bspwm.nix
+    ./common/pavucontrol.nix
+    ./common/polybar.nix
+    ./common/sxhkd.nix
+  ];
 
   programs.rofi.enable = true;
 
