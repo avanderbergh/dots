@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  colors,
+  config,
+  ...
+}: let
   inherit
     (config.colorScheme.colors)
     base00 #1e1e2e base
@@ -32,8 +36,8 @@ in {
         scroll-down = "#bspwm.next";
         tray-position = "right";
         font-0 = "VictorMono Nerd Font:size=14";
-        background = "${base00}";
-        foreground = "${base05}";
+        background = "${colors.bg}";
+        foreground = "${colors.fg}";
 
         modules-left = "date";
         modules-center = "bspwm";

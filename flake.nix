@@ -34,23 +34,8 @@
       systems = ["x86_64-linux"];
 
       imports = [
-        ({
-          withSystem,
-          inputs,
-          ...
-        }: let
-          inherit (inputs.nixpkgs.lib) nixosSystem;
-        in {
-          flake.nixosConfigurations =
-            withSystem "x86_64-linux"
-            ({system, ...}: {
-              zoidberg = nixosSystem {
-                inherit system;
-                specialArgs = {inherit inputs;};
-                modules = [./hosts/zoidberg];
-              };
-            });
-        })
+        # ./lib
+        ./hosts
       ];
 
       perSystem = {
@@ -58,9 +43,11 @@
         system,
         ...
       }: {
-        _module.args.pkgs = import self.inputs.nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
+        _module.args = {
+          pkgs = import self.inputs.nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
         };
       };
     };
