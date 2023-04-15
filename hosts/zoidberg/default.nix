@@ -1,5 +1,10 @@
-{ inputs, config, lib, pkgs, ... }: {
-
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
 
@@ -13,18 +18,17 @@
     ../common/optional/hidpi.nix
     ../common/optional/optin-persistence.nix
     ../common/optional/pipewire.nix
+    ../common/optional/secureboot.nix
   ];
 
   networking.hostName = "zoidberg";
 
   boot = {
-    extraModulePackages = [ ];
+    extraModulePackages = [];
     initrd = {
-      availableKernelModules =
-        [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-      kernelModules = [ "tpm_tis" ];
-      luks.devices."enc".device =
-        "/dev/disk/by-uuid/b9237f83-f195-4545-9bad-ee84c018d8cd";
+      availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
+      kernelModules = ["tpm_tis"];
+      luks.devices."enc".device = "/dev/disk/by-uuid/b9237f83-f195-4545-9bad-ee84c018d8cd";
     };
   };
 
@@ -32,10 +36,12 @@
     device = "/dev/disk/by-uuid/246D-DA90";
     fsType = "vfat";
   };
-  swapDevices = [{
-    device = "/swap/swapfile";
-    size = (1024 * 32) + (1024 * 2);
-  }];
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = (1024 * 32) + (1024 * 2);
+    }
+  ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
