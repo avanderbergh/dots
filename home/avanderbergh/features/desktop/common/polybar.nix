@@ -15,15 +15,20 @@
         scroll-up = "#bspwm.prev";
         scroll-down = "#bspwm.next";
         tray-position = "right";
-        font-0 = "VictorMono Nerd Font:size=14";
+        font-0 = "Victor Mono:size=14;3";
+        font-1 = "VictorMono Nerd Font Mono:size=40;24";
         background = "${colors.base}";
         foreground = "${colors.text}";
 
         modules-left = "date";
         modules-center = "bspwm";
-        modules-right = "network";
+        modules-right = "battery network";
 
         module-margin = 1;
+        padding = 1;
+
+        line-size = 3;
+        line-color = "${colors.lavender}";
       };
       "module/date" = {
         type = "internal/date";
@@ -34,17 +39,35 @@
       };
       "module/bspwm" = {
         type = "internal/bspwm";
+
+        label-focused = "%icon%";
         label-focused-underline = "${colors.mauve}";
         label-focused-foreground = "${colors.mauve}";
-        label-dimmed-underline = "${colors.surface2}";
+
+        label-urgent = "%icon%";
+        label-urgent-foreground = "${colors.red}";
+
+        label-occupied = "%icon%";
+
+        label-empty = "%icon%";
         label-empty-foreground = "${colors.surface2}";
+
+        label-separator = "|";
+        label-separator-padding = 1;
+
+        ws-icon-0 = "code;";
+        ws-icon-1 = "term;";
+        ws-icon-2 = "web;󰖟";
+        ws-icon-3 = "chat;󰭹";
+        ws-icon-4 = "music;";
+        ws-icon-5 = "prod;";
       };
       "module/network" = {
         type = "internal/network";
         interface = "wlp4s0";
         interface-type = "wireless";
         label-connected = "%essid%";
-        format-connected = "<ramp-signal> <label-connected>";
+        format-connected = "%{F${colors.sky}}<ramp-signal> <label-connected>%{F-}";
         ramp-signal-0 = "󰤨";
         ramp-signal-1 = "󰤥";
         ramp-signal-2 = "󰤢";
@@ -55,16 +78,15 @@
         type = "internal/battery";
         battery = "BAT0";
         adapter = "AC";
-      };
-      "module/backlight" = {
-        type = "internal/backlight";
-        card = "intel_backlight";
-        format = "<ramp>";
-        ramp-0 = "🌕";
-        ramp-1 = "🌔";
-        ramp-2 = "🌓";
-        ramp-3 = "🌒";
-        ramp-4 = "🌑";
+        poll-interval = 1;
+        format-charging = "%{F${colors.teal}}<ramp-capacity> <label-charging>%{F-}";
+        format-discharging = "%{F${colors.pink}}<ramp-capacity> <label-discharging>%{F-}";
+        format-full = "%{F${colors.green}}<ramp-capacity>%{F-}";
+        ramp-capacity-0 = "";
+        ramp-capacity-1 = "";
+        ramp-capacity-2 = "";
+        ramp-capacity-3 = "";
+        ramp-capacity-4 = "";
       };
     };
 
