@@ -16,6 +16,7 @@
 
       # 🖥️ Desktop Management
       "super + {1-6}" = "bspc desktop --focus ^{1-6}";
+      "super + bracket{left,right}" = "bspc desktop --focus {prev,next}.local";
       "super + shift + {1-6}" = "bspc node --to-desktop ^{1-6} --follow";
       "super + Tab" = "bspc desktop --layout next";
 
