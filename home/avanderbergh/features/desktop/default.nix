@@ -4,6 +4,7 @@
     ./common/pavucontrol.nix
     ./common/polybar.nix
     ./common/sxhkd.nix
+    ./common/wallpapers.nix
   ];
 
   programs.rofi.enable = true;
