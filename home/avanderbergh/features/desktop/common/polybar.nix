@@ -16,13 +16,13 @@
         scroll-down = "#bspwm.next";
         tray-position = "right";
         font-0 = "Victor Mono:size=14;3";
-        font-1 = "VictorMono Nerd Font Mono:size=40;24";
+        font-1 = "VictorMono Nerd Font Mono:size=32;20";
         background = "${colors.base}";
         foreground = "${colors.text}";
 
         modules-left = "date";
         modules-center = "bspwm";
-        modules-right = "battery network";
+        modules-right = "cpu memory battery network";
 
         module-margin = 1;
         padding = 1;
@@ -35,7 +35,7 @@
         internal = 5;
         date = "%a %d %b";
         time = "%H:%M";
-        label = "%date% | %time%";
+        label = "%{F${colors.lavender}} %date%%{F-} %{F${colors.teal}} %time%%{F-}";
       };
       "module/bspwm" = {
         type = "internal/bspwm";
@@ -52,7 +52,7 @@
         label-empty = "%icon%";
         label-empty-foreground = "${colors.surface2}";
 
-        label-separator = "|";
+        label-separator = " ";
         label-separator-padding = 1;
 
         ws-icon-0 = "code;";
@@ -66,7 +66,7 @@
         type = "internal/network";
         interface = "wlp4s0";
         interface-type = "wireless";
-        label-connected = "%essid%";
+        label-connected = "%downspeed:1%";
         format-connected = "%{F${colors.sky}}<ramp-signal> <label-connected>%{F-}";
         ramp-signal-0 = "󰤨";
         ramp-signal-1 = "󰤥";
@@ -87,6 +87,14 @@
         ramp-capacity-2 = "";
         ramp-capacity-3 = "";
         ramp-capacity-4 = "";
+      };
+      "module/cpu" = {
+        type = "internal/cpu";
+        label = "%{F${colors.yellow}}󰻠 %percentage%%%{F-}";
+      };
+      "module/memory" = {
+        type = "internal/memory";
+        label = "%{F${colors.flamingo}}󰍛 %percentage_used%%%{F-}";
       };
     };
 
