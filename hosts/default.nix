@@ -1,6 +1,7 @@
 {
-  withSystem,
+  colors,
   inputs,
+  withSystem,
   ...
 }: let
   inherit (inputs.nixpkgs.lib) nixosSystem;
@@ -10,7 +11,7 @@ in {
     ({system, ...}: {
       zoidberg = nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs;};
+        specialArgs = {inherit inputs colors;};
         modules = [./zoidberg];
       };
     });

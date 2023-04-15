@@ -19,15 +19,12 @@
     impermanence.url = "github:nix-community/impermanence";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
-    nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs = inputs @ {
     self,
     flake-parts,
     home-manager,
-    nix-colors,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {

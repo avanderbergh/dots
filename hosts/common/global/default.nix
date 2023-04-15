@@ -1,9 +1,10 @@
 {
-  inputs,
   lib,
-  modulesPath,
-  outputs,
   pkgs,
+  colors,
+  inputs,
+  outputs,
+  modulesPath,
   ...
 }: {
   imports = [
@@ -18,7 +19,7 @@
 
   home-manager = {
     useUserPackages = true;
-    extraSpecialArgs = {inherit inputs outputs;};
+    extraSpecialArgs = {inherit inputs colors;};
   };
 
   users.users.root.passwordFile = "/persist/passwords/root";
