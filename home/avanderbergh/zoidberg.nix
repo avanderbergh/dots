@@ -1,1 +1,3 @@
-{ imports = [ ./global ./features/desktop ]; }
+{
+  imports = [./global ./features/desktop];
+}

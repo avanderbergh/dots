@@ -1,6 +1,4 @@
-{ inputs, pkgs, ... }:
-
-{
+{pkgs, ...}: {
   home = {
     username = "avanderbergh";
     homeDirectory = "/home/avanderbergh";
@@ -46,7 +44,7 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
     };
   };
 }
