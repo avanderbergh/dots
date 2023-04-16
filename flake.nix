@@ -39,7 +39,7 @@
       "avanderbergh@zoidberg" = [./modules/hm/desktop] ++ shared;
     };
   in {
-    imports = [./lib];
+    colors = import ./lib/theme/colors.nix;
 
     nixosConfigurations = {
       zoidberg = inputs.nixpkgs.lib.nixosSystem {
