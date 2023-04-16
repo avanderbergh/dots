@@ -4,8 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
-
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,71 +21,51 @@
 
   outputs = inputs @ {
     self,
-    flake-parts,
+    nixpkgs,
     home-manager,
     ...
-  }:
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux"];
+  }: let
+    system = "x86_64-linux";
 
-      imports = [
-        ./lib
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
 
-        ({
-          colors,
-          withSystem,
-          ...
-        }: let
-          nixosModules = [./modules/nixos/global];
-          homeModules = rec {
-            shared = [./modules/hm];
-            "avanderbergh@zoidberg" = [./modules/hm/desktop] ++ shared;
-          };
-        in {
-          flake = {
-            nixosConfigurations = withSystem "x86_64-linux" ({system, ...}: {
-              zoidberg = inputs.nixpkgs.lib.nixosSystem {
-                inherit system;
-                specialArgs = {inherit inputs colors;};
-                modules =
-                  [
-                    inputs.nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
-                    ./hosts/zoidberg.nix
-                    {
-                      home-manager = {
-                        useUserPackages = true;
-                        useGlobalPkgs = true;
-                        extraSpecialArgs = {inherit inputs colors;};
-                        users.avanderbergh.imports = homeModules."avanderbergh@zoidberg";
-                      };
-                    }
-                  ]
-                  ++ nixosModules;
-              };
-            });
+    nixosModules = [./modules/nixos/global];
 
-            homeConfigurations = withSystem "x86_64-linux" ({pkgs, ...}: {
-              "avanderbergh@zoidberg" = home-manager.lib.homeManagerConfiguration {
-                inherit pkgs;
+    homeModules = rec {
+      shared = [./modules/hm];
+      "avanderbergh@zoidberg" = [./modules/hm/desktop] ++ shared;
+    };
+  in {
+    nixosConfigurations = {
+      zoidberg = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit self inputs colors;};
+        modules =
+          [
+            inputs.nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
+            ./hosts/zoidberg.nix
+            {
+              home-manager = {
+                useUserPackages = true;
+                useGlobalPkgs = true;
                 extraSpecialArgs = {inherit inputs colors;};
-                modules = homeModules."avanderbergh@zoidberg";
+                users.avanderbergh.imports = homeModules."avanderbergh@zoidberg";
               };
-            });
-          };
-        })
-      ];
-
-      perSystem = {
-        pkgs,
-        system,
-        ...
-      }: {
-        _module.args = {
-          pkgs = import self.inputs.nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
-        };
+            }
+          ]
+          ++ nixosModules;
       };
     };
+
+    homeConfigurations = {
+      "avanderbergh@zoidberg" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {inherit inputs colors;};
+        modules = homeModules."avanderbergh@zoidberg";
+      };
+    };
+  };
 }
