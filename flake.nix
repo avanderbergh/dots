@@ -23,6 +23,7 @@
     self,
     nixpkgs,
     home-manager,
+    nixos-hardware,
     ...
   }: let
     system = "x86_64-linux";
@@ -44,12 +45,12 @@
     extraSpecialArgs = {inherit self inputs colors;};
   in {
     nixosConfigurations = {
-      zoidberg = inputs.nixpkgs.lib.nixosSystem {
+      zoidberg = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit self inputs colors;};
         modules =
           [
-            inputs.nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
+            nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
             ./hosts/zoidberg.nix
             {
               home-manager = {
