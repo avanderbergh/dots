@@ -33,7 +33,7 @@
       imports = [
         ./lib
 
-        {
+        ({
           colors,
           withSystem,
           ...
@@ -77,7 +77,7 @@
               };
             });
           };
-        }
+        })
       ];
 
       perSystem = {
