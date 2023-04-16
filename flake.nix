@@ -38,9 +38,9 @@
       shared = [./modules/hm];
       "avanderbergh@zoidberg" = [./modules/hm/desktop] ++ shared;
     };
-  in {
-    colors = import ./lib/theme/colors.nix;
 
+    colors = import ./lib/theme/colors.nix;
+  in {
     nixosConfigurations = {
       zoidberg = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
