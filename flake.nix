@@ -39,6 +39,8 @@
       "avanderbergh@zoidberg" = [./modules/hm/desktop] ++ shared;
     };
   in {
+    imports = [./lib];
+
     nixosConfigurations = {
       zoidberg = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -51,7 +53,7 @@
               home-manager = {
                 useUserPackages = true;
                 useGlobalPkgs = true;
-                extraSpecialArgs = {inherit inputs colors;};
+                extraSpecialArgs = {inherit self inputs colors;};
                 users.avanderbergh.imports = homeModules."avanderbergh@zoidberg";
               };
             }
