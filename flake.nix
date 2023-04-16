@@ -40,6 +40,8 @@
     };
 
     colors = import ./lib/theme/colors.nix;
+
+    extraSpecialArgs = {inherit self inputs colors;};
   in {
     nixosConfigurations = {
       zoidberg = inputs.nixpkgs.lib.nixosSystem {
@@ -51,9 +53,9 @@
             ./hosts/zoidberg.nix
             {
               home-manager = {
+                inherit extraSpecialArgs;
                 useUserPackages = true;
                 useGlobalPkgs = true;
-                extraSpecialArgs = {inherit self inputs colors;};
                 users.avanderbergh.imports = homeModules."avanderbergh@zoidberg";
               };
             }
@@ -64,8 +66,7 @@
 
     homeConfigurations = {
       "avanderbergh@zoidberg" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {inherit inputs colors;};
+        inherit pkgs extraSpecialArgs;
         modules = homeModules."avanderbergh@zoidberg";
       };
     };
