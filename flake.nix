@@ -52,7 +52,7 @@
                 modules =
                   [
                     inputs.nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
-                    ./hosts/zoidberg
+                    ./hosts/zoidberg.nix
                     {
                       home-manager = {
                         useUserPackages = true;
