@@ -58,10 +58,7 @@
                         useUserPackages = true;
                         useGlobalPkgs = true;
                         extraSpecialArgs = {inherit inputs colors;};
-                        users.avanderbergh = {
-                          imports = homeModules."avanderbergh@zoidberg";
-                          homeDirectory = "/home/zoidberg";
-                        };
+                        users.avanderbergh.imports = homeModules."avanderbergh@zoidberg";
                       };
                     }
                   ]
