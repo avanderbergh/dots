@@ -15,12 +15,8 @@
     ./nix.nix
     ./security.nix
     ./systemd-boot.nix
+    ./users.nix
   ];
-
-  home-manager = {
-    useUserPackages = true;
-    extraSpecialArgs = {inherit inputs colors;};
-  };
 
   users.users.root.passwordFile = "/persist/passwords/root";
 

@@ -32,7 +32,52 @@
 
       imports = [
         ./lib
-        ./hosts
+
+        {
+          colors,
+          withSystem,
+          ...
+        }: let
+          nixosModules = [./modules/nixos/global];
+          homeModules = rec {
+            shared = [./modules/hm];
+            "avanderbergh@zoidberg" = [./modules/hm/desktop] ++ shared;
+          };
+        in {
+          flake = {
+            nixosConfigurations = withSystem "x86_64-linux" ({system, ...}: {
+              zoidberg = inputs.nixpkgs.lib.nixosSystem {
+                inherit system;
+                specialArgs = {inherit inputs colors;};
+                modules =
+                  [
+                    inputs.nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
+                    ./hosts/zoidberg
+                    {
+                      home-manager = {
+                        useUserPackages = true;
+                        useGlobalPkgs = true;
+                        users.avanderbergh = {
+                          imports = homeModules."avanderbergh@zoidberg";
+                          homeDirectory = "/home/zoidberg";
+                          extraSpecialArgs = {inherit inputs colors;};
+                        };
+                      };
+                    }
+                  ]
+                  ++ nixosModules;
+              };
+            });
+
+            homeConfigurations = withSystem "x86_64-linux" ({pkgs, ...}: {
+              "avanderbergh@zoidberg" = home-manager.lib.homeManagerConfiguration {
+                inherit pkgs;
+                extraSpecialArgs = {inherit inputs colors;};
+                modules = homeModules."avanderbergh@zoidberg";
+              };
+            });
+          };
+        }
       ];
 
       perSystem = {
