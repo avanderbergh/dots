@@ -1,6 +1,9 @@
-{ inputs, lib, ... }: {
-
-  imports = [ lanzaboote.nixosModules.lanzaboote ];
+{
+  inputs,
+  lib,
+  ...
+}: {
+  imports = [inputs.lanzaboote.nixosModules.lanzaboote];
 
   boot.bootspec.enable = true;
   boot.loader.systemd-boot.enable = lib.mkForce false;
@@ -12,5 +15,5 @@
   security.tpm2.enable = true;
   security.tpm2.tctiEnvironment.enable = true;
 
-  environment.persistence."/persist".directories = [ "/etc/secureboot" ];
+  environment.persistence."/persist".directories = ["/etc/secureboot"];
 }
