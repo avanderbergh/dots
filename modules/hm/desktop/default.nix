@@ -2,6 +2,7 @@
   imports = [
     ./common/bspwm.nix
     ./common/pavucontrol.nix
+    ./common/picom.nix
     ./common/polybar.nix
     ./common/sxhkd.nix
     ./common/wallpapers.nix

@@ -17,21 +17,26 @@
         tray-position = "right";
         font-0 = "Victor Mono:size=14;3";
         font-1 = "VictorMono Nerd Font Mono:size=32;20";
-        background = "${colors.base}";
+        font-2 = "VictorMono Nerd Font Mono:size=22;14";
+        background = "#00000000";
         foreground = "${colors.text}";
 
-        modules-left = "date";
-        modules-center = "bspwm";
-        modules-right = "cpu memory battery network";
+        modules-left = "lr date rr";
+        modules-center = "lr bspwm rr";
+        modules-right = "lr cpu sp memory sp battery sp network rr";
 
-        module-margin = 1;
+        module-margin = 0;
         padding = 1;
 
         line-size = 3;
         line-color = "${colors.lavender}";
+
+        border-size = 5;
+        border-color = "#00000000";
       };
       "module/date" = {
         type = "internal/date";
+        format-background = "${colors.base}";
         internal = 5;
         date = "%a %d %b";
         time = "%H:%M";
@@ -40,6 +45,7 @@
       "module/bspwm" = {
         type = "internal/bspwm";
 
+        format-background = "${colors.base}";
         label-focused = "%icon%";
         label-focused-underline = "${colors.mauve}";
         label-focused-foreground = "${colors.mauve}";
@@ -64,6 +70,8 @@
       };
       "module/network" = {
         type = "internal/network";
+        format-connected-background = "${colors.base}";
+        format-disconnected-background = "${colors.base}";
         interface = "wlp4s0";
         interface-type = "wireless";
         label-connected = "%downspeed:1%";
@@ -76,6 +84,9 @@
       };
       "module/battery" = {
         type = "internal/battery";
+        format-charging-background = "${colors.base}";
+        format-discharging-background = "${colors.base}";
+        format-full-background = "${colors.base}";
         battery = "BAT0";
         adapter = "AC";
         poll-interval = 1;
@@ -90,11 +101,28 @@
       };
       "module/cpu" = {
         type = "internal/cpu";
+        format-background = "${colors.base}";
         label = "%{F${colors.yellow}}󰻠 %percentage%%%{F-}";
       };
       "module/memory" = {
         type = "internal/memory";
+        format-background = "${colors.base}";
         label = "%{F${colors.flamingo}}󰍛 %percentage_used%%%{F-}";
+      };
+      "module/rr" = {
+        type = "custom/text";
+        content = "%{T3}%{T-}";
+        content-foreground = "${colors.base}";
+      };
+      "module/lr" = {
+        type = "custom/text";
+        content = "%{T3}%{T-}";
+        content-foreground = "${colors.base}";
+      };
+      "module/sp" = {
+        type = "custom/text";
+        content = "  ";
+        content-background = "${colors.base}";
       };
     };
 
