@@ -1,9 +1,10 @@
-{ inputs, ... }: {
-  imports = [ inputs.impermanence.nixosModules.impermanence ];
+{inputs, ...}: {
+  imports = [inputs.impermanence.nixosModules.impermanence];
 
   environment.persistence."/persist" = {
     directories = [
       "/etc/NetworkManager/system-connections"
+      "/usr/share"
       "/var/lib/bluetooth"
       "/var/lib/boltd/"
       "/var/lib/colord"
@@ -16,5 +17,4 @@
       "/var/lib/NetworkManager/timestamps"
     ];
   };
-
 }
