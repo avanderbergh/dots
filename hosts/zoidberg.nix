@@ -10,6 +10,7 @@
     ../modules/nixos/optional/ephemeral-btrfs.nix
     ../modules/nixos/optional/fingerprint.nix
     ../modules/nixos/optional/hidpi.nix
+    ../modules/nixos/optional/laptop.nix
     ../modules/nixos/optional/optin-persistence.nix
     ../modules/nixos/optional/pipewire.nix
     ../modules/nixos/optional/secureboot.nix
