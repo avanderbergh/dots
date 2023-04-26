@@ -4,11 +4,10 @@
     ./common/pavucontrol.nix
     ./common/picom.nix
     ./common/polybar.nix
+    ./common/rofi.nix
     ./common/sxhkd.nix
     ./common/wallpapers.nix
   ];
-
-  programs.rofi.enable = true;
 
   gtk = {
     enable = true;
