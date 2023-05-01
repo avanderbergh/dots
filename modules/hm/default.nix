@@ -8,10 +8,21 @@
       alejandra
       brightnessctl
       btop
+      calibre
       cava
       firefox
       google-chrome
+      nodejs_20
+      nodePackages.degit
+      nodePackages.pnpm
+      nodePackages.zx
       obsidian
+      pdfminer
+      pdftk
+      poppler_utils
+      tabula
+      tabula-java
+      tesseract
     ];
   };
 
