@@ -6,7 +6,7 @@
 }: let
   device = "/dev/mapper/enc";
   fsType = "btrfs";
-  mkOptions = {subvol}: ["subvol=${subvol}" "compress=zstd" "noatime"];
+  mkOptions = subvol: ["subvol=${subvol}" "compress=zstd" "noatime"];
 in {
   boot.initrd = {
     supportedFilesystems = ["btrfs"];
