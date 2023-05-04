@@ -1,20 +1,28 @@
-{ lib, config, pkgs, ... }: {
-
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
+  device = "/dev/mapper/enc";
+  fsType = "btrfs";
+  mkOptions = subvol: ["subvol=${subvol}" "compress=zstd" "noatime"];
+in {
   boot.initrd = {
-    supportedFilesystems = [ "btrfs" ];
+    supportedFilesystems = ["btrfs"];
     systemd = {
       enable = lib.mkDefault true;
       services = {
         rollback = {
           description = "Rollback BTRFS root subvolume to a pristine state";
-          wantedBy = [ "initrd.target" ];
-          after = [ "systemd-cryptsetup@enc.service" ];
-          before = [ "sysroot.mount" ];
+          wantedBy = ["initrd.target"];
+          after = ["systemd-cryptsetup@enc.service"];
+          before = ["sysroot.mount"];
           unitConfig.DefaultDependencies = "no";
           serviceConfig.Type = "oneshot";
           script = ''
             mkdir -p /mnt
-            mount -o subvol=/ /dev/mapper/enc /mnt
+            mount -o subvol=/ ${device} /mnt
 
             btrfs subvolume list -o /mnt/root |
               cut -f9 -d' ' |
@@ -32,8 +40,8 @@
         };
         persisted-files = {
           description = "Hard-link persisted files from /persist";
-          wantedBy = [ "initrd.target" ];
-          after = [ "sysroot.mount" ];
+          wantedBy = ["initrd.target"];
+          after = ["sysroot.mount"];
           unitConfig.DefaultDependencies = "no";
           serviceConfig.Type = "oneshot";
           script = ''
@@ -47,43 +55,35 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
-      fsType = "btrfs";
-      options = [ "subvol=root" "compress=zstd" "noatime" ];
+      inherit device fsType;
+      options = mkOptions "root";
     };
 
     "/home" = {
-      device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
-      fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" "noatime" ];
+      inherit device fsType;
+      options = mkOptions "home";
     };
 
     "/nix" = {
-      device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
-      fsType = "btrfs";
-      options = [ "subvol=nix" "compress=zstd" "noatime" ];
+      inherit device fsType;
+      options = mkOptions "nix";
     };
 
     "/persist" = {
-      device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
-      fsType = "btrfs";
-      options = [ "subvol=persist" "compress=zstd" "noatime" ];
+      inherit device fsType;
+      options = mkOptions "persist";
       neededForBoot = true;
     };
 
     "/var/log" = {
-      device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
-      fsType = "btrfs";
-      options = [ "subvol=log" "compress=zstd" "noatime" ];
+      inherit device fsType;
+      options = mkOptions "log";
       neededForBoot = true;
     };
 
     "/swap" = {
-      device = "/dev/disk/by-uuid/411e8516-a18c-42b1-b225-7efe702f4a9d";
-      fsType = "btrfs";
-      options = [ "subvol=swap" "noatime" ];
+      inherit device fsType;
+      options = ["subvol=swap" "noatime"];
     };
   };
-
 }
-

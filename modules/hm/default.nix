@@ -20,8 +20,6 @@
       pdfminer
       pdftk
       poppler_utils
-      tabula
-      tabula-java
       tesseract
     ];
   };
