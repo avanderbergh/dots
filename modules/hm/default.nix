@@ -12,6 +12,7 @@
       cava
       firefox
       google-chrome
+      ledger-live-desktop
       nodejs_20
       nodePackages.degit
       nodePackages.pnpm
