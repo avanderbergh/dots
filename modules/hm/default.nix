@@ -6,12 +6,14 @@
 
     packages = with pkgs; [
       alejandra
+      bitwig-studio
       brightnessctl
       btop
       calibre
       cava
       firefox
       google-chrome
+      joshuto
       ledger-live-desktop
       nodejs_20
       nodePackages.degit
@@ -57,4 +59,6 @@
       allowUnfreePredicate = _: true;
     };
   };
+
+  services.udiskie.enable = true;
 }
