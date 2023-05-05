@@ -38,6 +38,7 @@
     homeModules = rec {
       shared = [./modules/hm];
       "avanderbergh@zoidberg" = [./modules/hm/desktop] ++ shared;
+      "avanderbergh@hermes" = [./modules/hm/desktop] ++ shared;
     };
 
     colors = import ./lib/theme/colors.nix;
@@ -63,12 +64,36 @@
           ]
           ++ nixosModules;
       };
+      hermes = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit self inputs colors;};
+        modules =
+          [
+            nixos-hardware.nixosModules.common-cpu-amd
+            nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
+            nixos-hardware.nixosModules.common-pc-ssd
+            ./hosts/hermes.nix
+            {
+              home-manager = {
+                inherit extraSpecialArgs;
+                useUserPackages = true;
+                useGlobalPkgs = true;
+                users.avanderbergh.imports = homeModules."avanderbergh@hermes";
+              };
+            }
+          ]
+          ++ nixosModules;
+      };
     };
 
     homeConfigurations = {
       "avanderbergh@zoidberg" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs extraSpecialArgs;
         modules = homeModules."avanderbergh@zoidberg";
+      };
+      "avanderbergh@hermes" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs extraSpecialArgs;
+        modules = homeModules."avanderbergh@hermes";
       };
     };
   };
