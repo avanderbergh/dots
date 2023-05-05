@@ -2,16 +2,11 @@
   imports = [
     ../modules/nixos/optional/desktop.nix
     ../modules/nixos/optional/ephemeral-btrfs.nix
-    ../modules/nixos/optional/fingerprint.nix
-    ../modules/nixos/optional/hidpi.nix
-    ../modules/nixos/optional/laptop.nix
-    ../modules/nixos/optional/ledger-live.nix
     ../modules/nixos/optional/optin-persistence.nix
     ../modules/nixos/optional/pipewire.nix
-    ../modules/nixos/optional/secureboot.nix
   ];
 
-  networking.hostName = "zoidberg";
+  networking.hostName = "hermes";
 
   boot = {
     extraModulePackages = [];
@@ -29,12 +24,9 @@
   swapDevices = [
     {
       device = "/swap/swapfile";
-      size = (1024 * 32) + (1024 * 2);
+      size = (1024 * 16) + (1024 * 2);
     }
   ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  system.stateVersion = "23.05";
 }
