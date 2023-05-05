@@ -128,7 +128,7 @@
     };
 
     script = ''
-      polybar top &
+      sleep 0.5 && polybar top &
     '';
   };
 }
