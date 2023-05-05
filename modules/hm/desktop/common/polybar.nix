@@ -1,5 +1,6 @@
 {
   colors,
+  monitor,
   config,
   ...
 }: {
@@ -7,7 +8,7 @@
     enable = true;
     config = {
       "bar/top" = {
-        monitor = "eDP-1";
+        inherit monitor;
         width = "100%";
         height = "3%";
         dpi = 0;

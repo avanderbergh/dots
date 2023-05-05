@@ -43,7 +43,7 @@
 
     colors = import ./lib/theme/colors.nix;
 
-    extraSpecialArgs = {inherit self inputs colors;};
+    mkExtraSpecialArgs = monitor: {inherit self inputs colors monitor;};
   in {
     nixosConfigurations = {
       zoidberg = nixpkgs.lib.nixosSystem {
@@ -55,7 +55,7 @@
             ./hosts/zoidberg.nix
             {
               home-manager = {
-                inherit extraSpecialArgs;
+                extraSpecialArgs = mkExtraSpecialArgs "eDP-1";
                 useUserPackages = true;
                 useGlobalPkgs = true;
                 users.avanderbergh.imports = homeModules."avanderbergh@zoidberg";
@@ -75,7 +75,7 @@
             ./hosts/hermes.nix
             {
               home-manager = {
-                inherit extraSpecialArgs;
+                extraSpecialArgs = mkExtraSpecialArgs "DP-0";
                 useUserPackages = true;
                 useGlobalPkgs = true;
                 users.avanderbergh.imports = homeModules."avanderbergh@hermes";
@@ -88,11 +88,13 @@
 
     homeConfigurations = {
       "avanderbergh@zoidberg" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs extraSpecialArgs;
+        inherit pkgs;
+        extraSpecialArgs = mkExtraSpecialArgs "eDP-1";
         modules = homeModules."avanderbergh@zoidberg";
       };
       "avanderbergh@hermes" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs extraSpecialArgs;
+        inherit pkgs;
+        extraSpecialArgs = mkExtraSpecialArgs "DP-0";
         modules = homeModules."avanderbergh@hermes";
       };
     };
