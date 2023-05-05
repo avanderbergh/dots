@@ -11,10 +11,11 @@
   boot = {
     extraModulePackages = [];
     initrd = {
-      availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
+      availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "usbhid" "ahci"];
       kernelModules = ["tpm_tis"];
       luks.devices."enc".device = "/dev/disk/by-label/luks";
     };
+    kernalModules = ["kvm-amd"];
   };
 
   fileSystems."/boot" = {
