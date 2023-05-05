@@ -15,7 +15,7 @@
       kernelModules = ["tpm_tis"];
       luks.devices."enc".device = "/dev/disk/by-label/luks";
     };
-    kernalModules = ["kvm-amd"];
+    kernelModules = ["kvm-amd"];
   };
 
   fileSystems."/boot" = {
