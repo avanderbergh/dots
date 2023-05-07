@@ -1,6 +1,7 @@
 {
   config,
   colors,
+  pkgs,
   ...
 }: let
   inherit (config.lib.formats.rasi) mkLiteral;
@@ -23,6 +24,11 @@ in {
       display-Network = " 󰤨  Network";
       sidebar-mode = true;
     };
+    plugins = with pkgs; [
+      rofi-calc
+      rofi-emoji
+      rofi-power-menu
+    ];
     theme = {
       "element-text, element-icon, mode-switcher" = {
         background-color = mkLiteral "inherit";

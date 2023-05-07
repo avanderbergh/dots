@@ -24,6 +24,10 @@
       pdftk
       poppler_utils
       tesseract
+      xclip
+      xdotool
+      xorg.xev
+      xsel
     ];
   };
 

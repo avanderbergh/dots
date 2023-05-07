@@ -5,6 +5,7 @@
       # 🚀 Launcher
       "super + space" = "rofi -show drun";
       "super + Return" = "alacritty";
+      "super + shift + space" = "rofi -modi emoji -show emoji";
 
       # 🪟 Window Management
       "super + {h,j,k,l}" = "bspc node --focus {west,south,north,east}";
