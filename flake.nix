@@ -41,9 +41,30 @@
       "avanderbergh@hermes" = [./modules/hm/desktop] ++ shared;
     };
 
+    hostConfigs = {
+      zoidberg = {
+        monitor = "eDP-1";
+        wlan-interface = "wlp4s0";
+        polybar = {
+          font-1-size = "32;20";
+          font-2-size = "22;14";
+          modules-right = "lr cpu sp memory sp battery sp network rr";
+        };
+      };
+      hermes = {
+        monitor = "DP-0";
+        wlan-interface = "wlp10s0";
+        polybar = {
+          font-1-size = "32;12";
+          font-2-size = "23;8";
+          modules-right = "lr cpu sp memory sp network rr";
+        };
+      };
+    };
+
     colors = import ./lib/theme/colors.nix;
 
-    extraSpecialArgs = {inherit self inputs colors;};
+    mkExtraSpecialArgs = hostConfig: {inherit self inputs colors hostConfig;};
   in {
     nixosConfigurations = {
       zoidberg = nixpkgs.lib.nixosSystem {
@@ -55,7 +76,7 @@
             ./hosts/zoidberg.nix
             {
               home-manager = {
-                inherit extraSpecialArgs;
+                extraSpecialArgs = mkExtraSpecialArgs hostConfigs.zoidberg;
                 useUserPackages = true;
                 useGlobalPkgs = true;
                 users.avanderbergh.imports = homeModules."avanderbergh@zoidberg";
@@ -75,7 +96,7 @@
             ./hosts/hermes.nix
             {
               home-manager = {
-                inherit extraSpecialArgs;
+                extraSpecialArgs = mkExtraSpecialArgs hostConfigs.hermes;
                 useUserPackages = true;
                 useGlobalPkgs = true;
                 users.avanderbergh.imports = homeModules."avanderbergh@hermes";
@@ -88,11 +109,13 @@
 
     homeConfigurations = {
       "avanderbergh@zoidberg" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs extraSpecialArgs;
+        inherit pkgs;
+        extraSpecialArgs = hostConfigs.zoidberg;
         modules = homeModules."avanderbergh@zoidberg";
       };
       "avanderbergh@hermes" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs extraSpecialArgs;
+        inherit pkgs;
+        extraSpecialArgs = mkExtraSpecialArgs hostConfigs.hermes;
         modules = homeModules."avanderbergh@hermes";
       };
     };

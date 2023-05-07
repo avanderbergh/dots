@@ -8,6 +8,16 @@
 
   networking.hostName = "hermes";
 
+  services.xserver = {
+    dpi = 109;
+    resolutions = [
+      {
+        x = 5120;
+        y = 1440;
+      }
+    ];
+  };
+
   boot = {
     extraModulePackages = [];
     initrd = {
@@ -30,4 +40,5 @@
   ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  system.stateVersion = "23.05";
 }
