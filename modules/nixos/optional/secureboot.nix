@@ -5,6 +5,8 @@
 }: {
   imports = [inputs.lanzaboote.nixosModules.lanzaboote];
 
+  # Follow directions here: https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
+
   boot.bootspec.enable = true;
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.lanzaboote = {
