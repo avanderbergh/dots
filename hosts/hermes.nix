@@ -2,6 +2,7 @@
   imports = [
     ../modules/nixos/optional/desktop.nix
     ../modules/nixos/optional/ephemeral-btrfs.nix
+    ../modules/nixos/optional/ledger-live.nix
     ../modules/nixos/optional/optin-persistence.nix
     ../modules/nixos/optional/pipewire.nix
     ../modules/nixos/optional/secureboot.nix
