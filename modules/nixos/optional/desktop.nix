@@ -5,6 +5,7 @@
 }: {
   services.xserver = {
     enable = true;
+    xkbOptions = "compose:ralt,ctrl:nocaps";
     displayManager = {
       lightdm = {
         enable = true;
