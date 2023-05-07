@@ -1,9 +1,9 @@
-{monitor, ...}: {
+{hostConfig, ...}: {
   xsession = {
     enable = true;
     windowManager.bspwm = {
       enable = true;
-      monitors = {"${monitor}" = ["code" "term" "web" "chat" "music" "prod"];};
+      monitors = {"${hostConfig.monitor}" = ["code" "term" "web" "chat" "music" "prod"];};
       extraConfig = ''
         bspc config pointer_modifier mod4
         bspc config pointer_action1 move

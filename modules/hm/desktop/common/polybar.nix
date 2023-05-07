@@ -1,6 +1,6 @@
 {
   colors,
-  monitor,
+  hostConfig,
   config,
   ...
 }: {
@@ -8,7 +8,7 @@
     enable = true;
     config = {
       "bar/top" = {
-        inherit monitor;
+        monitor = hostConfig.monitor;
         width = "100%";
         height = "3%";
         dpi = 0;
@@ -17,14 +17,14 @@
         scroll-down = "#bspwm.next";
         tray-position = "right";
         font-0 = "Victor Mono:size=14;3";
-        font-1 = "VictorMono Nerd Font Mono:size=32;20";
-        font-2 = "VictorMono Nerd Font Mono:size=22;14";
+        font-1 = "VictorMono Nerd Font Mono:size=${hostConfig.polybar.font-1-size}";
+        font-2 = "VictorMono Nerd Font Mono:size=${hostConfig.polybar.font-2-size}";
         background = "#00000000";
         foreground = "${colors.text}";
 
         modules-left = "lr date rr";
         modules-center = "lr bspwm rr";
-        modules-right = "lr cpu sp memory sp battery sp network rr";
+        modules-right = hostConfig.polybar.modules-right;
 
         module-margin = 0;
         padding = 1;
@@ -73,7 +73,7 @@
         type = "internal/network";
         format-connected-background = "${colors.base}";
         format-disconnected-background = "${colors.base}";
-        interface = "wlp4s0";
+        interface = hostConfig.wlan-interface;
         interface-type = "wireless";
         label-connected = "%downspeed:1%";
         format-connected = "%{F${colors.sky}}<ramp-signal> <label-connected>%{F-}";
