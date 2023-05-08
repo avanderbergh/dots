@@ -44,6 +44,7 @@
     systemPackages = with pkgs; [
       dconf
       gtk-engine-murrine
+      libnotify
       pass
       pciutils
       pinentry
