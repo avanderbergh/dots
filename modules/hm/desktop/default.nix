@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./common/bspwm.nix
+    ./common/dunst.nix
     ./common/pavucontrol.nix
     ./common/picom.nix
     ./common/polybar.nix
