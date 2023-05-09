@@ -36,7 +36,7 @@
     nixosModules = [./modules/nixos/global];
 
     homeModules = rec {
-      shared = [./modules/hm];
+      shared = [./modules/hm ./modules/hm/console.nix];
       "avanderbergh@zoidberg" = [./modules/hm/desktop] ++ shared;
       "avanderbergh@hermes" = [./modules/hm/desktop] ++ shared;
     };

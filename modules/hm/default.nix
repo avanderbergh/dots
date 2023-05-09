@@ -12,6 +12,7 @@
       calibre
       cava
       firefox
+      ghq
       google-chrome
       joshuto
       ledger-live-desktop
@@ -20,6 +21,7 @@
       nodePackages.pnpm
       nodePackages.zx
       obsidian
+      pcmanfm
       pdfminer
       pdftk
       poppler_utils
@@ -29,27 +31,25 @@
       xorg.xev
       xsel
     ];
+
+    sessionVariables = {
+      GHQ_ROOT = "/home/avanderbergh/repos";
+    };
   };
 
   programs = {
-    alacritty.enable = true;
-    exa = {
-      enable = true;
-      enableAliases = true;
-    };
-    fish.enable = true;
-    fzf.enable = true;
     git = {
       enable = true;
       userEmail = "avanderbergh@gmail.com";
       userName = "Adriaan van der Bergh";
+      extraConfig = {
+        core.editor = "code --wait";
+        init.defaultBranch = "main";
+      };
     };
     home-manager.enable = true;
-    lf.enable = true;
     mpv.enable = true;
     obs-studio.enable = true;
-    starship.enable = true;
-    tealdeer.enable = true;
     vscode = {
       enable = true;
       package = pkgs.vscode.fhs;
