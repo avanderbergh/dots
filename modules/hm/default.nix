@@ -11,6 +11,8 @@
       btop
       calibre
       cava
+      figma-agent
+      figma-linux
       firefox
       ghq
       google-chrome
@@ -26,6 +28,8 @@
       pdftk
       poppler_utils
       tesseract
+      unzip
+      xarchiver
       xclip
       xdotool
       xorg.xev
