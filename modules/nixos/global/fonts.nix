@@ -6,6 +6,7 @@
       roboto
       roboto-slab
       noto-fonts-emoji
+      shantell-sans
       (nerdfonts.override {fonts = ["VictorMono" "Noto"];})
     ];
 

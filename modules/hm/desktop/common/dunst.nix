@@ -3,9 +3,9 @@
     enable = true;
     settings = {
       global = {
-        font = "Victor Mono 14";
+        font = "Shantell Sans 14";
         frame_color = colors.blue;
-        origin = "top-center";
+        origin = "top-right";
         separator_color = colors.blue;
         transparency = 20;
       };

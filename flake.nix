@@ -31,6 +31,7 @@
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
+      overlays = [(import ./pkgs)];
     };
 
     nixosModules = [./modules/nixos/global];
@@ -64,12 +65,12 @@
 
     colors = import ./lib/theme/colors.nix;
 
-    mkExtraSpecialArgs = hostConfig: {inherit self inputs colors hostConfig;};
+    mkExtraSpecialArgs = hostConfig: {inherit pkgs self inputs colors hostConfig;};
   in {
     nixosConfigurations = {
       zoidberg = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit self inputs colors;};
+        specialArgs = {inherit pkgs self inputs colors;};
         modules =
           [
             nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
@@ -87,7 +88,7 @@
       };
       hermes = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit self inputs colors;};
+        specialArgs = {inherit pkgs self inputs colors;};
         modules =
           [
             nixos-hardware.nixosModules.common-cpu-amd
