@@ -8,7 +8,7 @@
 in {
   programs.rofi = {
     enable = true;
-    font = "Victor Mono 32";
+    font = "Shantell Sans 32";
     extraConfig = {
       modi = "run,drun,window";
       icon-theme = "Oranchelo";

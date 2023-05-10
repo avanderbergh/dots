@@ -16,7 +16,7 @@
         scroll-up = "#bspwm.prev";
         scroll-down = "#bspwm.next";
         tray-position = "right";
-        font-0 = "Victor Mono:size=14;3";
+        font-0 = "Shantell Sans:size=16;4";
         font-1 = "VictorMono Nerd Font Mono:size=${hostConfig.polybar.font-1-size}";
         font-2 = "VictorMono Nerd Font Mono:size=${hostConfig.polybar.font-2-size}";
         background = "#00000000";
@@ -41,7 +41,7 @@
         internal = 5;
         date = "%a %d %b";
         time = "%H:%M";
-        label = "%{F${colors.lavender}} %date%%{F-} %{F${colors.teal}} %time%%{F-}";
+        label = "%{F${colors.lavender}} %date%%{F-}   %{F${colors.teal}} %time%%{F-}";
       };
       "module/bspwm" = {
         type = "internal/bspwm";
