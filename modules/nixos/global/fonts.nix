@@ -2,6 +2,7 @@
   fonts = {
     enableDefaultFonts = true;
     fonts = with pkgs; [
+      input-fonts
       victor-mono
       roboto
       roboto-slab
