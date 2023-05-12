@@ -45,6 +45,7 @@
       dconf
       gtk-engine-murrine
       libnotify
+      parted
       pass
       pciutils
       pinentry

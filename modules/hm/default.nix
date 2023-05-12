@@ -50,6 +50,10 @@
         core.editor = "code --wait";
         init.defaultBranch = "main";
       };
+      signing = {
+        key = "741E DA0A 1F94 2978 D0E6  12ED 9380 36D7 4671 D8D5";
+        signByDefault = true;
+      };
     };
     home-manager.enable = true;
     mpv.enable = true;
