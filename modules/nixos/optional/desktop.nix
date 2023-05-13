@@ -3,6 +3,12 @@
   colors,
   ...
 }: {
+  boot.plymouth = {
+    enable = true;
+    themePackages = [pkgs.catppuccin-plymouth];
+    theme = "catppuccin-mocha";
+  };
+
   services.xserver = {
     enable = true;
     xkbOptions = "compose:ralt,ctrl:nocaps";
