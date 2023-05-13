@@ -3,11 +3,12 @@
     enableDefaultFonts = true;
     fonts = with pkgs; [
       input-fonts
-      victor-mono
+      noto-fonts
+      noto-fonts-emoji
       roboto
       roboto-slab
-      noto-fonts-emoji
       shantell-sans
+      victor-mono
       (nerdfonts.override {fonts = ["VictorMono" "Noto"];})
     ];
 
