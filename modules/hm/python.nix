@@ -1,14 +1,20 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  packages = ps:
+    with ps; [
+      # mlxtend
+      ipykernel
+      matplotlib
+      numpy
+      pandas
+      pip
+      scikit-learn
+      torch-bin
+      torchmetrics
+      torchvision-bin
+      tqdm
+    ];
+in {
   home.packages = with pkgs; [
-    python310Full
-    python310Packages.huggingface-hub
-    python310Packages.langchain
-    python310Packages.matplotlib
-    python310Packages.numpy
-    python310Packages.pandas
-    python310Packages.scikit-learn
-    python310Packages.scipy
-    python310Packages.torch
-    python310Packages.torchvision
+    (python310.withPackages packages)
   ];
 }
