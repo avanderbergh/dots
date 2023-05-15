@@ -56,8 +56,8 @@
         monitor = "DP-0";
         wlan-interface = "wlp10s0";
         polybar = {
-          font-1-size = "32;12";
-          font-2-size = "23;8";
+          font-1-size = "32;10";
+          font-2-size = "20;6";
           modules-right = "lr cpu sp memory sp network rr";
         };
       };
