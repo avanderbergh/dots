@@ -18,10 +18,10 @@ in {
       location = 0;
       disable-history = false;
       hide-scrollbar = true;
-      display-drun = "   Apps ";
-      display-run = "   Run ";
-      display-window = " 﩯  Window";
-      display-Network = " 󰤨  Network";
+      display-drun = "Apps";
+      display-run = "Run";
+      display-window = "Window";
+      display-Network = "Network";
       sidebar-mode = true;
     };
     plugins = with pkgs; [
