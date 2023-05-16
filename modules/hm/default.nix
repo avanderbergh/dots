@@ -11,6 +11,7 @@
       btop
       calibre
       cava
+      expressvpn
       figma-agent
       figma-linux
       firefox
@@ -26,6 +27,7 @@
       pcmanfm
       pdfminer
       pdftk
+      playwright-driver
       poppler_utils
       tesseract
       unzip

@@ -9,6 +9,8 @@
     theme = "catppuccin-mocha";
   };
 
+  services.expressvpn.enable = true;
+
   services.xserver = {
     enable = true;
     xkbOptions = "compose:ralt,ctrl:nocaps";
