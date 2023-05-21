@@ -22,7 +22,6 @@
         background = "#00000000";
         foreground = "${colors.text}";
 
-        modules-left = "lr date rr";
         modules-center = "lr bspwm rr";
         modules-right = hostConfig.polybar.modules-right;
 

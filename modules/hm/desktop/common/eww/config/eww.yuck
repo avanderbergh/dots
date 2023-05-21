@@ -1,7 +1,5 @@
-(defpoll date :interval "1h"
-"date +'%a %d %b'")
-(defpoll time :interval "1s"
-"date +'%H:%M'")
+(defpoll date :interval "1s"
+"date +'%H:%M on %A %d %b %Y'")
 
 
 (defwindow calendar
@@ -15,7 +13,10 @@
   :stacking "fg"
   :reserve (struts :distance "40px" :side "top")
   :wm-ignore true
-  (calendar)
+  (calendar
+    :class "calendar"
+    :onclick "eww close calendar"
+  )
 )
 
 (defwindow time
@@ -33,14 +34,10 @@
 )
 
 (defwidget time []
-  (box
-    :orientation "h"
+  (button
     :class "time"
-    (label
-      :text date
-    :class "time-date")
-    (label
-      :text time
-    :class "time-time")
+    :onclick "eww open calendar"
+    
+    date
   )
 )

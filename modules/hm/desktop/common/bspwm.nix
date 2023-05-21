@@ -37,6 +37,8 @@
 
         # Fixes an issue where bar starts before the WM
         pkill -USR1 polybar
+        eww daemon
+        eww open time
       '';
     };
   };
