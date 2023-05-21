@@ -8,6 +8,7 @@
     ./common/rofi.nix
     ./common/sxhkd.nix
     ./common/wallpapers.nix
+    ./common/eww
   ];
 
   gtk = {

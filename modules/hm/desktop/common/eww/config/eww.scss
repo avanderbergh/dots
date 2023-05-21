@@ -1,0 +1,18 @@
+@import "colors";
+
+* {
+  font-family: Shantell Sans;
+}
+
+.time {
+  font-size: 24px;
+  padding: 5px;
+}
+
+.time-date {
+  color: $mauve;
+}
+
+.time-time {
+  color: $teal;
+}

@@ -1,0 +1,46 @@
+(defpoll date :interval "1h"
+"date +'%a %d %b'")
+(defpoll time :interval "1s"
+"date +'%H:%M'")
+
+
+(defwindow calendar
+  :monitor 0
+  :geometry (
+    geometry
+    :x "10px"
+    :y "4%"
+    :anchor "top left"
+  )
+  :stacking "fg"
+  :reserve (struts :distance "40px" :side "top")
+  :wm-ignore true
+  (calendar)
+)
+
+(defwindow time
+  :monitor 0
+  :geometry (
+    geometry
+    :x "5px"
+    :y "5px"
+    :anchor "top left"
+  )
+  :stacking "fg"
+  :reserve (struts :distance "40px" :side "top")
+  :wm-ignore true
+  (time)
+)
+
+(defwidget time []
+  (box
+    :orientation "h"
+    :class "time"
+    (label
+      :text date
+    :class "time-date")
+    (label
+      :text time
+    :class "time-time")
+  )
+)

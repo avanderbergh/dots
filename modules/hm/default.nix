@@ -23,6 +23,7 @@
       pdfminer
       pdftk
       poppler_utils
+      telegram-desktop
       tesseract
       unzip
       wpsoffice
