@@ -2,16 +2,12 @@
 
 * {
   font-family: Shantell Sans;
+  color: $text;
+  background-color: $bg;
+  font-size: 24px;
 }
 
 .time {
-  font-size: 24px;
   padding: 8px 16px;
   border-radius: calc(24px + 16px * 2);
-  color: $mauve;
-}
-
-.calendar {
-  font-size: 24px;
-  color: $sapphire;
 }

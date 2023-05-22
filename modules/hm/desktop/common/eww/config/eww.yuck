@@ -1,5 +1,5 @@
 (defpoll date :interval "1s"
-"date +'%H:%M on %A %d %b %Y'")
+"date +'%k:%M - %A %d %b %Y'")
 
 
 (defwindow calendar
@@ -14,8 +14,7 @@
   :reserve (struts :distance "40px" :side "top")
   :wm-ignore true
   (calendar
-    :class "calendar"
-    :onclick "eww close calendar"
+    :onclick "xdg-open https://calendar.google.com/calendar/u/0/r/day/{2}/{1}/{0} ; eww close calendar"
   )
 )
 
@@ -29,7 +28,8 @@
   )
   :stacking "fg"
   :reserve (struts :distance "40px" :side "top")
-  :wm-ignore true
+  :windowtype "dock"
+  :wm-ignore false
   (time)
 )
 
