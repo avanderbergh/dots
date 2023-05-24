@@ -25,6 +25,7 @@
       poppler_utils
       tesseract
       unzip
+      wpsoffice
       xarchiver
       xclip
       xdotool
