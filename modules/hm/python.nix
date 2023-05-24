@@ -7,6 +7,9 @@
       numpy
       pandas
       pip
+      poetry-core
+      poetry-dynamic-versioning
+      poetry-semver
       scikit-learn
       torch-bin
       torchmetrics
@@ -16,5 +19,11 @@
 in {
   home.packages = with pkgs; [
     (python310.withPackages packages)
+    cudaPackages.cudatoolkit
+    cudaPackages.cudnn
+    glibc
+    poetry
+    poetryPlugins.poetry-audit-plugin
+    poetryPlugins.poetry-plugin-up
   ];
 }
