@@ -4,10 +4,10 @@
     ./common/dunst.nix
     ./common/pavucontrol.nix
     ./common/picom.nix
-    ./common/polybar.nix
     ./common/rofi.nix
     ./common/sxhkd.nix
     ./common/wallpapers.nix
+    ./common/eww
   ];
 
   gtk = {

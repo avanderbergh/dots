@@ -22,7 +22,6 @@
         background = "#00000000";
         foreground = "${colors.text}";
 
-        modules-left = "lr date rr";
         modules-center = "lr bspwm rr";
         modules-right = hostConfig.polybar.modules-right;
 
@@ -42,6 +41,8 @@
         date = "%a %d %b";
         time = "%H:%M";
         label = "%{F${colors.lavender}} %date%%{F-}   %{F${colors.teal}} %time%%{F-}";
+        click-left = "eww open calendar";
+        click-right = "eww close calendar";
       };
       "module/bspwm" = {
         type = "internal/bspwm";
@@ -128,6 +129,7 @@
     };
 
     script = ''
+      eww daemon
       pkill polybar
       while pgrep -x polybar >/dev/null; do sleep 1; done
       polybar top &
