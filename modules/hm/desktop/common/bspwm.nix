@@ -35,27 +35,13 @@ in {
     enable = true;
     windowManager.bspwm = {
       enable = true;
-      monitors = {"${hostConfig.monitor}" = ["code" "term" "web" "chat" "music" "prod"];};
+      monitors = {"${hostConfig.monitor}" = ["1" "2" "3" "4" "5" "6" "7" "8" "9" "10"];};
       settings = {
         normal_border_color = "${colors.crust}";
         focused_border_color = "${colors.mauve}";
         active_border_color = "${colors.lavender}";
         gapless_monocle = true;
         border_width = 3;
-      };
-      rules = {
-        "Alacritty" = {
-          desktop = "term";
-        };
-        "Google-chrome" = {
-          desktop = "web";
-        };
-        "Code" = {
-          desktop = "code";
-        };
-        "Obsidian" = {
-          desktop = "prod";
-        };
       };
       extraConfig = ''
         bspc config pointer_modifier mod4

@@ -3,6 +3,11 @@
 (defvar desktop_3 "desktop_inactive")
 (defvar desktop_4 "desktop_inactive")
 (defvar desktop_5 "desktop_inactive")
+(defvar desktop_6 "desktop_inactive")
+(defvar desktop_7 "desktop_inactive")
+(defvar desktop_8 "desktop_inactive")
+(defvar desktop_9 "desktop_inactive")
+(defvar desktop_10 "desktop_inactive")
 
 
 (defpoll date :interval "1s"
@@ -122,6 +127,41 @@
       (label
         :class desktop_5
         :text "5"
+      )
+    )
+    (button
+      :onclick "bspc desktop -f ^6"
+      (label
+        :class desktop_6
+        :text "6"
+      )
+    )
+    (button
+      :onclick "bspc desktop -f ^7"
+      (label
+        :class desktop_7
+        :text "7"
+      )
+    )
+    (button
+      :onclick "bspc desktop -f ^8"
+      (label
+        :class desktop_8
+        :text "8"
+      )
+    )
+    (button
+      :onclick "bspc desktop -f ^9"
+      (label
+        :class desktop_9
+        :text "9"
+      )
+    )
+    (button
+      :onclick "bspc desktop -f ^10"
+      (label
+        :class desktop_10
+        :text "10"
       )
     )
   )

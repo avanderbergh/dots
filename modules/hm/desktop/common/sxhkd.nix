@@ -22,14 +22,16 @@
       "super + shift + f" = "bspc node --state fullscreen";
 
       # 🖥️ Desktop Management
-      "super + {1-6}" = "bspc desktop --focus ^{1-6}";
+      "super + {1-9}" = "bspc desktop --focus ^{1-9}";
+      "super + 0" = "bspc desktop --focus ^10";
       "super + bracket{left,right}" = "bspc desktop --focus {prev,next}.local";
-      "super + shift + {1-6}" = "bspc node --to-desktop ^{1-6} --follow";
+      "super + shift + {1-9}" = "bspc node --to-desktop ^{1-9} --follow";
+      "super + shift + 0" = "bspc node --to-desktop ^10 --follow";
       "super + Tab" = "bspc desktop --layout next";
 
       # 🔄 Reload Configurations
       "super + Escape" = ''
-        pkill -USR1 polybar;
+        eww reload;
         pkill -USR1 -x sxhkd;
         bspc wm -r;
       '';
