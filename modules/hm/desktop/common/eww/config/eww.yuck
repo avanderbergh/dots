@@ -1,6 +1,14 @@
+(defvar desktop_1 "desktop_active")
+(defvar desktop_2 "desktop_inactive")
+(defvar desktop_3 "desktop_inactive")
+(defvar desktop_4 "desktop_inactive")
+(defvar desktop_5 "desktop_inactive")
+
+
 (defpoll date :interval "1s"
 "date +'%k:%M - %A %d %b %Y'")
 
+; Window definitions
 
 (defwindow calendar
   :monitor 0
@@ -18,7 +26,7 @@
   )
 )
 
-(defwindow time
+(defwindow top_left
   :monitor 0
   :geometry (
     geometry
@@ -27,17 +35,136 @@
     :anchor "top left"
   )
   :stacking "fg"
-  :reserve (struts :distance "40px" :side "top")
+  :reserve (struts :distance "60px" :side "top")
   :windowtype "dock"
   :wm-ignore false
   (time)
 )
 
+(defwindow top_center
+  :monitor 0
+  :geometry (
+    geometry
+    :y "5px"
+    :anchor "top center"
+  )
+  :stacking "fg"
+  :reserve (struts :distance "60px" :side "top")
+  :windowtype "dock"
+  :wm-ignore false
+  (desktops)
+)
+
+(defwindow top_right
+  :monitor 0
+  :geometry (
+    geometry
+    :y "5px"
+    :x "-5px"
+    :anchor "top right"
+  )
+  :stacking "fg"
+  :reserve (struts :distance "60px" :side "top")
+  :windowtype "dock"
+  :wm-ignore false
+  (system_indicators)
+)
+
+; Widget definitions
+
 (defwidget time []
-  (button
-    :class "time"
-    :onclick "eww open calendar"
+  (box
+    :class "bar"
+    (button
+      :onclick "eww open calendar"
+      
+      date
+    )
+  )
+)
+
+(defwidget desktops []
+  (box
+    :class "bar"
+    :orientation "horizontal"
+    :spacing 10
     
-    date
+    (button
+      :onclick "bspc desktop -f ^1"
+      (label
+        :class desktop_1
+        :text "1"
+      )
+    )
+    (button
+      :onclick "bspc desktop -f ^2"
+      (label
+        :class desktop_2
+        :text "2"
+      )
+    )
+    (button
+      :onclick "bspc desktop -f ^3"
+      (label
+        :class desktop_3
+        :text "3"
+      )
+    )
+    (button
+      :onclick "bspc desktop -f ^4"
+      (label
+        :class desktop_4
+        :text "4"
+      )
+    )
+    (button
+      :onclick "bspc desktop -f ^5"
+      (label
+        :class desktop_5
+        :text "5"
+      )
+    )
+  )
+)
+
+(defwidget system_indicators []
+  (box
+    :class "bar"
+    :orientation "horizontal"
+    :spacing 30
+    :space-evenly false
+    :hexpand true
+    (metric
+      :label "󰍛"
+      :value {EWW_RAM.used_mem_perc}
+    )
+    (metric
+      :label "󰻠"
+      :value {EWW_CPU.avg}
+    )
+  )
+)
+
+(defwidget metric [label value]
+  (box
+    :orientation "horizontal"
+    :space-evenly false
+    :spacing 20
+    :hexpand true
+    (box
+      label
+    )
+    (circular-progress
+      :value {round(value, 0)}
+      :start-at 30
+      :thickness 2
+      :clockwise true
+      :halign "fill"
+      
+      (label
+        :class "circular-progress-label"
+        :text "${round(value, 0)}"
+      )
+    )
   )
 )

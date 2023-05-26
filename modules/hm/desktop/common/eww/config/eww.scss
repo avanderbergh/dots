@@ -1,13 +1,31 @@
 @import "colors";
 
 * {
+  all: unset;
+}
+
+.bar {
   font-family: Shantell Sans;
   color: $text;
   background-color: $bg;
   font-size: 24px;
+  border-radius: 56px;
+  padding: 8px 16px;
 }
 
-.time {
-  padding: 8px 16px;
-  border-radius: calc(24px + 16px * 2);
+.desktop_active {
+  color: $mauve;
+}
+
+.desktop_inactive {
+  color: $text;
+}
+
+.desktop_unused {
+  color: $subtext0;
+}
+
+.circular-progress-label {
+  font-size: 14px;
+  padding: 6px;
 }
