@@ -8,7 +8,6 @@
       alejandra
       bitwig-studio
       brightnessctl
-      btop
       calibre
       cava
       expressvpn

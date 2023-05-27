@@ -31,6 +31,7 @@ rec {
 
   fg = text;
   bg = base;
+  bgt = "rgba(30, 30, 46, 0.5)";
   bg1 = surface0;
   border = "#28283d";
   shadow = crust;
