@@ -42,6 +42,13 @@
     vscode = {
       enable = true;
       package = pkgs.vscode.fhs;
+      # package = (pkgs.vscode.override {isInsiders = true;}).overrideAttrs (oldAttrs: rec {
+      #   src = builtins.fetchTarball {
+      #     url = "https://update.code.visualstudio.com/latest/linux-x64/insider";
+      #     sha256 = "1cgrn4n6y348x0c7ndmn5vssvpj1sdk27bp91cayr27fb59lgmv9";
+      #   };
+      #   version = "latest";
+      # });
     };
     zathura.enable = true;
   };
