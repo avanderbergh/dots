@@ -189,17 +189,23 @@
   (box
     :orientation "horizontal"
     :space-evenly false
-    :spacing 20
+    :spacing 16
     :hexpand true
+    :halign "center"
     (box
+      :class "metric-label"
+      
       label
     )
     (circular-progress
       :value {round(value, 0)}
+      :width 30
+      :height 30
       :start-at 30
       :thickness 2
       :clockwise true
       :halign "fill"
+      :class "circular-progress"
       
       (label
         :class "circular-progress-label"

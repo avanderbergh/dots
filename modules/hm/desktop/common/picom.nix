@@ -4,15 +4,19 @@
     fade = true;
     backend = "glx";
     settings = {
-      corner-radius = 10;
-      use-damage = false;
-      vsync = true;
+      blur-background = true;
+      blur-background-fixed = true;
+      blur-background-frame = true;
       blur-method = "dual_kawase";
       blur-strength = 5;
-      blur-background-frame = true;
-      blur-background-fixed = true;
-      blur-background = true;
+      corner-radius = 5;
+      detect-rounded-corners = true;
+      experimental-backends = true;
+      round-borders = true;
+      use-damage = false;
+      vsync = true;
+      xrender-sync-fence = false;
     };
-    package = pkgs.picom-next;
+    package = pkgs.picom-jonaburg;
   };
 }
