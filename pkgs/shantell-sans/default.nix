@@ -9,7 +9,7 @@ stdenvNoCC.mkDerivation rec {
 
   src = fetchzip {
     url = "https://github.com/arrowtype/shantell-sans/releases/download/${version}/Shantell_Sans_${version}.zip";
-    hash = "sha256-hC8n2owpQO0OwaBuwMbli3sfcn6RB2rqkLzmSZY3Sks=";
+    hash = "sha256-jll9fTNVdnPM0uSFYpW7EfUzsQo+6SAdNtL482EGLxo=";
   };
 
   installPhase = ''
@@ -17,7 +17,7 @@ stdenvNoCC.mkDerivation rec {
 
     mkdir -p "$out/share/fonts/truetype"
 
-    cd Shantell\ Sans\ ${version}/Desktop
+    cd Desktop
 
     mv Static $out/share/fonts/opentype
     mv *.ttf $out/share/fonts/truetype
