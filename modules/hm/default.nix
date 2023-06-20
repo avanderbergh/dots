@@ -38,6 +38,7 @@
     home-manager.enable = true;
     mpv.enable = true;
     obs-studio.enable = true;
+    pandoc.enable = true;
     vscode = {
       enable = true;
       package = pkgs.vscode.fhs;
