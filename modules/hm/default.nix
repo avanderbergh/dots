@@ -21,6 +21,7 @@
       pcmanfm
       pdfminer
       pdftk
+      pgcli
       poppler_utils
       telegram-desktop
       tesseract

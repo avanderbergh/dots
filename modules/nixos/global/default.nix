@@ -20,7 +20,7 @@
 
   users.users.root.passwordFile = "/persist/passwords/root";
 
-  time.timeZone = "Europe/Berlin";
+  # time.timeZone = "Europe/Berlin";
   services.automatic-timezoned.enable = true;
   i18n.defaultLocale = "en_US.UTF-8";
 
