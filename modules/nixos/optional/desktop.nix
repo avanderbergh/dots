@@ -3,11 +3,11 @@
   colors,
   ...
 }: {
-  boot.plymouth = {
-    enable = true;
-    themePackages = [pkgs.catppuccin-plymouth];
-    theme = "catppuccin-mocha";
-  };
+  # boot.plymouth = {
+  #   enable = true;
+  #   themePackages = [pkgs.catppuccin-plymouth];
+  #   theme = "catppuccin-mocha";
+  # };
 
   services.expressvpn.enable = true;
 
