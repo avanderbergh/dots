@@ -8,7 +8,7 @@
     users = {
       avanderbergh = {
         isNormalUser = true;
-        extraGroups = ["wheel" "networkmanager"];
+        extraGroups = ["wheel" "networkmanager" "dialout"];
         passwordFile = "/persist/passwords/avanderbergh";
         shell = pkgs.fish;
       };
