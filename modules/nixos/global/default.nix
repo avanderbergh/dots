@@ -45,6 +45,8 @@
       dconf
       gtk-engine-murrine
       libnotify
+      libusb1
+      libudev-zero
       parted
       pass
       pciutils

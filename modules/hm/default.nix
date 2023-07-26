@@ -10,6 +10,8 @@
       brightnessctl
       calibre
       cava
+      cura
+      esptool
       expressvpn
       figma-agent
       figma-linux
@@ -18,11 +20,14 @@
       joshuto
       ledger-live-desktop
       obsidian
+      openscad
       pcmanfm
       pdfminer
       pdftk
       pgcli
       poppler_utils
+      prusa-slicer
+      super-slicer
       telegram-desktop
       tesseract
       unzip
