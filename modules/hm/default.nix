@@ -7,6 +7,7 @@
     packages = with pkgs; [
       alejandra
       bitwig-studio
+      blender
       brightnessctl
       calibre
       cava
