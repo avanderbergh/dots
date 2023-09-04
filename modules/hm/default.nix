@@ -18,6 +18,7 @@
       figma-linux
       firefox
       google-chrome
+      inav-configurator
       joshuto
       ledger-live-desktop
       obsidian
