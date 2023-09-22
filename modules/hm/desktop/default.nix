@@ -5,6 +5,7 @@
     ./common/pavucontrol.nix
     ./common/picom.nix
     ./common/rofi.nix
+    ./common/spotify.nix
     ./common/sxhkd.nix
     ./common/wallpapers.nix
     ./common/eww

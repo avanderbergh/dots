@@ -9,7 +9,7 @@
       avanderbergh = {
         isNormalUser = true;
         extraGroups = ["wheel" "networkmanager" "dialout"];
-        passwordFile = "/persist/passwords/avanderbergh";
+        hashedPasswordFile = "/persist/passwords/avanderbergh";
         shell = pkgs.fish;
       };
     };

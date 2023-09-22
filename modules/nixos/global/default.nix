@@ -18,7 +18,7 @@
     ./users.nix
   ];
 
-  users.users.root.passwordFile = "/persist/passwords/root";
+  users.users.root.hashedPasswordFile = "/persist/passwords/root";
 
   # time.timeZone = "Europe/Berlin";
   services.automatic-timezoned.enable = true;

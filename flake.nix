@@ -17,6 +17,8 @@
     impermanence.url = "github:nix-community/impermanence";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    spicetify-nix.url = github:the-argus/spicetify-nix;
   };
 
   outputs = inputs @ {
@@ -24,6 +26,7 @@
     nixpkgs,
     home-manager,
     nixos-hardware,
+    spicetify-nix,
     ...
   }: let
     system = "x86_64-linux";
@@ -71,7 +74,7 @@
 
     colors = import ./lib/theme/colors.nix;
 
-    mkExtraSpecialArgs = hostConfig: {inherit pkgs self inputs colors hostConfig;};
+    mkExtraSpecialArgs = hostConfig: {inherit pkgs self inputs colors hostConfig spicetify-nix;};
   in {
     nixosConfigurations = {
       zoidberg = nixpkgs.lib.nixosSystem {
@@ -117,7 +120,7 @@
     homeConfigurations = {
       "avanderbergh@zoidberg" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = hostConfigs.zoidberg;
+        extraSpecialArgs = mkExtraSpecialArgs hostConfigs.zoidberg;
         modules = homeModules."avanderbergh@zoidberg";
       };
       "avanderbergh@hermes" = home-manager.lib.homeManagerConfiguration {

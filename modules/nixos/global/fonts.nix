@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   fonts = {
-    enableDefaultFonts = true;
-    fonts = with pkgs; [
+    enableDefaultPackages = true;
+    packages = with pkgs; [
       input-fonts
       noto-fonts
       noto-fonts-emoji
