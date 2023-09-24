@@ -43,6 +43,7 @@
   environment = {
     systemPackages = with pkgs; [
       dconf
+      git
       gtk-engine-murrine
       libnotify
       libusb1
