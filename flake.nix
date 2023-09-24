@@ -115,6 +115,16 @@
           ]
           ++ nixosModules;
       };
+      farnsworth = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules =
+          [
+            nixos-hardware.nixosModules.common-cpu-amd
+            nixos-hardware.nixosModules.common-pc-ssd
+            ./hosts/farnsworth.nix
+          ]
+          ++ nixosModules;
+      };
     };
 
     homeConfigurations = {
