@@ -20,6 +20,14 @@
     };
   };
 
+  services.openssh = {
+    enable = true;
+    # require public key authentication for better security
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+    #settings.PermitRootLogin = "yes";
+  };
+
   swapDevices = [{device = "/dev/disk/by-label/swap";}];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
