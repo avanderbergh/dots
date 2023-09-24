@@ -117,10 +117,12 @@
       };
       farnsworth = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {inherit pkgs self inputs colors;};
         modules =
           [
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-pc-ssd
+            nixos-hardware.nixosModules.common-gpu-amd
             ./hosts/farnsworth.nix
           ]
           ++ nixosModules;
