@@ -1,5 +1,6 @@
 {lib, ...}: {
   imports = [
+    ../modules/nixos/optional/ausweisapp.nix
     ../modules/nixos/optional/desktop.nix
     ../modules/nixos/optional/docker.nix
     ../modules/nixos/optional/ephemeral-btrfs.nix
