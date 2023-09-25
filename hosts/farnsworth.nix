@@ -1,4 +1,7 @@
 {lib, ...}: {
+  imports = [
+    ../modules/nixos/optional/home-assistant
+  ];
   networking.hostName = "farnsworth";
 
   boot = {
