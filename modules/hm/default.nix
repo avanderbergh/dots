@@ -21,6 +21,7 @@
       inav-configurator
       joshuto
       ledger-live-desktop
+      logseq
       obsidian
       openscad
       pcmanfm
