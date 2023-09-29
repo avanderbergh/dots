@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: {
   services = {
@@ -31,6 +32,17 @@
         eroot     root      postgres
         eroot     postgres  postgres
       '';
+
+      ensureUsers = [
+        {
+          name = "avanderbergh";
+          ensureClauses = {
+            superuser = true;
+            createrole = true;
+            createdb = true;
+          };
+        }
+      ];
     };
 
     syslogd.extraConfig = {
