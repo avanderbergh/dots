@@ -2,6 +2,7 @@
   imports = [
     ./common/bspwm.nix
     ./common/dunst.nix
+    ./common/flameshot.nix
     ./common/pavucontrol.nix
     ./common/picom.nix
     ./common/rofi.nix
