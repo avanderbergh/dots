@@ -12,6 +12,7 @@
       calibre
       cava
       cura
+      discord-canary
       esptool
       expressvpn
       figma-agent
