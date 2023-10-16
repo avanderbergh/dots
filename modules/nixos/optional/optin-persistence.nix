@@ -11,6 +11,8 @@
       "/var/lib/systemd/coredump"
       "/var/lib/upower"
       "/var/lib/expressvpn"
+      "/var/lib/sops"
+      "/root/.gnupg"
     ];
     files = [
       "/var/lib/NetworkManager/secret_key"

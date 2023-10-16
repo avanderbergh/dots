@@ -10,6 +10,7 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     inputs.home-manager.nixosModules.home-manager
+    inputs.sops-nix.nixosModules.sops
     ./fonts.nix
     ./networking.nix
     ./nix.nix
@@ -52,8 +53,20 @@
       pinentry-curses
       pinentry-gtk2
       sbctl
+      sops
     ];
   };
+
+  sops = {
+    gnupg = {
+      home = "/var/lib/sops";
+      sshKeyPaths = [];
+    };
+    defaultSopsFile = ../../../secrets/secrets.yaml;
+    validateSopsFiles = false;
+  };
+
+  sops.secrets.example_secret = {};
 
   nixpkgs.config.allowUnfree = true;
 }
