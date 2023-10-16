@@ -31,6 +31,7 @@
       pgcli
       poppler_utils
       prusa-slicer
+      slack
       super-slicer
       telegram-desktop
       tesseract
