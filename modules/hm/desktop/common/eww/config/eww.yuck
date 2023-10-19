@@ -40,7 +40,7 @@
     :anchor "top left"
   )
   :stacking "fg"
-  :reserve (struts :distance "60px" :side "top")
+  :reserve (struts :distance "{{TOP_DISTANCE}}" :side "top")
   :windowtype "dock"
   :wm-ignore false
   (time)
@@ -54,7 +54,7 @@
     :anchor "top center"
   )
   :stacking "fg"
-  :reserve (struts :distance "60px" :side "top")
+  :reserve (struts :distance "{{TOP_DISTANCE}}" :side "top")
   :windowtype "dock"
   :wm-ignore false
   (desktops)
@@ -69,7 +69,7 @@
     :anchor "top right"
   )
   :stacking "fg"
-  :reserve (struts :distance "60px" :side "top")
+  :reserve (struts :distance "{{TOP_DISTANCE}}" :side "top")
   :windowtype "dock"
   :wm-ignore false
   (system_indicators)

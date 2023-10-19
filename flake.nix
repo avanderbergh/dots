@@ -60,6 +60,7 @@
           font-2-size = "22;14";
           modules-right = "lr cpu sp memory sp battery sp network rr";
         };
+        top-distance = "100px";
       };
       hermes = {
         monitor = "DP-0";
@@ -69,6 +70,7 @@
           font-2-size = "20;6";
           modules-right = "lr cpu sp memory sp network rr";
         };
+        top-distance = "60px";
       };
     };
 
