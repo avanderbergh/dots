@@ -15,6 +15,8 @@
 
     sessionVariables = {
       PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+      # TODO: This find a way to update the path to the latest version
+      PUPPETEER_EXECUTABLE_PATH = "${pkgs.playwright-driver.browsers}/chromium-1080/chrome-linux/chrome";
     };
   };
 }
