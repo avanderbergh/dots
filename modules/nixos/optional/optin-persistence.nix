@@ -4,6 +4,7 @@
   environment.persistence."/persist" = {
     directories = [
       "/etc/NetworkManager/system-connections"
+      "/etc/ssh"
       "/usr/share"
       "/var/lib/bluetooth"
       "/var/lib/boltd/"

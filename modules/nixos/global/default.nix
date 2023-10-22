@@ -3,18 +3,18 @@
   pkgs,
   colors,
   inputs,
-  outputs,
   modulesPath,
   ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     inputs.home-manager.nixosModules.home-manager
-    inputs.sops-nix.nixosModules.sops
     ./fonts.nix
     ./networking.nix
     ./nix.nix
+    ./openssh.nix
     ./security.nix
+    ./sops.nix
     ./systemd-boot.nix
     ./users.nix
   ];
@@ -53,20 +53,8 @@
       pinentry-curses
       pinentry-gtk2
       sbctl
-      sops
     ];
   };
-
-  sops = {
-    gnupg = {
-      home = "/var/lib/sops";
-      sshKeyPaths = [];
-    };
-    defaultSopsFile = ../../../secrets/secrets.yaml;
-    validateSopsFiles = false;
-  };
-
-  sops.secrets.example_secret = {};
 
   nixpkgs.config.allowUnfree = true;
 }
