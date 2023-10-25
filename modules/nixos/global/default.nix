@@ -3,7 +3,6 @@
   pkgs,
   colors,
   inputs,
-  outputs,
   modulesPath,
   ...
 }: {
@@ -13,7 +12,9 @@
     ./fonts.nix
     ./networking.nix
     ./nix.nix
+    ./openssh.nix
     ./security.nix
+    ./sops.nix
     ./systemd-boot.nix
     ./users.nix
   ];

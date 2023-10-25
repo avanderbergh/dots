@@ -19,6 +19,8 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     spicetify-nix.url = github:the-argus/spicetify-nix;
+
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs = inputs @ {
@@ -29,6 +31,7 @@
     spicetify-nix,
     ...
   }: let
+    inherit (self) outputs;
     system = "x86_64-linux";
 
     pkgs = import nixpkgs {
@@ -81,11 +84,11 @@
     nixosConfigurations = {
       zoidberg = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit pkgs self inputs colors;};
+        specialArgs = {inherit pkgs self inputs colors outputs;};
         modules =
           [
             nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
-            ./hosts/zoidberg.nix
+            ./hosts/zoidberg
             {
               home-manager = {
                 extraSpecialArgs = mkExtraSpecialArgs hostConfigs.zoidberg;
@@ -99,13 +102,13 @@
       };
       hermes = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit pkgs self inputs colors;};
+        specialArgs = {inherit pkgs self inputs colors outputs;};
         modules =
           [
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
             nixos-hardware.nixosModules.common-pc-ssd
-            ./hosts/hermes.nix
+            ./hosts/hermes
             {
               home-manager = {
                 extraSpecialArgs = mkExtraSpecialArgs hostConfigs.hermes;
@@ -119,13 +122,13 @@
       };
       farnsworth = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit pkgs self inputs colors;};
+        specialArgs = {inherit pkgs self inputs colors outputs;};
         modules =
           [
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-pc-ssd
             nixos-hardware.nixosModules.common-gpu-amd
-            ./hosts/farnsworth.nix
+            ./hosts/farnsworth
           ]
           ++ nixosModules;
       };

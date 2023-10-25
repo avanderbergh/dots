@@ -4,6 +4,7 @@
   environment.persistence."/persist" = {
     directories = [
       "/etc/NetworkManager/system-connections"
+      "/etc/ssh"
       "/usr/share"
       "/var/lib/bluetooth"
       "/var/lib/boltd/"
@@ -11,6 +12,8 @@
       "/var/lib/systemd/coredump"
       "/var/lib/upower"
       "/var/lib/expressvpn"
+      "/var/lib/sops"
+      "/root/.gnupg"
     ];
     files = [
       "/var/lib/NetworkManager/secret_key"
