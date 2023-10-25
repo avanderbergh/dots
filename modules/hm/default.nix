@@ -22,6 +22,7 @@
       inav-configurator
       joshuto
       ledger-live-desktop
+      libgen-cli
       logseq
       obsidian
       openscad
