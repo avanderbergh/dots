@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  browser = ["google-chrome.desktop"];
+in {
   imports = [
     ./common/bspwm.nix
     ./common/dunst.nix
@@ -31,5 +33,20 @@
   qt = {
     enable = true;
     platformTheme = "gtk";
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = browser;
+      "text/plain" = ["code.desktop"];
+      "x-scheme-handler/http" = browser;
+      "x-scheme-handler/https" = browser;
+      "inode/directory" = ["pcmanfm.desktop"];
+      "application/pdf" = ["zathura.desktop"];
+      "video/*" = ["mpv.desktop"];
+      "audio/*" = ["mpv.desktop"];
+      "image/*" = ["nsxiv.desktop"];
+    };
   };
 }

@@ -23,9 +23,11 @@
       joshuto
       ledger-live-desktop
       libgen-cli
+      libresprite
       logseq
       obsidian
       openscad
+      nsxiv
       pcmanfm
       pdfminer
       pdftk
