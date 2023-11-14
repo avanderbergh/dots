@@ -12,11 +12,13 @@
       calibre
       cava
       cura
+      davinci-resolve
       discord-canary
       esptool
       expressvpn
       figma-agent
-      figma-linux
+      # Package ‘figma-linux-0.10.0’ in /nix/store/kcmipm57ph9bpzz8bs80iiijiwbyzwy3-source/pkgs/applications/graphics/figma-linux/default.nix:72 is marked as insecure, refusing to evaluate.
+      # figma-linux
       firefox
       google-chrome
       inav-configurator
@@ -25,9 +27,9 @@
       libgen-cli
       libresprite
       logseq
+      nsxiv
       obsidian
       openscad
-      nsxiv
       pcmanfm
       pdfminer
       pdftk

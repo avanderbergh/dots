@@ -14,7 +14,7 @@
   in {
     enable = true;
 
-    theme = spicePkgs.themes.catppuccin-mocha;
+    theme = spicePkgs.themes.catppuccin;
 
     colorScheme = "mocha";
 

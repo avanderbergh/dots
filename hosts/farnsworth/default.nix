@@ -12,6 +12,12 @@
     kernelModules = ["kvm-amd"];
   };
 
+  environment = {
+    systemPackages = with pkgs; [
+      cryptsetup
+    ];
+  };
+
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-label/nixos";
