@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ../../modules/nixos/optional/ausweisapp.nix
     ../../modules/nixos/optional/desktop.nix
@@ -10,6 +14,7 @@
     ../../modules/nixos/optional/pipewire.nix
     ../../modules/nixos/optional/postgres.nix
     ../../modules/nixos/optional/secureboot.nix
+    ../../modules/nixos/optional/video.nix
   ];
 
   networking.hostName = "hermes";
