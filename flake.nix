@@ -54,9 +54,15 @@
       "avanderbergh@hermes" = [./modules/hm/desktop] ++ shared;
     };
 
+    desktops = ["1" "2" "3" "4" "5" "6" "7" "8" "9" "10"];
+
     hostConfigs = {
       zoidberg = {
         monitor = "eDP-1";
+        monitors = {
+          "eDP-1" = desktops;
+          "DP-1-1" = desktops;
+        };
         wlan-interface = "wlp4s0";
         polybar = {
           font-1-size = "32;20";
@@ -67,6 +73,8 @@
       };
       hermes = {
         monitor = "DP-0";
+        monitors = {"DP-0" = desktops;};
+
         wlan-interface = "wlp10s0";
         polybar = {
           font-1-size = "32;10";

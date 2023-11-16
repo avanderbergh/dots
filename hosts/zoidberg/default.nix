@@ -1,6 +1,7 @@
 {lib, ...}: {
   imports = [
     ../../modules/nixos/optional/ausweisapp.nix
+    ../../modules/nixos/optional/bluetooth.nix
     ../../modules/nixos/optional/desktop.nix
     ../../modules/nixos/optional/docker.nix
     ../../modules/nixos/optional/ephemeral-btrfs.nix
@@ -23,6 +24,7 @@
       kernelModules = ["tpm_tis"];
       luks.devices."enc".device = "/dev/disk/by-label/luks";
     };
+    kernelModules = ["btintel"];
   };
 
   fileSystems."/boot" = {
