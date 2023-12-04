@@ -29,6 +29,13 @@
       "super + shift + 0" = "bspc node --to-desktop ^10 --follow";
       "super + Tab" = "bspc desktop --layout next";
 
+      # 🖥️ Monitor Management
+      "super + F1" = "bspc monitor --focus ^1";
+      "super + F2" = "bspc monitor --focus ^2";
+
+      "super + shift + F1" = "bspc node --to-monitor ^1 --follow";
+      "super + shift + F2" = "bspc node --to-monitor ^2 --follow";
+
       # 🔄 Reload Configurations
       "super + Escape" = ''
         eww reload;

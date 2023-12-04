@@ -35,7 +35,7 @@ in {
     enable = true;
     windowManager.bspwm = {
       enable = true;
-      monitors = {"${hostConfig.monitor}" = ["1" "2" "3" "4" "5" "6" "7" "8" "9" "10"];};
+      monitors = hostConfig.monitors;
       settings = {
         normal_border_color = "${colors.crust}";
         focused_border_color = "${colors.mauve}";
