@@ -41,5 +41,5 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 }
