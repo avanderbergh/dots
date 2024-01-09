@@ -6,4 +6,10 @@
     storageDriver = "btrfs";
   };
   users.users.avanderbergh.extraGroups = ["docker"];
+
+  environment.persistence."/persist" = {
+    directories = [
+      "/var/lib/docker"
+    ];
+  };
 }
