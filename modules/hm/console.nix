@@ -15,7 +15,6 @@
           };
           opacity = 0.5;
         };
-        dynamic_padding = true;
         font = {
           normal = {
             family = "VictorMono Nerd Font";

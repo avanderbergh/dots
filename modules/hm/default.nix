@@ -2,7 +2,7 @@
   home = {
     username = "avanderbergh";
     homeDirectory = "/home/avanderbergh";
-    stateVersion = "23.05";
+    stateVersion = "23.11";
 
     packages = with pkgs; [
       alejandra
@@ -12,7 +12,7 @@
       calibre
       cava
       cura
-      davinci-resolve
+      # davinci-resolve
       discord-canary
       esptool
       expressvpn

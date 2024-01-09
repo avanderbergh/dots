@@ -31,7 +31,7 @@
     fish.enable = true;
     gnupg.agent = {
       enable = true;
-      pinentryFlavor = "gtk2";
+      pinentryFlavor = "gnome3";
       enableSSHSupport = true;
     };
   };
@@ -52,6 +52,7 @@
       pinentry
       pinentry-curses
       pinentry-gtk2
+      pinentry-gnome
       sbctl
     ];
   };
