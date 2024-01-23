@@ -33,6 +33,7 @@
       enable = true;
       pinentryFlavor = "gnome3";
       enableSSHSupport = true;
+      enableExtraSocket = true;
     };
   };
 
