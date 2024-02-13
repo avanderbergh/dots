@@ -8,7 +8,7 @@
   hosts = outputs.nixosConfigurations;
   pubKey = host: ../../../hosts/${host}/ssh_host_ed25519_key.pub;
 
-  hasOptinPersistence = config.environment.persistence ? "/persist";
+  hasOptinPersistence = lib.hasAttrByPath ["environment" "persistence"] config;
 in {
   services.openssh = {
     enable = true;
