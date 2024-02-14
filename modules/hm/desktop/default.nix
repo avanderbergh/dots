@@ -12,6 +12,7 @@ in {
     ./common/sxhkd.nix
     ./common/wallpapers.nix
     ./common/eww
+    ./common/syncthing.nix
   ];
 
   gtk = {
