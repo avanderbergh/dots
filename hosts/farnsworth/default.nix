@@ -35,6 +35,11 @@
 
   swapDevices = [{device = "/dev/disk/by-label/swap";}];
 
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+  };
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "23.11";
 }
