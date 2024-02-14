@@ -12,7 +12,7 @@
       calibre
       cava
       cura
-      # davinci-resolve
+      davinci-resolve
       discord-canary
       esptool
       expressvpn

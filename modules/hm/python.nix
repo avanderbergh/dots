@@ -2,7 +2,8 @@
   packages = ps:
     with ps; [
       # mlxtend
-      ipykernel
+      # We need to disable this for now because of this: https://github.com/NixOS/nixpkgs/issues/262000
+      # ipykernel
       matplotlib
       numpy
       pandas
