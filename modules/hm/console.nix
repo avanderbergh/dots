@@ -100,7 +100,7 @@
     fzf.enable = true;
     lf.enable = true;
     starship.enable = true;
-    tealdeer.enable = true;
+    # tealdeer.enable = true;
     btop = {
       enable = true;
       settings = {
