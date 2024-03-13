@@ -36,6 +36,7 @@
       pgcli
       poppler_utils
       prusa-slicer
+      signal-desktop
       slack
       super-slicer
       telegram-desktop
