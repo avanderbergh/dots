@@ -4,8 +4,6 @@
   spicetify-nix,
   ...
 }: {
-  home.packages = [pkgs.spotify-tui];
-
   imports = [spicetify-nix.homeManagerModule];
 
   # themable spotify

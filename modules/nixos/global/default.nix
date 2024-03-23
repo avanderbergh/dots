@@ -31,7 +31,7 @@
     fish.enable = true;
     gnupg.agent = {
       enable = true;
-      pinentryFlavor = "gnome3";
+      pinentryPackage = pkgs.pinentry-gnome3;
       enableSSHSupport = true;
       enableExtraSocket = true;
     };
@@ -53,7 +53,7 @@
       pinentry
       pinentry-curses
       pinentry-gtk2
-      pinentry-gnome
+      pinentry-gnome3
       sbctl
     ];
   };

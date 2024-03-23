@@ -38,7 +38,7 @@
       prusa-slicer
       signal-desktop
       slack
-      super-slicer
+      # super-slicer
       telegram-desktop
       tesseract
       unzip
