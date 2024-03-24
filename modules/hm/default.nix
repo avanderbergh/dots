@@ -5,6 +5,9 @@
     stateVersion = "23.11";
 
     packages = with pkgs; [
+      # figma-linux
+      # Package ‘figma-linux-0.10.0’ in /nix/store/kcmipm57ph9bpzz8bs80iiijiwbyzwy3-source/pkgs/applications/graphics/figma-linux/default.nix:72 is marked as insecure, refusing to evaluate.
+      # super-slicer
       alejandra
       bitwig-studio
       blender
@@ -17,8 +20,6 @@
       esptool
       expressvpn
       figma-agent
-      # Package ‘figma-linux-0.10.0’ in /nix/store/kcmipm57ph9bpzz8bs80iiijiwbyzwy3-source/pkgs/applications/graphics/figma-linux/default.nix:72 is marked as insecure, refusing to evaluate.
-      # figma-linux
       firefox
       google-chrome
       inav-configurator
@@ -38,7 +39,6 @@
       prusa-slicer
       signal-desktop
       slack
-      # super-slicer
       telegram-desktop
       tesseract
       unzip

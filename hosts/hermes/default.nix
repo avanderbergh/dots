@@ -9,6 +9,7 @@
     ../../modules/nixos/optional/docker.nix
     ../../modules/nixos/optional/ephemeral-btrfs.nix
     ../../modules/nixos/optional/ledger-live.nix
+    ../../modules/nixos/optional/nts-1.nix
     ../../modules/nixos/optional/ollama.nix
     ../../modules/nixos/optional/optin-persistence.nix
     ../../modules/nixos/optional/pentablet.nix
