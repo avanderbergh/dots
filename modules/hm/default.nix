@@ -54,7 +54,12 @@
   programs = {
     home-manager.enable = true;
     mpv.enable = true;
-    obs-studio.enable = true;
+    obs-studio = {
+      enable = true;
+      plugins = with pkgs; [
+        obs-studio-plugins.droidcam-obs
+      ];
+    };
     pandoc.enable = true;
     vscode = {
       enable = true;
