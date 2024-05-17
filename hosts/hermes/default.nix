@@ -15,6 +15,7 @@
     ../../modules/nixos/optional/pentablet.nix
     ../../modules/nixos/optional/pipewire.nix
     ../../modules/nixos/optional/postgres.nix
+    ../../modules/nixos/optional/quickemu.nix
     ../../modules/nixos/optional/secureboot.nix
     ../../modules/nixos/optional/video.nix
   ];
