@@ -20,8 +20,8 @@ in {
   home.packages = with pkgs; [
     (python3.withPackages packages)
     # https://github.com/NixOS/nixpkgs/issues/305583
-    # cudaPackages.cudatoolkit
-    cudaPackages.cudnn
+    cudaPackages.cudatoolkit
+    # cudaPackages.cudnn
     glibc
     poetry
     # Build Failing

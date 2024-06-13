@@ -9,7 +9,7 @@
       # Package ‘figma-linux-0.10.0’ in /nix/store/kcmipm57ph9bpzz8bs80iiijiwbyzwy3-source/pkgs/applications/graphics/figma-linux/default.nix:72 is marked as insecure, refusing to evaluate.
       # super-slicer
       alejandra
-      bitwig-studio
+      # bitwig-studio
       blender
       brightnessctl
       calibre
@@ -28,6 +28,7 @@
       libgen-cli
       libresprite
       logseq
+      ncdu
       nsxiv
       obsidian
       openscad

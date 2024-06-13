@@ -55,6 +55,10 @@
       pinentry-gtk2
       pinentry-gnome3
       sbctl
+      gcc
+      libGLU
+      libGL
+      glib
     ];
   };
 
