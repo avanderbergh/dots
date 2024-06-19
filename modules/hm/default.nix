@@ -79,6 +79,7 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
+      allowCuda = true;
       allowUnfreePredicate = _: true;
     };
   };
