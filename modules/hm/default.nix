@@ -27,7 +27,7 @@
       ledger-live-desktop
       libgen-cli
       libresprite
-      logseq
+      # logseq
       ncdu
       nsxiv
       obsidian
