@@ -21,8 +21,8 @@
 
   users.users.root.hashedPasswordFile = "/persist/passwords/root";
 
-  # time.timeZone = "Europe/Berlin";
-  services.automatic-timezoned.enable = true;
+  time.timeZone = "Europe/Berlin";
+  # services.automatic-timezoned.enable = true;
   i18n.defaultLocale = "en_US.UTF-8";
 
   console.useXkbConfig = true;

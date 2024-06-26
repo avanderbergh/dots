@@ -39,7 +39,10 @@
       config = {
         allowUnfree = true;
         allowCuda = true;
-        permittedInsecurePackages = ["electron-25.9.0"];
+        permittedInsecurePackages = [
+          # For loqseq
+          "electron-28.3.3"
+        ];
       };
       overlays = [(import ./pkgs)];
     };
