@@ -16,23 +16,14 @@ in {
 
   gtk = {
     enable = true;
-    theme = {
-      name = "Catppuccin-Mocha-Standard-Pink-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        accents = ["pink"];
-        variant = "mocha";
-      };
-    };
-    cursorTheme = {
-      name = "Catppuccin-Mocha-Dark-Cursors";
-      package = pkgs.catppuccin-cursors.mochaDark;
-      size = 48;
-    };
+    catppuccin.enable = true;
   };
+
+  catppuccin.enable = true;
 
   qt = {
     enable = true;
-    platformTheme.name = "gtk";
+    style.name = "kvantum";
   };
 
   xdg.mimeApps = {

@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    catppuccin.url = "github:catppuccin/nix";
+
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,6 +28,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
+    catppuccin,
     home-manager,
     nixos-hardware,
     spicetify-nix,
@@ -47,10 +50,13 @@
       overlays = [(import ./pkgs)];
     };
 
-    nixosModules = [./modules/nixos/global];
+    nixosModules = [
+      ./modules/nixos/global
+    ];
 
     homeModules = rec {
       shared = [
+        catppuccin.homeManagerModules.catppuccin
         ./modules/hm
         ./modules/hm/console.nix
         ./modules/hm/git.nix
