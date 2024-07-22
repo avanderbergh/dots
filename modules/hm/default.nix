@@ -11,7 +11,8 @@
       brightnessctl
       calibre
       cava
-      cura
+      # error: sip-4.19.25 not supported for interpreter python3.12
+      # cura
       davinci-resolve
       discord-canary
       esptool

@@ -44,7 +44,8 @@
         allowCuda = true;
         permittedInsecurePackages = [
           # For loqseq
-          "electron-28.3.3"
+          "electron-27.3.11"
+          
         ];
       };
       overlays = [(import ./pkgs)];
