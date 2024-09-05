@@ -9,6 +9,7 @@
       "/var/lib/bluetooth"
       "/var/lib/boltd/"
       "/var/lib/colord"
+      "/var/lib/nixos"
       "/var/lib/systemd/coredump"
       "/var/lib/upower"
       "/var/lib/expressvpn"

@@ -1,10 +1,14 @@
 {
-  hardware.opengl.driSupport32Bit = true;
+  hardware = {
+    graphics.enable32Bit = true;
+    nvidia-container-toolkit.enable = true;
+  };
+
   virtualisation.docker = {
     enable = true;
-    enableNvidia = true;
     storageDriver = "btrfs";
   };
+
   users.users.avanderbergh.extraGroups = ["docker"];
 
   environment.persistence."/persist" = {
