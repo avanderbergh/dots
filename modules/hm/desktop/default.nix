@@ -4,14 +4,15 @@ in {
   imports = [
     ./common/bspwm.nix
     ./common/dunst.nix
+    ./common/eww
     ./common/flameshot.nix
+    ./common/obs.nix
     ./common/pavucontrol.nix
     ./common/picom.nix
     ./common/rofi.nix
     ./common/sxhkd.nix
-    ./common/wallpapers.nix
-    ./common/eww
     ./common/syncthing.nix
+    ./common/wallpapers.nix
   ];
 
   gtk = {

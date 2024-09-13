@@ -32,6 +32,7 @@
     home-manager,
     nixos-hardware,
     spicetify-nix,
+    sops-nix,
     ...
   }: let
     inherit (self) outputs;
@@ -45,7 +46,6 @@
         permittedInsecurePackages = [
           # For loqseq
           "electron-27.3.11"
-          
         ];
       };
       overlays = [(import ./pkgs)];
@@ -58,11 +58,13 @@
     homeModules = rec {
       shared = [
         catppuccin.homeManagerModules.catppuccin
+        sops-nix.homeManagerModules.sops
         ./modules/hm
         ./modules/hm/console.nix
         ./modules/hm/git.nix
         ./modules/hm/node.nix
         ./modules/hm/python.nix
+        ./modules/hm/sops.nix
       ];
       "avanderbergh@zoidberg" = [./modules/hm/desktop ./modules/hm/desktop/autorandr.nix] ++ shared;
       "avanderbergh@hermes" = [./modules/hm/desktop] ++ shared;
