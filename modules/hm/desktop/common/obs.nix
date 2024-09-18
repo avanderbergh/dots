@@ -9,14 +9,16 @@
     plugins = with pkgs; [
       obs-studio-plugins.droidcam-obs
       obs-studio-plugins.obs-websocket
+      obs-studio-plugins.obs-shaderfilter
     ];
   };
 
   # Install obs-cli and xprop (to get window names)
   home.packages = with pkgs; [
+    asciicam
+    bspwm
     obs-cli
     xorg.xprop
-    bspwm
   ];
 
   # Define the script in your configuration
