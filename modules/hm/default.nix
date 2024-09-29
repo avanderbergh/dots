@@ -32,6 +32,7 @@
       openscad
       pcmanfm
       pgcli
+      pinokio
       signal-desktop
       slack
       telegram-desktop
