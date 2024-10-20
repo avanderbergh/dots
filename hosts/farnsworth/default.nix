@@ -5,6 +5,7 @@
 }: {
   imports = [
     ../../modules/nixos/optional/home-assistant
+    ../../modules/nixos/optional/media-server
   ];
   networking.hostName = "farnsworth";
 
