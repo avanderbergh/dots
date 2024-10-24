@@ -11,10 +11,10 @@
       poetry-dynamic-versioning
       poetry-semver
       scikit-learn
-      torch-bin
-      torchmetrics
-      torchvision-bin
-      tqdm
+      # torch-bin
+      # torchmetrics
+      # torchvision-bin
+      # tqdm
     ];
 in {
   home.packages = with pkgs; [

@@ -9,7 +9,8 @@
       # bitwig-studio
       blender
       brightnessctl
-      calibre
+      # Failing to build
+      # calibre
       cava
       # error: sip-4.19.25 not supported for interpreter python3.12
       # cura
@@ -30,6 +31,7 @@
       nsxiv
       obsidian
       openscad
+      orca-slicer
       pcmanfm
       pgcli
       pinokio

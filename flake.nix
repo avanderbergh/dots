@@ -4,7 +4,9 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin = {
+      url = "github:ryand56/catppuccin-nix?ref=home-manager-kvantum-fix";
+    };
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
@@ -48,7 +50,12 @@
           "electron-27.3.11"
         ];
       };
-      overlays = [(import ./pkgs)];
+      overlays = [
+        (import ./pkgs)
+        (self: super: {
+          utillinux = super.util-linux;
+        })
+      ];
     };
 
     nixosModules = [
