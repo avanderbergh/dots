@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-hermes:
+  build-farnsworth:
     runs-on: ubuntu-latest
     outputs:
       build-success: ${{ steps.build-result.outputs.success }}
@@ -29,10 +29,10 @@ jobs:
           name: avanderbergh
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
-      - name: Build Hermes
+      - name: Build Farnsworth
         run: |
           echo "Building Hermes..."
-          if nix build .#nixosConfigurations.hermes.config.system.build.toplevel --system x86_64-linux --accept-flake-config --show-trace --keep-going; then
+          if nix build .#nixosConfigurations.farnsworth.config.system.build.toplevel --system x86_64-linux --accept-flake-config --show-trace --keep-going; then
             echo "success=true" >> $GITHUB_ENV
           else
             echo "Build failed, listing flake.lock for debugging:"
