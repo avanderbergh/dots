@@ -27,7 +27,7 @@ jobs:
       - name: Build Hermes
         run: |
           echo "Building Hermes..."
-          if nix build .#nixosConfigurations.hermes.config.system.build.toplevel --system x86_64-linux --show-trace --keep-going; then
+          if nix build .#nixosConfigurations.hermes.config.system.build.toplevel --system x86_64-linux --accept-flake-config --show-trace --keep-going; then
             echo "success=true" >> $GITHUB_ENV
           else
             echo "Build failed, listing flake.lock for debugging:"
