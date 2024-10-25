@@ -22,17 +22,17 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    spicetify-nix.url = github:the-argus/spicetify-nix;
-
     sops-nix.url = "github:Mic92/sops-nix";
   };
 
   nixConfig = {
-    accept-suggestions = true;
+    accept-flake-config = true;
+
     extra-substituters = [
       "https://nix-community.cachix.org"
       "https://cuda-maintainers.cachix.org"
     ];
+
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
@@ -45,7 +45,6 @@
     catppuccin,
     home-manager,
     nixos-hardware,
-    spicetify-nix,
     sops-nix,
     ...
   }: let
@@ -123,7 +122,7 @@
 
     colors = import ./lib/theme/colors.nix;
 
-    mkExtraSpecialArgs = hostConfig: {inherit pkgs self inputs colors hostConfig spicetify-nix;};
+    mkExtraSpecialArgs = hostConfig: {inherit pkgs self inputs colors hostConfig;};
   in {
     nixosConfigurations = {
       zoidberg = nixpkgs.lib.nixosSystem {
