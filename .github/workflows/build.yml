@@ -7,24 +7,26 @@ on:
       - main
 
 jobs:
-  build-farnsworth:
+  farnsworth:
     uses: ./.github/workflows/build-job.yml
     with:
       host: farnsworth
 
-  build-hermes:
+  hermes:
+    needs: farnsworth
     uses: ./.github/workflows/build-job.yml
     with:
       host: hermes
 
-  build-zoidberg:
+  zoidberg:
+    needs: hermes
     uses: ./.github/workflows/build-job.yml
     with:
       host: zoidberg
 
   final-status:
     runs-on: ubuntu-latest
-    needs: [build-farnsworth, build-hermes, build-zoidberg]
+    needs: [farnsworth, hermes, zoidberg]
     steps:
       - name: Set final build status
         run: |

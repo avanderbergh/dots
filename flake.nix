@@ -133,6 +133,9 @@
         modules =
           [
             nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
+            # nixos-hardware.nixosModules.common-gpu-nvidia
+            # nixos-hardware.nixosModules.common-cpu-amd
+            # nixos-hardware.nixosModules.common-pc-laptop
             ./hosts/zoidberg
             {
               home-manager = {

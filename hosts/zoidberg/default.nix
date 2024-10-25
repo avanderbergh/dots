@@ -38,7 +38,14 @@
     }
   ];
 
-  hardware.nvidia.open = true;
+  hardware.nvidia = {
+    open = true;
+    prime = {
+      nvidiaBusId = lib.mkDefault "PCI:1:0:0";
+      intelBusId = lib.mkDefault "PCI:0:2:0";
+    };
+  };
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

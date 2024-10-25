@@ -1,3 +1,3 @@
 {
-  services.xserver.libinput.touchpad.clickMethod = "clickfinger";
+  services.libinput.touchpad.clickMethod = "clickfinger";
 }
