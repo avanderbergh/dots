@@ -1,4 +1,5 @@
-name: Build NixOS Configurations
+# .github/workflows/build.yml
+name: CI
 
 on:
   push:
@@ -7,76 +8,28 @@ on:
 
 jobs:
   build-farnsworth:
-    runs-on: ubuntu-latest
-    outputs:
-      build-success: ${{ steps.build-result.outputs.success }}
+    uses: ./.github/workflows/build-job.yml
+    with:
+      host: farnsworth
 
-    steps:
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
-
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
-
-      - name: Setup Cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
-
-      - uses: cachix/cachix-action@master
-        with:
-          name: avanderbergh
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-
-      - name: Build Farnsworth
-        run: |
-          echo "Building Hermes..."
-          if nix build .#nixosConfigurations.farnsworth.config.system.build.toplevel --system x86_64-linux --accept-flake-config --show-trace --keep-going; then
-            echo "success=true" >> $GITHUB_ENV
-          else
-            echo "Build failed, listing flake.lock for debugging:"
-            cat flake.lock
-            echo "success=false" >> $GITHUB_ENV  
-          fi
-
-      - name: Determine build result
-        id: build-result
-        run: echo "success=${{ env.success }}" >> $GITHUB_OUTPUT
   build-hermes:
+    uses: ./.github/workflows/build-job.yml
+    with:
+      host: hermes
+
+  build-zoidberg:
+    uses: ./.github/workflows/build-job.yml
+    with:
+      host: zoidberg
+
+  final-status:
     runs-on: ubuntu-latest
-    outputs:
-      build-success: ${{ steps.build-result.outputs.success }}
-
+    needs: [build-farnsworth, build-hermes, build-zoidberg]
     steps:
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
-
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
-
-      - name: Setup Cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
-
-      - uses: cachix/cachix-action@master
-        with:
-          name: avanderbergh
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-
-      - name: Build Hermes
+      - name: Set final build status
         run: |
-          echo "Building Hermes..."
-          if nix build .#nixosConfigurations.hermes.config.system.build.toplevel --system x86_64-linux --accept-flake-config --show-trace --keep-going; then
-            echo "success=true" >> $GITHUB_ENV
+          if [[ "${{ needs.build-farnsworth.outputs.build-success }}" == "false" || "${{ needs.build-hermes.outputs.build-success }}" == "false" || "${{ needs.build-zoidberg.outputs.build-success }}" == "false" ]]; then
+            echo "One or more builds failed."
+            exit 1
           else
-            echo "Build failed, listing flake.lock for debugging:"
-            cat flake.lock
-            echo "success=false" >> $GITHUB_ENV  
-          fi
-
-      - name: Determine build result
-        id: build-result
-        run: echo "success=${{ env.success }}" >> $GITHUB_OUTPUT
+            echo "All builds succeeded."
