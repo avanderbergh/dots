@@ -6,12 +6,15 @@ on:
       - main
 
 jobs:
-  build:
+  build-hermes:
     runs-on: ubuntu-latest
     outputs:
       build-success: ${{ steps.build-result.outputs.success }}
 
     steps:
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -21,12 +24,10 @@ jobs:
       - name: Setup Cache
         uses: DeterminateSystems/magic-nix-cache-action@main
 
-      - name: Build Nix Flakes
+      - name: Build Hermes
         run: |
-          echo "Building NixOS configurations..."
-
           echo "Building Hermes..."
-          if nix build .#nixosConfigurations.hermes.config.system.build.toplevel --show-trace --keep-going --system x86_64-linux; then
+          if nix build .#nixosConfigurations.hermes.config.x86_64-linux.build.toplevel --show-trace --keep-going; then
             echo "success=true" >> $GITHUB_ENV
           else
             echo "Build failed, listing flake.lock for debugging:"

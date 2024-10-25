@@ -1,7 +1,6 @@
 {pkgs, ...}: let
   packages = ps:
     with ps; [
-      # mlxtend
       ipykernel
       matplotlib
       numpy
@@ -11,21 +10,19 @@
       poetry-dynamic-versioning
       poetry-semver
       scikit-learn
+      # https://github.com/NixOS/nixpkgs/issues/350117
       # torch-bin
-      # torchmetrics
       # torchvision-bin
-      # tqdm
+      torchmetrics
+      tqdm
     ];
 in {
   home.packages = with pkgs; [
-    (python311.withPackages packages)
-    # https://github.com/NixOS/nixpkgs/issues/305583
+    (python312.withPackages packages)
     cudaPackages.cudatoolkit
-    # cudaPackages.cudnn
     glibc
     poetry
-    # Build Failing
-    # poetryPlugins.poetry-audit-plugin
+    poetryPlugins.poetry-audit-plugin
     poetryPlugins.poetry-plugin-up
   ];
 }
