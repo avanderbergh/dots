@@ -73,6 +73,8 @@
 
   hardware.nvidia.open = true;
 
+  programs.nh.flake = "/home/avanderbergh/repos/github.com/avanderbergh/dots/";
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "23.11";
 }

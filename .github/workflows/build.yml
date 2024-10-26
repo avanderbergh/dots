@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Set final build status
         run: |
-          if [[ "${{ needs.build-farnsworth.outputs.build-success }}" == "false" || "${{ needs.build-hermes.outputs.build-success }}" == "false" || "${{ needs.build-zoidberg.outputs.build-success }}" == "false" ]]; then
+          if [[ "${{ needs.farnsworth.outputs.build-success }}" == "false" || "${{ needs.hermes.outputs.build-success }}" == "false" || "${{ needs.zoidberg.outputs.build-success }}" == "false" ]]; then
             echo "One or more builds failed."
             exit 1
           else

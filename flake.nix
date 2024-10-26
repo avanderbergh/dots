@@ -107,6 +107,7 @@
           modules-right = "lr cpu sp memory sp battery sp network rr";
         };
         top-distance = "100px";
+        flake = "/home/avanderbergh/repos/github.com/avanderbergh/dots/";
       };
       hermes = {
         monitor = "DP-0";
@@ -119,6 +120,10 @@
           modules-right = "lr cpu sp memory sp network rr";
         };
         top-distance = "60px";
+        flake = "/home/avanderbergh/repos/github.com/avanderbergh/dots/";
+      };
+      farnsworth = {
+        flake = "/home/avanderbergh/dots/";
       };
     };
 
