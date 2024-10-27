@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     catppuccin = {
-      url = "github:ryand56/catppuccin-nix?ref=home-manager-kvantum-fix";
+      url = "github:catppuccin/nix";
     };
 
     lanzaboote = {

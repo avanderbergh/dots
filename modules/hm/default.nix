@@ -14,7 +14,7 @@
       cava
       # error: sip-4.19.25 not supported for interpreter python3.12
       # cura
-      # davinci-resolve
+      davinci-resolve
       discord-canary
       esptool
       expressvpn
