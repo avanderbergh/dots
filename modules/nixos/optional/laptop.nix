@@ -18,17 +18,17 @@
       #!/usr/bin/env bash
 
       export DISPLAY=:0
-      export XAUTHORITY=/home/yourusername/.Xauthority
+      export XAUTHORITY=/home/avanderbergh/.Xauthority
 
       # Get the lid state from the event parameter
       lid_state=$(echo $@ | awk '{print $3}')
 
       if [ "$lid_state" = "close" ]; then
         logger "Lid closed: turning off display"
-        su yourusername -c "xset dpms force off"
+        su avanderbergh -c "xset dpms force off"
       elif [ "$lid_state" = "open" ]; then
         logger "Lid opened: turning on display"
-        su yourusername -c "xset dpms force on"
+        su avanderbergh -c "xset dpms force on"
       fi
     '';
 
