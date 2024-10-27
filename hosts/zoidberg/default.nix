@@ -1,6 +1,7 @@
 {lib, ...}: {
   imports = [
     ../../modules/nixos/optional/ausweisapp.nix
+    ../../modules/nixos/optional/cache-server.nix
     ../../modules/nixos/optional/bluetooth.nix
     ../../modules/nixos/optional/desktop.nix
     ../../modules/nixos/optional/docker.nix
