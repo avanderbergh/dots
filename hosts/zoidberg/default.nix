@@ -9,6 +9,7 @@
     ../../modules/nixos/optional/hidpi.nix
     ../../modules/nixos/optional/laptop.nix
     ../../modules/nixos/optional/ledger-live.nix
+    ../../modules/nixos/optional/media-server.nix
     ../../modules/nixos/optional/optin-persistence.nix
     ../../modules/nixos/optional/pipewire.nix
     ../../modules/nixos/optional/postgres.nix
@@ -49,6 +50,9 @@
   programs.nh.flake = "/home/avanderbergh/repos/github.com/avanderbergh/dots/";
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
+  # We want to keep the laptop on when closing the lid
+  services.logind.lidSwitchExternalPower = "ignore";
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   system.stateVersion = "23.11";
