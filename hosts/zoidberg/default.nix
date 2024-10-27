@@ -51,9 +51,6 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  # We want to keep the laptop on when closing the lid
-  services.logind.lidSwitchExternalPower = "ignore";
-
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   system.stateVersion = "23.11";
 }
