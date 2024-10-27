@@ -29,7 +29,7 @@
     accept-flake-config = true;
 
     extra-substituters = [
-      "http://zoidberg.fritz.box"
+      "http://zoidberg.fritz.box:5000"
       "https://nix-community.cachix.org"
       "https://cuda-maintainers.cachix.org"
     ];
