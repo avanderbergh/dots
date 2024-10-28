@@ -146,4 +146,28 @@ in {
     morbo_git_token = {};
     morbo_ssh_key = {};
   };
+
+  systemd.services.update-and-build = {
+    description = "Update flake inputs and build NixOS configurations";
+    after = ["network-online.target"];
+    wants = ["network-online.target"];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${updateBuildScript}";
+      WorkingDirectory = "${repoDir}";
+      User = "avanderbergh";
+      Environment = [
+        "HOME=/home/avanderbergh"
+      ];
+    };
+  };
+
+  # systemd.timers.update-and-build = {
+  #   description = "Run update-and-build.service daily";
+  #   wantedBy = ["timers.target"];
+  #   timerConfig = {
+  #     OnCalendar = "02:00";
+  #     Persistent = true;
+  #   };
+  # };
 }
