@@ -21,6 +21,4 @@ in {
   environment.systemPackages = [
     pkgs.sops
   ];
-
-  sops.secrets.example_secret = {};
 }
