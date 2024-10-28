@@ -70,8 +70,8 @@
     echo "Updating flake inputs..."
     nix flake update
 
-    # Check if flake.lock changed
-    if git diff --quiet flake.lock; then
+    # Check if there are any changes, including uncommitted ones
+    if [[ -z $(git status --porcelain) ]]; then
       echo "No updates found in flake inputs."
       exit 0
     fi
