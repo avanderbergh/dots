@@ -11,8 +11,8 @@
       poetry-semver
       scikit-learn
       # https://github.com/NixOS/nixpkgs/issues/350117
-      torch-bin
-      torchvision-bin
+      # torch-bin
+      # torchvision-bin
       torchmetrics
       tqdm
     ];
