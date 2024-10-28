@@ -57,6 +57,9 @@
 
     cd "$REPO_DIR"
 
+    git checkout main
+    git pull
+
     # Ensure the working directory is clean
     if [[ -n $(git status --porcelain) ]]; then
       echo "Working directory is not clean. Please commit or stash changes."
@@ -80,7 +83,7 @@
     # Commit the updated flake.lock
     echo "Committing changes..."
     git add flake.lock
-    git commit -m "Update flake inputs"
+    git -c commit.gpgsign=false commit -m "Update flake inputs"
 
     # Push the branch to remote
     echo "Pushing branch to origin..."
