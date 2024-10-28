@@ -60,7 +60,7 @@
     git checkout main
     git pull
 
-    # Ensure the working directory is clean
+    # Ensure the working directory is clean before updating flake inputs
     if [[ -n $(git status --porcelain) ]]; then
       echo "Working directory is not clean. Please commit or stash changes."
       exit 1
@@ -71,7 +71,9 @@
     nix flake update
 
     # Check if there are any changes, including uncommitted ones
-    if [[ -z $(git status --porcelain) ]]; then
+    if [[ -n $(git status --porcelain) ]]; then
+      echo "Updates found in flake inputs."
+    else
       echo "No updates found in flake inputs."
       exit 0
     fi
