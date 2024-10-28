@@ -15,7 +15,7 @@
     REPO_DIR="${repoDir}"
     BRANCH_NAME="flake-update-$(date +%Y%m%d%H%M%S)"
     HOSTS=(
-      ${lib.concatStringsSep "\n" (map (host: "\"${host}\"") hosts)}
+      ${lib.concatStringsSep "\n  " (map (host: "\"${host}\"") hosts)}
     )
 
     GH_TOKEN="$(cat ${config.sops.secrets.morbo_git_token.path})"
@@ -106,11 +106,11 @@
 
     # Prepare PR title and body based on build results
     if [ "$build_failed" = true ]; then
-      pr_title="Update flake inputs (build failed)"
+      pr_title="Update flake inputs"
       pr_body="Automated update of flake inputs.\n\nSome builds failed:\n$build_failures"
       pr_flags="--draft"
     else
-      pr_title="Update flake inputs (all builds succeeded)"
+      pr_title="Update flake inputs"
       pr_body="Automated update of flake inputs.\n\nAll builds succeeded."
       pr_flags=""
     fi
