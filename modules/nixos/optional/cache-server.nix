@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   services.nix-serve = {
     enable = true;
     openFirewall = true;
@@ -6,4 +6,8 @@
   };
 
   environment.persistence."/persist".files = ["/var/cache-priv-key.pem"];
+
+  environment.systemPackages = with pkgs; [
+    gh
+  ];
 }
