@@ -8,6 +8,9 @@
 
   hosts = ["zoidberg" "hermes" "farnsworth"];
 
+  username = "avanderbergh";
+  key_mode = "0400";
+
   updateBuildScript = pkgs.writeShellScript "update-and-build.sh" ''
     #!/usr/bin/env bash
     set -euo pipefail
@@ -138,8 +141,16 @@ in {
   ];
 
   sops.secrets = {
-    morbo_git_token = {};
-    morbo_ssh_key = {};
+    morbo_git_token = {
+      owner = username;
+      group = username;
+      mode = key_mode;
+    };
+    morbo_ssh_key = {
+      owner = username;
+      group = username;
+      mode = key_mode;
+    };
   };
 
   systemd.services.update-and-build = {
