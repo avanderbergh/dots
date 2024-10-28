@@ -5,10 +5,16 @@
 }: {
   users = {
     mutableUsers = false;
+    groups.avanderbergh = {};
     users = {
       avanderbergh = {
         isNormalUser = true;
-        extraGroups = ["wheel" "networkmanager" "dialout"];
+        extraGroups = [
+          "avanderbergh"
+          "dialout"
+          "networkmanager"
+          "wheel"
+        ];
         hashedPasswordFile = "/persist/passwords/avanderbergh";
         shell = pkgs.fish;
         openssh.authorizedKeys.keys = [
