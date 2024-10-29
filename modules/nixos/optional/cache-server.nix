@@ -113,24 +113,28 @@
     done
 
     # Prepare PR title and body based on build results
+
+    TEMP_PR_BODY="$(mktemp)"
+
     if [ "$build_failed" = true ]; then
       pr_title="Update flake inputs"
-      pr_body="Automated update of flake inputs.\n\nSome builds failed:\n''${build_failures}"
+      echo -e "Automated update of flake inputs.\n\nSome builds failed:\n''${build_failures}" > $TEMP_PR_BODY
       pr_flags="--draft"
     else
       pr_title="Update flake inputs"
-      pr_body="Automated update of flake inputs.\n\nAll builds succeeded."
+      echo -e "Automated update of flake inputs.\n\nAll builds succeeded." > $TEMP_PR_BODY
       pr_flags=""
     fi
 
     # Create a pull request using GitHub CLI
     echo "Creating pull request..."
+    pr_body=$(cat $TEMP_PR_BODY)
     gh pr create $pr_flags --title "$pr_title" --body "$pr_body"
 
     echo "All done."
 
     # Clean up temporary SSH key and config
-    rm -f "$TEMP_SSH_KEY" "$TEMP_SSH_CONFIG"
+    rm -f "$TEMP_SSH_KEY" "$TEMP_SSH_CONFIG" "$TEMP_PR_BODY"
   '';
 in {
   services.nix-serve = {
