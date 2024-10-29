@@ -21,7 +21,7 @@
       ${lib.concatStringsSep "\n  " (map (host: "\"${host}\"") hosts)}
     )
 
-    GH_TOKEN="$(cat ${config.sops.secrets.morbo_git_token.path})"
+    GH_TOKEN="$(cat ${config.sops.secrets.morbo_github_pat.path})"
 
     # Read the morbo-bot SSH key content
     MORBO_SSH_KEY_CONTENT="$(cat ${config.sops.secrets.morbo_ssh_key.path})"
@@ -106,7 +106,7 @@
         echo "Build for $HOST failed."
         build_failed=true
         build_log=$(tail -n 50 "$BUILD_LOG")
-        build_failures="$build_failures\n\n### Build failed for $HOST:\n\n```\n$build_log\n```"
+        build_failures="''${build_failures}\n\n### Build failed for ''${HOST}:\n\n\`\`\`\n''${build_log}\n\`\`\`"
       fi
       # Remove the build log file
       rm -f "$BUILD_LOG"
@@ -115,7 +115,7 @@
     # Prepare PR title and body based on build results
     if [ "$build_failed" = true ]; then
       pr_title="Update flake inputs"
-      pr_body="Automated update of flake inputs.\n\nSome builds failed:\n$build_failures"
+      pr_body="Automated update of flake inputs.\n\nSome builds failed:\n''${build_failures}"
       pr_flags="--draft"
     else
       pr_title="Update flake inputs"
@@ -146,7 +146,7 @@ in {
   ];
 
   sops.secrets = {
-    morbo_git_token = {
+    morbo_github_pat = {
       owner = username;
       group = username;
       mode = key_mode;
