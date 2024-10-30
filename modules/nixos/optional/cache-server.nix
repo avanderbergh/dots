@@ -147,6 +147,7 @@ in {
 
   environment.systemPackages = with pkgs; [
     gh
+    git
   ];
 
   sops.secrets = {
@@ -173,6 +174,7 @@ in {
       User = "avanderbergh";
       Environment = [
         "HOME=/home/avanderbergh"
+        "PATH=${pkgs.git}/bin:${pkgs.gh}/bin:/usr/bin:/bin"
       ];
     };
   };
