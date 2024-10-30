@@ -149,6 +149,11 @@ in {
     gh
     git
     coreutils
+    openssh
+    nix
+    bash
+    gnugrep
+    gnused
   ];
 
   sops.secrets = {
@@ -175,7 +180,7 @@ in {
       User = "avanderbergh";
       Environment = [
         "HOME=/home/avanderbergh"
-        "PATH=${pkgs.coreutils}/bin:${pkgs.git}/bin:${pkgs.gh}/bin:/usr/bin:/bin"
+        "PATH=${pkgs.coreutils}/bin:${pkgs.git}/bin:${pkgs.gh}/bin:${pkgs.openssh}/bin:${pkgs.nix}/bin:${pkgs.bash}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:/usr/bin:/bin"
       ];
     };
   };
