@@ -7,7 +7,8 @@
     packages = with pkgs; [
       alejandra
       # bitwig-studio
-      blender
+      # https://github.com/NixOS/nixpkgs/issues/352873
+      # blender
       brightnessctl
       # Failing to build
       # calibre
