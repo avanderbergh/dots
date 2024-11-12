@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
 
     catppuccin = {
       url = "github:catppuccin/nix";
@@ -40,6 +41,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
+    nixpkgs-stable,
     catppuccin,
     home-manager,
     nixos-hardware,
@@ -61,6 +63,19 @@
       };
       overlays = [
         (import ./pkgs)
+        (self: super: {
+          utillinux = super.util-linux;
+        })
+      ];
+    };
+
+    pkgs-stable = import nixpkgs-stable {
+      inherit system;
+      config = {
+        allowUnfree = true;
+        allowCuda = true;
+      };
+      overlays = [
         (self: super: {
           utillinux = super.util-linux;
         })
@@ -108,7 +123,6 @@
       hermes = {
         monitor = "DP-0";
         monitors = {"DP-0" = desktops_1 ++ desktops_2;};
-
         wlan-interface = "wlp10s0";
         polybar = {
           font-1-size = "32;10";
@@ -125,18 +139,17 @@
 
     colors = import ./lib/theme/colors.nix;
 
-    mkExtraSpecialArgs = hostConfig: {inherit pkgs self inputs colors hostConfig;};
+    mkExtraSpecialArgs = hostConfig: {
+      inherit pkgs self inputs colors hostConfig pkgs-stable;
+    };
   in {
     nixosConfigurations = {
       zoidberg = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit pkgs self inputs colors outputs;};
+        specialArgs = {inherit pkgs pkgs-stable self inputs colors outputs;};
         modules =
           [
             nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
-            # nixos-hardware.nixosModules.common-gpu-nvidia
-            # nixos-hardware.nixosModules.common-cpu-amd
-            # nixos-hardware.nixosModules.common-pc-laptop
             ./hosts/zoidberg
             {
               home-manager = {
@@ -149,9 +162,10 @@
           ]
           ++ nixosModules;
       };
+
       hermes = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit pkgs self inputs colors outputs;};
+        specialArgs = {inherit pkgs pkgs-stable self inputs colors outputs;};
         modules =
           [
             nixos-hardware.nixosModules.common-cpu-amd
@@ -169,9 +183,10 @@
           ]
           ++ nixosModules;
       };
+
       farnsworth = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit pkgs self inputs colors outputs;};
+        specialArgs = {inherit pkgs pkgs-stable self inputs colors outputs;};
         modules =
           [
             nixos-hardware.nixosModules.common-cpu-amd

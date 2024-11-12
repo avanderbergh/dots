@@ -8,7 +8,7 @@
       alejandra
       # bitwig-studio
       # https://github.com/NixOS/nixpkgs/issues/352873
-      # blender
+      blender
       brightnessctl
       # Failing to build
       # calibre
