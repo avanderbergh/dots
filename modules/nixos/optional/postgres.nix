@@ -10,7 +10,7 @@
 
       package = pkgs.postgresql_14;
 
-      extraPlugins = with pkgs.postgresql_14.pkgs; [
+      extensions = with pkgs.postgresql_14.pkgs; [
         pgvector
       ];
 

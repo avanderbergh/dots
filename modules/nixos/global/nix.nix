@@ -14,6 +14,7 @@
       ];
       trusted-users = ["root" "avanderbergh"];
       accept-flake-config = true;
+      download-buffer-size = 134217728;
     };
   };
   programs.nh = {
