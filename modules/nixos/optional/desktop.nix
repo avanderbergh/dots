@@ -17,7 +17,6 @@
     displayManager = {
       lightdm = {
         enable = true;
-        background = "/usr/share/background.jpg";
         greeters = {
           gtk = {
             enable = true;
@@ -42,5 +41,42 @@
     package = pkgs.i3lock-color;
   };
 
-  catppuccin.enable = true;
+  stylix = {
+    enable = true;
+    polarity = "dark";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    cursor = {
+      size = 64;
+    };
+    fonts = {
+      serif = {
+        package = pkgs.shantell-sans;
+        name = "Shantell Sans";
+      };
+
+      sansSerif = {
+        package = pkgs.shantell-sans;
+        name = "Shantell Sans";
+      };
+
+      monospace = {
+        package = pkgs.victor-mono;
+        name = "Victor Mono";
+      };
+
+      emoji = {
+        package = pkgs.noto-fonts-emoji;
+        name = "Noto Color Emoji";
+      };
+
+      sizes = {
+        popups = 32;
+      };
+    };
+    opacity = {
+      popups = 0.9;
+      terminal = 0.75;
+    };
+    image = ../../hm/desktop/images/luca-micheli-ruWkmt3nU58-unsplash.jpg;
+  };
 }

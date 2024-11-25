@@ -1,8 +1,4 @@
-{
-  colors,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   programs = {
     alacritty = {
       enable = true;
@@ -12,25 +8,6 @@
           padding = {
             x = 10;
             y = 10;
-          };
-          opacity = 0.5;
-        };
-        font = {
-          normal = {
-            family = "VictorMono Nerd Font";
-            style = "Regular";
-          };
-          bold = {
-            family = "VictorMono Nerd Font";
-            style = "Bold";
-          };
-          italic = {
-            family = "VictorMono Nerd Font";
-            style = "Italic";
-          };
-          bold_italic = {
-            family = "VictorMono Nerd Font";
-            style = "Bold Italic";
           };
         };
       };

@@ -5,10 +5,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
 
-    catppuccin = {
-      url = "github:catppuccin/nix";
-    };
-
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +20,8 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     sops-nix.url = "github:Mic92/sops-nix";
+
+    stylix.url = "github:danth/stylix";
   };
 
   nixConfig = {
@@ -42,10 +40,10 @@
     self,
     nixpkgs,
     nixpkgs-stable,
-    catppuccin,
     home-manager,
     nixos-hardware,
     sops-nix,
+    stylix,
     ...
   }: let
     inherit (self) outputs;
@@ -88,7 +86,6 @@
 
     homeModules = rec {
       shared = [
-        catppuccin.homeManagerModules.catppuccin
         sops-nix.homeManagerModules.sops
         ./modules/hm
         ./modules/hm/console.nix
@@ -117,7 +114,6 @@
           font-2-size = "22;14";
           modules-right = "lr cpu sp memory sp battery sp network rr";
         };
-        top-distance = "100px";
         flake = "/home/avanderbergh/repos/github.com/avanderbergh/dots/";
       };
       hermes = {
@@ -129,7 +125,6 @@
           font-2-size = "20;6";
           modules-right = "lr cpu sp memory sp network rr";
         };
-        top-distance = "60px";
         flake = "/home/avanderbergh/repos/github.com/avanderbergh/dots/";
       };
       farnsworth = {
@@ -156,6 +151,7 @@
                 extraSpecialArgs = mkExtraSpecialArgs hostConfigs.zoidberg;
                 useUserPackages = true;
                 useGlobalPkgs = true;
+                backupFileExtension = "backup";
                 users.avanderbergh.imports = homeModules."avanderbergh@zoidberg";
               };
             }
@@ -177,6 +173,7 @@
                 extraSpecialArgs = mkExtraSpecialArgs hostConfigs.hermes;
                 useUserPackages = true;
                 useGlobalPkgs = true;
+                backupFileExtension = "backup";
                 users.avanderbergh.imports = homeModules."avanderbergh@hermes";
               };
             }

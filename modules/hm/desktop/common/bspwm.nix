@@ -1,6 +1,5 @@
 {
   hostConfig,
-  colors,
   pkgs,
   ...
 }: let
@@ -37,9 +36,6 @@ in {
       enable = true;
       monitors = hostConfig.monitors;
       settings = {
-        normal_border_color = "${colors.crust}";
-        focused_border_color = "${colors.mauve}";
-        active_border_color = "${colors.lavender}";
         gapless_monocle = true;
         border_width = 3;
       };

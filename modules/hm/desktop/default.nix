@@ -16,10 +16,7 @@ in {
 
   gtk = {
     enable = true;
-    catppuccin.enable = true;
   };
-
-  catppuccin.enable = true;
 
   qt = {
     enable = true;
