@@ -11,7 +11,6 @@ in {
     ./common/rofi.nix
     ./common/sxhkd.nix
     ./common/syncthing.nix
-    ./common/wallpapers.nix
   ];
 
   gtk = {

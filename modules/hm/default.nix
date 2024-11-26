@@ -22,6 +22,7 @@
       pkgs.expressvpn
       pkgs-stable.figma-agent
       pkgs.firefox
+      pkgs.font-manager
       pkgs.google-chrome
       pkgs.joshuto
       pkgs.ledger-live-desktop

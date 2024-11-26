@@ -3,11 +3,7 @@
   colors,
   ...
 }: {
-  # boot.plymouth = {
-  #   enable = true;
-  #   themePackages = [pkgs.catppuccin-plymouth];
-  #   theme = "catppuccin-mocha";
-  # };
+  boot.plymouth.enable = true;
 
   services.expressvpn.enable = true;
 
@@ -50,18 +46,18 @@
     };
     fonts = {
       serif = {
-        package = pkgs.shantell-sans;
-        name = "Shantell Sans";
+        package = pkgs.recursive;
+        name = "RecMonoCasual Nerd Font Propo";
       };
 
       sansSerif = {
-        package = pkgs.shantell-sans;
-        name = "Shantell Sans";
+        package = pkgs.recursive;
+        name = "RecMonoLinear Nerd Font Propo";
       };
 
       monospace = {
-        package = pkgs.victor-mono;
-        name = "Victor Mono";
+        package = pkgs.recursive;
+        name = "RecMonoLinear Nerd Font Mono";
       };
 
       emoji = {

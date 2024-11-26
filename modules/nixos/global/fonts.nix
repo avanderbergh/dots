@@ -5,18 +5,19 @@
       input-fonts
       noto-fonts
       noto-fonts-emoji
+      recursive
       roboto
       roboto-slab
       shantell-sans
       victor-mono
-      (nerdfonts.override {fonts = ["VictorMono" "Noto"];})
+      (nerdfonts.override {fonts = ["VictorMono" "Noto" "Recursive"];})
     ];
 
     fontconfig = {
       defaultFonts = {
-        serif = ["Roboto Slab"];
-        sansSerif = ["Roboto"];
-        monospace = ["Victor Mono"];
+        serif = ["RecMonoCasual Nerd Font Propo"];
+        sansSerif = ["RecMonoLinear Nerd Font Propo"];
+        monospace = ["RecMonoLinear Nerd Font Mono"];
       };
     };
   };
