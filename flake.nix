@@ -28,11 +28,11 @@
     accept-flake-config = true;
 
     extra-substituters = [
-      "http://zoidberg.fritz.box:5000"
+      "http://zoidberg:5000"
     ];
 
     extra-trusted-public-keys = [
-      "zoidberg.fritz.box:TRN+E73yI/YM72iiC7mLrEMCvFMOSqFZh520vIv7KWE="
+      "zoidberg:TRN+E73yI/YM72iiC7mLrEMCvFMOSqFZh520vIv7KWE="
     ];
   };
 
