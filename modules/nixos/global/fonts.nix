@@ -10,7 +10,11 @@
       roboto-slab
       shantell-sans
       victor-mono
-      (nerdfonts.override {fonts = ["VictorMono" "Noto" "Recursive"];})
+      nerd-fonts.departure-mono
+      nerd-fonts.proggy-clean-tt
+      nerd-fonts.noto
+      nerd-fonts.recursive-mono
+      nerd-fonts.victor-mono
     ];
 
     fontconfig = {
