@@ -32,7 +32,7 @@
     ];
 
     extra-trusted-public-keys = [
-      "zoidberg:TRN+E73yI/YM72iiC7mLrEMCvFMOSqFZh520vIv7KWE="
+      "zoidberg.fritz.box:TRN+E73yI/YM72iiC7mLrEMCvFMOSqFZh520vIv7KWE="
     ];
   };
 
