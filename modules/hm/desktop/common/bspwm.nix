@@ -50,6 +50,7 @@ in {
         "eww open top_left"
         "eww open top_center"
         "eww open top_right"
+        "autorandr --change"
       ];
     };
   };

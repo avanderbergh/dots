@@ -103,7 +103,7 @@
     hostConfigs = {
       zoidberg = {
         monitors = {
-          "eDP-1" = desktops;
+          "eDP-1-1" = desktops;
         };
       };
       hermes = {

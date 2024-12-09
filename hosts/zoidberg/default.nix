@@ -43,6 +43,8 @@
   hardware.nvidia = {
     open = true;
     prime = {
+      offload.enable = false;
+      sync.enable = true;
       nvidiaBusId = lib.mkDefault "PCI:1:0:0";
       intelBusId = lib.mkDefault "PCI:0:2:0";
     };
