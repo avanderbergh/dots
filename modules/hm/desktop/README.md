@@ -31,4 +31,4 @@
 
 ## 🔄 Reload Configurations
 
-- `Super + Escape`: Reload Polybar, Sxhkd, and BSPWM configurations
+- `Super + Escape`: Reload EWW, Sxhkd, and BSPWM configurations

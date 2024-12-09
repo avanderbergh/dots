@@ -98,37 +98,18 @@
       "avanderbergh@hermes" = [./modules/hm/desktop] ++ shared;
     };
 
-    desktops_1 = ["1" "2" "3" "4" "5"];
-    desktops_2 = ["6" "7" "8" "9" "10"];
+    desktops = ["1" "2" "3" "4" "5" "6" "7" "8" "9" "10"];
 
     hostConfigs = {
       zoidberg = {
-        monitor = "eDP-1";
         monitors = {
-          "eDP-1" = desktops_1;
-          "DP-1-1" = desktops_2;
+          "eDP-1" = desktops;
         };
-        wlan-interface = "wlp4s0";
-        polybar = {
-          font-1-size = "32;20";
-          font-2-size = "22;14";
-          modules-right = "lr cpu sp memory sp battery sp network rr";
-        };
-        flake = "/home/avanderbergh/repos/github.com/avanderbergh/dots/";
       };
       hermes = {
-        monitor = "DP-0";
-        monitors = {"DP-0" = desktops_1 ++ desktops_2;};
-        wlan-interface = "wlp10s0";
-        polybar = {
-          font-1-size = "32;10";
-          font-2-size = "20;6";
-          modules-right = "lr cpu sp memory sp network rr";
+        monitors = {
+          "DP-0" = desktops;
         };
-        flake = "/home/avanderbergh/repos/github.com/avanderbergh/dots/";
-      };
-      farnsworth = {
-        flake = "/home/avanderbergh/dots/";
       };
     };
 
