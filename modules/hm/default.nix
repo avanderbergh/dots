@@ -19,7 +19,6 @@
       pkgs.davinci-resolve
       pkgs.discord-canary
       pkgs.esptool
-      pkgs.expressvpn
       pkgs-stable.figma-agent
       pkgs.firefox
       pkgs.font-manager
