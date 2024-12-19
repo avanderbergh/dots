@@ -51,10 +51,7 @@
       parted
       pass
       pciutils
-      pinentry
-      pinentry-curses
-      pinentry-gtk2
-      pinentry-gnome3
+      pinentry-all
       sbctl
       gcc
       libGLU
