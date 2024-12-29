@@ -9,7 +9,6 @@
     ../../modules/nixos/optional/hidpi.nix
     ../../modules/nixos/optional/laptop.nix
     ../../modules/nixos/optional/ledger-live.nix
-    ../../modules/nixos/optional/media-server.nix
     ../../modules/nixos/optional/optin-persistence.nix
     ../../modules/nixos/optional/pipewire.nix
     ../../modules/nixos/optional/postgres.nix
