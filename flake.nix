@@ -28,11 +28,11 @@
     accept-flake-config = true;
 
     extra-substituters = [
-      "http://zoidberg:5000"
+      "http://hermes:5000"
     ];
 
     extra-trusted-public-keys = [
-      "zoidberg.fritz.box:TRN+E73yI/YM72iiC7mLrEMCvFMOSqFZh520vIv7KWE="
+      "hermes:ctaxZAzCtUCIsQCwrws97n2o81DIPM9c1iXUO3H59U8="
     ];
   };
 
