@@ -9,17 +9,20 @@
     stateVersion = "23.11";
 
     packages = [
-      pkgs.alejandra
       pkgs-stable.bitwig-studio
-      pkgs.blender
-      pkgs.brightnessctl
       pkgs-stable.calibre
       pkgs-stable.cava
       pkgs-stable.cura
+      pkgs-stable.figma-agent
+      pkgs-stable.openscad
+      pkgs-stable.orca-slicer
+      pkgs-stable.pcmanfm
+      pkgs.alejandra
+      pkgs.blender
+      pkgs.brightnessctl
       pkgs.davinci-resolve
       pkgs.discord-canary
       pkgs.esptool
-      pkgs-stable.figma-agent
       pkgs.firefox
       pkgs.font-manager
       pkgs.google-chrome
@@ -31,9 +34,6 @@
       pkgs.ncdu
       pkgs.nsxiv
       pkgs.obsidian
-      pkgs.openscad
-      pkgs.orca-slicer
-      pkgs.pcmanfm
       pkgs.pgcli
       pkgs.pinokio
       pkgs.signal-desktop

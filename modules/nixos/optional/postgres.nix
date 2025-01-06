@@ -8,9 +8,9 @@
     postgresql = {
       enable = true;
 
-      package = pkgs.postgresql_14;
+      package = pkgs.postgresql_17;
 
-      extensions = with pkgs.postgresql_14.pkgs; [
+      extensions = with pkgs.postgresql_17.pkgs; [
         pgvector
       ];
 
