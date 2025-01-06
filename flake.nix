@@ -49,36 +49,22 @@
     inherit (self) outputs;
     system = "x86_64-linux";
 
-    pkgs = import nixpkgs {
+    nixosSystemArgs = {
       inherit system;
       config = {
         allowUnfree = true;
         allowCuda = true;
         permittedInsecurePackages = [
-          # For loqseq
-          "electron-27.3.11"
+          "electron-27.3.11" # For logseq
         ];
       };
       overlays = [
         (import ./pkgs)
-        (self: super: {
-          utillinux = super.util-linux;
-        })
       ];
     };
 
-    pkgs-stable = import nixpkgs-stable {
-      inherit system;
-      config = {
-        allowUnfree = true;
-        allowCuda = true;
-      };
-      overlays = [
-        (self: super: {
-          utillinux = super.util-linux;
-        })
-      ];
-    };
+    pkgs = import nixpkgs nixosSystemArgs;
+    pkgs-stable = import nixpkgs-stable nixosSystemArgs;
 
     nixosModules = [
       ./modules/nixos/global
@@ -116,18 +102,19 @@
     colors = import ./lib/theme/colors.nix;
 
     mkExtraSpecialArgs = hostConfig: {
-      inherit pkgs self inputs colors hostConfig pkgs-stable;
+      inherit self inputs colors hostConfig pkgs-stable;
     };
   in {
     nixosConfigurations = {
       zoidberg = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit pkgs pkgs-stable self inputs colors outputs;};
+        specialArgs = {inherit pkgs-stable self inputs colors outputs;};
         modules =
           [
             nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
             ./hosts/zoidberg
             {
+              nixpkgs = nixosSystemArgs;
               home-manager = {
                 extraSpecialArgs = mkExtraSpecialArgs hostConfigs.zoidberg;
                 useUserPackages = true;
@@ -142,7 +129,7 @@
 
       hermes = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit pkgs pkgs-stable self inputs colors outputs;};
+        specialArgs = {inherit pkgs-stable self inputs colors outputs;};
         modules =
           [
             nixos-hardware.nixosModules.common-cpu-amd
@@ -150,6 +137,7 @@
             nixos-hardware.nixosModules.common-pc-ssd
             ./hosts/hermes
             {
+              nixpkgs = nixosSystemArgs;
               home-manager = {
                 extraSpecialArgs = mkExtraSpecialArgs hostConfigs.hermes;
                 useUserPackages = true;
@@ -164,13 +152,16 @@
 
       farnsworth = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit pkgs pkgs-stable self inputs colors outputs;};
+        specialArgs = {inherit pkgs-stable self inputs colors outputs;};
         modules =
           [
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-pc-ssd
             nixos-hardware.nixosModules.common-gpu-amd
             ./hosts/farnsworth
+            {
+              nixpkgs = nixosSystemArgs;
+            }
           ]
           ++ nixosModules;
       };
