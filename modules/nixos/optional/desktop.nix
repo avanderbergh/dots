@@ -5,12 +5,6 @@
 }: {
   boot.plymouth.enable = true;
 
-  services.expressvpn.enable = true;
-
-  environment.systemPackages = [
-    pkgs.expressvpn
-  ];
-
   services.xserver = {
     enable = true;
     xkb.options = "compose:ralt,ctrl:nocaps";
