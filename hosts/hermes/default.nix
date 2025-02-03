@@ -20,6 +20,7 @@
     ../../modules/nixos/optional/quickemu.nix
     ../../modules/nixos/optional/secureboot.nix
     ../../modules/nixos/optional/video.nix
+    ../../modules/nixos/optional/vpn.nix
   ];
 
   networking.hostName = "hermes";

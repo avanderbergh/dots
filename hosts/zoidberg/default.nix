@@ -12,6 +12,7 @@
     ../../modules/nixos/optional/pipewire.nix
     ../../modules/nixos/optional/postgres.nix
     ../../modules/nixos/optional/secureboot.nix
+    ../../modules/nixos/optional/vpn.nix
   ];
 
   networking.hostName = "zoidberg";

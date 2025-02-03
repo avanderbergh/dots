@@ -75,4 +75,8 @@
     };
     image = ../../hm/desktop/images/luca-micheli-ruWkmt3nU58-unsplash.jpg;
   };
+
+  environment.systemPackages = [
+    pkgs.networkmanagerapplet
+  ];
 }
