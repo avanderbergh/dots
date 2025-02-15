@@ -63,13 +63,5 @@
     zathura.enable = true;
   };
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowCuda = true;
-      allowUnfreePredicate = _: true;
-    };
-  };
-
   services.udiskie.enable = true;
 }
