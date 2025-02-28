@@ -2,7 +2,6 @@
   home = {
     packages = with pkgs; [
       nodejs_20
-      nodePackages.degit
       nodePackages.node-gyp-build
       nodePackages.pnpm
       nodePackages.zx
