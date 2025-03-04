@@ -1,12 +1,13 @@
 {
   pkgs,
+  pkgs-stable,
   config,
   ...
 }: {
   # Enable OBS Studio and required plugins
   programs.obs-studio = {
     enable = true;
-    plugins = with pkgs; [
+    plugins = with pkgs-stable; [
       obs-studio-plugins.droidcam-obs
       obs-studio-plugins.obs-websocket
       obs-studio-plugins.obs-shaderfilter
