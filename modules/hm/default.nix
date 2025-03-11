@@ -46,6 +46,7 @@
       pkgs.xdotool
       pkgs.xorg.xev
       pkgs.xsel
+      pkgs.zoom-us
     ];
   };
 
