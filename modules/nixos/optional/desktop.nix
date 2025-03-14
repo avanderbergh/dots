@@ -73,7 +73,7 @@
       popups = 0.9;
       terminal = 0.75;
     };
-    image = ../../hm/desktop/images/luca-micheli-ruWkmt3nU58-unsplash.jpg;
+    image = ../../hm/desktop/images/wallpaper.jpg;
   };
 
   environment.systemPackages = [

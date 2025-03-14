@@ -30,6 +30,9 @@
             bspc desktop "$desktop" -m eDP-1-1
           done
           bspc desktop -f last
+
+          # Reload wallpaper using direct path
+          ${pkgs.feh}/bin/feh --no-fehbg --bg-fill ${./images/wallpaper.jpg}
         '';
       };
       mobile = {
@@ -51,6 +54,9 @@
             bspc desktop "$desktop" -m eDP-1-1
           done
           bspc desktop -f last
+
+          # Reload wallpaper using direct path
+          ${pkgs.feh}/bin/feh --no-fehbg --bg-fill ${./images/wallpaper.jpg}
         '';
       };
       portable_monitor = {
@@ -86,6 +92,9 @@
             bspc desktop "$desktop" -m DP-1-3
           done
           bspc desktop -f last
+
+          # Reload wallpaper using direct path
+          ${pkgs.feh}/bin/feh --no-fehbg --bg-fill ${./images/wallpaper.jpg}
         '';
       };
     };
@@ -93,5 +102,8 @@
 
   services.autorandr.enable = true;
 
-  home.packages = with pkgs; [arandr];
+  home.packages = with pkgs; [
+    arandr
+    feh
+  ];
 }
