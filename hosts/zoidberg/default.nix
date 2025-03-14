@@ -25,6 +25,7 @@
       luks.devices."enc".device = "/dev/disk/by-label/luks";
     };
     kernelModules = ["btintel"];
+    kernelParams = ["snd_hda_intel.dmic_detect=0"];
   };
 
   fileSystems."/boot" = {
