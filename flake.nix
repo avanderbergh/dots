@@ -54,9 +54,6 @@
       config = {
         allowUnfree = true;
         allowCuda = true;
-        permittedInsecurePackages = [
-          "electron-27.3.11" # For logseq
-        ];
       };
       overlays = [
         (import ./pkgs)
@@ -102,7 +99,7 @@
     colors = import ./lib/theme/colors.nix;
 
     mkExtraSpecialArgs = hostConfig: {
-      inherit self inputs colors hostConfig pkgs-stable;
+      inherit self inputs colors hostConfig pkgs pkgs-stable;
     };
   in {
     nixosConfigurations = {
@@ -118,7 +115,6 @@
               home-manager = {
                 extraSpecialArgs = mkExtraSpecialArgs hostConfigs.zoidberg;
                 useUserPackages = true;
-                useGlobalPkgs = true;
                 backupFileExtension = "backup";
                 users.avanderbergh.imports = homeModules."avanderbergh@zoidberg";
               };
@@ -141,7 +137,6 @@
               home-manager = {
                 extraSpecialArgs = mkExtraSpecialArgs hostConfigs.hermes;
                 useUserPackages = true;
-                useGlobalPkgs = true;
                 backupFileExtension = "backup";
                 users.avanderbergh.imports = homeModules."avanderbergh@hermes";
               };

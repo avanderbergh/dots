@@ -30,7 +30,6 @@
       pkgs.ledger-live-desktop
       pkgs.libgen-cli
       pkgs.libresprite
-      pkgs.logseq
       pkgs.ncdu
       pkgs.nsxiv
       pkgs.obsidian
@@ -57,9 +56,6 @@
     vscode = {
       enable = true;
       package = pkgs.vscode.fhs;
-      userSettings = {
-        "window.menuBarVisibility" = "toggle";
-      };
     };
     zathura.enable = true;
   };

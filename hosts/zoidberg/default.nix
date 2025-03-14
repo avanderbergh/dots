@@ -5,7 +5,6 @@
     ../../modules/nixos/optional/desktop.nix
     ../../modules/nixos/optional/docker.nix
     ../../modules/nixos/optional/ephemeral-btrfs.nix
-    ../../modules/nixos/optional/fingerprint.nix
     ../../modules/nixos/optional/laptop.nix
     ../../modules/nixos/optional/ledger-live.nix
     ../../modules/nixos/optional/optin-persistence.nix
@@ -25,7 +24,6 @@
       luks.devices."enc".device = "/dev/disk/by-label/luks";
     };
     kernelModules = ["btintel"];
-    kernelParams = ["snd_hda_intel.dmic_detect=0"];
   };
 
   fileSystems."/boot" = {
