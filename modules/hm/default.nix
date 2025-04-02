@@ -20,6 +20,7 @@
       pkgs.alejandra
       pkgs.blender
       pkgs.brightnessctl
+      pkgs.code-cursor
       pkgs.davinci-resolve
       pkgs.discord-canary
       pkgs.esptool

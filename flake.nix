@@ -76,6 +76,7 @@
         ./modules/hm/node.nix
         ./modules/hm/python.nix
         ./modules/hm/sops.nix
+        ./modules/hm/ssh.nix
       ];
       "avanderbergh@zoidberg" = [./modules/hm/desktop ./modules/hm/desktop/autorandr.nix] ++ shared;
       "avanderbergh@hermes" = [./modules/hm/desktop] ++ shared;

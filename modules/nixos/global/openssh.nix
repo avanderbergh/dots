@@ -22,6 +22,8 @@ in {
       StreamLocalBindUnlink = "yes";
       # Allow forwarding ports to everywhere
       GatewayPorts = "clientspecified";
+      # Allow SSH agent forwarding
+      AllowAgentForwarding = true;
     };
 
     hostKeys = [
