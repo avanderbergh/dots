@@ -24,6 +24,8 @@ in {
       GatewayPorts = "clientspecified";
       # Allow SSH agent forwarding
       AllowAgentForwarding = true;
+      # Enable X11 forwarding on the server
+      X11Forwarding = true;
     };
 
     hostKeys = [
