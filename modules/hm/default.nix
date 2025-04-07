@@ -33,6 +33,7 @@
       pkgs.libresprite
       pkgs.ncdu
       pkgs.nsxiv
+      pkgs.nvtopPackages.full
       pkgs.obsidian
       pkgs.pgcli
       pkgs.pinokio

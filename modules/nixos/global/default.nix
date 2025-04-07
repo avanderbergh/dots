@@ -28,6 +28,11 @@
 
   console.useXkbConfig = true;
 
+  # Disable the sudo lecture
+  security.sudo.extraConfig = ''
+    Defaults lecture = never
+  '';
+
   programs = {
     fish.enable = true;
     gnupg.agent = {
