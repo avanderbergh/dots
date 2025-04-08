@@ -1,6 +1,7 @@
 {
   pkgs,
   pkgs-stable,
+  pkgs-master,
   ...
 }: {
   home = {
@@ -57,7 +58,7 @@
     pandoc.enable = true;
     vscode = {
       enable = true;
-      package = pkgs.vscode.fhs;
+      package = pkgs-master.vscode.fhs;
     };
     zathura.enable = true;
   };

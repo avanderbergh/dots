@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
@@ -40,6 +41,7 @@
     self,
     nixpkgs,
     nixpkgs-stable,
+    nixpkgs-master,
     home-manager,
     nixos-hardware,
     sops-nix,
@@ -62,6 +64,7 @@
 
     pkgs = import nixpkgs nixosSystemArgs;
     pkgs-stable = import nixpkgs-stable nixosSystemArgs;
+    pkgs-master = import nixpkgs-master nixosSystemArgs;
 
     nixosModules = [
       ./modules/nixos/global
@@ -100,13 +103,13 @@
     colors = import ./lib/theme/colors.nix;
 
     mkExtraSpecialArgs = hostConfig: {
-      inherit self inputs colors hostConfig pkgs pkgs-stable;
+      inherit self inputs colors hostConfig pkgs pkgs-stable pkgs-master;
     };
   in {
     nixosConfigurations = {
       zoidberg = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit pkgs-stable self inputs colors outputs;};
+        specialArgs = {inherit pkgs-stable pkgs-master self inputs colors outputs;};
         modules =
           [
             nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
@@ -126,7 +129,7 @@
 
       hermes = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit pkgs-stable self inputs colors outputs;};
+        specialArgs = {inherit pkgs-stable pkgs-master self inputs colors outputs;};
         modules =
           [
             nixos-hardware.nixosModules.common-cpu-amd
@@ -148,7 +151,7 @@
 
       farnsworth = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit pkgs-stable self inputs colors outputs;};
+        specialArgs = {inherit pkgs-stable pkgs-master self inputs colors outputs;};
         modules =
           [
             nixos-hardware.nixosModules.common-cpu-amd

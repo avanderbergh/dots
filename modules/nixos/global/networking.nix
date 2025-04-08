@@ -4,7 +4,7 @@
     useDHCP = lib.mkDefault true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [22 80 443];
+      allowedTCPPorts = [22 80 443 9090];
       allowedTCPPortRanges = [
         {
           from = 3000;
