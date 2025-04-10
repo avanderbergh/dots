@@ -9,6 +9,7 @@
     ../../modules/nixos/optional/ledger-live.nix
     ../../modules/nixos/optional/ollama.nix
     ../../modules/nixos/optional/optin-persistence.nix
+    ../../modules/nixos/optional/pipewire-sof-workarounds.nix
     ../../modules/nixos/optional/pipewire.nix
     ../../modules/nixos/optional/postgres.nix
     ../../modules/nixos/optional/secureboot.nix
