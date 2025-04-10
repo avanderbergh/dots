@@ -105,11 +105,14 @@
     mkExtraSpecialArgs = hostConfig: {
       inherit self inputs colors hostConfig pkgs pkgs-stable pkgs-master;
     };
+
+    specialArgs = {
+      inherit pkgs-stable pkgs-master self inputs colors outputs;
+    };
   in {
     nixosConfigurations = {
       zoidberg = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit pkgs-stable pkgs-master self inputs colors outputs;};
+        inherit system specialArgs;
         modules =
           [
             nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
@@ -128,8 +131,7 @@
       };
 
       hermes = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit pkgs-stable pkgs-master self inputs colors outputs;};
+        inherit system specialArgs;
         modules =
           [
             nixos-hardware.nixosModules.common-cpu-amd
@@ -150,8 +152,7 @@
       };
 
       farnsworth = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit pkgs-stable pkgs-master self inputs colors outputs;};
+        inherit system specialArgs;
         modules =
           [
             nixos-hardware.nixosModules.common-cpu-amd
