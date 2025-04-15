@@ -40,6 +40,7 @@
       pkgs.pinokio
       pkgs.signal-desktop
       pkgs.slack
+      pkgs.steam-run
       pkgs.telegram-desktop
       pkgs.unzip
       pkgs.wpsoffice

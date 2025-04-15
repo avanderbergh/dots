@@ -41,6 +41,16 @@
       enableSSHSupport = true;
       enableExtraSocket = true;
     };
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        # Add libraries needed by dynamically linked executables here
+        stdenv.cc.cc # Basic C library
+        # Add other libraries as needed, e.g.:
+        # openssl
+        # zlib
+      ];
+    };
   };
 
   services.udisks2.enable = true;
