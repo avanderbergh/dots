@@ -2,26 +2,23 @@
   description = "Ado's Dots";
 
   inputs = {
+    # Core Nixpkgs channels
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
+    # NixOS modules and overlays
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     impermanence.url = "github:nix-community/impermanence";
-
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
     sops-nix.url = "github:Mic92/sops-nix";
-
     stylix.url = "github:danth/stylix";
   };
 
@@ -62,15 +59,16 @@
       ];
     };
 
-    pkgs = import nixpkgs nixosSystemArgs;
-    pkgs-stable = import nixpkgs-stable nixosSystemArgs;
-    pkgs-master = import nixpkgs-master nixosSystemArgs;
+    mkPkgs = nixpkgsSource: import nixpkgsSource nixosSystemArgs;
+    pkgs = mkPkgs nixpkgs;
+    pkgs-stable = mkPkgs nixpkgs-stable;
+    pkgs-master = mkPkgs nixpkgs-master;
 
     nixosModules = [
       ./modules/nixos/global
     ];
 
-    homeModules = rec {
+    homeModules = let
       shared = [
         sops-nix.homeManagerModules.sops
         ./modules/hm
@@ -81,8 +79,11 @@
         ./modules/hm/sops.nix
         ./modules/hm/ssh.nix
       ];
-      "avanderbergh@zoidberg" = [./modules/hm/desktop ./modules/hm/desktop/autorandr.nix] ++ shared;
-      "avanderbergh@hermes" = [./modules/hm/desktop] ++ shared;
+      mkHomeModules = extra: extra ++ shared;
+    in {
+      inherit shared;
+      "avanderbergh@zoidberg" = mkHomeModules [./modules/hm/desktop ./modules/hm/desktop/autorandr.nix];
+      "avanderbergh@hermes" = mkHomeModules [./modules/hm/desktop];
     };
 
     desktops = ["1" "2" "3" "4" "5" "6" "7" "8" "9" "10"];
@@ -109,6 +110,23 @@
     specialArgs = {
       inherit pkgs-stable pkgs-master self inputs colors outputs;
     };
+
+    mkHostModule = hostName: {
+      nixpkgs = nixosSystemArgs;
+      home-manager = {
+        extraSpecialArgs = mkExtraSpecialArgs hostConfigs.${hostName};
+        useUserPackages = true;
+        backupFileExtension = "backup";
+        users.avanderbergh.imports = homeModules."avanderbergh@${hostName}";
+      };
+    };
+
+    mkHomeConfig = hostName:
+      home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = mkExtraSpecialArgs hostConfigs.${hostName};
+        modules = homeModules."avanderbergh@${hostName}";
+      };
   in {
     nixosConfigurations = {
       zoidberg = nixpkgs.lib.nixosSystem {
@@ -117,15 +135,7 @@
           [
             nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
             ./hosts/zoidberg
-            {
-              nixpkgs = nixosSystemArgs;
-              home-manager = {
-                extraSpecialArgs = mkExtraSpecialArgs hostConfigs.zoidberg;
-                useUserPackages = true;
-                backupFileExtension = "backup";
-                users.avanderbergh.imports = homeModules."avanderbergh@zoidberg";
-              };
-            }
+            (mkHostModule "zoidberg")
           ]
           ++ nixosModules;
       };
@@ -138,15 +148,7 @@
             nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
             nixos-hardware.nixosModules.common-pc-ssd
             ./hosts/hermes
-            {
-              nixpkgs = nixosSystemArgs;
-              home-manager = {
-                extraSpecialArgs = mkExtraSpecialArgs hostConfigs.hermes;
-                useUserPackages = true;
-                backupFileExtension = "backup";
-                users.avanderbergh.imports = homeModules."avanderbergh@hermes";
-              };
-            }
+            (mkHostModule "hermes")
           ]
           ++ nixosModules;
       };
@@ -159,25 +161,15 @@
             nixos-hardware.nixosModules.common-pc-ssd
             nixos-hardware.nixosModules.common-gpu-amd
             ./hosts/farnsworth
-            {
-              nixpkgs = nixosSystemArgs;
-            }
+            {nixpkgs = nixosSystemArgs;}
           ]
           ++ nixosModules;
       };
     };
 
     homeConfigurations = {
-      "avanderbergh@zoidberg" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = mkExtraSpecialArgs hostConfigs.zoidberg;
-        modules = homeModules."avanderbergh@zoidberg";
-      };
-      "avanderbergh@hermes" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = mkExtraSpecialArgs hostConfigs.hermes;
-        modules = homeModules."avanderbergh@hermes";
-      };
+      "avanderbergh@zoidberg" = mkHomeConfig "zoidberg";
+      "avanderbergh@hermes" = mkHomeConfig "hermes";
     };
   };
 }

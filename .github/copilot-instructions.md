@@ -7,7 +7,7 @@ This repository contains NixOS configurations managed using Nix Flakes. The prim
 ## Key Repository Structure & Conventions
 
 - **Nix Flakes:** The core of the configuration management. See [`flake.nix`](../flake.nix) and [`flake.lock`](../flake.lock).
-- **Hosts:** Machine-specific configurations are located in the [`./hosts/`](../hosts/) directory. Each host has a subdirectory (e.g., [`./hosts/zoidberg`](../hosts/zoidberg)). Refer to the [README.md#Hosts](../README.md#hosts) for a list of hosts.
+- **Hosts:** Machine-specific configurations are located in the [`./hosts/`](../hosts/) directory. Each host has a subdirectory (e.g., [`./hosts/zoidberg`](../hosts/zoidberg)). Refer to the [README.md](../README.md) for a list of hosts.
 - **NixOS Modules:** System-wide configurations are defined in [`./modules/nixos/`](../modules/nixos/).
   - Global settings: [`./modules/nixos/global/`](../modules/nixos/global/)
   - Optional features: [`./modules/nixos/optional/`](../modules/nixos/optional/)
@@ -24,3 +24,4 @@ This repository contains NixOS configurations managed using Nix Flakes. The prim
 
 - After making changes to Nix files (`.nix`), always run `nix flake check` in the terminal to validate the syntax and structure of the flake!
 - Always format your code changes using `alejandra`!
+- Before adding new packages in Nix expressions, search for them with `nix search nixpkgs <regex>`

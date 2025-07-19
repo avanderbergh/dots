@@ -38,7 +38,7 @@
       pkgs.obsidian
       pkgs.pgcli
       pkgs.pinokio
-      pkgs.signal-desktop
+      pkgs.signal-desktop-bin
       pkgs.slack
       pkgs.steam-run
       pkgs.telegram-desktop
