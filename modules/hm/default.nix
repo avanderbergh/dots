@@ -13,8 +13,8 @@
       pkgs-stable.bitwig-studio
       pkgs-stable.calibre
       pkgs-stable.cava
-      pkgs-stable.cura
-      pkgs-stable.figma-agent
+      # pkgs-stable.cura
+      # pkgs-stable.figma-agent
       pkgs-stable.openscad
       pkgs-stable.orca-slicer
       pkgs-stable.pcmanfm

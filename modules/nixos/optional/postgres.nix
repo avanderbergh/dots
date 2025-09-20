@@ -1,5 +1,5 @@
 {
-  pkgs,
+  pkgs-stable,
   lib,
   config,
   ...
@@ -8,9 +8,9 @@
     postgresql = {
       enable = true;
 
-      package = pkgs.postgresql_17;
+      package = pkgs-stable.postgresql_17;
 
-      extensions = with pkgs.postgresql_17.pkgs; [
+      extensions = with pkgs-stable.postgresql_17.pkgs; [
         pgvector
       ];
 
