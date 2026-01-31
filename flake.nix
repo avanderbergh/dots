@@ -20,6 +20,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix";
+    nix-openclaw.url = "github:openclaw/nix-openclaw";
   };
 
   nixConfig = {
@@ -43,6 +44,7 @@
     nixos-hardware,
     sops-nix,
     stylix,
+    nix-openclaw,
     ...
   }: let
     inherit (self) outputs;
@@ -56,6 +58,7 @@
       };
       overlays = [
         (import ./pkgs)
+        nix-openclaw.overlays.default
       ];
     };
 
@@ -71,11 +74,13 @@
     homeModules = let
       shared = [
         sops-nix.homeManagerModules.sops
+        nix-openclaw.homeManagerModules.openclaw
         ./modules/hm
         ./modules/hm/console.nix
         ./modules/hm/git.nix
         ./modules/hm/node.nix
         ./modules/hm/python.nix
+        ./modules/hm/openclaw.nix
         ./modules/hm/sops.nix
         ./modules/hm/ssh.nix
       ];
