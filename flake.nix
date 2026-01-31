@@ -80,7 +80,6 @@
         ./modules/hm/git.nix
         ./modules/hm/node.nix
         ./modules/hm/python.nix
-        ./modules/hm/openclaw.nix
         ./modules/hm/sops.nix
         ./modules/hm/ssh.nix
       ];
@@ -88,7 +87,7 @@
     in {
       inherit shared;
       "avanderbergh@zoidberg" = mkHomeModules [./modules/hm/desktop ./modules/hm/desktop/autorandr.nix];
-      "avanderbergh@hermes" = mkHomeModules [./modules/hm/desktop];
+      "avanderbergh@hermes" = mkHomeModules [./modules/hm/desktop ./modules/hm/openclaw.nix];
     };
 
     desktops = ["1" "2" "3" "4" "5" "6" "7" "8" "9" "10"];
