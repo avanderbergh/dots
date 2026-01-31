@@ -5,6 +5,8 @@
       disableWhileTyping = true;
       sendEventsMode = "disabled-on-external-mouse";
     };
-    logind.lidSwitch = "lock";
+    logind.settings = {
+      Login.HandleLidSwitch = "lock";
+    };
   };
 }
