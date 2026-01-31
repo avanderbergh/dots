@@ -2,9 +2,11 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    userEmail = "avanderbergh@gmail.com";
-    userName = "Adriaan van der Bergh";
-    extraConfig = {
+    settings = {
+      user = {
+        email = "avanderbergh@gmail.com";
+        name = "Adriaan van der Bergh";
+      };
       core.editor = "code --wait";
       init.defaultBranch = "main";
     };

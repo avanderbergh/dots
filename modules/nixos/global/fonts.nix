@@ -4,7 +4,7 @@
     packages = with pkgs; [
       input-fonts
       noto-fonts
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       recursive
       roboto
       roboto-slab

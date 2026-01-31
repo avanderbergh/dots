@@ -3,6 +3,16 @@
   lib,
   ...
 }: {
+  home.activation.sshConfigPermissions = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    if [ -e "$HOME/.ssh" ]; then
+      chmod 700 "$HOME/.ssh"
+    fi
+
+    if [ -e "$HOME/.ssh/config" ]; then
+      chmod 600 "$HOME/.ssh/config"
+    fi
+  '';
+
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
