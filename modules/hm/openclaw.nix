@@ -3,6 +3,7 @@
 in {
   programs.openclaw = {
     enable = true;
+    exposePluginPackages = false;
 
     config = {
       channels.telegram = {
