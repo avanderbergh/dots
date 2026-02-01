@@ -17,7 +17,7 @@
 
     current_token=$($openclaw config get gateway.auth.token 2>/dev/null || echo "")
     if [ -z "$current_token" ] || [ "$current_token" = "null" ]; then
-      new_token=$(cat /proc/sys/kernel/random/uuid | tr -d '-')
+      new_token=$(${pkgs.coreutils}/bin/cat /proc/sys/kernel/random/uuid | ${pkgs.coreutils}/bin/tr -d '-')
       $openclaw config set gateway.auth.token "$new_token" 2>/dev/null || true
     fi
   '';
