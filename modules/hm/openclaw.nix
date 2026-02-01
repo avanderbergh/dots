@@ -3,6 +3,7 @@
 in {
   programs.openclaw = {
     enable = true;
+    exposePluginPackages = false;
     toolNames = [
       "nodejs_22"
       "pnpm_10"
