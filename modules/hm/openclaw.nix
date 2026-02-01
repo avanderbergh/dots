@@ -21,6 +21,8 @@ in {
       oracle.enable = true;
     };
 
+    config.gateway.mode = "local";
+
     instances.default = {
       enable = true;
       config = {
