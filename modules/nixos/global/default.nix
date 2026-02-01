@@ -55,7 +55,12 @@
 
   services.udisks2.enable = true;
 
+  systemd.tmpfiles.rules = [
+    "L+ /bin - - - - /run/current-system/sw/bin"
+  ];
+
   environment = {
+    pathsToLink = ["/bin"];
     systemPackages = with pkgs; [
       dconf
       coreutils
