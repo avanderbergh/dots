@@ -11,7 +11,6 @@ in {
   systemd.user.services.openclaw-gateway.Service.EnvironmentFile = openclawEnvFile;
 
   programs.openclaw = {
-    enable = true;
     exposePluginPackages = false;
     toolNames = [
       "jq"
