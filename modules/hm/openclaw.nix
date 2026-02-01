@@ -21,11 +21,13 @@ in {
       oracle.enable = true;
     };
 
-    config.gateway.mode = "local";
-
     instances.default = {
       enable = true;
       config = {
+        gateway = {
+          port = 18789;
+        };
+
         env = {
           vars = {
             OLLAMA_API_KEY = "ollama-local";
