@@ -124,7 +124,13 @@
         extraSpecialArgs = mkExtraSpecialArgs hostConfigs.${hostName};
         useUserPackages = true;
         backupFileExtension = "backup";
-        users.avanderbergh.imports = homeModules."avanderbergh@${hostName}";
+        users.avanderbergh = {
+          imports = homeModules."avanderbergh@${hostName}";
+          nixpkgs.overlays = [
+            nix-openclaw.overlays.default
+            (import ./pkgs)
+          ];
+        };
       };
     };
 
