@@ -56,8 +56,10 @@
   services.udisks2.enable = true;
 
   environment = {
+    pathsToLink = ["/bin"];
     systemPackages = with pkgs; [
       dconf
+      coreutils
       git
       gtk-engine-murrine
       libnotify
