@@ -59,7 +59,7 @@ in {
     };
   };
 
-  systemd.user.services.openclaw-gateway-default = lib.mkIf config.programs.openclaw.instances.default.enable {
+  systemd.user.services.openclaw-gateway = lib.mkIf config.programs.openclaw.instances.default.enable {
     Service = {
       EnvironmentFile = openclawEnvFile;
       # Workaround for nix-openclaw#35: Set gateway.mode and gateway.bind before start
