@@ -4,7 +4,7 @@
 in {
   sops.templates.openclaw-env = {
     content = ''
-      OPENCLAW_GATEWAY_TOKEN=${config.sops.secrets.openclaw_auth_token.placeholder}
+      OPENCLAW_GATEWAY_TOKEN=${config.sops.placeholder.openclaw_auth_token}
     '';
   };
 
