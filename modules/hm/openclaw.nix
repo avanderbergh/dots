@@ -28,13 +28,15 @@
   patchedOpenclaw = basePackages.openclaw.overrideAttrs (oldAttrs: {
     paths =
       [patchedGateway]
-      ++ builtins.filter (p: p != basePackages.openclaw-gateway && p != patchedGateway) (oldAttrs.paths or []);
+      ++ builtins.filter
+      (p: toString p != toString basePackages.openclaw-gateway && toString p != toString patchedGateway)
+      (oldAttrs.paths or []);
   });
 
   # Workaround for nix-openclaw#35: gateway.mode/bind don't serialize
   # The Nix type definitions are broken, so we use openclaw CLI to set them
   gatewaySetupScript = pkgs.writeShellScript "openclaw-gateway-setup" ''
-    openclaw="${pkgs.openclaw-gateway}/bin/openclaw"
+    openclaw="${patchedGateway}/bin/openclaw"
 
     $openclaw config set gateway.mode local 2>/dev/null || true
     $openclaw config set gateway.bind loopback 2>/dev/null || true
