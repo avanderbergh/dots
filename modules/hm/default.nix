@@ -38,6 +38,7 @@
       pkgs.obsidian
       pkgs.pgcli
       pkgs.pinokio
+      pkgs.ripgrep
       pkgs.signal-desktop-bin
       pkgs.slack
       pkgs.steam-run
