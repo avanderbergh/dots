@@ -10,8 +10,16 @@
   # Workaround for nix-openclaw#35: gateway.mode/bind don't serialize
   # The Nix type definitions are broken, so we use openclaw CLI to set them
   gatewaySetupScript = pkgs.writeShellScript "openclaw-gateway-setup" ''
-    ${pkgs.openclaw-gateway}/bin/openclaw config set gateway.mode local 2>/dev/null || true
-    ${pkgs.openclaw-gateway}/bin/openclaw config set gateway.bind loopback 2>/dev/null || true
+    openclaw="${pkgs.openclaw-gateway}/bin/openclaw"
+
+    $openclaw config set gateway.mode local 2>/dev/null || true
+    $openclaw config set gateway.bind loopback 2>/dev/null || true
+
+    current_token=$($openclaw config get gateway.auth.token 2>/dev/null || echo "")
+    if [ -z "$current_token" ] || [ "$current_token" = "null" ]; then
+      new_token=$(cat /proc/sys/kernel/random/uuid | tr -d '-')
+      $openclaw config set gateway.auth.token "$new_token" 2>/dev/null || true
+    fi
   '';
 in {
   sops.templates.openclaw-env = {
