@@ -7,36 +7,10 @@
   telegramTokenPath = config.sops.secrets.openclaw_telegram_bot_token.path;
   openclawEnvFile = config.sops.templates.openclaw-env.path;
 
-  toolOverrides = {
-    toolNamesOverride = config.programs.openclaw.toolNames;
-    excludeToolNames = config.programs.openclaw.excludeTools;
-  };
-  toolOverridesEnabled =
-    config.programs.openclaw.toolNames != null || config.programs.openclaw.excludeTools != [];
-  basePackages =
-    if toolOverridesEnabled
-    then pkgs.openclawPackages.withTools toolOverrides
-    else pkgs.openclawPackages;
-
-  patchedGateway = basePackages.openclaw-gateway.overrideAttrs (oldAttrs: {
-    installPhase = ''
-      ${oldAttrs.installPhase}
-      mkdir -p $out/lib/openclaw/docs/reference/templates
-      cp -r ${oldAttrs.src}/docs/reference/templates/* $out/lib/openclaw/docs/reference/templates/
-    '';
-  });
-  patchedOpenclaw = basePackages.openclaw.overrideAttrs (oldAttrs: {
-    paths =
-      [patchedGateway]
-      ++ builtins.filter
-      (p: toString p != toString basePackages.openclaw-gateway && toString p != toString patchedGateway)
-      (oldAttrs.paths or []);
-  });
-
   # Workaround for nix-openclaw#35: gateway.mode/bind don't serialize
   # The Nix type definitions are broken, so we use openclaw CLI to set them
   gatewaySetupScript = pkgs.writeShellScript "openclaw-gateway-setup" ''
-    openclaw="${patchedGateway}/bin/openclaw"
+    openclaw="${pkgs.openclaw-gateway}/bin/openclaw"
 
     $openclaw config set gateway.mode local 2>/dev/null || true
     $openclaw config set gateway.bind loopback 2>/dev/null || true
@@ -55,7 +29,6 @@ in {
   };
 
   programs.openclaw = {
-    package = patchedOpenclaw;
     exposePluginPackages = false;
     toolNames = [
       "jq"
@@ -70,7 +43,6 @@ in {
 
     instances.default = {
       enable = true;
-      package = patchedOpenclaw;
       config = {
         gateway.port = 18789;
         # gateway.mode = "local"; # Cannot set due to upstream type bug - patched via activation hook
@@ -86,6 +58,16 @@ in {
       };
     };
   };
+
+  home.activation.openclawTemplates = lib.hm.dag.entryAfter ["openclawDirs"] ''
+    set -euo pipefail
+    template_src="${pkgs.openclaw-gateway.src}/docs/reference/templates"
+    template_dst="${config.programs.openclaw.stateDir}/docs/reference/templates"
+    if [ -d "$template_src" ]; then
+      ${pkgs.coreutils}/bin/mkdir -p "$template_dst"
+      ${pkgs.coreutils}/bin/cp -R "$template_src/." "$template_dst/"
+    fi
+  '';
 
   systemd.user.services.openclaw-gateway = lib.mkIf config.programs.openclaw.instances.default.enable {
     Service = {
