@@ -8,8 +8,6 @@ in {
     '';
   };
 
-  systemd.user.services.openclaw-gateway.Service.EnvironmentFile = openclawEnvFile;
-
   programs.openclaw = {
     exposePluginPackages = false;
     toolNames = [
@@ -18,37 +16,35 @@ in {
       "ripgrep"
     ];
 
-    config = {
-      gateway = {
-        mode = "local";
-        auth.mode = "token";
-      };
-
-      env = {
-        vars = {
-          OLLAMA_API_KEY = "ollama-local";
-        };
-      };
-
-      agents = {
-        defaults = {
-          model = {
-            primary = "ollama/gemma3";
-          };
-        };
-      };
-
-      channels.telegram = {
-        tokenFile = telegramTokenPath;
-        allowFrom = [120043384];
-      };
-    };
-
     firstParty = {
       summarize.enable = true;
       oracle.enable = true;
     };
 
-    instances.default.enable = true;
+    instances.default = {
+      enable = true;
+      config = {
+        env = {
+          vars = {
+            OLLAMA_API_KEY = "ollama-local";
+          };
+        };
+
+        agents = {
+          defaults = {
+            model = {
+              primary = "ollama/gemma3";
+            };
+          };
+        };
+
+        channels.telegram = {
+          tokenFile = telegramTokenPath;
+          allowFrom = [120043384];
+        };
+      };
+    };
   };
+
+  systemd.user.services.openclaw-gateway.Service.EnvironmentFile = openclawEnvFile;
 }
