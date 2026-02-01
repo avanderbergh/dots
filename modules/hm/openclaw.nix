@@ -7,6 +7,30 @@
   telegramTokenPath = config.sops.secrets.openclaw_telegram_bot_token.path;
   openclawEnvFile = config.sops.templates.openclaw-env.path;
 
+  toolOverrides = {
+    toolNamesOverride = config.programs.openclaw.toolNames;
+    excludeToolNames = config.programs.openclaw.excludeTools;
+  };
+  toolOverridesEnabled =
+    config.programs.openclaw.toolNames != null || config.programs.openclaw.excludeTools != [];
+  basePackages =
+    if toolOverridesEnabled
+    then pkgs.openclawPackages.withTools toolOverrides
+    else pkgs.openclawPackages;
+
+  patchedGateway = basePackages.openclaw-gateway.overrideAttrs (oldAttrs: {
+    installPhase = ''
+      ${oldAttrs.installPhase}
+      mkdir -p $out/lib/openclaw/docs/reference/templates
+      cp -r ${oldAttrs.src}/docs/reference/templates/* $out/lib/openclaw/docs/reference/templates/
+    '';
+  });
+  patchedOpenclaw = basePackages.openclaw.overrideAttrs (oldAttrs: {
+    paths =
+      [patchedGateway]
+      ++ builtins.filter (p: p != basePackages.openclaw-gateway && p != patchedGateway) (oldAttrs.paths or []);
+  });
+
   # Workaround for nix-openclaw#35: gateway.mode/bind don't serialize
   # The Nix type definitions are broken, so we use openclaw CLI to set them
   gatewaySetupScript = pkgs.writeShellScript "openclaw-gateway-setup" ''
@@ -29,6 +53,7 @@ in {
   };
 
   programs.openclaw = {
+    package = patchedOpenclaw;
     exposePluginPackages = false;
     toolNames = [
       "jq"
