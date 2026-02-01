@@ -60,18 +60,8 @@
         allowCuda = true;
       };
       overlays = [
-        (import ./pkgs)
         nix-openclaw.overlays.default
-        # Workaround for nix-openclaw#18: Missing workspace templates
-        (final: prev: {
-          openclaw-gateway = prev.openclaw-gateway.overrideAttrs (oldAttrs: {
-            installPhase = ''
-              ${oldAttrs.installPhase}
-              mkdir -p $out/lib/openclaw/docs/reference/templates
-              cp -r $src/docs/reference/templates/* $out/lib/openclaw/docs/reference/templates/
-            '';
-          });
-        })
+        (import ./pkgs)
       ];
     };
 

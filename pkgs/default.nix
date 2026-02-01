@@ -1,4 +1,6 @@
-final: prev: {
+final: prev:
+(import ./overlays/openclaw-templates.nix final prev)
+// {
   input-fonts = prev.callPackage ./input-fonts {};
   logue-cli = prev.callPackage ./logue-cli {};
   shantell-sans = prev.callPackage ./shantell-sans {};
