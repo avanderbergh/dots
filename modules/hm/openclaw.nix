@@ -5,10 +5,6 @@ in {
     enable = true;
     exposePluginPackages = false;
     toolNames = [
-      "nodejs_22"
-      "pnpm_10"
-      "git"
-      "curl"
       "jq"
       "ffmpeg"
       "ripgrep"
