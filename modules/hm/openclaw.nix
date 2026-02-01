@@ -70,6 +70,7 @@ in {
 
     instances.default = {
       enable = true;
+      package = patchedOpenclaw;
       config = {
         gateway.port = 18789;
         # gateway.mode = "local"; # Cannot set due to upstream type bug - patched via activation hook

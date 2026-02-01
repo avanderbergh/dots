@@ -55,6 +55,13 @@
 
   services.udisks2.enable = true;
 
+  systemd.tmpfiles.rules = [
+    "d /bin 0755 root root -"
+    "L+ /bin/sh - - - - /run/current-system/sw/bin/sh"
+    "L+ /bin/mkdir - - - - /run/current-system/sw/bin/mkdir"
+    "L+ /bin/ln - - - - /run/current-system/sw/bin/ln"
+  ];
+
   environment = {
     systemPackages = with pkgs; [
       dconf
