@@ -74,8 +74,8 @@ in {
       EnvironmentFile = openclawEnvFile;
       # Workaround for nix-openclaw#35: Set gateway.mode and gateway.bind before start
       ExecStartPre = "+${gatewaySetupScript}";
-      StandardOutput = "journal";
-      StandardError = "journal";
+      StandardOutput = lib.mkForce "journal";
+      StandardError = lib.mkForce "journal";
     };
   };
 }
