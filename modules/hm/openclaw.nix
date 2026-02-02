@@ -49,7 +49,7 @@ in {
 
         env.vars.OLLAMA_API_KEY = "ollama-local";
 
-        agents.defaults.model.primary = "ollama/gemma3";
+        agents.defaults.model.primary = "ollama/gemma3:latest";
 
         channels.telegram = {
           tokenFile = telegramTokenPath;
