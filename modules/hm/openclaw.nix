@@ -64,6 +64,7 @@ in {
     template_src="${pkgs.openclaw-gateway.src}/docs/reference/templates"
     template_dst="${config.programs.openclaw.stateDir}/docs/reference/templates"
     if [ -d "$template_src" ]; then
+      ${pkgs.coreutils}/bin/rm -rf "$template_dst"
       ${pkgs.coreutils}/bin/mkdir -p "$template_dst"
       ${pkgs.coreutils}/bin/cp -R "$template_src/." "$template_dst/"
     fi
