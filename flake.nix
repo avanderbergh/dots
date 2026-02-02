@@ -20,6 +20,10 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix";
+    nix-openclaw = {
+      url = "github:openclaw/nix-openclaw";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
@@ -43,6 +47,7 @@
     nixos-hardware,
     sops-nix,
     stylix,
+    nix-openclaw,
     ...
   }: let
     inherit (self) outputs;
@@ -55,6 +60,7 @@
         allowCuda = true;
       };
       overlays = [
+        nix-openclaw.overlays.default
         (import ./pkgs)
       ];
     };
@@ -71,6 +77,7 @@
     homeModules = let
       shared = [
         sops-nix.homeManagerModules.sops
+        nix-openclaw.homeManagerModules.openclaw
         ./modules/hm
         ./modules/hm/console.nix
         ./modules/hm/git.nix
@@ -83,7 +90,7 @@
     in {
       inherit shared;
       "avanderbergh@zoidberg" = mkHomeModules [./modules/hm/desktop ./modules/hm/desktop/autorandr.nix];
-      "avanderbergh@hermes" = mkHomeModules [./modules/hm/desktop];
+      "avanderbergh@hermes" = mkHomeModules [./modules/hm/desktop ./modules/hm/openclaw.nix];
     };
 
     desktops = ["1" "2" "3" "4" "5" "6" "7" "8" "9" "10"];
