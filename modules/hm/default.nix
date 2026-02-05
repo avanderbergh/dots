@@ -19,6 +19,7 @@
       pkgs-stable.orca-slicer
       pkgs-stable.pcmanfm
       pkgs.alejandra
+      pkgs.nixd
       pkgs.blender
       pkgs.brightnessctl
       pkgs.code-cursor

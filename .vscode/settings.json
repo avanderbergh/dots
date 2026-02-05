@@ -1,3 +1,29 @@
 {
-    "idf.flashType": "JTAG"
+  "idf.flashType": "JTAG",
+  "nix.enableLanguageServer": true,
+  "nix.hiddenLanguageServerErrors": ["textDocument/definition"],
+  "nix.serverPath": ["nixd", "--log=error"],
+  "nix.serverSettings": {
+    "nixd": {
+      "formatting": {
+        "command": ["alejandra"]
+      },
+      "nixpkgs": {
+        "expr": "let flake = builtins.getFlake \"${workspaceFolder}\"; in import flake.inputs.nixpkgs { system = builtins.currentSystem; }"
+      },
+      "options": {
+        "nixos": {
+          "expr": "let flake = builtins.getFlake \"${workspaceFolder}\"; in (flake.inputs.nixpkgs.lib.nixosSystem { system = builtins.currentSystem; modules = []; }).options"
+        },
+        "home-manager": {
+          "expr": "let flake = builtins.getFlake \"${workspaceFolder}\"; pkgs = import flake.inputs.nixpkgs { system = builtins.currentSystem; }; in (flake.inputs.home-manager.lib.homeManagerConfiguration { inherit pkgs; modules = [{ home.username = \"nixd\"; home.homeDirectory = \"/tmp\"; home.stateVersion = \"23.11\"; }]; }).options"
+        }
+      }
+    }
+  },
+  "[nix]": {
+    "editor.defaultFormatter": "jnoortheen.nix-ide",
+    "editor.formatOnSave": true,
+    "editor.occurrencesHighlight": "off"
+  }
 }
