@@ -24,7 +24,10 @@
     ../../modules/nixos/optional/yubikey.nix
   ];
 
-  networking.hostName = "hermes";
+  networking = {
+    hostName = "hermes";
+    firewall.allowedTCPPorts = [18789];
+  };
 
   local.users.enableBotUsers = true;
 
