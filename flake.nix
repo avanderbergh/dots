@@ -46,6 +46,7 @@
   }: let
     inherit (self) outputs;
     system = "x86_64-linux";
+    lib = nixpkgs.lib;
 
     nixosSystemArgs = {
       inherit system;
@@ -78,11 +79,22 @@
         ./modules/hm/sops.nix
         ./modules/hm/ssh.nix
       ];
-      mkHomeModules = extra: extra ++ shared;
+      mkHomeModules = extra: shared ++ extra;
+
+      botShared = [
+        sops-nix.homeManagerModules.sops
+      ];
+      mkBotHomeModules = extra: botShared ++ extra;
     in {
-      inherit shared;
       "avanderbergh@zoidberg" = mkHomeModules [./modules/hm/desktop ./modules/hm/desktop/autorandr.nix];
       "avanderbergh@hermes" = mkHomeModules [./modules/hm/desktop];
+
+      "morbo@hermes" = mkBotHomeModules [
+        ./modules/hm/users/morbo.nix
+        ./modules/hm/bot
+        ./modules/hm/sops.nix
+        ./modules/hm/ssh.nix
+      ];
     };
 
     desktops = ["1" "2" "3" "4" "5" "6" "7" "8" "9" "10"];
@@ -110,21 +122,38 @@
       inherit pkgs-stable pkgs-master self inputs colors outputs;
     };
 
+    hmKeysForHost = hostName:
+      lib.filter (key: let
+        parts = lib.splitString "@" key;
+      in
+        builtins.length parts == 2 && builtins.elemAt parts 1 == hostName) (builtins.attrNames homeModules);
+
+    hmUsersForHost = hostName:
+      builtins.listToAttrs (map (key: let
+        parts = lib.splitString "@" key;
+        userName = builtins.elemAt parts 0;
+      in {
+        name = userName;
+        value = {imports = homeModules.${key};};
+      }) (hmKeysForHost hostName));
+
     mkHostModule = hostName: {
       nixpkgs = nixosSystemArgs;
       home-manager = {
         extraSpecialArgs = mkExtraSpecialArgs hostConfigs.${hostName};
         useUserPackages = true;
         backupFileExtension = "backup";
-        users.avanderbergh.imports = homeModules."avanderbergh@${hostName}";
+        users = hmUsersForHost hostName;
       };
     };
 
-    mkHomeConfig = hostName:
+    mkHomeConfig = key: let
+      hostName = builtins.elemAt (lib.splitString "@" key) 1;
+    in
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = mkExtraSpecialArgs hostConfigs.${hostName};
-        modules = homeModules."avanderbergh@${hostName}";
+        modules = homeModules.${key};
       };
   in {
     nixosConfigurations = {
@@ -166,9 +195,6 @@
       };
     };
 
-    homeConfigurations = {
-      "avanderbergh@zoidberg" = mkHomeConfig "zoidberg";
-      "avanderbergh@hermes" = mkHomeConfig "hermes";
-    };
+    homeConfigurations = lib.genAttrs (builtins.attrNames homeModules) mkHomeConfig;
   };
 }
