@@ -42,7 +42,6 @@
     home-manager,
     nixos-hardware,
     sops-nix,
-    stylix,
     ...
   }: let
     inherit (self) outputs;

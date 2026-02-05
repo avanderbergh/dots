@@ -1,9 +1,4 @@
-{
-  lib,
-  config,
-  pkgs,
-  ...
-}: let
+{lib, ...}: let
   device = "/dev/mapper/enc";
   fsType = "btrfs";
   mkOptions = subvol: ["subvol=${subvol}" "compress=zstd" "noatime"];

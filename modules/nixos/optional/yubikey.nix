@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # Enable smartcard daemon for YubiKey
   services.pcscd.enable = true;
 

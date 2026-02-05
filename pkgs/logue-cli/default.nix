@@ -5,7 +5,6 @@
   autoPatchelfHook,
   alsa-lib,
   gcc,
-  pkgs,
 }:
 stdenv.mkDerivation rec {
   pname = "logue-cli";

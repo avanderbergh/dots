@@ -1,8 +1,4 @@
-{
-  pkgs,
-  colors,
-  ...
-}: {
+{pkgs, ...}: {
   boot.plymouth.enable = true;
 
   services.xserver = {

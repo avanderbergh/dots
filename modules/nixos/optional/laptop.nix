@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   services = {
     libinput.touchpad = {
       clickMethod = "clickfinger";

@@ -1,4 +1,3 @@
-{lib, ...}:
 # This module contains workarounds for PipeWire/WirePlumber issues specifically
 # related to Intel Sound Open Firmware (SOF) devices, often found on newer Dell XPS
 # and other laptops (e.g., sof-soundwire).

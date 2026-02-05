@@ -1,7 +1,5 @@
 {
-  lib,
   pkgs,
-  colors,
   inputs,
   modulesPath,
   ...

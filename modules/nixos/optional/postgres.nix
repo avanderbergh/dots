@@ -1,9 +1,4 @@
-{
-  pkgs-stable,
-  lib,
-  config,
-  ...
-}: {
+{pkgs-stable, ...}: {
   services = {
     postgresql = {
       enable = true;
