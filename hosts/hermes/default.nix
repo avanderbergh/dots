@@ -26,6 +26,8 @@
 
   networking.hostName = "hermes";
 
+  local.users.enableBotUsers = true;
+
   services.xserver = {
     dpi = 109;
     resolutions = [
