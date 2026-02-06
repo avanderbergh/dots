@@ -1,28 +1,12 @@
 {pkgs, ...}: {
-  services.tailscale = {
-    enable = true;
-    openFirewall = true;
-    useRoutingFeatures = "client";
-  };
-
   environment.systemPackages = with pkgs; [
     protonvpn-gui
-    tailscale
     wireguard-tools
   ];
 
   networking = {
     firewall = {
-      checkReversePath = "loose";
-      trustedInterfaces = ["tailscale0"];
+      checkReversePath = false;
     };
-
-    nameservers = [
-      "100.100.100.100"
-      "1.1.1.1"
-      "8.8.8.8"
-    ];
-
-    search = ["tailb3c3b8.ts.net"];
   };
 }
