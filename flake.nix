@@ -20,6 +20,11 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix";
+    nix-openclaw = {
+      url = "github:openclaw/nix-openclaw";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   nixConfig = {
@@ -42,6 +47,7 @@
     home-manager,
     nixos-hardware,
     sops-nix,
+    nix-openclaw,
     ...
   }: let
     inherit (self) outputs;
@@ -55,6 +61,7 @@
         allowCuda = true;
       };
       overlays = [
+        nix-openclaw.overlays.default
         (import ./pkgs)
       ];
     };
@@ -82,7 +89,7 @@
       mkHomeModules = extra: shared ++ extra;
 
       botShared = [
-        sops-nix.homeManagerModules.sops
+        nix-openclaw.homeManagerModules.openclaw
       ];
       mkBotHomeModules = extra: botShared ++ extra;
     in {
@@ -92,7 +99,6 @@
       "morbo@hermes" = mkBotHomeModules [
         ./modules/hm/users/morbo.nix
         ./modules/hm/bot
-        ./modules/hm/sops.nix
         ./modules/hm/ssh.nix
       ];
     };

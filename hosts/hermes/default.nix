@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [
+    ./morbo-secrets.nix
     ../../modules/nixos/optional/ausweisapp.nix
     ../../modules/nixos/optional/cache-server.nix
     ../../modules/nixos/optional/desktop.nix

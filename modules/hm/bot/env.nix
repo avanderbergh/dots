@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   ...
@@ -18,24 +17,17 @@
   envVarNameForSecret = secretName:
     lib.toUpper (lib.replaceStrings ["-" "."] ["_" "_"] secretName);
 
-  sopsKeyForSecret = secretName: "${secretRoot}/${envRoot}/${secretName}";
+  secretFileForSecret = secretName: "/run/secrets/morbo-env-${secretName}";
 
   exportSecrets = lib.concatStringsSep "\n" (map (secretName: let
     envVar = envVarNameForSecret secretName;
+    secretFile = secretFileForSecret secretName;
   in ''
-    if [ -r "${config.sops.secrets.${secretName}.path}" ]; then
-      export ${envVar}="$(cat "${config.sops.secrets.${secretName}.path}")"
+    if [ -r "${secretFile}" ]; then
+      export ${envVar}="$(cat "${secretFile}")"
     fi
   '') secretNames);
 in {
-  sops.secrets = builtins.listToAttrs (map (secretName: {
-      name = secretName;
-      value = {
-        key = sopsKeyForSecret secretName;
-      };
-    })
-    secretNames);
-
   programs.bash = {
     profileExtra = lib.mkAfter exportSecrets;
     initExtra = lib.mkAfter exportSecrets;
