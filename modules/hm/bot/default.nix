@@ -1,8 +1,9 @@
 {
   imports = [
-    ./build-tools.nix
+    ./env.nix
     ./git.nix
-    ./mise.nix
     ./npm.nix
+    ./ssh.nix
+    ./tools.nix
   ];
 }

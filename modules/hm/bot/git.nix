@@ -7,6 +7,10 @@
     enable = true;
     lfs.enable = true;
     settings = {
+      user = {
+        name = "morbo";
+        email = "morbo@flipfish.net";
+      };
       init.defaultBranch = "main";
     };
   };
