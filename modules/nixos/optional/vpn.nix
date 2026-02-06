@@ -11,14 +11,18 @@
     wireguard-tools
   ];
 
-  networking.firewall = {
-    checkReversePath = "loose";
-    trustedInterfaces = ["tailscale0"];
-  };
+  networking = {
+    firewall = {
+      checkReversePath = "loose";
+      trustedInterfaces = ["tailscale0"];
+    };
 
-  networking.nameservers = [
-    "100.100.100.100"
-    "1.1.1.1"
-    "8.8.8.8"
-  ];
+    nameservers = [
+      "100.100.100.100"
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
+
+    search = ["tailb3c3b8.ts.net"];
+  };
 }
