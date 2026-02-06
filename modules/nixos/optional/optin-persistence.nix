@@ -10,6 +10,7 @@
       "/var/lib/boltd/"
       "/var/lib/colord"
       "/var/lib/nixos"
+      "/var/lib/tailscale"
       "/var/lib/systemd/coredump"
       "/var/lib/upower"
       "/var/lib/sops"
