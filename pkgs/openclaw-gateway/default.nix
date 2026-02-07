@@ -15,6 +15,7 @@
   sourceInfo ? import ./source.nix,
   stdenv,
   vips,
+  writeTextFile,
   zstd,
   gatewaySrc ? null,
   pnpmDepsHash ? (sourceInfo.pnpmDepsHash or null),
@@ -40,6 +41,12 @@ assert gatewaySrc == null || pnpmDepsHash != null; let
       mkdir -p "$out/lib/node_modules/node-addon-api"
       tar -xf "$src" --strip-components=1 -C "$out/lib/node_modules/node-addon-api"
     '';
+  };
+
+  nodeGypWrapper = writeTextFile {
+    name = "openclaw-node-gyp-wrapper.sh";
+    executable = true;
+    text = builtins.readFile ./scripts/node-gyp-wrapper.sh;
   };
 in
   stdenv.mkDerivation (finalAttrs: {
@@ -87,7 +94,7 @@ in
       npm_config_python = python3;
       NODE_PATH = "${nodeAddonApi}/lib/node_modules:${node-gyp}/lib/node_modules";
       NODE_BIN = "${nodejs_22}/bin/node";
-      NODE_GYP_WRAPPER_SH = toString ./scripts/node-gyp-wrapper.sh;
+      NODE_GYP_WRAPPER_SH = nodeGypWrapper;
     };
 
     postPatch = builtins.readFile ./scripts/post-patch.sh;
