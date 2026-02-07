@@ -189,6 +189,24 @@
       };
     };
 
+    devShells.${system} = let
+      nixosDotsTools = with pkgs; [
+        alejandra
+        git
+        nix
+        ripgrep
+        statix
+      ];
+    in {
+      default = pkgs.mkShell {
+        packages = nixosDotsTools;
+      };
+
+      "nixos-dots" = pkgs.mkShell {
+        packages = nixosDotsTools;
+      };
+    };
+
     homeConfigurations = lib.genAttrs (builtins.attrNames homeModules) mkHomeConfig;
   };
 }
