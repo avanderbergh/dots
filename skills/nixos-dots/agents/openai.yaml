@@ -1,0 +1,4 @@
+interface:
+  display_name: "NixOS Dots Checks"
+  short_description: "Run format, lint, and flake checks for this Nix repo"
+  default_prompt: "Run the nixos-dots workflow (alejandra, statix, flake check) and summarize issues with actionable fixes."

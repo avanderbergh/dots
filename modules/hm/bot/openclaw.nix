@@ -11,8 +11,6 @@
 
     # Disable the only bundled plugin that is enabled by default.
     bundledPlugins.goplaces.enable = false;
-
-    config.gateway.mode = "local";
   };
 
   systemd.user.services.openclaw-gateway.Service.Environment = lib.mkAfter [

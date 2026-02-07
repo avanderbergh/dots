@@ -18,12 +18,18 @@
         "home-manager": {
           "expr": "let flake = builtins.getFlake \"${workspaceFolder}\"; pkgs = import flake.inputs.nixpkgs { system = builtins.currentSystem; }; in (flake.inputs.home-manager.lib.homeManagerConfiguration { inherit pkgs; modules = [{ home.username = \"nixd\"; home.homeDirectory = \"/tmp\"; home.stateVersion = \"23.11\"; }]; }).options"
         }
+      },
+      "diagnostic": {
+        "suppress": []
       }
     }
   },
   "[nix]": {
     "editor.defaultFormatter": "jnoortheen.nix-ide",
     "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    },
     "editor.occurrencesHighlight": "off"
   }
 }

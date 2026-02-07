@@ -1,0 +1,54 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "nix: statix (current file)",
+      "type": "shell",
+      "command": "statix check --format errfmt \"${file}\"",
+      "problemMatcher": ["$statix"],
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "nix: statix (workspace)",
+      "type": "shell",
+      "command": "statix check --format errfmt .",
+      "problemMatcher": ["$statix"],
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared"
+      },
+      "group": "test"
+    },
+    {
+      "label": "nix: repo checks",
+      "type": "shell",
+      "command": "skills/nixos-dots/scripts/nix-dev-check.sh --check",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    }
+  ],
+  "problemMatcher": [
+    {
+      "name": "statix",
+      "owner": "nix",
+      "fileLocation": ["relative", "${workspaceFolder}"],
+      "pattern": [
+        {
+          "regexp": "^(.*)>([0-9]+):([0-9]+):[A-Z]:([0-9]+):(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "code": 4,
+          "message": 5
+        }
+      ],
+      "severity": "warning"
+    }
+  ]
+}

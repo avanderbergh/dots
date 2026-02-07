@@ -18,7 +18,10 @@
       pkgs-stable.openscad
       pkgs-stable.orca-slicer
       pkgs-stable.pcmanfm
+      pkgs.git
       pkgs.alejandra
+      pkgs.ripgrep
+      pkgs.statix
       pkgs.nixd
       pkgs.blender
       pkgs.brightnessctl

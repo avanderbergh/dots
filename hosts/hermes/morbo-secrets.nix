@@ -1,15 +1,13 @@
-{
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   secretRoot = "morbo";
   envRoot = "env";
 
-  envSecretNamesJson = pkgs.runCommand "morbo-env-secret-names.json" {
-    nativeBuildInputs = [pkgs.yq-go];
-  } ''
-    yq -o=json '(.${secretRoot}.${envRoot} // {} | with_entries(select(.value | tag == "!!str")) | keys)' ${../../secrets/secrets.yaml} > "$out"
-  '';
+  envSecretNamesJson =
+    pkgs.runCommand "morbo-env-secret-names.json" {
+      nativeBuildInputs = [pkgs.yq-go];
+    } ''
+      yq -o=json '(.${secretRoot}.${envRoot} // {} | with_entries(select(.value | tag == "!!str")) | keys)' ${../../secrets/secrets.yaml} > "$out"
+    '';
 
   envSecretNames = builtins.fromJSON (builtins.readFile envSecretNamesJson);
 
