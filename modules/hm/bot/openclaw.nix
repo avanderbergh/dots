@@ -38,7 +38,7 @@
 
       gateway = {
         mode = "local";
-        bind = "lan";
+        bind = "loopback";
         tailscale = {
           mode = "off";
           resetOnExit = false;
