@@ -26,6 +26,32 @@ Welcome to my NixOS configurations repository! This is where I manage the setup 
 
 Feel free to explore the configurations and see how everything is set up!
 
+## Development Shell
+
+A dev shell is provided in `flake.nix` so you can run the repository checks with all required tools (`nix`, `git`, `ripgrep`, `alejandra`, `statix`) available.
+
+Enter the shell:
+
+```sh
+# Default shell (same toolset as nixos-dots)
+nix develop
+
+# Explicit shell name
+nix develop .#nixos-dots
+```
+
+Run the Nix workflow from the shell:
+
+```sh
+skills/nixos-dots/scripts/nix-dev-check.sh
+```
+
+Or run it without entering an interactive shell:
+
+```sh
+nix develop .#nixos-dots --command skills/nixos-dots/scripts/nix-dev-check.sh
+```
+
 ## Notes
 
 ### Import GPG Keys
