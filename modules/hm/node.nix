@@ -1,8 +1,4 @@
-{
-  pkgs,
-  pkgs-master,
-  ...
-}: {
+{pkgs, ...}: {
   home = {
     packages = [
       pkgs.nodePackages_latest.nodejs
@@ -11,7 +7,6 @@
       pkgs.zx
       pkgs.playwright
       pkgs.playwright-test
-      pkgs-master.codex
     ];
 
     sessionVariables = {
