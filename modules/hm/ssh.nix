@@ -1,4 +1,9 @@
 {
+  config,
+  ...
+}: let
+  isAvanderbergh = config.home.username == "avanderbergh";
+in {
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
@@ -6,6 +11,7 @@
     matchBlocks = {
       "*" = {
         forwardAgent = false;
+        forwardX11 = false;
         serverAliveInterval = 0;
         serverAliveCountMax = 3;
         compression = false;
@@ -18,15 +24,13 @@
       };
       "hermes" = {
         hostname = "hermes";
-        forwardAgent = true;
-        forwardX11 = true;
-        forwardX11Trusted = true;
+        forwardAgent = isAvanderbergh;
+        forwardX11 = false;
       };
       "zoidberg" = {
         hostname = "zoidberg";
-        forwardAgent = true;
-        forwardX11 = true;
-        forwardX11Trusted = true;
+        forwardAgent = isAvanderbergh;
+        forwardX11 = false;
       };
     };
   };

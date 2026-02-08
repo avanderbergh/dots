@@ -12,6 +12,10 @@
 in {
   services.openssh = {
     enable = true;
+    extraConfig = ''
+      Match User avanderbergh
+        AllowAgentForwarding yes
+    '';
     # require public key authentication for better security
     settings = {
       # Harden
@@ -20,8 +24,8 @@ in {
       PermitRootLogin = "no";
       # Automatically remove stale sockets
       StreamLocalBindUnlink = "yes";
-      # Allow SSH agent forwarding
-      AllowAgentForwarding = true;
+      # Deny SSH agent forwarding by default (least privilege)
+      AllowAgentForwarding = false;
     };
 
     hostKeys = [
