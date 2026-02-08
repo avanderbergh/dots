@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}: let
+{config, ...}: let
   isAvanderbergh = config.home.username == "avanderbergh";
 in {
   programs.ssh = {
