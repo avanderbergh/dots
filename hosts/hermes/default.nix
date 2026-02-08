@@ -8,6 +8,7 @@
     ../../modules/nixos/optional/ausweisapp.nix
     ../../modules/nixos/optional/cache-server.nix
     ../../modules/nixos/optional/cloudflared.nix
+    ../../modules/nixos/optional/cloudflare-ssh-ca.nix
     ../../modules/nixos/optional/desktop.nix
     ../../modules/nixos/optional/docker.nix
     ../../modules/nixos/optional/ephemeral-btrfs.nix
