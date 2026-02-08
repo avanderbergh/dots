@@ -1,4 +1,4 @@
-name: nix-flake-check
+name: nix-dev-check
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  flake-check:
+  nix-dev-check:
     if: github.event.pull_request.draft == false || github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
@@ -19,5 +19,5 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v27
 
-      - name: Run flake check (eval only)
-        run: nix flake check --no-build
+      - name: Run nix-dev-check in flake dev shell
+        run: nix develop .#nixos-dots --command bash skills/nixos-dots/scripts/nix-dev-check.sh --check
