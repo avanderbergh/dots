@@ -76,6 +76,7 @@
         ./modules/hm/git.nix
         ./modules/hm/node.nix
         ./modules/hm/python.nix
+        ./modules/hm/dev
         ./modules/hm/sops.nix
         ./modules/hm/ssh.nix
       ];
@@ -86,6 +87,7 @@
 
       "morbo@hermes" = [
         ./modules/hm/users/morbo.nix
+        ./modules/hm/dev
         ./modules/hm/bot
         ./modules/hm/ssh.nix
       ];

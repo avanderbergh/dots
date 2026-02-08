@@ -6,8 +6,6 @@
   home = {
     packages = with pkgs; [
       bashInteractive
-      claude-code
-      codex
       coreutils
       curl
       fd
