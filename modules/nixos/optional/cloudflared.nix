@@ -9,7 +9,7 @@ in {
         credentialsFile = "/run/secrets/cloudflared-hermes-credentials";
         default = "http_status:404";
         ingress = {
-          "ssh.hermes.adriaan.cc" = {
+          "ssh-hermes.adriaan.cc" = {
             service = "ssh://127.0.0.1:22";
           };
         };
