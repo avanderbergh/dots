@@ -10,40 +10,41 @@
     stateVersion = "23.11";
 
     packages = [
+      # pkgs-stable.cura
+      # pkgs-stable.figma-agent
       pkgs-stable.bitwig-studio
       pkgs-stable.calibre
       pkgs-stable.cava
-      # pkgs-stable.cura
-      # pkgs-stable.figma-agent
       pkgs-stable.openscad
       pkgs-stable.orca-slicer
       pkgs-stable.pcmanfm
-      pkgs.git
       pkgs.alejandra
-      pkgs.ripgrep
-      pkgs.statix
-      pkgs.nixd
       pkgs.blender
       pkgs.brightnessctl
+      pkgs.cloudflared
       pkgs.code-cursor
       pkgs.davinci-resolve
       pkgs.discord-canary
       pkgs.esptool
       pkgs.firefox
       pkgs.font-manager
+      pkgs.git
       pkgs.google-chrome
       pkgs.joshuto
       pkgs.ledger-live-desktop
       pkgs.libgen-cli
       pkgs.libresprite
       pkgs.ncdu
+      pkgs.nixd
       pkgs.nsxiv
       pkgs.nvtopPackages.full
       pkgs.obsidian
       pkgs.pgcli
       pkgs.pinokio
+      pkgs.ripgrep
       pkgs.signal-desktop-bin
       pkgs.slack
+      pkgs.statix
       pkgs.steam-run
       pkgs.telegram-desktop
       pkgs.unzip
