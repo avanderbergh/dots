@@ -1,15 +1,15 @@
 {
   lib,
   buildNpmPackage,
-  fetchurl,
+  fetchzip,
 }:
-buildNpmPackage rec {
+buildNpmPackage (finalAttrs: {
   pname = "pi-coding-agent";
   version = "0.52.8";
 
-  src = fetchurl {
-    url = "https://registry.npmjs.org/@mariozechner/pi-coding-agent/-/pi-coding-agent-${version}.tgz";
-    hash = "sha256-zw4R20/TQztVIMKc52PHTcyXLRTdYAuuaDOn1WC9q3Y=";
+  src = fetchzip {
+    url = "https://registry.npmjs.org/@mariozechner/pi-coding-agent/-/pi-coding-agent-${finalAttrs.version}.tgz";
+    hash = "sha256-O2O/a28S4Qogue1iGSOthZi0VmofTzAq3R5k0SaPSN0=";
   };
 
   postPatch = ''
@@ -26,4 +26,4 @@ buildNpmPackage rec {
     mainProgram = "pi";
     platforms = platforms.unix;
   };
-}
+})
