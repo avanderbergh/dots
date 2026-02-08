@@ -18,7 +18,18 @@
     # Secrets stay out of repo config and are injected via /run/secrets files.
     baseConfig = {
       agents.defaults = {
-        model.primary = "openai-codex/gpt-5.3-codex";
+        model = {
+          primary = "openai-codex/gpt-5.3-codex";
+          fallbacks = [
+            "google/gemini-3-pro-preview"
+            "google/gemini-3-flash-preview"
+          ];
+        };
+        models = {
+          "google/gemini-3-pro-preview".alias = "gemini";
+          "google/gemini-3-flash-preview".alias = "gemini-flash";
+          "openai-codex/gpt-5.3-codex" = {};
+        };
         workspace = "/home/morbo";
         maxConcurrent = 4;
         subagents.maxConcurrent = 8;
@@ -28,6 +39,11 @@
         enabled = true;
         dmPolicy = "pairing";
         groupPolicy = "allowlist";
+        groups."-1003794257231" = {
+          enabled = true;
+          groupPolicy = "open";
+          requireMention = false;
+        };
         streamMode = "partial";
       };
 
@@ -49,7 +65,20 @@
         };
       };
 
-      messages.ackReactionScope = "group-mentions";
+      messages = {
+        ackReactionScope = "group-mentions";
+        tts = {
+          provider = "edge";
+          edge = {
+            enabled = true;
+            voice = "en-US-GuyNeural";
+            lang = "en-US";
+            outputFormat = "ogg-24khz-16bit-mono-opus";
+            pitch = "-22%";
+            rate = "-8%";
+          };
+        };
+      };
       plugins.entries.telegram.enabled = true;
       skills.install.nodeManager = "pnpm";
     };

@@ -1,0 +1,23 @@
+name: nix-dev-check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  nix-dev-check:
+    if: github.event.pull_request.draft == false || github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+
+      - name: Run nix-dev-check in flake dev shell
+        run: nix develop .#nixos-dots --command bash skills/nixos-dots/scripts/nix-dev-check.sh --check
