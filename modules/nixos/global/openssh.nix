@@ -20,12 +20,8 @@ in {
       PermitRootLogin = "no";
       # Automatically remove stale sockets
       StreamLocalBindUnlink = "yes";
-      # Allow forwarding ports to everywhere
-      GatewayPorts = "clientspecified";
       # Allow SSH agent forwarding
       AllowAgentForwarding = true;
-      # Enable X11 forwarding on the server
-      X11Forwarding = true;
     };
 
     hostKeys = [
