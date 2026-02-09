@@ -26,9 +26,8 @@ in {
       StreamLocalBindUnlink = "yes";
       # Deny SSH agent forwarding by default (least privilege)
       AllowAgentForwarding = false;
-      # Cloudflare browser-rendered SSH supports these KEX algorithms.
-      # Prefer the strongest/fastest modern option first.
-      KexAlgorithms = ["curve25519-sha256@libssh.org"];
+      # Cloudflare browser-rendered SSH compatibility (reported working setting).
+      Macs = ["hmac-sha2-256"];
     };
 
     hostKeys = [
