@@ -206,6 +206,7 @@
         vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Quick Open" })
         vim.keymap.set("n", "<C-f>", builtin.live_grep, { desc = "Search in files" })
         vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Explorer" })
+        vim.keymap.set("n", "<C-S-p>", builtin.commands, { desc = "Command Palette" })
 
         vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next tab" })
         vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous tab" })
