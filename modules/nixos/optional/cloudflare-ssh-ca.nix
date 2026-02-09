@@ -18,7 +18,6 @@ _: {
 
       cat > /var/lib/ssh-ca/auth_principals/avanderbergh <<'EOF'
       avanderbergh
-      adriaan
       EOF
       chmod 0644 /var/lib/ssh-ca/auth_principals/avanderbergh
     '';
