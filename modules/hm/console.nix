@@ -120,7 +120,7 @@
         cmp-path
         cmp_luasnip
         luasnip
-        nvim-treesitter.withAllGrammars
+        nvim-treesitter
         nvim-treesitter-textobjects
         lualine-nvim
         bufferline-nvim
@@ -157,20 +157,28 @@
         require("bufferline").setup({ options = { diagnostics = "nvim_lsp" } })
         require("nvim-tree").setup({})
         require("trouble").setup({})
-        require("ibl").setup({})
+        pcall(function() require("ibl").setup({}) end)
 
         require("telescope").setup({})
         pcall(require("telescope").load_extension, "fzf")
 
-        local lspconfig = require("lspconfig")
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         local servers = {
           "bashls", "clangd", "dockerls", "gopls", "lua_ls", "marksman",
           "nixd", "pyright", "rust_analyzer", "taplo", "ts_ls", "yamlls",
           "html", "cssls", "jsonls"
         }
-        for _, server in ipairs(servers) do
-          lspconfig[server].setup({ capabilities = capabilities })
+
+        if vim.lsp and vim.lsp.config and vim.lsp.enable then
+          for _, server in ipairs(servers) do
+            vim.lsp.config(server, { capabilities = capabilities })
+            vim.lsp.enable(server)
+          end
+        else
+          local lspconfig = require("lspconfig")
+          for _, server in ipairs(servers) do
+            lspconfig[server].setup({ capabilities = capabilities })
+          end
         end
 
         local cmp = require("cmp")
@@ -194,10 +202,12 @@
           }),
         })
 
-        require("nvim-treesitter.configs").setup({
-          highlight = { enable = true },
-          indent = { enable = true },
-        })
+        pcall(function()
+          require("nvim-treesitter.configs").setup({
+            highlight = { enable = true },
+            indent = { enable = true },
+          })
+        end)
 
         local builtin = require("telescope.builtin")
 
@@ -207,6 +217,7 @@
         vim.keymap.set("n", "<C-f>", builtin.live_grep, { desc = "Search in files" })
         vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Explorer" })
         vim.keymap.set("n", "<C-S-p>", builtin.commands, { desc = "Command Palette" })
+        vim.keymap.set("n", "<leader>p", builtin.commands, { desc = "Command Palette" })
 
         vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next tab" })
         vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous tab" })
