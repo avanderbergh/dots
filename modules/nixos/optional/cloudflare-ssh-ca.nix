@@ -12,6 +12,7 @@
 
     "ssh/auth_principals/avanderbergh".text = ''
       avanderbergh
+      adriaan
     '';
   };
 }
