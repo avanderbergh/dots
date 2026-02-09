@@ -83,7 +83,7 @@
       mkHomeModules = extra: shared ++ extra;
     in {
       "avanderbergh@zoidberg" = mkHomeModules [./modules/hm/desktop ./modules/hm/desktop/autorandr.nix];
-      "avanderbergh@hermes" = mkHomeModules [./modules/hm/desktop ./modules/hm/terminal-power.nix];
+      "avanderbergh@hermes" = mkHomeModules [./modules/hm/desktop];
 
       "morbo@hermes" = [
         ./modules/hm/users/morbo.nix
