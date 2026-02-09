@@ -7,6 +7,9 @@
     glow
     just
     tokei
+    tree-sitter
+    wl-clipboard
+    xclip
     yazi
   ];
 
@@ -137,7 +140,9 @@
         vim.opt.relativenumber = true
         vim.opt.termguicolors = true
         vim.opt.mouse = "a"
-        vim.opt.clipboard = "unnamedplus"
+        if vim.fn.executable("xclip") == 1 or vim.fn.executable("wl-copy") == 1 then
+          vim.opt.clipboard = "unnamedplus"
+        end
         vim.opt.splitright = true
         vim.opt.splitbelow = true
         vim.opt.ignorecase = true
