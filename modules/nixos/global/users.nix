@@ -40,10 +40,17 @@ with lib; let
         };
 
   userDefs =
-    {avanderbergh = "human";}
+    {"${cfg.ownerName}" = "human";}
     // optionalAttrs cfg.enableBotUsers {morbo = "bot";};
 in {
-  options.local.users.enableBotUsers = mkEnableOption "Enable bot user accounts on this host";
+  options.local.users = {
+    enableBotUsers = mkEnableOption "Enable bot user accounts on this host";
+    ownerName = mkOption {
+      type = types.str;
+      default = "avanderbergh";
+      description = "Primary human owner username for this system.";
+    };
+  };
 
   config.users = {
     mutableUsers = false;
