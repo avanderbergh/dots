@@ -121,17 +121,12 @@
         cmp_luasnip
         luasnip
         nvim-treesitter
-        nvim-treesitter-textobjects
         lualine-nvim
-        bufferline-nvim
-        nvim-web-devicons
         which-key-nvim
         gitsigns-nvim
         nvim-tree-lua
-        trouble-nvim
         comment-nvim
         nvim-autopairs
-        indent-blankline-nvim
       ];
 
       initLua = ''
@@ -154,10 +149,7 @@
         require("Comment").setup({})
         require("nvim-autopairs").setup({})
         require("lualine").setup({ options = { theme = "auto" } })
-        require("bufferline").setup({ options = { diagnostics = "nvim_lsp" } })
         require("nvim-tree").setup({})
-        require("trouble").setup({})
-        pcall(function() require("ibl").setup({}) end)
 
         require("telescope").setup({})
         pcall(require("telescope").load_extension, "fzf")
@@ -202,12 +194,10 @@
           }),
         })
 
-        pcall(function()
-          require("nvim-treesitter.configs").setup({
-            highlight = { enable = true },
-            indent = { enable = true },
-          })
-        end)
+        require("nvim-treesitter.configs").setup({
+          highlight = { enable = true },
+          indent = { enable = true },
+        })
 
         local builtin = require("telescope.builtin")
 
@@ -219,8 +209,8 @@
         vim.keymap.set("n", "<C-S-p>", builtin.commands, { desc = "Command Palette" })
         vim.keymap.set("n", "<leader>p", builtin.commands, { desc = "Command Palette" })
 
-        vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next tab" })
-        vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous tab" })
+
+        -- no custom tab cycling for now
 
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
         vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Find references" })
@@ -238,7 +228,7 @@
         vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
         vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
         vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Explorer" })
-        vim.keymap.set("n", "<leader>xx", ":Trouble diagnostics toggle<CR>", { desc = "Diagnostics" })
+        vim.keymap.set("n", "<leader>xx", vim.diagnostic.open_float, { desc = "Diagnostics" })
       '';
     };
 
