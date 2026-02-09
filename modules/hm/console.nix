@@ -123,6 +123,8 @@
         nvim-treesitter.withAllGrammars
         nvim-treesitter-textobjects
         lualine-nvim
+        bufferline-nvim
+        nvim-web-devicons
         which-key-nvim
         gitsigns-nvim
         nvim-tree-lua
@@ -145,12 +147,14 @@
         vim.opt.splitbelow = true
         vim.opt.ignorecase = true
         vim.opt.smartcase = true
+        vim.opt.completeopt = "menu,menuone,noselect"
 
         require("which-key").setup({})
         require("gitsigns").setup({})
         require("Comment").setup({})
         require("nvim-autopairs").setup({})
         require("lualine").setup({ options = { theme = "auto" } })
+        require("bufferline").setup({ options = { diagnostics = "nvim_lsp" } })
         require("nvim-tree").setup({})
         require("trouble").setup({})
         require("ibl").setup({})
@@ -196,6 +200,29 @@
         })
 
         local builtin = require("telescope.builtin")
+
+        -- VSCode-like bindings
+        vim.keymap.set({ "n", "i", "v" }, "<C-s>", "<cmd>w<CR>", { desc = "Save" })
+        vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Quick Open" })
+        vim.keymap.set("n", "<C-f>", builtin.live_grep, { desc = "Search in files" })
+        vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Explorer" })
+
+        vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next tab" })
+        vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous tab" })
+
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Find references" })
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
+        vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename symbol" })
+        vim.keymap.set("n", "<F12>", vim.lsp.buf.definition, { desc = "Go to definition" })
+        vim.keymap.set("n", "<S-F12>", vim.lsp.buf.references, { desc = "Find references" })
+        vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+        vim.keymap.set("n", "<leader>fm", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format document" })
+
+        vim.keymap.set("n", "<C-/>", "gcc", { remap = true, desc = "Toggle comment" })
+        vim.keymap.set("v", "<C-/>", "gc", { remap = true, desc = "Toggle comment" })
+
         vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
         vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
         vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Explorer" })
