@@ -40,7 +40,7 @@ with lib; let
         };
 
   userDefs =
-    {(cfg.ownerName) = "human";}
+    {"${cfg.ownerName}" = "human";}
     // optionalAttrs cfg.enableBotUsers {morbo = "bot";};
 in {
   options.local.users = {
