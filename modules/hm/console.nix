@@ -120,18 +120,13 @@
         cmp-path
         cmp_luasnip
         luasnip
-        nvim-treesitter.withAllGrammars
-        nvim-treesitter-textobjects
+        nvim-treesitter
         lualine-nvim
-        bufferline-nvim
-        nvim-web-devicons
         which-key-nvim
         gitsigns-nvim
         nvim-tree-lua
-        trouble-nvim
         comment-nvim
         nvim-autopairs
-        indent-blankline-nvim
       ];
 
       initLua = ''
@@ -154,23 +149,28 @@
         require("Comment").setup({})
         require("nvim-autopairs").setup({})
         require("lualine").setup({ options = { theme = "auto" } })
-        require("bufferline").setup({ options = { diagnostics = "nvim_lsp" } })
         require("nvim-tree").setup({})
-        require("trouble").setup({})
-        require("ibl").setup({})
 
         require("telescope").setup({})
         pcall(require("telescope").load_extension, "fzf")
 
-        local lspconfig = require("lspconfig")
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         local servers = {
           "bashls", "clangd", "dockerls", "gopls", "lua_ls", "marksman",
           "nixd", "pyright", "rust_analyzer", "taplo", "ts_ls", "yamlls",
           "html", "cssls", "jsonls"
         }
-        for _, server in ipairs(servers) do
-          lspconfig[server].setup({ capabilities = capabilities })
+
+        if vim.lsp and vim.lsp.config and vim.lsp.enable then
+          for _, server in ipairs(servers) do
+            vim.lsp.config(server, { capabilities = capabilities })
+            vim.lsp.enable(server)
+          end
+        else
+          local lspconfig = require("lspconfig")
+          for _, server in ipairs(servers) do
+            lspconfig[server].setup({ capabilities = capabilities })
+          end
         end
 
         local cmp = require("cmp")
@@ -207,9 +207,10 @@
         vim.keymap.set("n", "<C-f>", builtin.live_grep, { desc = "Search in files" })
         vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Explorer" })
         vim.keymap.set("n", "<C-S-p>", builtin.commands, { desc = "Command Palette" })
+        vim.keymap.set("n", "<leader>p", builtin.commands, { desc = "Command Palette" })
 
-        vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next tab" })
-        vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous tab" })
+
+        -- no custom tab cycling for now
 
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
         vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Find references" })
@@ -227,7 +228,7 @@
         vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
         vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
         vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Explorer" })
-        vim.keymap.set("n", "<leader>xx", ":Trouble diagnostics toggle<CR>", { desc = "Diagnostics" })
+        vim.keymap.set("n", "<leader>xx", vim.diagnostic.open_float, { desc = "Diagnostics" })
       '';
     };
 
