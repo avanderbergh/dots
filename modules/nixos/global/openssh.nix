@@ -26,21 +26,15 @@ in {
       StreamLocalBindUnlink = "yes";
       # Deny SSH agent forwarding by default (least privilege)
       AllowAgentForwarding = false;
+      # Cloudflare browser-rendered SSH supports these KEX algorithms.
+      # Prefer the strongest/fastest modern option first.
+      KexAlgorithms = ["curve25519-sha256@libssh.org"];
     };
 
     hostKeys = [
       {
         path = "${lib.optionalString hasOptinPersistence "/persist"}/etc/ssh/ssh_host_ed25519_key";
         type = "ed25519";
-      }
-      {
-        path = "${lib.optionalString hasOptinPersistence "/persist"}/etc/ssh/ssh_host_ecdsa_key";
-        type = "ecdsa";
-      }
-      {
-        bits = 4096;
-        path = "${lib.optionalString hasOptinPersistence "/persist"}/etc/ssh/ssh_host_rsa_key";
-        type = "rsa";
       }
     ];
   };
