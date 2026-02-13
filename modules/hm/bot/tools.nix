@@ -23,6 +23,14 @@
       jq
       less
       nodePackages_latest.nodejs
+      go_1_25
+      gopls
+      gofumpt
+      gotools
+      golangci-lint
+      golines
+      gosec
+      delve
       opencode
       pkg-config
       pnpm
