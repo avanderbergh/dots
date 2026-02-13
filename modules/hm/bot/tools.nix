@@ -2,9 +2,13 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  goTools = import ../go.nix {inherit pkgs;};
+in {
   home = {
-    packages = with pkgs; [
+    packages = with pkgs;
+      [
+
       bashInteractive
       coreutils
       curl
@@ -23,14 +27,6 @@
       jq
       less
       nodePackages_latest.nodejs
-      go_1_25
-      gopls
-      gofumpt
-      gotools
-      golangci-lint
-      golines
-      gosec
-      delve
       opencode
       pkg-config
       pnpm
@@ -48,7 +44,8 @@
       yq-go
       zip
       zx
-    ];
+    ]
+    ++ goTools;
 
     sessionVariables = {
       SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
