@@ -1,6 +1,4 @@
-{pkgs, ...}: let
-  goTools = import ./go.nix {inherit pkgs;};
-in {
+{pkgs, ...}: {
   home = {
     packages = [
       pkgs.nodePackages_latest.nodejs
@@ -9,7 +7,7 @@ in {
       pkgs.zx
       pkgs.playwright
       pkgs.playwright-test
-    ] ++ goTools;
+    ];
 
     sessionVariables = {
       SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";

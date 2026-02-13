@@ -2,9 +2,7 @@
   config,
   pkgs,
   ...
-}: let
-  goTools = import ../go.nix {inherit pkgs;};
-in {
+}: {
   home = {
     packages = with pkgs;
       [
@@ -44,8 +42,7 @@ in {
       yq-go
       zip
       zx
-    ]
-    ++ goTools;
+    ];
 
     sessionVariables = {
       SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
