@@ -25,7 +25,7 @@
     {
       "label": "nix: repo checks",
       "type": "shell",
-      "command": "skills/nixos-dots/scripts/nix-dev-check.sh --check",
+      "command": ".agents/skills/nixos-dots/scripts/nix-dev-check.sh --check",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",

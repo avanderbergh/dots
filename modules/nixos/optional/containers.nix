@@ -1,4 +1,9 @@
-{config, lib, pkgs, ...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   hardware = {
     graphics.enable32Bit = true;
     nvidia-container-toolkit.enable = true;
@@ -17,11 +22,13 @@
     };
   };
 
-  users.users = {
-    avanderbergh.extraGroups = ["docker"];
-  } // lib.optionalAttrs config.local.users.enableBotUsers {
-    morbo.extraGroups = ["docker"];
-  };
+  users.users =
+    {
+      avanderbergh.extraGroups = ["docker"];
+    }
+    // lib.optionalAttrs config.local.users.enableBotUsers {
+      morbo.extraGroups = ["docker"];
+    };
 
   environment.systemPackages = with pkgs; [
     podman

@@ -43,13 +43,13 @@ nix develop .#nixos-dots
 Run the Nix workflow from the shell:
 
 ```sh
-skills/nixos-dots/scripts/nix-dev-check.sh
+.agents/skills/nixos-dots/scripts/nix-dev-check.sh
 ```
 
 Or run it without entering an interactive shell:
 
 ```sh
-nix develop .#nixos-dots --command skills/nixos-dots/scripts/nix-dev-check.sh
+nix develop .#nixos-dots --command .agents/skills/nixos-dots/scripts/nix-dev-check.sh
 ```
 
 ## Notes

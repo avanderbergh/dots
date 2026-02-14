@@ -4,9 +4,7 @@
   ...
 }: {
   home = {
-    packages = with pkgs;
-      [
-
+    packages = with pkgs; [
       bashInteractive
       coreutils
       curl
@@ -28,10 +26,6 @@
       opencode
       pkg-config
       pnpm
-      podman
-      podman-compose
-      buildah
-      skopeo
       procps
       python3
       ripgrep
