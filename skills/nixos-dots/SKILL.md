@@ -12,19 +12,19 @@ Run the script in `scripts/nix-dev-check.sh` to perform repository checks in one
 Run from anywhere:
 
 ```bash
-skills/nixos-dots/scripts/nix-dev-check.sh
+scripts/nix-dev-check.sh
 ```
 
 Run read-only validation (no file edits):
 
 ```bash
-skills/nixos-dots/scripts/nix-dev-check.sh --check
+scripts/nix-dev-check.sh --check
 ```
 
 Pass extra arguments to `nix flake check`:
 
 ```bash
-skills/nixos-dots/scripts/nix-dev-check.sh -- --keep-going
+scripts/nix-dev-check.sh -- --keep-going
 ```
 
 ## Script Behavior

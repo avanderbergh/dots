@@ -75,6 +75,7 @@
         ./modules/hm/console.nix
         ./modules/hm/git.nix
         ./modules/hm/node.nix
+        ./modules/hm/go.nix
         ./modules/hm/python.nix
         ./modules/hm/dev
         ./modules/hm/sops.nix

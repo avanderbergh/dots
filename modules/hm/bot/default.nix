@@ -1,6 +1,7 @@
 {
   imports = [
     ../openclaw
+    ../go.nix
     ./env.nix
     ./git.nix
     ./npm.nix

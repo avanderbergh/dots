@@ -3,7 +3,7 @@
     ../../modules/nixos/optional/ausweisapp.nix
     ../../modules/nixos/optional/bluetooth.nix
     ../../modules/nixos/optional/desktop.nix
-    ../../modules/nixos/optional/docker.nix
+    ../../modules/nixos/optional/containers.nix
     ../../modules/nixos/optional/ephemeral-btrfs.nix
     ../../modules/nixos/optional/laptop.nix
     ../../modules/nixos/optional/ledger-live.nix

@@ -130,7 +130,7 @@ command -v nix-instantiate >/dev/null 2>&1 || {
 }
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 if [[ ! -f "${REPO_ROOT}/flake.nix" ]]; then
   REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || true)"
 fi
