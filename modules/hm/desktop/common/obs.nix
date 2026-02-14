@@ -19,7 +19,7 @@
     asciicam
     bspwm
     obs-cli
-    xorg.xprop
+    xprop
   ];
 
   # Define the script in your configuration
