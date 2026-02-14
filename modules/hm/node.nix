@@ -7,6 +7,10 @@
       pkgs.zx
       pkgs.playwright
       pkgs.playwright-test
+      pkgs.podman
+      pkgs.podman-compose
+      pkgs.buildah
+      pkgs.skopeo
     ];
 
     sessionVariables = {
