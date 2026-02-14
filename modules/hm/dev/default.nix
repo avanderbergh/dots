@@ -8,4 +8,11 @@
     gh
     pi-coding-agent
   ];
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableBashIntegration = true;
+    enableFishIntegration = true;
+  };
 }
