@@ -1,6 +1,7 @@
 {
   fetchFromGitHub,
   fetchurl,
+  fetchPnpmDeps,
   git,
   gawk,
   jq,
@@ -58,7 +59,7 @@ in
       then gatewaySrc
       else fetchFromGitHub sourceFetch;
 
-    pnpmDeps = pnpm_10.fetchDeps {
+    pnpmDeps = fetchPnpmDeps {
       inherit (finalAttrs) pname version src;
       hash =
         if pnpmDepsHash != null

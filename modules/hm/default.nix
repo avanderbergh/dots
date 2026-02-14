@@ -52,7 +52,7 @@
       pkgs.xarchiver
       pkgs.xclip
       pkgs.xdotool
-      pkgs.xorg.xev
+      pkgs.xev
       pkgs.xsel
       pkgs.zoom-us
     ];
