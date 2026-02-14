@@ -20,4 +20,4 @@ jobs:
         uses: cachix/install-nix-action@v27
 
       - name: Run nix-dev-check in flake dev shell
-        run: nix develop .#nixos-dots --command bash .agents/skills/nixos-dots/scripts/nix-dev-check.sh --check
+        run: nix develop .#nixos-dots --command bash scripts/nix-dev-check.sh --check
