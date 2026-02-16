@@ -37,6 +37,20 @@ with lib; let
         }
         // optionalAttrs (!isHuman) {
           group = name;
+          # Rootless containers (Podman) require subordinate ID ranges.
+          # Keep bots as system users, but grant explicit subuid/subgid mappings.
+          subUidRanges = [
+            {
+              startUid = 200000;
+              count = 65536;
+            }
+          ];
+          subGidRanges = [
+            {
+              startGid = 200000;
+              count = 65536;
+            }
+          ];
         };
 
   userDefs =
