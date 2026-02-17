@@ -28,6 +28,7 @@ in {
     ../../modules/nixos/optional/video.nix
     ../../modules/nixos/optional/vpn.nix
     ../../modules/nixos/optional/yubikey.nix
+    ../../modules/nixos/optional/github-runner.nix
   ];
 
   networking.hostName = "hermes";
