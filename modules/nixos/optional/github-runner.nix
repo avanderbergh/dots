@@ -20,6 +20,7 @@
       gnused
       gnugrep
       coreutils
+      devenv
     ];
     user = "morbo";
     group = "morbo";
