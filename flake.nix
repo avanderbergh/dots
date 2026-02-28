@@ -18,6 +18,10 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix";
   };
@@ -41,6 +45,7 @@
     nixpkgs-master,
     home-manager,
     nixos-hardware,
+    niri,
     sops-nix,
     ...
   }: let
@@ -84,7 +89,7 @@
       ];
       mkHomeModules = extra: shared ++ extra;
     in {
-      "avanderbergh@zoidberg" = mkHomeModules [./modules/hm/desktop/apps.nix ./modules/hm/desktop ./modules/hm/desktop/autorandr.nix];
+      "avanderbergh@zoidberg" = mkHomeModules [./modules/hm/desktop/apps.nix ./modules/hm/desktop];
       "avanderbergh@hermes" = mkHomeModules [];
 
       "morbo@hermes" = [
@@ -147,11 +152,14 @@
 
     mkHomeConfig = key: let
       hostName = builtins.elemAt (lib.splitString "@" key) 1;
+      homeConfigModules =
+        homeModules.${key}
+        ++ lib.optionals (key == "avanderbergh@zoidberg") [inputs.niri.homeModules.config];
     in
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = mkExtraSpecialArgs hostConfigs.${hostName};
-        modules = homeModules.${key};
+        modules = homeConfigModules;
       };
   in {
     nixosConfigurations = {
@@ -160,6 +168,7 @@
         modules =
           [
             nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
+            niri.nixosModules.niri
             ./hosts/zoidberg
             (mkHostModule "zoidberg")
           ]

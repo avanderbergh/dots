@@ -29,11 +29,11 @@
     pkgs.telegram-desktop
     pkgs.wl-clipboard
     pkgs.wpsoffice
+    pkgs.wev
     pkgs.xarchiver
-    pkgs.xclip
-    pkgs.xdotool
-    pkgs.xev
-    pkgs.xsel
+    pkgs.grim
+    pkgs.slurp
+    pkgs.satty
     pkgs.zoom-us
   ];
 

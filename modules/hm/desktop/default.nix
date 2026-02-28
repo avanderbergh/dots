@@ -2,14 +2,16 @@
   browser = ["google-chrome.desktop"];
 in {
   imports = [
-    ./common/bspwm.nix
-    ./common/dunst.nix
-    ./common/eww
-    ./common/flameshot.nix
+    ./common/fuzzel.nix
+    ./common/niri.nix
     ./common/obs.nix
-    ./common/picom.nix
-    ./common/rofi.nix
-    ./common/sxhkd.nix
+    ./common/screenshots.nix
+    ./common/swayidle.nix
+    ./common/swaylock.nix
+    ./common/swaync.nix
+    ./common/waybar.nix
+    ./common/wpaperd.nix
+    ./kanshi.nix
   ];
 
   gtk = {
