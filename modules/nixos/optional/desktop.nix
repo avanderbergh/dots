@@ -1,36 +1,58 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   boot.plymouth.enable = true;
 
-  services.gnome.gnome-keyring.enable = true;
+  nixpkgs.overlays = [inputs.niri.overlays.niri];
 
-  services.xserver = {
+  programs.niri = {
     enable = true;
-    xkb.options = "compose:ralt,ctrl:nocaps";
+    package = pkgs.niri-stable;
+  };
+
+  niri-flake.cache.enable = true;
+
+  services = {
     displayManager = {
-      lightdm = {
+      gdm = {
         enable = true;
-        greeters = {
-          gtk = {
-            enable = true;
-            extraConfig = ''
-              [greeter]
-              xft-dpi = 261
-            '';
-          };
-        };
+        wayland = true;
       };
+      defaultSession = "niri";
     };
-    windowManager.bspwm.enable = true;
-    xautolock = {
-      enable = true;
-      locker = "${pkgs.i3lock-color}/bin/i3lock-color --blur=15";
-      nowlocker = "${pkgs.i3lock-color}/bin/i3lock-color --blur=15";
-      notifier = "${pkgs.libnotify}/bin/notify-send -u critical -t 10000 -- 'Locking screen in 10 seconds'";
+
+    gnome = {
+      gnome-keyring.enable = true;
+      # Keep keyring secrets support, but avoid stealing SSH_AUTH_SOCK from gpg-agent.
+      gcr-ssh-agent.enable = false;
     };
   };
-  programs.i3lock = {
-    enable = true;
-    package = pkgs.i3lock-color;
+
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
+
+  environment.etc."nvidia/nvidia-application-profiles-rc.d/50-limit-free-buffer-pool-in-wayland-compositors.json".text = builtins.toJSON {
+    rules = [
+      {
+        pattern = {
+          feature = "procname";
+          matches = "niri";
+        };
+        profile = "Limit Free Buffer Pool On Wayland Compositors";
+      }
+    ];
+    profiles = [
+      {
+        name = "Limit Free Buffer Pool On Wayland Compositors";
+        settings = [
+          {
+            key = "GLVidHeapReuseRatio";
+            value = 0;
+          }
+        ];
+      }
+    ];
   };
 
   programs.gnupg.agent.pinentryPackage = pkgs.pinentry-gnome3;
@@ -81,5 +103,6 @@
     gtk-engine-murrine
     libnotify
     networkmanagerapplet
+    xwayland-satellite
   ];
 }
