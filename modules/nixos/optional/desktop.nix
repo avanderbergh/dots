@@ -23,7 +23,11 @@
       defaultSession = "niri";
     };
 
-    gnome.gnome-keyring.enable = true;
+    gnome = {
+      gnome-keyring.enable = true;
+      # Keep keyring secrets support, but avoid stealing SSH_AUTH_SOCK from gpg-agent.
+      gcr-ssh-agent.enable = false;
+    };
   };
 
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
