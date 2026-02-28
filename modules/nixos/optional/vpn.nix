@@ -1,8 +1,5 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    protonvpn-gui
-    wireguard-tools
-  ];
+  environment.systemPackages = with pkgs; [wireguard-tools];
 
   networking = {
     firewall = {

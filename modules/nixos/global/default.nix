@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   inputs,
   modulesPath,
@@ -35,7 +36,7 @@
     fish.enable = true;
     gnupg.agent = {
       enable = true;
-      pinentryPackage = pkgs.pinentry-gnome3;
+      pinentryPackage = lib.mkDefault pkgs.pinentry-curses;
       enableSSHSupport = true;
       enableExtraSocket = true;
     };
@@ -55,10 +56,7 @@
 
   environment = {
     systemPackages = with pkgs; [
-      dconf
       git
-      gtk-engine-murrine
-      libnotify
       libusb1
       libudev-zero
       parted

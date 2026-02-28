@@ -10,7 +10,6 @@ in {
     ./common/picom.nix
     ./common/rofi.nix
     ./common/sxhkd.nix
-    ./common/syncthing.nix
   ];
 
   gtk = {

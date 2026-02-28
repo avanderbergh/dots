@@ -79,12 +79,13 @@
         ./modules/hm/python.nix
         ./modules/hm/dev
         ./modules/hm/sops.nix
+        ./modules/hm/syncthing.nix
         ./modules/hm/ssh.nix
       ];
       mkHomeModules = extra: shared ++ extra;
     in {
-      "avanderbergh@zoidberg" = mkHomeModules [./modules/hm/desktop ./modules/hm/desktop/autorandr.nix];
-      "avanderbergh@hermes" = mkHomeModules [./modules/hm/desktop];
+      "avanderbergh@zoidberg" = mkHomeModules [./modules/hm/desktop/apps.nix ./modules/hm/desktop ./modules/hm/desktop/autorandr.nix];
+      "avanderbergh@hermes" = mkHomeModules [];
 
       "morbo@hermes" = [
         ./modules/hm/users/morbo.nix
