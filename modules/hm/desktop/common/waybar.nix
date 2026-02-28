@@ -1,4 +1,11 @@
-{colors, ...}: {
+{...}: {
+  stylix.targets.waybar = {
+    addCss = true;
+    enableLeftBackColors = true;
+    enableCenterBackColors = true;
+    enableRightBackColors = true;
+  };
+
   programs.waybar = {
     enable = true;
     systemd.enable = true;
@@ -6,13 +13,13 @@
       layer = "top";
       position = "top";
       height = 34;
-      margin-top = 8;
-      margin-left = 8;
-      margin-right = 8;
+      margin-top = 0;
+      margin-left = 0;
+      margin-right = 0;
       spacing = 8;
       "modules-left" = ["niri/workspaces" "niri/window"];
       "modules-center" = ["clock"];
-      "modules-right" = ["niri/language" "cpu" "memory" "network" "pulseaudio" "tray"];
+      "modules-right" = ["cpu" "memory" "network" "pulseaudio" "tray"];
 
       "niri/workspaces" = {
         "disable-scroll" = false;
@@ -21,12 +28,11 @@
 
       "niri/window" = {
         "separate-outputs" = true;
-        "max-length" = 96;
+        "max-length" = 24;
       };
 
       clock = {
-        format = " {:%H:%M}   {:%a %d %b}";
-        "tooltip-format" = "{:%A, %d %B %Y %H:%M:%S}";
+        format = "{:%H:%M}";
       };
 
       cpu = {
@@ -57,23 +63,15 @@
       * {
         border: none;
         border-radius: 0;
-        font-family: "RecMonoLinear Nerd Font Propo";
-        font-size: 16px;
+        min-height: 0;
       }
 
       window#waybar {
-        background: ${colors.bgt};
-        color: ${colors.text};
-        border-radius: 16px;
+        border-radius: 0;
       }
 
       #workspaces button {
-        color: ${colors.subtext0};
         padding: 0 10px;
-      }
-
-      #workspaces button.active {
-        color: ${colors.mauve};
       }
 
       #window,
@@ -84,14 +82,9 @@
       #pulseaudio,
       #language,
       #tray {
-        background: ${colors.surface0};
         border-radius: 12px;
         margin: 5px 0;
         padding: 0 12px;
-      }
-
-      #window {
-        color: ${colors.lavender};
       }
     '';
   };

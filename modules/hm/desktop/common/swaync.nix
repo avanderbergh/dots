@@ -1,4 +1,4 @@
-{colors, ...}: {
+_: {
   services.swaync = {
     enable = true;
     settings = {
@@ -27,30 +27,14 @@
     };
 
     style = ''
-      * {
-        font-family: "RecMonoLinear Nerd Font Propo";
-      }
-
       .control-center,
       .notification-row .notification-background .notification {
-        background: ${colors.base};
-        color: ${colors.text};
         border-radius: 16px;
-        border: 2px solid ${colors.surface1};
       }
 
       .notification-row:focus,
       .notification-row:hover {
-        background: ${colors.surface0};
         border-radius: 16px;
-      }
-
-      .notification-content {
-        color: ${colors.text};
-      }
-
-      .notification.critical {
-        border: 2px solid ${colors.red};
       }
     '';
   };

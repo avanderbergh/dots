@@ -154,7 +154,10 @@
       hostName = builtins.elemAt (lib.splitString "@" key) 1;
       homeConfigModules =
         homeModules.${key}
-        ++ lib.optionals (key == "avanderbergh@zoidberg") [inputs.niri.homeModules.config];
+        ++ lib.optionals (key == "avanderbergh@zoidberg") [
+          inputs.stylix.homeModules.stylix
+          inputs.niri.homeModules.config
+        ];
     in
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
