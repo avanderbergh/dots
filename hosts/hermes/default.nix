@@ -8,11 +8,9 @@
 in {
   imports = [
     ./morbo-secrets.nix
-    ../../modules/nixos/optional/ausweisapp.nix
     ../../modules/nixos/optional/cache-server.nix
     ../../modules/nixos/optional/cloudflared.nix
     ../../modules/nixos/optional/cloudflare-ssh-ca.nix
-    ../../modules/nixos/optional/desktop.nix
     ../../modules/nixos/optional/containers.nix
     ../../modules/nixos/optional/ephemeral-btrfs.nix
     ../../modules/nixos/optional/ledger-live.nix
@@ -20,8 +18,6 @@ in {
     ../../modules/nixos/optional/nts-1.nix
     ../../modules/nixos/optional/ollama.nix
     ../../modules/nixos/optional/optin-persistence.nix
-    ../../modules/nixos/optional/pentablet.nix
-    ../../modules/nixos/optional/pipewire.nix
     ../../modules/nixos/optional/postgres.nix
     ../../modules/nixos/optional/quickemu.nix
     ../../modules/nixos/optional/secureboot.nix
@@ -58,16 +54,6 @@ in {
     xz
     zlib
   ]);
-
-  services.xserver = {
-    dpi = 109;
-    resolutions = [
-      {
-        x = 5120;
-        y = 1440;
-      }
-    ];
-  };
 
   boot = {
     extraModulePackages = [];

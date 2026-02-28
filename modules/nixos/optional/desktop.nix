@@ -1,6 +1,8 @@
 {pkgs, ...}: {
   boot.plymouth.enable = true;
 
+  services.gnome.gnome-keyring.enable = true;
+
   services.xserver = {
     enable = true;
     xkb.options = "compose:ralt,ctrl:nocaps";
@@ -30,6 +32,8 @@
     enable = true;
     package = pkgs.i3lock-color;
   };
+
+  programs.gnupg.agent.pinentryPackage = pkgs.pinentry-gnome3;
 
   stylix = {
     enable = true;
@@ -72,7 +76,10 @@
     image = ../../hm/desktop/images/wallpaper.jpg;
   };
 
-  environment.systemPackages = [
-    pkgs.networkmanagerapplet
+  environment.systemPackages = with pkgs; [
+    dconf
+    gtk-engine-murrine
+    libnotify
+    networkmanagerapplet
   ];
 }

@@ -14,6 +14,7 @@
     ../../modules/nixos/optional/postgres.nix
     ../../modules/nixos/optional/secureboot.nix
     ../../modules/nixos/optional/vpn.nix
+    ../../modules/nixos/optional/vpn-gui.nix
     ../../modules/nixos/optional/yubikey.nix
   ];
 

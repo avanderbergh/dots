@@ -1,7 +1,6 @@
 {
   pkgs,
   pkgs-stable,
-  pkgs-master,
   ...
 }: {
   home = {
@@ -12,62 +11,25 @@
     packages = [
       # pkgs-stable.cura
       # pkgs-stable.figma-agent
-      pkgs-stable.bitwig-studio
-      pkgs-stable.calibre
       pkgs-stable.cava
-      pkgs-stable.openscad
-      pkgs-stable.orca-slicer
-      pkgs-stable.pcmanfm
       pkgs.alejandra
-      pkgs.blender
-      pkgs.brightnessctl
       pkgs.cloudflared
-      pkgs.code-cursor
-      pkgs.davinci-resolve
-      pkgs.discord-canary
       pkgs.esptool
-      pkgs.firefox
-      pkgs.font-manager
       pkgs.git
-      pkgs.google-chrome
       pkgs.joshuto
-      pkgs.ledger-live-desktop
       pkgs.libgen-cli
-      pkgs.libresprite
       pkgs.ncdu
       pkgs.nixd
-      pkgs.nsxiv
       pkgs.nvtopPackages.full
-      pkgs.obsidian
       pkgs.pgcli
-      pkgs.pinokio
       pkgs.ripgrep
-      pkgs.signal-desktop-bin
-      pkgs.slack
       pkgs.statix
-      pkgs.steam-run
-      pkgs.telegram-desktop
       pkgs.unzip
-      pkgs.wpsoffice
-      pkgs.xarchiver
-      pkgs.xclip
-      pkgs.xdotool
-      pkgs.xev
-      pkgs.xsel
-      pkgs.zoom-us
     ];
   };
 
   programs = {
     home-manager.enable = true;
-    mpv.enable = true;
     pandoc.enable = true;
-    vscode = {
-      enable = true;
-      package = pkgs-master.vscode.fhs;
-    };
-    zathura.enable = true;
   };
-
-  services.udiskie.enable = true;
 }
