@@ -6,19 +6,27 @@
   ...
 }: let
   inherit (inputs.q15.packages.${pkgs.system}) q15;
+  containerHelperBins = pkgs.symlinkJoin {
+    name = "q15-container-helpers";
+    paths = [pkgs.netavark pkgs.aardvark-dns];
+  };
   q15ConfigDir = "${config.home.homeDirectory}/.config/q15";
   q15RuntimePath = lib.makeBinPath [
     q15
+    pkgs.aardvark-dns
     pkgs.bash
     pkgs.buildah
     pkgs.coreutils
     pkgs.git
     pkgs.nix
+    pkgs.netavark
   ];
 in {
   home.packages = [
     q15
+    pkgs.aardvark-dns
     pkgs.buildah
+    pkgs.netavark
   ];
 
   home.activation.q15ConfigDir = lib.hm.dag.entryAfter ["writeBoundary"] ''
@@ -41,6 +49,7 @@ in {
     Service = {
       Type = "simple";
       Environment = [
+        "CONTAINERS_HELPER_BINARY_DIR=${containerHelperBins}/bin"
         "PATH=/run/wrappers/bin:/run/current-system/sw/bin:${q15RuntimePath}:/etc/profiles/per-user/${config.home.username}/bin"
       ];
       EnvironmentFile = "-${config.sops.secrets.q15_env.path}";
