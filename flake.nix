@@ -24,6 +24,10 @@
     };
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix";
+    q15 = {
+      url = "github:q15co/q15";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
@@ -90,7 +94,7 @@
       mkHomeModules = extra: shared ++ extra;
     in {
       "avanderbergh@zoidberg" = mkHomeModules [./modules/hm/desktop/apps.nix ./modules/hm/desktop];
-      "avanderbergh@hermes" = mkHomeModules [];
+      "avanderbergh@hermes" = mkHomeModules [./modules/hm/q15.nix];
 
       "morbo@hermes" = [
         ./modules/hm/users/morbo.nix
