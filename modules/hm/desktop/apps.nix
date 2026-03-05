@@ -23,7 +23,7 @@
     pkgs.nsxiv
     pkgs.obsidian
     pkgs.pinokio
-    pkgs.signal-desktop-bin
+    pkgs.signal-desktop
     pkgs.slack
     pkgs.steam-run
     pkgs.telegram-desktop

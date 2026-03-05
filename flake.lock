@@ -517,11 +517,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772633829,
-        "narHash": "sha256-Q237cHz+bcMCueHDAkrlsmIkqUnFVvg4Zi8mVpUE/1A=",
+        "lastModified": 1772640711,
+        "narHash": "sha256-u+ZJXe4M+RpN0ytZ1Qfaprzknm19szBpc1AIRxlbows=",
         "owner": "q15co",
         "repo": "q15",
-        "rev": "028ee551153e296d8dd554c11535a8abafaeaeaa",
+        "rev": "f677c036f9605a2167744a870532ac0019b20aa4",
         "type": "github"
       },
       "original": {
