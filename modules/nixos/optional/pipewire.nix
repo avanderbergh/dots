@@ -16,8 +16,8 @@
     alsa-topology-conf
     alsa-ucm-conf
     alsa-utils
+    crosspipe
     easyeffects
-    helvum
     pavucontrol
   ];
 }
