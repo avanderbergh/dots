@@ -9,6 +9,8 @@
     url = "https://github.com/q15co";
     tokenFile = config.sops.secrets.github-runner-hermes.path;
     name = "hermes-q15";
+    # Ephemeral runners re-register on each service start, so replace stale GitHub-side state.
+    replace = true;
     extraLabels = ["nixos" "linux-x64" "q15"];
     extraPackages = with pkgs; [
       nix
