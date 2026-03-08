@@ -7,7 +7,6 @@
   owner = config.local.users.ownerName;
 in {
   imports = [
-    ./morbo-secrets.nix
     ../../modules/nixos/optional/cache-server.nix
     ../../modules/nixos/optional/cloudflared.nix
     ../../modules/nixos/optional/cloudflare-ssh-ca.nix

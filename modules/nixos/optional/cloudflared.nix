@@ -12,9 +12,6 @@ in {
           "ssh-hermes.adriaan.cc" = {
             service = "ssh://127.0.0.1:22";
           };
-          "openclaw.adriaan.cc" = {
-            service = "http://127.0.0.1:18789";
-          };
         };
       };
     };

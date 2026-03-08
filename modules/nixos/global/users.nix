@@ -16,7 +16,7 @@ with lib; let
         {
           isNormalUser = isHuman;
           isSystemUser = !isHuman;
-          linger = !isHuman;
+          linger = true;
           createHome = true;
           home = "/home/${name}";
           extraGroups =
