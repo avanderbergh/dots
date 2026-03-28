@@ -510,26 +510,6 @@
         "type": "github"
       }
     },
-    "q15": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1773009466,
-        "narHash": "sha256-2qpjLSJLKtU5+3ZxhK7XCsXSSXg8KINbDLDPaLHO1vk=",
-        "owner": "q15co",
-        "repo": "q15",
-        "rev": "b82897364834464b904aec7c8eed8a0faa9b6cb8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "q15co",
-        "repo": "q15",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -540,7 +520,6 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-stable": "nixpkgs-stable_2",
-        "q15": "q15",
         "sops-nix": "sops-nix",
         "stylix": "stylix"
       }
