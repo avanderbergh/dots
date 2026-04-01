@@ -13,7 +13,7 @@
     pkgs.blender
     pkgs.brightnessctl
     pkgs.code-cursor
-    pkgs.davinci-resolve
+    pkgs-stable.davinci-resolve
     pkgs.discord-canary
     pkgs.firefox
     pkgs.font-manager
@@ -35,6 +35,7 @@
     pkgs.slurp
     pkgs.satty
     pkgs.zoom-us
+    pkgs.opencode-desktop
   ];
 
   programs = {

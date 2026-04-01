@@ -6,6 +6,7 @@
     devcontainer
     gemini-cli
     gh
+    opencode
     pi-coding-agent
   ];
 

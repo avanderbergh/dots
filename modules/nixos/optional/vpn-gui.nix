@@ -1,3 +1,3 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs; [protonvpn-gui];
+  environment.systemPackages = with pkgs; [proton-vpn];
 }
