@@ -12,6 +12,7 @@
     ../../modules/nixos/optional/pipewire-sof-workarounds.nix
     ../../modules/nixos/optional/pipewire.nix
     ../../modules/nixos/optional/postgres.nix
+    ./qca6390-wifi-fix.nix
     ../../modules/nixos/optional/secureboot.nix
     ../../modules/nixos/optional/vpn.nix
     ../../modules/nixos/optional/vpn-gui.nix
