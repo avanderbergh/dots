@@ -48,6 +48,7 @@
   '';
 in {
   home.packages = [
+    pkgs.q15-auth
     pkgs.podman
     pkgs.podman-compose
   ];
@@ -70,48 +71,52 @@ in {
     run chmod 700 ${lib.escapeShellArg "${q15RuntimeDir}/proxy"}
   '';
 
-  sops.secrets.q15_jared_moonshot_api_key = {
-    key = "q15/hermes/jared/moonshot_api_key";
-    mode = "0400";
-    path = "${q15SecretsDir}/moonshot_api_key";
-  };
+  sops = {
+    secrets = {
+      q15_jared_moonshot_api_key = {
+        key = "q15/hermes/jared/moonshot_api_key";
+        mode = "0400";
+        path = "${q15SecretsDir}/moonshot_api_key";
+      };
 
-  sops.secrets.q15_jared_zai_api_key = {
-    key = "q15/hermes/jared/zai_api_key";
-    mode = "0400";
-    path = "${q15SecretsDir}/zai_api_key";
-  };
+      q15_jared_zai_api_key = {
+        key = "q15/hermes/jared/zai_api_key";
+        mode = "0400";
+        path = "${q15SecretsDir}/zai_api_key";
+      };
 
-  sops.secrets.q15_jared_q15_telegram_token = {
-    key = "q15/hermes/jared/q15_telegram_token";
-    mode = "0400";
-    path = "${q15SecretsDir}/q15_telegram_token";
-  };
+      q15_jared_q15_telegram_token = {
+        key = "q15/hermes/jared/q15_telegram_token";
+        mode = "0400";
+        path = "${q15SecretsDir}/q15_telegram_token";
+      };
 
-  sops.secrets.q15_jared_github_token = {
-    key = "q15/hermes/jared/github_token";
-    mode = "0400";
-    path = "${q15SecretsDir}/github_token";
-  };
+      q15_jared_github_token = {
+        key = "q15/hermes/jared/github_token";
+        mode = "0400";
+        path = "${q15SecretsDir}/github_token";
+      };
 
-  sops.secrets.q15_jared_annas_secret_key = {
-    key = "q15/hermes/jared/annas_secret_key";
-    mode = "0400";
-    path = "${q15SecretsDir}/annas_secret_key";
-  };
+      q15_jared_annas_secret_key = {
+        key = "q15/hermes/jared/annas_secret_key";
+        mode = "0400";
+        path = "${q15SecretsDir}/annas_secret_key";
+      };
 
-  sops.secrets.q15_jared_brave_api_key = {
-    key = "q15/hermes/jared/brave_api_key";
-    mode = "0400";
-    path = "${q15SecretsDir}/brave_api_key";
-  };
+      q15_jared_brave_api_key = {
+        key = "q15/hermes/jared/brave_api_key";
+        mode = "0400";
+        path = "${q15SecretsDir}/brave_api_key";
+      };
+    };
 
-  sops.templates."q15-jared-service-env" = {
-    path = q15ServiceEnvPath;
-    mode = "0400";
-    content = ''
-      Q15_BRAVE_API_KEY=${config.sops.placeholder.q15_jared_brave_api_key}
-    '';
+    templates."q15-jared-service-env" = {
+      path = q15ServiceEnvPath;
+      mode = "0400";
+      content = ''
+        Q15_BRAVE_API_KEY=${config.sops.placeholder.q15_jared_brave_api_key}
+      '';
+    };
   };
 
   systemd.user.services.q15 = {
