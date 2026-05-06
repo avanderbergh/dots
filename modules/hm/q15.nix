@@ -108,6 +108,12 @@ in {
         mode = "0400";
         path = "${q15SecretsDir}/brave_api_key";
       };
+
+      q15_jared_fal_key = {
+        key = "q15/hermes/jared/fal_key";
+        mode = "0400";
+        path = "${q15SecretsDir}/fal_key";
+      };
     };
 
     templates."q15-jared-service-env" = {
