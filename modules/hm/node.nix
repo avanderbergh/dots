@@ -1,8 +1,8 @@
 {pkgs, ...}: {
   home = {
     packages = [
-      pkgs.nodePackages_latest.nodejs
-      pkgs.nodePackages_latest.node-gyp-build
+      pkgs.nodejs_latest
+      pkgs.node-gyp-build
       pkgs.pnpm
       pkgs.zx
       pkgs.playwright

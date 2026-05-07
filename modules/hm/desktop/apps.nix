@@ -13,8 +13,7 @@
     pkgs.blender
     pkgs.brightnessctl
     pkgs.code-cursor
-    pkgs-stable.davinci-resolve
-    pkgs.discord-canary
+    pkgs-stable.discord-canary
     pkgs.firefox
     pkgs.font-manager
     pkgs.google-chrome

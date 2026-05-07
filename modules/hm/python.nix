@@ -3,13 +3,11 @@
     with ps; [
       pip
     ];
-
 in {
-  home.packages = with pkgs;
-    [
-      (python312.withPackages packages)
-      glibc
-      uv
-      cudaPackages.cudatoolkit
-    ];
+  home.packages = with pkgs; [
+    (python312.withPackages packages)
+    glibc
+    uv
+    cudaPackages.cudatoolkit
+  ];
 }

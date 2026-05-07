@@ -22,7 +22,7 @@
       gzip
       jq
       less
-      nodePackages_latest.nodejs
+      nodejs_latest
       opencode
       pkg-config
       pnpm
