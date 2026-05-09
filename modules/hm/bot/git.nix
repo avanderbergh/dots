@@ -1,28 +1,30 @@
 {
-  config,
-  pkgs,
-  ...
-}: {
-  programs.git = {
-    enable = true;
-    lfs.enable = true;
-    signing.format = null;
-    settings = {
-      user = {
-        name = "morbo";
-        email = "morbo@flipfish.net";
+  flake.modules.homeManager."profile-bot-git" = {
+    config,
+    pkgs,
+    ...
+  }: {
+    programs.git = {
+      enable = true;
+      lfs.enable = true;
+      signing.format = null;
+      settings = {
+        user = {
+          name = "morbo";
+          email = "morbo@flipfish.net";
+        };
+        init.defaultBranch = "main";
       };
-      init.defaultBranch = "main";
     };
-  };
 
-  home = {
-    packages = with pkgs; [
-      gh
-      ghq
-    ];
-    sessionVariables = {
-      GHQ_ROOT = "${config.home.homeDirectory}/repos";
+    home = {
+      packages = with pkgs; [
+        gh
+        ghq
+      ];
+      sessionVariables = {
+        GHQ_ROOT = "${config.home.homeDirectory}/repos";
+      };
     };
   };
 }

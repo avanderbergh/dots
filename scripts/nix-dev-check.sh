@@ -161,10 +161,13 @@ else
   log_warn "No hosts/<hostname>/default.nix match for '${HOSTNAME_SHORT:-unknown}'"
 fi
 
-if [[ -n "${HOSTNAME_SHORT}" ]] && rg -n "^[[:space:]]*${HOSTNAME_SHORT}[[:space:]]*=" flake.nix >/dev/null; then
-  log_ok "Hostname appears in flake.nix outputs"
+HOST_OUTPUT_HINT_FILE="hosts/${HOSTNAME_SHORT}/default.nix"
+HOST_OUTPUT_HINT_PATTERN="(nixosHosts[.]${HOSTNAME_SHORT}|^[[:space:]]*${HOSTNAME_SHORT}[[:space:]]*=)"
+
+if [[ -n "${HOSTNAME_SHORT}" && -f "${HOST_OUTPUT_HINT_FILE}" ]] && rg -n "${HOST_OUTPUT_HINT_PATTERN}" "${HOST_OUTPUT_HINT_FILE}" >/dev/null; then
+  log_ok "Hostname appears in flake output wiring"
 else
-  log_warn "Hostname not detected in flake.nix output blocks"
+  log_warn "Hostname not detected in flake output wiring"
 fi
 
 collect_changed_nix_files() {

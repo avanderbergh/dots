@@ -52,6 +52,22 @@ Or run it without entering an interactive shell:
 nix develop .#nixos-dots --command scripts/nix-dev-check.sh
 ```
 
+## Dendritic Layout
+
+`flake.nix` is intentionally thin. It declares inputs, enables `flake-parts.flakeModules.modules`, then imports every top-level module under [`modules`](./modules) and [`hosts`](./hosts) through `import-tree`.
+
+The important invariant is that every `.nix` file under those imported roots is a flake-parts module. Feature files publish lower-level modules as stable names such as `flake.modules.nixos.vpn` or `flake.modules.homeManager."profile-desktop"`. Other files compose those features by name through `config.flake.modules`, not by importing their filesystem paths.
+
+The dendritic layer is organized by concern:
+
+- [`modules/repo`](./modules/repo) defines repository-level options, package sets, and developer shells.
+- [`modules/configurations`](./modules/configurations) assembles public outputs from host and home registrations.
+- [`hosts/*`](./hosts) publish host metadata, `dots.nixosHosts.<name>` registrations, and split host modules by concern.
+- [`modules/nixos`](./modules/nixos) publish flattened NixOS feature modules.
+- [`modules/hm`](./modules/hm) publish Home Manager user, profile, and integration modules.
+
+If a raw helper file is ever needed under an imported tree, place it under a path segment beginning with `_`; `import-tree` ignores those paths by default.
+
 ## Notes
 
 ### Import GPG Keys

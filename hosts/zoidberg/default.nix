@@ -1,61 +1,19 @@
-{lib, ...}: {
-  imports = [
-    ../../modules/nixos/optional/ausweisapp.nix
-    ../../modules/nixos/optional/bluetooth.nix
-    ../../modules/nixos/optional/desktop.nix
-    ../../modules/nixos/optional/containers.nix
-    ../../modules/nixos/optional/ephemeral-btrfs.nix
-    ../../modules/nixos/optional/laptop.nix
-    ../../modules/nixos/optional/ledger-live.nix
-    ../../modules/nixos/optional/ollama.nix
-    ../../modules/nixos/optional/optin-persistence.nix
-    ../../modules/nixos/optional/pipewire-sof-workarounds.nix
-    ../../modules/nixos/optional/pipewire.nix
-    ../../modules/nixos/optional/postgres.nix
-    ./qca6390-wifi-fix.nix
-    ../../modules/nixos/optional/secureboot.nix
-    ../../modules/nixos/optional/vpn.nix
-    ../../modules/nixos/optional/vpn-gui.nix
-    ../../modules/nixos/optional/yubikey.nix
-  ];
-
-  networking.hostName = "zoidberg";
-
-  boot = {
-    extraModulePackages = [];
-    initrd = {
-      availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
-      kernelModules = ["tpm_tis"];
-      luks.devices."enc".device = "/dev/disk/by-label/luks";
+{
+  config,
+  inputs,
+  ...
+}: let
+  inherit (config.flake.modules) nixos;
+in {
+  dots = {
+    hostConfigs.zoidberg = {
+      monitors."eDP-1-1" = config.dots.desktops;
+      sshPublicKeyFile = inputs.self + /hosts/zoidberg/ssh_host_ed25519_key.pub;
     };
-    kernelModules = ["btintel"];
+
+    nixosHosts.zoidberg.modules = [
+      nixos.base
+      nixos."host-zoidberg"
+    ];
   };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
-    fsType = "vfat";
-  };
-  swapDevices = [
-    {
-      device = "/swap/swapfile";
-      size = (1024 * 32) + (1024 * 2);
-    }
-  ];
-
-  hardware.nvidia = {
-    open = true;
-    prime = {
-      offload.enable = false;
-      sync.enable = true;
-      nvidiaBusId = lib.mkDefault "PCI:1:0:0";
-      intelBusId = lib.mkDefault "PCI:0:2:0";
-    };
-  };
-
-  programs.nh.flake = "/home/avanderbergh/repos/github.com/avanderbergh/dots/";
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  system.stateVersion = "23.11";
 }

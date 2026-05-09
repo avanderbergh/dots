@@ -1,3 +1,0 @@
-{
-  hardware.opentabletdriver.enable = true;
-}
