@@ -9,7 +9,6 @@
     q15StackDir = "${q15ConfigDir}/stacks/jared";
     q15SecretsDir = "${q15ConfigDir}/secrets/jared";
     q15RuntimeDir = "${config.home.homeDirectory}/q15-runtime/jared";
-    q15ServiceEnvPath = "${q15SecretsDir}/service.env";
     q15RuntimePath = lib.makeBinPath [
       pkgs.bash
       pkgs.coreutils
@@ -116,14 +115,6 @@
           path = "${q15SecretsDir}/fal_key";
         };
       };
-
-      templates."q15-jared-service-env" = {
-        path = q15ServiceEnvPath;
-        mode = "0400";
-        content = ''
-          Q15_BRAVE_API_KEY=${config.sops.placeholder.q15_jared_brave_api_key}
-        '';
-      };
     };
 
     systemd.user.services.q15 = {
@@ -141,7 +132,6 @@
           "HOME=${config.home.homeDirectory}"
           "PATH=/run/wrappers/bin:/run/current-system/sw/bin:${q15RuntimePath}:/etc/profiles/per-user/${config.home.username}/bin"
         ];
-        EnvironmentFile = "-${q15ServiceEnvPath}";
         ExecStartPre = validateStackFiles;
         ExecStart = "${pkgs.podman-compose}/bin/podman-compose up -d --remove-orphans";
         ExecReload = "${pkgs.podman-compose}/bin/podman-compose up -d --remove-orphans";
