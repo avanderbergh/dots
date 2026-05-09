@@ -1,29 +1,31 @@
-{pkgs, ...}: {
-  programs.git = {
-    enable = true;
-    lfs.enable = true;
-    settings = {
-      user = {
-        email = "avanderbergh@gmail.com";
-        name = "Adriaan van der Bergh";
+{
+  flake.modules.homeManager."profile-git" = {pkgs, ...}: {
+    programs.git = {
+      enable = true;
+      lfs.enable = true;
+      settings = {
+        user = {
+          email = "avanderbergh@gmail.com";
+          name = "Adriaan van der Bergh";
+        };
+        core.editor = "code --wait";
+        init.defaultBranch = "main";
       };
-      core.editor = "code --wait";
-      init.defaultBranch = "main";
+      signing = {
+        key = "741E DA0A 1F94 2978 D0E6  12ED 9380 36D7 4671 D8D5";
+        signByDefault = true;
+        format = null;
+      };
     };
-    signing = {
-      key = "741E DA0A 1F94 2978 D0E6  12ED 9380 36D7 4671 D8D5";
-      signByDefault = true;
-      format = null;
-    };
-  };
 
-  home = {
-    packages = with pkgs; [
-      gh
-      ghq
-    ];
-    sessionVariables = {
-      GHQ_ROOT = "/home/avanderbergh/repos";
+    home = {
+      packages = with pkgs; [
+        gh
+        ghq
+      ];
+      sessionVariables = {
+        GHQ_ROOT = "/home/avanderbergh/repos";
+      };
     };
   };
 }

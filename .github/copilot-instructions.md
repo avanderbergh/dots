@@ -7,13 +7,11 @@ This repository contains NixOS configurations managed using Nix Flakes. The prim
 ## Key Repository Structure & Conventions
 
 - **Nix Flakes:** The core of the configuration management. See [`flake.nix`](../flake.nix) and [`flake.lock`](../flake.lock).
-- **Hosts:** Machine-specific configurations are located in the [`./hosts/`](../hosts/) directory. Each host has a subdirectory (e.g., [`./hosts/zoidberg`](../hosts/zoidberg)). Refer to the [README.md](../README.md) for a list of hosts.
-- **NixOS Modules:** System-wide configurations are defined in [`./modules/nixos/`](../modules/nixos/).
-  - Global settings: [`./modules/nixos/global/`](../modules/nixos/global/)
-  - Optional features: [`./modules/nixos/optional/`](../modules/nixos/optional/)
+- **Hosts:** Machine-specific configurations are located in the [`./hosts/`](../hosts/) directory. Each host has a subdirectory (e.g., [`./hosts/zoidberg`](../hosts/zoidberg)); `default.nix` registers the host, and sibling files contribute features, hardware, system policy, and local host-only modules.
+- **NixOS Modules:** System-wide feature modules are defined directly in [`./modules/nixos/`](../modules/nixos/).
 - **Home Manager:** User-specific configurations (dotfiles, user packages, services) are managed via Home Manager modules located in [`./modules/hm/`](../modules/hm/).
 - **Custom Packages:** Custom or overridden packages are defined in the [`./pkgs/`](../pkgs/) directory.
-- **Secrets:** Secrets are managed using `sops-nix`. See relevant modules in [`modules/nixos/global/sops.nix`](../modules/nixos/global/sops.nix) and [`modules/hm/sops.nix`](../modules/hm/sops.nix).
+- **Secrets:** Secrets are managed using `sops-nix`. See relevant modules in [`modules/nixos/sops.nix`](../modules/nixos/sops.nix) and [`modules/hm/sops.nix`](../modules/hm/sops.nix).
 - **README:** The main [README.md](../README.md) file provides a high-level overview of the repository structure and hosts. Please refer to it for more details.
 
 ## External Resources & Searching

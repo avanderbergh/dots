@@ -1,263 +1,265 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
-    bottom
-    duf
-    dust
-    gitui
-    glow
-    just
-    tokei
-    tree-sitter
-    yazi
-  ];
+{
+  flake.modules.homeManager."profile-console" = {pkgs, ...}: {
+    home.packages = with pkgs; [
+      bottom
+      duf
+      dust
+      gitui
+      glow
+      just
+      tokei
+      tree-sitter
+      yazi
+    ];
 
-  programs = {
-    atuin = {
-      enable = true;
-      enableFishIntegration = true;
-      settings = {
-        auto_sync = true;
-        sync_frequency = "5m";
-        update_check = false;
-      };
-    };
-
-    bat.enable = true;
-
-    btop = {
-      enable = true;
-      settings = {
-        theme_background = false;
-      };
-    };
-
-    eza = {
-      enable = true;
-      enableFishIntegration = true;
-      git = true;
-      icons = "auto";
-    };
-
-    fd.enable = true;
-
-    fish = {
-      enable = true;
-      functions = {
-        __fish_command_not_found_handler = {
-          body = "__fish_default_command_not_found_handler $argv[1]";
-          onEvent = "fish_command_not_found";
+    programs = {
+      atuin = {
+        enable = true;
+        enableFishIntegration = true;
+        settings = {
+          auto_sync = true;
+          sync_frequency = "5m";
+          update_check = false;
         };
-
-        fish_greeting = "";
-
-        gitignore = "curl -sL https://www.gitignore.io/api/$argv";
       };
-      shellAliases = {
-        g = "git";
-        get = "ghq get -p -u";
-        create = "ghq create";
+
+      bat.enable = true;
+
+      btop = {
+        enable = true;
+        settings = {
+          theme_background = false;
+        };
       };
-    };
 
-    fzf.enable = true;
-    lazygit.enable = true;
-    lf.enable = true;
+      eza = {
+        enable = true;
+        enableFishIntegration = true;
+        git = true;
+        icons = "auto";
+      };
 
-    neovim = {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-      withNodeJs = true;
-      withPython3 = true;
-      withRuby = true;
+      fd.enable = true;
 
-      extraPackages = with pkgs; [
-        # LSP servers
-        bash-language-server
-        clang-tools
-        dockerfile-language-server
-        gopls
-        lua-language-server
-        marksman
-        nixd
-        pyright
-        rust-analyzer
-        taplo
-        typescript-language-server
-        vscode-langservers-extracted
-        yaml-language-server
+      fish = {
+        enable = true;
+        functions = {
+          __fish_command_not_found_handler = {
+            body = "__fish_default_command_not_found_handler $argv[1]";
+            onEvent = "fish_command_not_found";
+          };
 
-        # formatters / tooling
-        alejandra
-        black
-        gofumpt
-        isort
-        prettierd
-        shfmt
-        stylua
-      ];
+          fish_greeting = "";
 
-      plugins = with pkgs.vimPlugins; [
-        plenary-nvim
-        telescope-nvim
-        telescope-fzf-native-nvim
-        nvim-lspconfig
-        nvim-cmp
-        cmp-nvim-lsp
-        cmp-buffer
-        cmp-path
-        cmp_luasnip
-        luasnip
-        nvim-treesitter
-        lualine-nvim
-        which-key-nvim
-        gitsigns-nvim
-        nvim-tree-lua
-        comment-nvim
-        nvim-autopairs
-      ];
+          gitignore = "curl -sL https://www.gitignore.io/api/$argv";
+        };
+        shellAliases = {
+          g = "git";
+          get = "ghq get -p -u";
+          create = "ghq create";
+        };
+      };
 
-      initLua = ''
-        vim.g.mapleader = " "
-        vim.g.maplocalleader = " "
+      fzf.enable = true;
+      lazygit.enable = true;
+      lf.enable = true;
 
-        vim.opt.number = true
-        vim.opt.relativenumber = true
-        vim.opt.termguicolors = true
-        vim.opt.mouse = "a"
-        if vim.fn.executable("xclip") == 1 or vim.fn.executable("wl-copy") == 1 then
-          vim.opt.clipboard = "unnamedplus"
-        end
-        vim.opt.splitright = true
-        vim.opt.splitbelow = true
-        vim.opt.ignorecase = true
-        vim.opt.smartcase = true
-        vim.opt.completeopt = "menu,menuone,noselect"
+      neovim = {
+        enable = true;
+        viAlias = true;
+        vimAlias = true;
+        vimdiffAlias = true;
+        withNodeJs = true;
+        withPython3 = true;
+        withRuby = true;
 
-        require("which-key").setup({})
-        require("gitsigns").setup({})
-        require("Comment").setup({})
-        require("nvim-autopairs").setup({})
-        require("lualine").setup({ options = { theme = "auto" } })
-        require("nvim-tree").setup({})
+        extraPackages = with pkgs; [
+          # LSP servers
+          bash-language-server
+          clang-tools
+          dockerfile-language-server
+          gopls
+          lua-language-server
+          marksman
+          nixd
+          pyright
+          rust-analyzer
+          taplo
+          typescript-language-server
+          vscode-langservers-extracted
+          yaml-language-server
 
-        require("telescope").setup({})
-        pcall(require("telescope").load_extension, "fzf")
+          # formatters / tooling
+          alejandra
+          black
+          gofumpt
+          isort
+          prettierd
+          shfmt
+          stylua
+        ];
 
-        local capabilities = require("cmp_nvim_lsp").default_capabilities()
-        local servers = {
-          "bashls", "clangd", "dockerls", "gopls", "lua_ls", "marksman",
-          "nixd", "pyright", "rust_analyzer", "taplo", "ts_ls", "yamlls",
-          "html", "cssls", "jsonls"
-        }
+        plugins = with pkgs.vimPlugins; [
+          plenary-nvim
+          telescope-nvim
+          telescope-fzf-native-nvim
+          nvim-lspconfig
+          nvim-cmp
+          cmp-nvim-lsp
+          cmp-buffer
+          cmp-path
+          cmp_luasnip
+          luasnip
+          nvim-treesitter
+          lualine-nvim
+          which-key-nvim
+          gitsigns-nvim
+          nvim-tree-lua
+          comment-nvim
+          nvim-autopairs
+        ];
 
-        if vim.lsp and vim.lsp.config and vim.lsp.enable then
-          for _, server in ipairs(servers) do
-            vim.lsp.config(server, { capabilities = capabilities })
-            vim.lsp.enable(server)
+        initLua = ''
+          vim.g.mapleader = " "
+          vim.g.maplocalleader = " "
+
+          vim.opt.number = true
+          vim.opt.relativenumber = true
+          vim.opt.termguicolors = true
+          vim.opt.mouse = "a"
+          if vim.fn.executable("xclip") == 1 or vim.fn.executable("wl-copy") == 1 then
+            vim.opt.clipboard = "unnamedplus"
           end
-        else
-          local lspconfig = require("lspconfig")
-          for _, server in ipairs(servers) do
-            lspconfig[server].setup({ capabilities = capabilities })
+          vim.opt.splitright = true
+          vim.opt.splitbelow = true
+          vim.opt.ignorecase = true
+          vim.opt.smartcase = true
+          vim.opt.completeopt = "menu,menuone,noselect"
+
+          require("which-key").setup({})
+          require("gitsigns").setup({})
+          require("Comment").setup({})
+          require("nvim-autopairs").setup({})
+          require("lualine").setup({ options = { theme = "auto" } })
+          require("nvim-tree").setup({})
+
+          require("telescope").setup({})
+          pcall(require("telescope").load_extension, "fzf")
+
+          local capabilities = require("cmp_nvim_lsp").default_capabilities()
+          local servers = {
+            "bashls", "clangd", "dockerls", "gopls", "lua_ls", "marksman",
+            "nixd", "pyright", "rust_analyzer", "taplo", "ts_ls", "yamlls",
+            "html", "cssls", "jsonls"
+          }
+
+          if vim.lsp and vim.lsp.config and vim.lsp.enable then
+            for _, server in ipairs(servers) do
+              vim.lsp.config(server, { capabilities = capabilities })
+              vim.lsp.enable(server)
+            end
+          else
+            local lspconfig = require("lspconfig")
+            for _, server in ipairs(servers) do
+              lspconfig[server].setup({ capabilities = capabilities })
+            end
           end
-        end
 
-        local cmp = require("cmp")
-        cmp.setup({
-          snippet = {
-            expand = function(args)
-              require("luasnip").lsp_expand(args.body)
-            end,
-          },
-          mapping = cmp.mapping.preset.insert({
-            ["<C-Space>"] = cmp.mapping.complete(),
-            ["<CR>"] = cmp.mapping.confirm({ select = true }),
-            ["<Tab>"] = cmp.mapping.select_next_item(),
-            ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-          }),
-          sources = cmp.config.sources({
-            { name = "nvim_lsp" },
-            { name = "luasnip" },
-            { name = "path" },
-            { name = "buffer" },
-          }),
-        })
+          local cmp = require("cmp")
+          cmp.setup({
+            snippet = {
+              expand = function(args)
+                require("luasnip").lsp_expand(args.body)
+              end,
+            },
+            mapping = cmp.mapping.preset.insert({
+              ["<C-Space>"] = cmp.mapping.complete(),
+              ["<CR>"] = cmp.mapping.confirm({ select = true }),
+              ["<Tab>"] = cmp.mapping.select_next_item(),
+              ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+            }),
+            sources = cmp.config.sources({
+              { name = "nvim_lsp" },
+              { name = "luasnip" },
+              { name = "path" },
+              { name = "buffer" },
+            }),
+          })
 
-        require("nvim-treesitter.configs").setup({
-          highlight = { enable = true },
-          indent = { enable = true },
-        })
+          require("nvim-treesitter.configs").setup({
+            highlight = { enable = true },
+            indent = { enable = true },
+          })
 
-        local builtin = require("telescope.builtin")
+          local builtin = require("telescope.builtin")
 
-        -- VSCode-like bindings
-        vim.keymap.set({ "n", "i", "v" }, "<C-s>", "<cmd>w<CR>", { desc = "Save" })
-        vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Quick Open" })
-        vim.keymap.set("n", "<C-f>", builtin.live_grep, { desc = "Search in files" })
-        vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Explorer" })
-        vim.keymap.set("n", "<C-S-p>", builtin.commands, { desc = "Command Palette" })
-        vim.keymap.set("n", "<leader>p", builtin.commands, { desc = "Command Palette" })
+          -- VSCode-like bindings
+          vim.keymap.set({ "n", "i", "v" }, "<C-s>", "<cmd>w<CR>", { desc = "Save" })
+          vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Quick Open" })
+          vim.keymap.set("n", "<C-f>", builtin.live_grep, { desc = "Search in files" })
+          vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Explorer" })
+          vim.keymap.set("n", "<C-S-p>", builtin.commands, { desc = "Command Palette" })
+          vim.keymap.set("n", "<leader>p", builtin.commands, { desc = "Command Palette" })
 
 
-        -- no custom tab cycling for now
+          -- no custom tab cycling for now
 
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Find references" })
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
-        vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename symbol" })
-        vim.keymap.set("n", "<F12>", vim.lsp.buf.definition, { desc = "Go to definition" })
-        vim.keymap.set("n", "<S-F12>", vim.lsp.buf.references, { desc = "Find references" })
-        vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
-        vim.keymap.set("n", "<leader>fm", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format document" })
+          vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+          vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Find references" })
+          vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+          vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
+          vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename symbol" })
+          vim.keymap.set("n", "<F12>", vim.lsp.buf.definition, { desc = "Go to definition" })
+          vim.keymap.set("n", "<S-F12>", vim.lsp.buf.references, { desc = "Find references" })
+          vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+          vim.keymap.set("n", "<leader>fm", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format document" })
 
-        vim.keymap.set("n", "<C-/>", "gcc", { remap = true, desc = "Toggle comment" })
-        vim.keymap.set("v", "<C-/>", "gc", { remap = true, desc = "Toggle comment" })
+          vim.keymap.set("n", "<C-/>", "gcc", { remap = true, desc = "Toggle comment" })
+          vim.keymap.set("v", "<C-/>", "gc", { remap = true, desc = "Toggle comment" })
 
-        vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
-        vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
-        vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Explorer" })
-        vim.keymap.set("n", "<leader>xx", vim.diagnostic.open_float, { desc = "Diagnostics" })
-      '';
-    };
+          vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
+          vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
+          vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Explorer" })
+          vim.keymap.set("n", "<leader>xx", vim.diagnostic.open_float, { desc = "Diagnostics" })
+        '';
+      };
 
-    ripgrep.enable = true;
-    starship.enable = true;
-    tealdeer.enable = true;
+      ripgrep.enable = true;
+      starship.enable = true;
+      tealdeer.enable = true;
 
-    tmux = {
-      enable = true;
-      sensibleOnTop = true;
-      clock24 = true;
-      keyMode = "vi";
-      terminal = "screen-256color";
-      historyLimit = 100000;
-      extraConfig = ''
-        set -g mouse on
-        set -g set-clipboard on
-        set -g base-index 1
-        setw -g pane-base-index 1
-        set -g renumber-windows on
+      tmux = {
+        enable = true;
+        sensibleOnTop = true;
+        clock24 = true;
+        keyMode = "vi";
+        terminal = "screen-256color";
+        historyLimit = 100000;
+        extraConfig = ''
+          set -g mouse on
+          set -g set-clipboard on
+          set -g base-index 1
+          setw -g pane-base-index 1
+          set -g renumber-windows on
 
-        unbind %
-        unbind '"'
-        bind | split-window -h -c "#{pane_current_path}"
-        bind - split-window -v -c "#{pane_current_path}"
+          unbind %
+          unbind '"'
+          bind | split-window -h -c "#{pane_current_path}"
+          bind - split-window -v -c "#{pane_current_path}"
 
-        bind h select-pane -L
-        bind j select-pane -D
-        bind k select-pane -U
-        bind l select-pane -R
+          bind h select-pane -L
+          bind j select-pane -D
+          bind k select-pane -U
+          bind l select-pane -R
 
-        bind r source-file ~/.config/tmux/tmux.conf \; display-message "tmux config reloaded"
-      '';
-    };
+          bind r source-file ~/.config/tmux/tmux.conf \; display-message "tmux config reloaded"
+        '';
+      };
 
-    zoxide = {
-      enable = true;
-      enableFishIntegration = true;
+      zoxide = {
+        enable = true;
+        enableFishIntegration = true;
+      };
     };
   };
 }

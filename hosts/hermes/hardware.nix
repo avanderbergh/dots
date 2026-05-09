@@ -1,0 +1,46 @@
+{
+  flake.modules.nixos."host-hermes" = {lib, ...}: {
+    boot = {
+      extraModulePackages = [];
+      initrd = {
+        availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "usbhid" "ahci"];
+        kernelModules = ["tpm_tis"];
+        luks.devices = {
+          "enc".device = "/dev/disk/by-label/luks";
+          "enc_ssd".device = "/dev/disk/by-label/luks_ssd";
+          "enc_hdd".device = "/dev/disk/by-label/luks_hdd";
+        };
+      };
+      kernelModules = ["kvm-amd"];
+    };
+
+    fileSystems = {
+      "/boot" = {
+        device = "/dev/disk/by-label/boot";
+        fsType = "vfat";
+      };
+      "/home/avanderbergh/ssd" = {
+        device = "/dev/mapper/enc_ssd";
+        fsType = "btrfs";
+        options = ["compress=zstd" "noatime" "ssd"];
+      };
+      "/home/avanderbergh/hdd" = {
+        device = "/dev/mapper/enc_hdd";
+        fsType = "btrfs";
+        options = ["autodefrag" "noatime"];
+      };
+    };
+
+    swapDevices = [
+      {
+        device = "/swap/swapfile";
+        size = (1024 * 16) + (1024 * 2);
+      }
+    ];
+
+    hardware.graphics.enable = true;
+    hardware.nvidia.open = true;
+
+    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  };
+}
