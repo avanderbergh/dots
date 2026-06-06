@@ -4,7 +4,7 @@
   inputs = {
     # Core Nixpkgs channels
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
     # Top-level dendritic module system
@@ -28,6 +28,7 @@
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     };
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix";

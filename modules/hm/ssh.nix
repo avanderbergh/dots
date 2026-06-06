@@ -6,29 +6,29 @@
       enable = true;
       enableDefaultConfig = false;
 
-      matchBlocks = {
+      settings = {
         "*" = {
-          forwardAgent = false;
-          forwardX11 = false;
-          serverAliveInterval = 0;
-          serverAliveCountMax = 3;
-          compression = false;
-          addKeysToAgent = "yes";
-          hashKnownHosts = false;
-          userKnownHostsFile = "~/.ssh/known_hosts";
-          controlMaster = "no";
-          controlPath = "~/.ssh/master-%r@%n:%p";
-          controlPersist = "no";
+          ForwardAgent = false;
+          ForwardX11 = false;
+          ServerAliveInterval = 0;
+          ServerAliveCountMax = 3;
+          Compression = false;
+          AddKeysToAgent = "yes";
+          HashKnownHosts = false;
+          UserKnownHostsFile = "~/.ssh/known_hosts";
+          ControlMaster = "no";
+          ControlPath = "~/.ssh/master-%r@%n:%p";
+          ControlPersist = "no";
         };
         "hermes" = {
-          hostname = "hermes";
-          forwardAgent = isAvanderbergh;
-          forwardX11 = false;
+          HostName = "hermes";
+          ForwardAgent = isAvanderbergh;
+          ForwardX11 = false;
         };
         "zoidberg" = {
-          hostname = "zoidberg";
-          forwardAgent = isAvanderbergh;
-          forwardX11 = false;
+          HostName = "zoidberg";
+          ForwardAgent = isAvanderbergh;
+          ForwardX11 = false;
         };
       };
     };

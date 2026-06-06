@@ -12,12 +12,10 @@
     niri-flake.cache.enable = true;
 
     services = {
-      displayManager = {
-        gdm = {
-          enable = true;
-          wayland = true;
-        };
-        defaultSession = "niri";
+      greetd = {
+        enable = true;
+        useTextGreeter = true;
+        settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd ${pkgs.niri-stable}/bin/niri-session";
       };
 
       gnome = {
