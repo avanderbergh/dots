@@ -82,6 +82,12 @@
           path = "${q15SecretsDir}/moonshot_api_key";
         };
 
+        q15_jared_ollama_api_key = {
+          key = "q15/hermes/jared/ollama_api_key";
+          mode = "0400";
+          path = "${q15SecretsDir}/ollama_api_key";
+        };
+
         q15_jared_zai_api_key = {
           key = "q15/hermes/jared/zai_api_key";
           mode = "0400";
