@@ -106,6 +106,12 @@
           path = "${q15SecretsDir}/github_token";
         };
 
+        q15_jared_cloudflare_api_key = {
+          key = "q15/hermes/jared/cloudflare_api_key";
+          mode = "0400";
+          path = "${q15SecretsDir}/cloudflare_api_key";
+        };
+
         q15_jared_annas_secret_key = {
           key = "q15/hermes/jared/annas_secret_key";
           mode = "0400";
