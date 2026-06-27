@@ -112,6 +112,18 @@
           path = "${q15SecretsDir}/cloudflare_api_key";
         };
 
+        q15_jared_cf_access_client_id = {
+          key = "q15/hermes/jared/cf_access_client_id";
+          mode = "0400";
+          path = "${q15SecretsDir}/cf_access_client_id";
+        };
+
+        q15_jared_cf_access_client_secret = {
+          key = "q15/hermes/jared/cf_access_client_secret";
+          mode = "0400";
+          path = "${q15SecretsDir}/cf_access_client_secret";
+        };
+
         q15_jared_annas_secret_key = {
           key = "q15/hermes/jared/annas_secret_key";
           mode = "0400";
