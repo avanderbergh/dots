@@ -11,6 +11,10 @@
         "hue"
         "met"
         "radio_browser"
+        # Matter-over-Thread support (requires openthread + matter-server modules)
+        "matter"
+        "otbr"
+        "thread"
       ];
       config = {
         # Includes dependencies for a basic setup
