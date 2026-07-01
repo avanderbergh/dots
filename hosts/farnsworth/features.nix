@@ -12,6 +12,8 @@ in {
       inputs.nixos-hardware.nixosModules.common-gpu-amd
       nixos."home-assistant"
       nixos."media-server"
+      nixos.openthread
+      nixos.matter-server
     ];
   };
 }
