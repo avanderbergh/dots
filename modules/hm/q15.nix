@@ -147,6 +147,12 @@
           mode = "0400";
           path = "${q15SecretsDir}/gemini_api_key";
         };
+
+        q15_jared_ha_token = {
+          key = "q15/hermes/jared/ha_token";
+          mode = "0400";
+          path = "${q15SecretsDir}/ha_token";
+        };
       };
     };
 
