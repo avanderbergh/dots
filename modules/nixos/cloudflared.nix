@@ -13,6 +13,9 @@
             "ssh-hermes.adriaan.cc" = {
               service = "ssh://127.0.0.1:22";
             };
+            "ha.adriaan.cc" = {
+              service = "http://192.168.178.113:8123";
+            };
           };
         };
       };
