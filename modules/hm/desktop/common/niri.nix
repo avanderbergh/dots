@@ -14,6 +14,9 @@
 
       "screenshot-path" = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
 
+      # Keep a small separation without sacrificing ultrawide screen real estate.
+      layout.gaps = 4;
+
       binds = {
         # Keep the upstream Niri key philosophy, with a few extra ergonomic aliases.
         "Mod+Shift+Slash".action."show-hotkey-overlay" = [];
@@ -22,9 +25,10 @@
 
         "Mod+T".action.spawn = ["alacritty"];
         "Super+Return".action.spawn = ["alacritty"];
-        "Mod+D".action.spawn = ["fuzzel"];
-        "Super+Space".action.spawn = ["fuzzel"];
-        "Super+Alt+L".action.spawn = ["swaylock"];
+        "Mod+D".action.spawn = ["noctalia" "msg" "panel-toggle" "launcher"];
+        "Super+Space".action.spawn = ["noctalia" "msg" "panel-toggle" "launcher"];
+        "Super+Alt+L".action.spawn = ["noctalia" "msg" "session" "lock"];
+        "Mod+Shift+C".action.spawn = ["noctalia" "msg" "caffeine-toggle"];
 
         "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"];
         "XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"];

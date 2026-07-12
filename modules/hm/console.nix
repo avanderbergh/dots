@@ -6,6 +6,7 @@
       dust
       gitui
       glow
+      jq
       just
       tokei
       tree-sitter

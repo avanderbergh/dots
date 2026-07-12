@@ -9,6 +9,8 @@
       package = pkgs.niri-stable;
     };
 
+    services.upower.enable = true;
+
     niri-flake.cache.enable = true;
 
     services = {

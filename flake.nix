@@ -30,6 +30,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     };
+    noctalia.url = "github:noctalia-dev/noctalia";
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix";
   };

@@ -16,15 +16,11 @@ in {
     browser = ["google-chrome.desktop"];
   in {
     imports = [
-      hm."profile-desktop-fuzzel"
       hm."profile-desktop-niri"
+      hm."profile-desktop-noctalia"
       hm."profile-desktop-obs"
       hm."profile-desktop-screenshots"
       hm."profile-desktop-swayidle"
-      hm."profile-desktop-swaylock"
-      hm."profile-desktop-swaync"
-      hm."profile-desktop-waybar"
-      hm."profile-desktop-wpaperd"
       hm."profile-desktop-kanshi"
     ];
 
