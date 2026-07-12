@@ -28,6 +28,8 @@ in {
       hm."profile-desktop-kanshi"
     ];
 
+    home.pointerCursor.enable = true;
+
     gtk = {
       enable = true;
     };

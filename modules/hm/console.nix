@@ -60,7 +60,11 @@
         };
       };
 
-      fzf.enable = true;
+      fzf = {
+        enable = true;
+        # Atuin owns Fish's Ctrl-R history search binding.
+        historyWidget.fish.command = "";
+      };
       lazygit.enable = true;
       lf.enable = true;
 

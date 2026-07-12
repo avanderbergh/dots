@@ -5,7 +5,6 @@
     # Follow directions here: https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
 
     boot = {
-      bootspec.enable = true;
       loader.systemd-boot.enable = lib.mkForce false;
       lanzaboote = {
         enable = true;

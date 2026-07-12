@@ -1,6 +1,9 @@
 {
   flake.modules.nixos."host-zoidberg" = {lib, ...}: {
     boot = {
+      # Keep firmware/driver errors in the journal without letting them overwrite
+      # the text greeter that shares the kernel console.
+      consoleLogLevel = 3;
       extraModulePackages = [];
       initrd = {
         availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
@@ -32,7 +35,12 @@
       };
     };
 
-    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+    nixpkgs = {
+      # The RTX 2060 (Turing) only needs sm_75. Avoid compiling every CUDA
+      # architecture for source-built packages such as Ollama.
+      config.cudaCapabilities = ["7.5"];
+      hostPlatform = lib.mkDefault "x86_64-linux";
+    };
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   };
 }
