@@ -65,6 +65,13 @@
           transition = ["fade" "wipe" "zoom"];
           transition_duration = 1200;
           directory = "~/Pictures/Wallpapers";
+
+          automation = {
+            enabled = true;
+            interval_seconds = 3600;
+            order = "random";
+            recursive = true;
+          };
         };
 
         notification = {
