@@ -8,6 +8,7 @@ in {
       nixos.desktop
       nixos.containers
       nixos."ephemeral-btrfs"
+      nixos.gaming
       nixos.laptop
       nixos."ledger-live"
       nixos.ollama

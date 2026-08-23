@@ -55,6 +55,12 @@
       };
     };
 
+    # Gamescope and Xwayland otherwise select the Intel iGPU first.
+    local.gaming = {
+      nvidiaPrimeOffload = true;
+      preferredVulkanDevice = "10de:1f12";
+    };
+
     nixpkgs = {
       # The RTX 2060 (Turing) only needs sm_75. Avoid compiling every CUDA
       # architecture for source-built packages such as Ollama.
