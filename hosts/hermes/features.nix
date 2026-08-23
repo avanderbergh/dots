@@ -1,15 +1,8 @@
-{
-  config,
-  inputs,
-  ...
-}: let
+{config, ...}: let
   inherit (config.flake.modules) nixos;
 in {
   flake.modules.nixos."host-hermes" = {
     imports = [
-      inputs.nixos-hardware.nixosModules.common-cpu-amd
-      inputs.nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
-      inputs.nixos-hardware.nixosModules.common-pc-ssd
       nixos."cache-server"
       nixos.cloudflared
       nixos."cloudflare-ssh-ca"

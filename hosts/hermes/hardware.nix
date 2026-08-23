@@ -38,8 +38,13 @@
       }
     ];
 
-    hardware.graphics.enable = true;
-    hardware.nvidia.open = true;
+    hardware = {
+      cpu.amd.updateMicrocode = true;
+      graphics.enable = true;
+      nvidia.open = true;
+    };
+
+    services.xserver.videoDrivers = ["nvidia"];
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   };

@@ -18,12 +18,6 @@ Welcome to my NixOS configurations repository! This is where I manage the setup 
 - **Machine**: HP Pavilion TG01-0004ng
 - **Specs**: Ryzen 7 3700X | 16GB RAM | 1TB + 512GB SSD | RTX 2060, 8GB
 
-### Farnsworth
-
-- **Hostname**: `farnsworth`
-- **Configuration File**: [./hosts/farnsworth](./hosts/farnsworth)
-- **Machine**: Fujitsu Futro S720
-
 Feel free to explore the configurations and see how everything is set up!
 
 ## Development Shell

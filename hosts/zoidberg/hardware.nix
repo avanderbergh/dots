@@ -1,5 +1,12 @@
 {
-  flake.modules.nixos."host-zoidberg" = {lib, ...}: {
+  flake.modules.nixos."host-zoidberg" = {
+    lib,
+    pkgs,
+    ...
+  }: {
+    # Keep the XPS hardware policy explicit. The stock Nixpkgs kernel already
+    # enables this model's SoundWire drivers, so the nixos-hardware profile's
+    # config-only patch would only bypass the binary cache.
     boot = {
       # Keep firmware/driver errors in the journal without letting them overwrite
       # the text greeter that shares the kernel console.
@@ -7,7 +14,7 @@
       extraModulePackages = [];
       initrd = {
         availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
-        kernelModules = ["tpm_tis"];
+        kernelModules = ["i915" "tpm_tis"];
         luks.devices."enc".device = "/dev/disk/by-label/luks";
       };
       kernelModules = ["btintel"];
@@ -25,13 +32,26 @@
       }
     ];
 
-    hardware.nvidia = {
-      open = true;
-      prime = {
-        offload.enable = false;
-        sync.enable = true;
-        nvidiaBusId = lib.mkDefault "PCI:1:0:0";
-        intelBusId = lib.mkDefault "PCI:0:2:0";
+    hardware = {
+      cpu.intel.updateMicrocode = true;
+
+      graphics = {
+        extraPackages = [
+          pkgs.intel-media-driver
+          # Comet Lake is Gen9; the current runtime supports Gen12 and newer.
+          pkgs.intel-compute-runtime-legacy1
+        ];
+        extraPackages32 = [pkgs.driversi686Linux.intel-media-driver];
+      };
+
+      nvidia = {
+        open = true;
+        prime = {
+          offload.enable = false;
+          sync.enable = true;
+          nvidiaBusId = "PCI:1:0:0";
+          intelBusId = "PCI:0:2:0";
+        };
       };
     };
 
@@ -42,5 +62,11 @@
       hostPlatform = lib.mkDefault "x86_64-linux";
     };
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+
+    services = {
+      thermald.enable = true;
+      tlp.enable = true;
+      xserver.videoDrivers = ["nvidia"];
+    };
   };
 }

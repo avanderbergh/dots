@@ -7,7 +7,6 @@
 in {
   flake.modules.nixos."host-zoidberg" = {
     imports = [
-      inputs.nixos-hardware.nixosModules.dell-xps-17-9700-nvidia
       inputs.niri.nixosModules.niri
       nixos.ausweisapp
       nixos.bluetooth
