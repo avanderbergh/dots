@@ -36,16 +36,14 @@ in {
     ];
 
     programs = {
-      alacritty = {
+      kitty = {
         enable = true;
         settings = {
-          env.TERM = "xterm-256color";
-          window = {
-            padding = {
-              x = 10;
-              y = 10;
-            };
-          };
+          confirm_os_window_close = 0;
+          enable_audio_bell = false;
+          hide_window_decorations = "yes";
+          tab_bar_min_tabs = 2;
+          window_padding_width = 10;
         };
       };
 

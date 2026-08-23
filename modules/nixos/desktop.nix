@@ -93,7 +93,7 @@
       };
       opacity = {
         popups = 0.9;
-        terminal = 0.75;
+        terminal = 0.82;
       };
       image = inputs.self + /modules/hm/desktop/images/wallpaper.jpg;
     };

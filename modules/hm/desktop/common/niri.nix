@@ -47,6 +47,10 @@
 
         "hotkey-overlay"."skip-at-startup" = {};
 
+        # Prefer compositor decorations so titlebars do not obscure the compact
+        # Niri chrome or fill the translucent window background behind the ring.
+        "prefer-no-csd" = {};
+
         overview = {
           "backdrop-color" = colors.base00;
           zoom = 0.52;
@@ -189,8 +193,8 @@
           "Mod+F1"."show-hotkey-overlay" = {};
           "Mod+O"."toggle-overview" = {};
 
-          "Mod+T".spawn = ["alacritty"];
-          "Super+Return".spawn = ["alacritty"];
+          "Mod+T".spawn = ["kitty"];
+          "Super+Return".spawn = ["kitty"];
           "Mod+D".spawn = ["noctalia" "msg" "panel-toggle" "launcher"];
           "Super+Space".spawn = ["noctalia" "msg" "panel-toggle" "launcher"];
           "Super+Alt+L".spawn = ["noctalia" "msg" "session" "lock"];
@@ -326,6 +330,7 @@
             "window-rule" = {
               "geometry-corner-radius" = 16;
               "clip-to-geometry" = true;
+              "draw-border-with-background" = false;
               "background-effect" = {
                 blur = true;
                 xray = false;

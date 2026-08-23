@@ -4,7 +4,7 @@
 
 - Window management and workspace navigation use Niri upstream defaults.
 - `Super + Space` opens the Noctalia launcher.
-- `Super + Return` opens `alacritty`.
+- `Super + Return` opens Kitty.
 - `Super + Alt + L` opens the Noctalia lock screen.
 - `Super + Shift + C` toggles Noctalia caffeine mode to inhibit idle suspend.
 - `Super + O` opens Niri's wallpaper-backed overview.
@@ -30,3 +30,5 @@
   recent-window switcher directly from the shared Stylix palette.
 - Noctalia provides the blurred, tinted wallpaper backdrop for Niri's overview;
   Niri provides restrained blur for translucent windows and shell surfaces.
+- Kitty uses the shared Catppuccin palette at 82% background opacity, without
+  client-side window decorations; Niri draws its focus ring around the window.

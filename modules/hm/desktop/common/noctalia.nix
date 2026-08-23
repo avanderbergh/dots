@@ -16,7 +16,6 @@
           date_format = "%A, %d %B %Y";
           setup_wizard_enabled = false;
           settings_show_advanced = true;
-          middle_click_opens_widget_settings = true;
           clipboard_enabled = true;
           clipboard_history_max_entries = 250;
           app_icon_colorize = true;
@@ -219,7 +218,7 @@
               }
             ];
 
-            dead_zone.command = "noctalia msg panel-toggle launcher";
+            dead_zone.actions.left = "panel-toggle launcher";
 
             monitor.ultrawide = {
               match = "DP-1";
@@ -239,8 +238,8 @@
           };
 
           workspaces = {
-            display = "none";
-            minimal = false;
+            show_labels = false;
+            style = "regular";
             labels_only_when_occupied = true;
             focused_output_only = true;
             active_pill_size = 1.75;
@@ -301,24 +300,6 @@
             capsule_opacity = 0.92;
           };
 
-          cpu = {
-            display = "gauge";
-            show_label = true;
-            highlight_color = "error";
-          };
-
-          ram = {
-            stat = "ram_pct";
-            display = "gauge";
-            show_label = true;
-            highlight_color = "secondary";
-          };
-
-          temp = {
-            display = "text";
-            highlight_color = "error";
-          };
-
           network = {
             show_label = false;
             icon_color = "primary";
@@ -327,14 +308,8 @@
 
           output_volume = {
             show_label = false;
-            scroll_step = 5;
             mute_color = "error";
             icon_color = "secondary";
-          };
-
-          brightness = {
-            show_label = true;
-            scroll_step = 5;
           };
 
           battery = {
