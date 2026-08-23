@@ -4,9 +4,17 @@
 
     nixpkgs.overlays = [inputs.niri.overlays.niri];
 
-    programs.niri = {
-      enable = true;
-      package = pkgs.niri-stable;
+    programs = {
+      niri = {
+        enable = true;
+        package = pkgs.niri-stable;
+      };
+
+      # xdg-document-portal requires fusermount3 to hand selected files back to
+      # portal clients such as Chrome.
+      fuse.enable = true;
+
+      gnupg.agent.pinentryPackage = pkgs.pinentry-gnome3;
     };
 
     services.upower.enable = true;
@@ -14,6 +22,10 @@
     niri-flake.cache.enable = true;
 
     services = {
+      # Niri's portal config prefers the GNOME file chooser, which delegates to
+      # Nautilus. Register it on D-Bus so Chrome upload dialogs can be opened.
+      dbus.packages = [pkgs.nautilus];
+
       greetd = {
         enable = true;
         useTextGreeter = true;
@@ -51,8 +63,6 @@
         }
       ];
     };
-
-    programs.gnupg.agent.pinentryPackage = pkgs.pinentry-gnome3;
 
     stylix = {
       enable = true;
