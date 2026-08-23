@@ -8,7 +8,6 @@ in {
   flake.modules.homeManager."integration-zoidberg-desktop" = {
     imports = [
       inputs.stylix.homeModules.stylix
-      inputs.niri.homeModules.config
     ];
   };
 

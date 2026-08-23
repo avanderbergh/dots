@@ -148,11 +148,13 @@ if [[ -z "${HOSTNAME_SHORT}" ]]; then
 fi
 
 log_section "Environment"
+STATIX_BIN_PATH="$(readlink -f "$(command -v statix)")"
+STATIX_STORE_PATH="${STATIX_BIN_PATH%/bin/statix}"
 printf "Repo root: %s\n" "${REPO_ROOT}"
 printf "Host: %s\n" "${HOSTNAME_SHORT:-unknown}"
 printf "Nix: %s\n" "$(nix --version)"
 printf "Alejandra: %s\n" "$(alejandra --version)"
-printf "Statix: %s\n" "$(statix --version)"
+printf "Statix: %s\n" "${STATIX_STORE_PATH##*/}"
 
 log_section "Host Hints"
 if [[ -n "${HOSTNAME_SHORT}" && -f "hosts/${HOSTNAME_SHORT}/default.nix" ]]; then

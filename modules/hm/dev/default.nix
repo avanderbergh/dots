@@ -5,7 +5,7 @@
       codex
       devenv
       devcontainer
-      gemini-cli
+      antigravity-cli
       gh
       opencode
       pi-coding-agent

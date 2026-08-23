@@ -59,6 +59,13 @@
           };
         };
 
+        # Niri places this blurred, tinted wallpaper copy behind its overview.
+        backdrop = {
+          enabled = true;
+          blur_intensity = 0.62;
+          tint_intensity = 0.34;
+        };
+
         wallpaper = {
           enabled = true;
           fill_mode = "crop";
@@ -147,7 +154,7 @@
             reserve_space = true;
             auto_hide = false;
             thickness = 50;
-            background_opacity = 0.94;
+            background_opacity = 0.9;
             border = "outline";
             border_width = 1.0;
             shadow = true;

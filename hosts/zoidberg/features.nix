@@ -1,13 +1,8 @@
-{
-  config,
-  inputs,
-  ...
-}: let
+{config, ...}: let
   inherit (config.flake.modules) nixos;
 in {
   flake.modules.nixos."host-zoidberg" = {
     imports = [
-      inputs.niri.nixosModules.niri
       nixos.ausweisapp
       nixos.bluetooth
       nixos.desktop

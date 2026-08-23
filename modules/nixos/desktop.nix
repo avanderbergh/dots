@@ -2,12 +2,11 @@
   flake.modules.nixos.desktop = {pkgs, ...}: {
     boot.plymouth.enable = true;
 
-    nixpkgs.overlays = [inputs.niri.overlays.niri];
-
     programs = {
       niri = {
         enable = true;
-        package = pkgs.niri-stable;
+        package = pkgs.niri;
+        useNautilus = true;
       };
 
       # xdg-document-portal requires fusermount3 to hand selected files back to
@@ -19,17 +18,11 @@
 
     services.upower.enable = true;
 
-    niri-flake.cache.enable = true;
-
     services = {
-      # Niri's portal config prefers the GNOME file chooser, which delegates to
-      # Nautilus. Register it on D-Bus so Chrome upload dialogs can be opened.
-      dbus.packages = [pkgs.nautilus];
-
       greetd = {
         enable = true;
         useTextGreeter = true;
-        settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd ${pkgs.niri-stable}/bin/niri-session";
+        settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd ${pkgs.niri}/bin/niri-session";
       };
 
       gnome = {
@@ -67,7 +60,7 @@
     stylix = {
       enable = true;
       polarity = "dark";
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+      base16Scheme = "${inputs.stylix.inputs.tinted-schemes}/base16/catppuccin-mocha.yaml";
       cursor = {
         package = pkgs.catppuccin-cursors.mochaMauve;
         name = "catppuccin-mocha-mauve-cursors";
@@ -107,7 +100,6 @@
 
     environment.systemPackages = with pkgs; [
       dconf
-      gtk-engine-murrine
       libnotify
       networkmanagerapplet
       xwayland-satellite

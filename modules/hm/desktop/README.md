@@ -7,6 +7,10 @@
 - `Super + Return` opens `alacritty`.
 - `Super + Alt + L` opens the Noctalia lock screen.
 - `Super + Shift + C` toggles Noctalia caffeine mode to inhibit idle suspend.
+- `Super + O` opens Niri's wallpaper-backed overview.
+- `Super/Alt + Tab` opens Niri's themed recent-window switcher.
+- `Super + W` toggles the focused column between tiled and tabbed layouts.
+- `Super + V` toggles the focused window between tiled and floating.
 - `Print` captures a region with `grim + slurp` and opens it in `satty`.
 - `Ctrl + Print` captures the full screen and opens it in `satty`.
 
@@ -22,4 +26,7 @@
 - Stylix is the source of truth for desktop theming.
 - Stylix gives Noctalia the same Catppuccin Mocha palette and Recursive Mono
   family as the rest of the desktop; the bar uses `RecMonoLinear Nerd Font Mono`.
-- Niri styling uses `programs.niri.settings` and Stylix integration from `niri-flake`.
+- Niri derives its mauve-to-blue focus gradient, shadows, overview, tabs, and
+  recent-window switcher directly from the shared Stylix palette.
+- Noctalia provides the blurred, tinted wallpaper backdrop for Niri's overview;
+  Niri provides restrained blur for translucent windows and shell surfaces.
