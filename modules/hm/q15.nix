@@ -10,6 +10,7 @@
     q15StackDir = "${q15ConfigDir}/stacks/jared";
     q15SecretsDir = "${q15ConfigDir}/secrets/jared";
     q15RuntimeDir = "${config.home.homeDirectory}/q15-runtime/jared";
+    q15Compose = "${pkgs.podman-compose}/bin/podman-compose --in-pod=false";
     q15RuntimePath = lib.makeBinPath [
       pkgs.bash
       pkgs.coreutils
@@ -187,9 +188,12 @@
           "PATH=/run/wrappers/bin:/run/current-system/sw/bin:${q15RuntimePath}:/etc/profiles/per-user/${config.home.username}/bin"
         ];
         ExecStartPre = validateStackFiles;
-        ExecStart = "${pkgs.podman-compose}/bin/podman-compose up -d --remove-orphans";
-        ExecReload = "${pkgs.podman-compose}/bin/podman-compose up -d --remove-orphans";
-        ExecStop = "-${pkgs.podman-compose}/bin/podman-compose down";
+        # Keep services in separate containers on a Compose network. Podman
+        # Compose's default shared pod forces unrelated services to be
+        # recreated whenever one image changes.
+        ExecStart = "${q15Compose} up -d --remove-orphans";
+        ExecReload = "${q15Compose} up -d --remove-orphans";
+        ExecStop = "-${q15Compose} down";
         # A cold Compose reconciliation may wait for qdrant, exec, and agent
         # health checks sequentially before returning.
         TimeoutStartSec = 300;
