@@ -47,9 +47,24 @@
         exit 1
       fi
     '';
+    q15Update = pkgs.writeShellApplication {
+      name = "q15-update";
+      runtimeInputs = [
+        pkgs.coreutils
+        pkgs.gawk
+        pkgs.gnugrep
+        pkgs.jq
+        pkgs.podman
+        pkgs.skopeo
+        pkgs.systemd
+        pkgs.util-linux
+      ];
+      text = builtins.readFile ./_/q15-update.sh;
+    };
   in {
     home.packages = [
       pkgs.q15-auth
+      q15Update
       pkgs.podman
       pkgs.podman-compose
     ];
