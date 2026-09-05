@@ -190,7 +190,9 @@
         ExecStart = "${pkgs.podman-compose}/bin/podman-compose up -d --remove-orphans";
         ExecReload = "${pkgs.podman-compose}/bin/podman-compose up -d --remove-orphans";
         ExecStop = "-${pkgs.podman-compose}/bin/podman-compose down";
-        TimeoutStartSec = 120;
+        # A cold Compose reconciliation may wait for qdrant, exec, and agent
+        # health checks sequentially before returning.
+        TimeoutStartSec = 300;
         TimeoutStopSec = 120;
       };
 
