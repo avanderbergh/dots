@@ -16,6 +16,7 @@
 
 ## Shell Components
 
+- Login screen: Noctalia Greeter on greetd, with Niri selected by default
 - Shell: Noctalia v5 (left vertical bar, launcher, notifications, lock screen,
   idle handling, wallpaper, OSD, clipboard history, and control center)
 - Suspend event bridge: `swayidle` locks Noctalia before external suspend paths
@@ -26,6 +27,14 @@
 - Stylix is the source of truth for desktop theming.
 - Stylix gives Noctalia the same Catppuccin Mocha palette and Recursive Mono
   family as the rest of the desktop; the bar uses `RecMonoLinear Nerd Font Mono`.
+- Noctalia Greeter reads the owner's declarative shell palette, font, and corner
+  radius directly, and uses the Stylix cursor. Its fixed background is the
+  flower meadow from `Howl_s Moving Castle - 004.jpg` in the desktop's Ghibli
+  collection, copied into the repository so it is available before login.
+  A Catppuccin soot-sprite SVG replaces the bottom Noctalia logo through the
+  greeter's asset-directory override. Both assets live under
+  `modules/nixos/_assets/noctalia-greeter/`; the desktop slideshow stays
+  independent. Greeter state and AccountsService avatars survive reboots.
 - Niri derives its mauve-to-blue focus gradient, shadows, overview, tabs, and
   recent-window switcher directly from the shared Stylix palette.
 - Noctalia provides the blurred, tinted wallpaper backdrop for Niri's overview;

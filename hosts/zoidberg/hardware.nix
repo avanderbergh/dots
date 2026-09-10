@@ -8,8 +8,7 @@
     # enables this model's SoundWire drivers, so the nixos-hardware profile's
     # config-only patch would only bypass the binary cache.
     boot = {
-      # Keep firmware/driver errors in the journal without letting them overwrite
-      # the text greeter that shares the kernel console.
+      # Keep firmware/driver errors in the journal and the boot console quiet.
       consoleLogLevel = 3;
       extraModulePackages = [];
       initrd = {

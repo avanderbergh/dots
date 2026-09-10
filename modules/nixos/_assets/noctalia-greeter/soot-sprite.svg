@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>A soot sprite with a little sugar star</title>
+  <!-- Theme placeholders are filled from the desktop palette by Nix. -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M61 29 68 36 77 31 79 41 90 40 87 51 98 56 90 64
+             98 72 88 76 91 87 80 87 77 98 69 92 61 101 56 91
+             45 96 44 85 33 83 39 74 30 67 40 61 36 50 47 51
+             49 40 57 44Z"
+          fill="@soot@" stroke="@outline@" stroke-width="3"/>
+    <path d="M85 52Q97 46 99 34M42 85 33 97M78 89 85 100"
+          fill="none" stroke="@outline@" stroke-width="3"/>
+    <ellipse cx="54" cy="62" rx="10" ry="12" fill="@eyes@"/>
+    <ellipse cx="74" cy="60" rx="10" ry="12" fill="@eyes@"/>
+    <ellipse cx="58" cy="59" rx="4" ry="5" fill="@soot@"/>
+    <ellipse cx="77" cy="57" rx="4" ry="5" fill="@soot@"/>
+    <path d="M99 12 104 23 116 25 107 33 109 45 99 39 88 45
+             90 33 81 25 94 23Z"
+          fill="@star@" stroke="@soot@" stroke-width="2.5"/>
+    <path d="M25 32 28 39 35 42 28 45 25 52 22 45 15 42 22 39Z"
+          fill="@sparkle@"/>
+    <circle cx="104" cy="91" r="3" fill="@outline@"/>
+    <circle cx="24" cy="75" r="2.5" fill="@star@"/>
+  </g>
+</svg>

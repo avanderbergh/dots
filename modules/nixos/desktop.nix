@@ -1,5 +1,11 @@
-{inputs, ...}: {
+{
+  config,
+  inputs,
+  ...
+}: {
   flake.modules.nixos.desktop = {pkgs, ...}: {
+    imports = [config.flake.modules.nixos.noctalia-greeter];
+
     boot.plymouth.enable = true;
 
     programs = {
@@ -19,12 +25,6 @@
     services.upower.enable = true;
 
     services = {
-      greetd = {
-        enable = true;
-        useTextGreeter = true;
-        settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd ${pkgs.niri}/bin/niri-session";
-      };
-
       gnome = {
         gnome-keyring.enable = true;
         # Keep keyring secrets support, but avoid stealing SSH_AUTH_SOCK from gpg-agent.
