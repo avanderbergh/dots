@@ -1,14 +1,16 @@
-{
+{config, ...}: let
+  inherit (config.dots.packageSets) pkgs-master;
+in {
   flake.modules.homeManager."profile-dev" = {pkgs, ...}: {
-    home.packages = with pkgs; [
-      claude-code
-      codex
-      devenv
-      devcontainer
-      antigravity-cli
-      gh
-      opencode
-      pi-coding-agent
+    home.packages = [
+      pkgs.claude-code
+      pkgs-master.codex
+      pkgs.devenv
+      pkgs.devcontainer
+      pkgs.antigravity-cli
+      pkgs.gh
+      pkgs.opencode
+      pkgs.pi-coding-agent
     ];
 
     programs.direnv = {

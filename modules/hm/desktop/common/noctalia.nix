@@ -5,7 +5,7 @@
     programs.noctalia = {
       enable = true;
       systemd.enable = true;
-      validateConfig = true;
+      checkConfig = true;
 
       settings = {
         accessibility.ui_scale = 1.0;
