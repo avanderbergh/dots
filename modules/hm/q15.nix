@@ -153,6 +153,20 @@
           mode = "0400";
           path = "${q15SecretsDir}/ha_token";
         };
+
+        q15_jared_hf_token = {
+          key = "q15/hermes/jared/hf_token";
+          mode = "0400";
+          path = "${q15SecretsDir}/hf_token";
+        };
+      };
+
+      templates.q15_jared_hf_env = {
+        content = ''
+          HF_TOKEN=${config.sops.placeholder.q15_jared_hf_token}
+        '';
+        mode = "0400";
+        path = "${q15SecretsDir}/hf_token.env";
       };
     };
 
@@ -171,6 +185,7 @@
           "HOME=${config.home.homeDirectory}"
           "PATH=/run/wrappers/bin:/run/current-system/sw/bin:${q15RuntimePath}:/etc/profiles/per-user/${config.home.username}/bin"
         ];
+        EnvironmentFile = config.sops.templates.q15_jared_hf_env.path;
         ExecStartPre = validateStackFiles;
         ExecStart = "${pkgs.podman-compose}/bin/podman-compose up -d --remove-orphans";
         ExecReload = "${pkgs.podman-compose}/bin/podman-compose up -d --remove-orphans";
