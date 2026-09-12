@@ -187,10 +187,12 @@
         ];
         EnvironmentFile = config.sops.templates.q15_jared_hf_env.path;
         ExecStartPre = validateStackFiles;
-        ExecStart = "${pkgs.podman-compose}/bin/podman-compose up -d --remove-orphans";
-        ExecReload = "${pkgs.podman-compose}/bin/podman-compose up -d --remove-orphans";
-        ExecStop = "-${pkgs.podman-compose}/bin/podman-compose down";
-        TimeoutStartSec = 120;
+        # Allow the agent's 35-second worker shutdown budget during recreation too.
+        ExecStart = "${pkgs.podman-compose}/bin/podman-compose up -d --remove-orphans --timeout 60";
+        ExecReload = "${pkgs.podman-compose}/bin/podman-compose up -d --remove-orphans --timeout 60";
+        ExecStop = "-${pkgs.podman-compose}/bin/podman-compose down --timeout 60";
+        # Startup/reload may pull uncached images and wait for dependencies.
+        TimeoutStartSec = "15min";
         TimeoutStopSec = 120;
       };
 
