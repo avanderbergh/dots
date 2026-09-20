@@ -64,6 +64,11 @@ If a raw helper file is ever needed under an imported tree, place it under a pat
 
 ## Notes
 
+### Local backups
+
+The local disk backup policy and recovery instructions are in
+[docs/LOCAL_BACKUP.md](docs/LOCAL_BACKUP.md).
+
 ### Import GPG Keys
 
 ```sh
