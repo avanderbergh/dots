@@ -38,6 +38,8 @@
       '';
     };
   in {
+    environment.systemPackages = [pkgs.smartmontools];
+
     # View the NVMe's top-level subvolumes without traversing mounts in /home.
     fileSystems.${sourceMount} = {
       inherit (config.fileSystems."/home") device fsType;
