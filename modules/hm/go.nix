@@ -5,7 +5,7 @@
     ...
   }: {
     home.packages = [
-      pkgs.go_1_25
+      pkgs.go_1_26
       pkgs.gopls
       pkgs.gofumpt
       # gopls also provides modernize; keep the rest of gotools without a buildEnv collision.

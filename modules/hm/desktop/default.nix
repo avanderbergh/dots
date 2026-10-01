@@ -23,6 +23,9 @@ in {
       hm."profile-desktop-kanshi"
     ];
 
+    # Noctalia provides the launcher; do not generate unused Rofi styling.
+    stylix.targets.rofi.enable = false;
+
     home.pointerCursor.enable = true;
 
     gtk = {

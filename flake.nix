@@ -24,7 +24,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
-    noctalia.url = "github:noctalia-dev/noctalia";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia";
+      # Match the system graphics drivers' libc when Noctalia loads them.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix";
   };
