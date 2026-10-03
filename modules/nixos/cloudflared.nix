@@ -16,6 +16,9 @@
             "ha.adriaan.cc" = {
               service = "http://192.168.178.113:8123";
             };
+            "chat.adriaan.cc" = {
+              service = "http://127.0.0.1:8080";
+            };
           };
         };
       };

@@ -19,5 +19,14 @@ in {
       enableBashIntegration = true;
       enableFishIntegration = true;
     };
+
+    programs.herdr = {
+      enable = true;
+      package = pkgs-master.herdr;
+      settings = {
+        terminal.default_shell = "fish";
+        theme.name = "catppuccin";
+      };
+    };
   };
 }

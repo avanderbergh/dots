@@ -15,6 +15,7 @@ in {
       pkgs.firefox
       pkgs.font-manager
       pkgs.google-chrome
+      pkgs.handy
       pkgs.ledger-live-desktop
       pkgs.libresprite
       pkgs.nsxiv
