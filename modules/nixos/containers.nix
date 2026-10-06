@@ -45,6 +45,9 @@
         "/var/lib/docker"
         "/var/lib/containers"
       ];
+      files = [
+        "/var/lib/systemd/credential.secret"
+      ];
     };
   };
 }
