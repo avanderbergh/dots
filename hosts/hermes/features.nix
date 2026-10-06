@@ -19,7 +19,6 @@ in {
       nixos.video
       nixos.vpn
       nixos.yubikey
-      nixos."github-runner"
     ];
   };
 }
