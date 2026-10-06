@@ -54,6 +54,7 @@ in {
         package = pkgs-master.vscode.fhs;
       };
       zathura.enable = true;
+      zed-editor.enable = true;
     };
 
     services.udiskie.enable = true;
