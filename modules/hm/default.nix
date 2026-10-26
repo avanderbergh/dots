@@ -1,5 +1,5 @@
 {config, ...}: let
-  inherit (config.dots.packageSets) pkgs-stable;
+  inherit (config.dots.packageSets) pkgs-master pkgs-stable;
 in {
   flake.modules.homeManager."user-avanderbergh" = {pkgs, ...}: {
     home = {
@@ -12,7 +12,7 @@ in {
         # pkgs-stable.figma-agent
         pkgs-stable.cava
         pkgs.alejandra
-        pkgs.cloudflared
+        pkgs-master.cloudflared
         pkgs.esptool
         pkgs.git
         pkgs.joshuto

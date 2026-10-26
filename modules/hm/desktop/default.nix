@@ -5,10 +5,20 @@
 }: let
   hm = config.flake.modules.homeManager;
 in {
-  flake.modules.homeManager."integration-zoidberg-desktop" = {
+  flake.modules.homeManager."integration-zoidberg-desktop" = let
+    desktopStyle = config.flake.nixosConfigurations.zoidberg.config.stylix;
+  in {
     imports = [
       inputs.stylix.homeModules.stylix
     ];
+
+    # Standalone Home Manager does not receive the NixOS Stylix settings automatically.
+    stylix = {
+      inherit (desktopStyle) enable polarity base16Scheme cursor opacity image;
+      fonts = {
+        inherit (desktopStyle.fonts) serif sansSerif monospace emoji sizes;
+      };
+    };
   };
 
   flake.modules.homeManager."profile-desktop" = _: let

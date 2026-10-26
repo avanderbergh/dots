@@ -1,10 +1,14 @@
-{
+{config, ...}: let
+  inherit (config.dots.packageSets) pkgs-master;
+in {
   flake.modules.nixos.cloudflared = {lib, ...}: let
     tunnelId = "e0b6e7f2-c209-4f32-b371-669a635695e1";
     tunnelUnit = "cloudflared-tunnel-${tunnelId}";
   in {
     services.cloudflared = {
       enable = true;
+      # The eMudhra certificate fix requires cloudflared >= 2026.10.2 and Go >= 1.27.3.
+      package = pkgs-master.cloudflared;
       tunnels = {
         "${tunnelId}" = {
           credentialsFile = "/run/secrets/cloudflared-hermes-credentials";

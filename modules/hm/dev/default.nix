@@ -11,6 +11,7 @@ in {
       pkgs.gh
       pkgs.opencode
       pkgs.pi-coding-agent
+      pkgs-master.tuios
     ];
 
     programs.direnv = {

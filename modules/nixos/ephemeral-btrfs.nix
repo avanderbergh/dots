@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos."ephemeral-btrfs" = {lib, ...}: let
+  flake.modules.nixos."ephemeral-btrfs" = _: let
     device = "/dev/mapper/enc";
     fsType = "btrfs";
     mkOptions = subvol: ["subvol=${subvol}" "compress=zstd" "noatime"];
@@ -7,7 +7,6 @@
     boot.initrd = {
       supportedFilesystems = ["btrfs"];
       systemd = {
-        enable = lib.mkDefault true;
         services = {
           rollback = {
             description = "Rollback BTRFS root subvolume to a pristine state";
