@@ -47,7 +47,7 @@
 
         # Disable node suspension to prevent glitches/crashes on wake-up
         # See: https://wiki.archlinux.org/title/PipeWire#Noticeable_audio_delay_or_audible_pop/crack_when_starting_playback
-        "51-disable-suspension.conf" = {
+        "51-disable-suspension" = {
           "monitor.alsa.rules" = [
             {
               matches = [

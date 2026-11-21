@@ -6,15 +6,13 @@
       directories = [
         "/etc/NetworkManager/system-connections"
         "/etc/ssh"
-        "/usr/share"
         "/var/lib/bluetooth"
-        "/var/lib/boltd/"
+        "/var/lib/boltd"
         "/var/lib/colord"
         "/var/lib/nixos"
         "/var/lib/tailscale"
-        "/var/lib/systemd/coredump"
+        "/var/lib/systemd"
         "/var/lib/upower"
-        "/var/lib/sops"
         "/root/.gnupg"
       ];
       files = [

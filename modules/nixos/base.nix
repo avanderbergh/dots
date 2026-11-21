@@ -19,7 +19,6 @@ in {
       nixos.networking
       nixos.nix
       nixos.openssh
-      nixos.security
       nixos.sops
       nixos."systemd-boot"
       nixos.users
@@ -59,6 +58,8 @@ in {
     };
 
     services.udisks2.enable = true;
+
+    zramSwap.enable = true;
 
     environment = {
       systemPackages = with pkgs; [

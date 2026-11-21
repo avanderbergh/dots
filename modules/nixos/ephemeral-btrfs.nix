@@ -16,31 +16,41 @@
             unitConfig.DefaultDependencies = "no";
             serviceConfig.Type = "oneshot";
             script = ''
+              set -eu
               mkdir -p /mnt
               mount -o subvol=/ ${device} /mnt
+              trap 'umount /mnt || true' EXIT
 
-              btrfs subvolume list -o /mnt/root |
-                cut -f9 -d' ' |
-                while read subvolume; do
-                  echo "deleting /$subvolume subvolume..."
-                  btrfs subvolume delete "/mnt/$subvolume"
-                done &&
-                echo "deleting /root subvolume..." &&
+              if [ -d /mnt/root ]; then
+                subvols=$(btrfs subvolume list -o /mnt/root)
+                if [ -n "$subvols" ]; then
+                  printf '%s\n' "$subvols" |
+                    while IFS= read -r line; do
+                      printf '%s\n' "''${line#* path }"
+                    done |
+                    sort -r |
+                    while IFS= read -r subvolume; do
+                      echo "deleting /$subvolume subvolume..."
+                      btrfs subvolume delete "/mnt/$subvolume"
+                    done
+                fi
+                echo "deleting /root subvolume..."
                 btrfs subvolume delete /mnt/root
+              fi
+
               echo "restoring blank /root subvolume..."
               btrfs subvolume snapshot /mnt/root-blank /mnt/root
-
-              umount /mnt
             '';
           };
           persisted-files = {
-            description = "Hard-link persisted files from /persist";
+            description = "Symlink persisted files from /persist";
             wantedBy = ["initrd.target"];
             after = ["sysroot.mount"];
             unitConfig.DefaultDependencies = "no";
             serviceConfig.Type = "oneshot";
             script = ''
-              mkdir -p /sysroot/etc/
+              set -eu
+              mkdir -p /sysroot/etc
               ln -snfT /persist/etc/machine-id /sysroot/etc/machine-id
             '';
           };

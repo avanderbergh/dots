@@ -1,27 +1,27 @@
 {
-  flake.modules.nixos."cloudflare-ssh-ca" = _: {
+  flake.modules.nixos."cloudflare-ssh-ca" = {
+    config,
+    pkgs,
+    ...
+  }: let
+    owner = config.local.users.ownerName;
+    cloudflareCaKey = pkgs.writeText "cloudflare-ca.pub" ''
+      ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOzn7HAZE/Kq/O3pTUlvIZHUI4NV47iKW+rlbfZfCzxY24cN4AAEFFBdV1RuG/Zi/6SKoVnvtBjElI1hT5buHFY= open-ssh-ca@cloudflareaccess.org
+    '';
+  in {
     services.openssh.settings = {
       PubkeyAuthentication = true;
-      TrustedUserCAKeys = "/var/lib/ssh-ca/cloudflare-ca.pub";
-      AuthorizedPrincipalsFile = "/var/lib/ssh-ca/auth_principals/%u";
+      TrustedUserCAKeys = "${cloudflareCaKey}";
+      # Prefer modern ETM MACs while keeping hmac-sha2-256 for Cloudflare
+      # browser-rendered SSH compatibility.
+      Macs = [
+        "hmac-sha2-512-etm@openssh.com"
+        "hmac-sha2-256-etm@openssh.com"
+        "umac-128-etm@openssh.com"
+        "hmac-sha2-256"
+      ];
     };
 
-    system.activationScripts.cloudflareSshCa = {
-      text = ''
-        mkdir -p /var/lib/ssh-ca/auth_principals
-        chmod 0755 /var/lib/ssh-ca
-        chmod 0755 /var/lib/ssh-ca/auth_principals
-
-        cat > /var/lib/ssh-ca/cloudflare-ca.pub <<'EOF'
-        ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOzn7HAZE/Kq/O3pTUlvIZHUI4NV47iKW+rlbfZfCzxY24cN4AAEFFBdV1RuG/Zi/6SKoVnvtBjElI1hT5buHFY= open-ssh-ca@cloudflareaccess.org
-        EOF
-        chmod 0644 /var/lib/ssh-ca/cloudflare-ca.pub
-
-        cat > /var/lib/ssh-ca/auth_principals/avanderbergh <<'EOF'
-        avanderbergh
-        EOF
-        chmod 0644 /var/lib/ssh-ca/auth_principals/avanderbergh
-      '';
-    };
+    users.users.${owner}.openssh.authorizedPrincipals = [owner];
   };
 }

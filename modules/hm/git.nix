@@ -1,7 +1,12 @@
 {config, ...}: let
   inherit (config.dots) ownerSshKey;
 in {
-  flake.modules.homeManager."profile-git" = {pkgs, ...}: let
+  flake.modules.homeManager."profile-git" = {
+    config,
+    lib,
+    pkgs,
+    ...
+  }: let
     allowedSignersFile = pkgs.writeText "git-allowed-signers" ''
       avanderbergh@gmail.com ${ownerSshKey}
     '';
@@ -14,7 +19,7 @@ in {
           email = "avanderbergh@gmail.com";
           name = "Adriaan van der Bergh";
         };
-        core.editor = "code --wait";
+        core.editor = lib.mkDefault "nvim";
         gpg.ssh.allowedSignersFile = "${allowedSignersFile}";
         init.defaultBranch = "main";
       };
@@ -31,7 +36,7 @@ in {
         ghq
       ];
       sessionVariables = {
-        GHQ_ROOT = "/home/avanderbergh/repos";
+        GHQ_ROOT = "${config.home.homeDirectory}/repos";
       };
     };
   };
