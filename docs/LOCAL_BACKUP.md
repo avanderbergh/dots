@@ -64,8 +64,9 @@ before restoring their files; validate databases after recovery.
 Btrfs snapshots do not traverse other mounts or nested subvolumes. This keeps
 the HDD backup from backing itself up even though it is mounted inside a home
 directory. The SSD and existing HDD media are **not backed up** by this job.
-Neither are `/nix`, `/boot`, logs, swap, or disposable root state. Jellyfin's
-currently unpersisted `/var/lib/jellyfin` is outside this backup too.
+Neither are `/nix`, `/boot`, logs, swap, `/var/cache/jellyfin`, or disposable
+root state. Jellyfin's `/var/lib/jellyfin` state is persisted under `/persist`
+and covered by this backup.
 
 Docker's Btrfs image/container-layer subvolumes are not included. At setup time
 Docker had no running containers or named volumes. After disk recovery, recreate

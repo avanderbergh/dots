@@ -1,37 +1,27 @@
 {
-  flake.modules.nixos.ollama = {pkgs, ...}: {
-    services = {
-      ollama = {
-        enable = true;
-        package = pkgs.ollama-cuda;
-      };
-      # open-webui = {
-      #   enable = true;
-      #   port = 11111;
-      #   openFirewall = true;
-      #   host = "0.0.0.0";
-      #   # Add environment variable to fix home directory issue
-      #   environment = {
-      #     HOME = "/var/lib/private/open-webui";
-      #   };
-      # };
+  flake.modules.nixos.ollama = {
+    lib,
+    pkgs,
+    ...
+  }: {
+    services.ollama = {
+      enable = true;
+      package = pkgs.ollama-cuda;
+      user = "ollama";
+      group = "ollama";
     };
 
-    environment.persistence."/persist" = {
-      directories = [
-        {
-          directory = "/var/lib/private/ollama";
-          user = "nobody";
-          group = "nogroup";
-          mode = "0755";
-        }
-        {
-          directory = "/var/lib/private/open-webui";
-          user = "nobody";
-          group = "nogroup";
-          mode = "0755";
-        }
-      ];
-    };
+    # Use a static system user and /var/lib/ollama directly so impermanence
+    # does not bind-mount inside systemd's /var/lib/private directory.
+    systemd.services.ollama.serviceConfig.DynamicUser = lib.mkForce false;
+
+    environment.persistence."/persist".directories = [
+      {
+        directory = "/var/lib/ollama";
+        user = "ollama";
+        group = "ollama";
+        mode = "0700";
+      }
+    ];
   };
 }

@@ -46,6 +46,11 @@
 
     services.xserver.videoDrivers = ["nvidia"];
 
-    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+    nixpkgs = {
+      # The RTX 2060 (Turing) only needs sm_75. Match zoidberg so CUDA builds
+      # stay fast and share binary-cache store paths between both hosts.
+      config.cudaCapabilities = ["7.5"];
+      hostPlatform = lib.mkDefault "x86_64-linux";
+    };
   };
 }
