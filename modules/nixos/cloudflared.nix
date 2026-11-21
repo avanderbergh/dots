@@ -1,7 +1,7 @@
 {config, ...}: let
   inherit (config.dots.packageSets) pkgs-master;
 in {
-  flake.modules.nixos.cloudflared = {lib, ...}: let
+  flake.modules.nixos.cloudflared = {config, ...}: let
     tunnelId = "e0b6e7f2-c209-4f32-b371-669a635695e1";
     tunnelUnit = "cloudflared-tunnel-${tunnelId}";
   in {
@@ -11,7 +11,7 @@ in {
       package = pkgs-master.cloudflared;
       tunnels = {
         "${tunnelId}" = {
-          credentialsFile = "/run/secrets/cloudflared-hermes-credentials";
+          credentialsFile = config.sops.secrets.cloudflared-hermes-credentials.path;
           default = "http_status:404";
           ingress = {
             "ssh-hermes.adriaan.cc" = {
@@ -28,18 +28,14 @@ in {
       };
     };
 
-    # cloudflared tunnel units use DynamicUser by default; make this tunnel run as
-    # root so it can read a root-owned 0400 credentials file from /run/secrets.
-    systemd.services."${tunnelUnit}".serviceConfig = {
-      DynamicUser = lib.mkForce false;
-      User = lib.mkForce "root";
-    };
-
+    # NixOS's cloudflared module passes credentialsFile via systemd LoadCredential,
+    # so the service can stay unprivileged with DynamicUser=true while reading a 0400 root secret.
     sops.secrets.cloudflared-hermes-credentials = {
       key = "cloudflared/hermes/credentials";
       owner = "root";
       group = "root";
       mode = "0400";
+      restartUnits = ["${tunnelUnit}.service"];
     };
   };
 }

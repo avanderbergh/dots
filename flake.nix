@@ -33,18 +33,6 @@
     stylix.url = "github:danth/stylix";
   };
 
-  nixConfig = {
-    accept-flake-config = true;
-
-    extra-substituters = [
-      "http://hermes:5000"
-    ];
-
-    extra-trusted-public-keys = [
-      "hermes:ctaxZAzCtUCIsQCwrws97n2o81DIPM9c1iXUO3H59U8="
-    ];
-  };
-
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [

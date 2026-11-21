@@ -29,13 +29,6 @@ in {
         ++ [
           hm."profile-q15"
         ];
-
-      "morbo@hermes" = [
-        hm."user-morbo"
-        hm."profile-dev"
-        hm."profile-bot"
-        hm."profile-ssh"
-      ];
     };
 
     standaloneHomeModules = {

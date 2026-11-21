@@ -4,7 +4,7 @@
 
     networking = {
       firewall = {
-        checkReversePath = false;
+        checkReversePath = "loose";
       };
     };
   };

@@ -49,7 +49,7 @@ the damaged filesystem. See the [Btrfs ENOSPC explanation](https://btrfs.readthe
 
 ## What is covered
 
-- All user homes, including the bot account, q15 memory, workspaces, configuration,
+- All user homes, including q15 memory, workspaces, configuration,
   and rootless Podman volumes (including Qdrant).
 - All ordinary files in `/persist`, including SSH/SOPS keys, account password
   hashes, Secure Boot keys, network identity, and persistent service data.

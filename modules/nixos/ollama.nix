@@ -4,7 +4,6 @@
       ollama = {
         enable = true;
         package = pkgs.ollama-cuda;
-        openFirewall = true;
       };
       # open-webui = {
       #   enable = true;

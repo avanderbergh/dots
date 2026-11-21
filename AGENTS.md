@@ -12,9 +12,8 @@
 - NixOS host output registrations: `dots.nixosHosts.<hostname>` in `hosts/<hostname>/default.nix`
 - Host feature stacks, hardware, and local policy: sibling files in `hosts/<hostname>/`
 - Published NixOS/Home Manager features: `flake.modules.*` definitions in `hosts/` and `modules/`
-- System user policy (human vs bot account type): `modules/nixos/users.nix`
-- Home Manager user modules: `modules/hm/users/*.nix`
-- Bot Home Manager stack: `modules/hm/bot/*.nix`
+- System user policy: `modules/nixos/users.nix`
+- Home Manager user module: `modules/hm/default.nix`
 
 ## Required Before Running Nix Commands
 - Determine the current machine first:

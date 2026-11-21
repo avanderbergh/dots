@@ -1,7 +1,5 @@
 {
-  flake.modules.homeManager."profile-ssh" = {config, ...}: let
-    isAvanderbergh = config.home.username == "avanderbergh";
-  in {
+  flake.modules.homeManager."profile-ssh" = _: {
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
@@ -22,12 +20,12 @@
         };
         "hermes" = {
           HostName = "hermes";
-          ForwardAgent = isAvanderbergh;
+          ForwardAgent = true;
           ForwardX11 = false;
         };
         "zoidberg" = {
           HostName = "zoidberg";
-          ForwardAgent = isAvanderbergh;
+          ForwardAgent = true;
           ForwardX11 = false;
         };
       };

@@ -1,7 +1,6 @@
 {
   flake.modules.nixos.containers = {
     config,
-    lib,
     pkgs,
     ...
   }: {
@@ -23,13 +22,7 @@
       };
     };
 
-    users.users =
-      {
-        avanderbergh.extraGroups = ["docker"];
-      }
-      // lib.optionalAttrs config.local.users.enableBotUsers {
-        morbo.extraGroups = ["docker"];
-      };
+    users.users.${config.local.users.ownerName}.extraGroups = ["docker"];
 
     environment.systemPackages = with pkgs; [
       podman

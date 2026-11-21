@@ -14,7 +14,7 @@ in {
     services.openssh = {
       enable = true;
       extraConfig = ''
-        Match User avanderbergh
+        Match User ${config.local.users.ownerName}
           AllowAgentForwarding yes
       '';
       # require public key authentication for better security
@@ -27,8 +27,6 @@ in {
         StreamLocalBindUnlink = "yes";
         # Deny SSH agent forwarding by default (least privilege)
         AllowAgentForwarding = false;
-        # Cloudflare browser-rendered SSH compatibility (reported working setting).
-        Macs = ["hmac-sha2-256"];
       };
 
       hostKeys = [
