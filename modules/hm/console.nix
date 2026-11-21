@@ -115,7 +115,56 @@
           cmp-path
           cmp_luasnip
           luasnip
-          nvim-treesitter
+          (nvim-treesitter.withPlugins (p:
+            with p; [
+              bash
+              c
+              comment
+              cpp
+              css
+              csv
+              diff
+              dockerfile
+              fish
+              git_config
+              git_rebase
+              gitattributes
+              gitcommit
+              gitignore
+              go
+              gomod
+              gosum
+              gowork
+              hcl
+              html
+              ini
+              javascript
+              jsdoc
+              json
+              json5
+              just
+              kdl
+              lua
+              luadoc
+              make
+              markdown
+              markdown_inline
+              nix
+              python
+              query
+              regex
+              rust
+              sql
+              ssh_config
+              terraform
+              toml
+              tsx
+              typescript
+              vim
+              vimdoc
+              xml
+              yaml
+            ]))
           lualine-nvim
           which-key-nvim
           gitsigns-nvim
@@ -191,9 +240,16 @@
             }),
           })
 
-          require("nvim-treesitter.configs").setup({
-            highlight = { enable = true },
-            indent = { enable = true },
+          vim.api.nvim_create_autocmd("FileType", {
+            group = vim.api.nvim_create_augroup("treesitter-setup", { clear = true }),
+            callback = function(args)
+              if pcall(vim.treesitter.start, args.buf) then
+                local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+                if lang and vim.treesitter.query.get(lang, "indents") then
+                  vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end
+              end
+            end,
           })
 
           local builtin = require("telescope.builtin")

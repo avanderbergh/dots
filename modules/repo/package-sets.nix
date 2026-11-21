@@ -22,7 +22,7 @@ in {
     packageSets = {
       pkgs = mkPkgs inputs.nixpkgs;
       pkgs-stable = mkPkgs inputs.nixpkgs-stable;
-      pkgs-master = mkPkgs inputs.nixpkgs-master;
+      llm-agents = inputs.llm-agents.packages.${config.dots.system};
     };
   };
 }

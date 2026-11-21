@@ -48,11 +48,12 @@ in {
       nix-ld = {
         enable = true;
         libraries = with pkgs; [
-          # Add libraries needed by dynamically linked executables here
-          stdenv.cc.cc # Basic C library
-          # Add other libraries as needed, e.g.:
-          # openssl
-          # zlib
+          # Runtime libraries for dynamically linked executables (NixOS already
+          # includes stdenv.cc.cc, zlib, openssl, systemd/libudev, etc. by default).
+          glib
+          libGL
+          libGLU
+          libusb1
         ];
       };
     };
@@ -64,17 +65,11 @@ in {
     environment = {
       systemPackages = with pkgs; [
         git
-        libusb1
-        libudev-zero
         parted
         pass
         pciutils
         pinentry-all
         sbctl
-        gcc
-        libGLU
-        libGL
-        glib
       ];
     };
   };

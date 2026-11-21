@@ -1,5 +1,5 @@
 {config, ...}: let
-  inherit (config.dots.packageSets) pkgs-master pkgs-stable;
+  inherit (config.dots.packageSets) llm-agents pkgs-stable;
 in {
   flake.modules.homeManager."profile-desktop-apps" = {pkgs, ...}: {
     home.packages = [
@@ -15,7 +15,7 @@ in {
       pkgs.firefox
       pkgs.font-manager
       pkgs.google-chrome
-      pkgs.handy
+      llm-agents.handy
       pkgs.ledger-live-desktop
       pkgs.libresprite
       pkgs.nsxiv
@@ -33,7 +33,7 @@ in {
       pkgs.slurp
       pkgs.satty
       pkgs.zoom-us
-      pkgs.opencode-desktop
+      llm-agents.opencode2-desktop
     ];
 
     programs = {
@@ -53,7 +53,7 @@ in {
       mpv.enable = true;
       vscode = {
         enable = true;
-        package = pkgs-master.vscode.fhs;
+        package = pkgs.vscode.fhs;
       };
       zathura.enable = true;
       zed-editor.enable = true;

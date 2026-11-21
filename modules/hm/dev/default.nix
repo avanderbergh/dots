@@ -1,17 +1,17 @@
 {config, ...}: let
-  inherit (config.dots.packageSets) pkgs-master;
+  inherit (config.dots.packageSets) llm-agents;
 in {
   flake.modules.homeManager."profile-dev" = {pkgs, ...}: {
     home.packages = [
-      pkgs.claude-code
-      pkgs-master.codex
-      pkgs.devenv
+      llm-agents.antigravity-cli
+      llm-agents.claude-code
+      llm-agents.codex
+      llm-agents.opencode2
+      llm-agents.pi
       pkgs.devcontainer
-      pkgs.antigravity-cli
+      pkgs.devenv
       pkgs.gh
-      pkgs.opencode
-      pkgs.pi-coding-agent
-      pkgs-master.tuios
+      pkgs.tuios
     ];
 
     programs.direnv = {
@@ -23,7 +23,7 @@ in {
 
     programs.herdr = {
       enable = true;
-      package = pkgs-master.herdr;
+      package = llm-agents.herdr;
       settings = {
         terminal.default_shell = "fish";
         theme.name = "catppuccin";
