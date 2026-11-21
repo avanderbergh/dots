@@ -1,9 +1,5 @@
 {
-  flake.modules.nixos."ledger-live" = {pkgs, ...}: {
-    environment.systemPackages = [
-      pkgs.fusePackages.fuse_2
-    ];
-
+  flake.modules.nixos."ledger-live" = {
     services.udev.extraRules = ''
       # HW.1 / Nano
       SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="1b7c|2b7c|3b7c|4b7c", TAG+="uaccess", TAG+="udev-acl"

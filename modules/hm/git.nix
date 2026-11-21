@@ -1,5 +1,11 @@
-{
-  flake.modules.homeManager."profile-git" = {pkgs, ...}: {
+{config, ...}: let
+  inherit (config.dots) ownerSshKey;
+in {
+  flake.modules.homeManager."profile-git" = {pkgs, ...}: let
+    allowedSignersFile = pkgs.writeText "git-allowed-signers" ''
+      avanderbergh@gmail.com ${ownerSshKey}
+    '';
+  in {
     programs.git = {
       enable = true;
       lfs.enable = true;
@@ -9,12 +15,13 @@
           name = "Adriaan van der Bergh";
         };
         core.editor = "code --wait";
+        gpg.ssh.allowedSignersFile = "${allowedSignersFile}";
         init.defaultBranch = "main";
       };
       signing = {
-        key = "741E DA0A 1F94 2978 D0E6  12ED 9380 36D7 4671 D8D5";
+        format = "ssh";
+        key = "key::${ownerSshKey}";
         signByDefault = true;
-        format = null;
       };
     };
 

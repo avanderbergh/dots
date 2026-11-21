@@ -15,7 +15,6 @@ in {
         pkgs-master.cloudflared
         pkgs.esptool
         pkgs.git
-        pkgs.joshuto
         pkgs.libgen-cli
         pkgs.ncdu
         pkgs.nixd
@@ -23,6 +22,7 @@ in {
         pkgs.pgcli
         pkgs.ripgrep
         pkgs.statix
+        pkgs.superfile
         pkgs.unzip
       ];
     };
