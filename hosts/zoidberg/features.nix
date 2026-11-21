@@ -18,6 +18,7 @@ in {
       nixos.postgres
       nixos."host-zoidberg-qca6390-wifi-fix"
       nixos.secureboot
+      nixos.virtualisation
       nixos.vpn
       nixos."vpn-gui"
       nixos.yubikey

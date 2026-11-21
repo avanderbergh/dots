@@ -45,6 +45,7 @@
 
       nvidia = {
         open = true;
+        powerManagement.enable = true;
         prime = {
           offload.enable = false;
           sync.enable = true;
