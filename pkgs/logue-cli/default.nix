@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "http://cdn.storage.korg.com/korg_SDK/logue-cli-linux64-${version}.tar.gz";
-    sha1 = "50af8cad47635f26c8a5c35dcb20f3bbad4f2f2d";
+    hash = "sha256-bCwWVrkSf9jmd8UKqm7xX/u6A2A/tZXbb+6URnQqxU8=";
   };
 
   nativeBuildInputs = [autoPatchelfHook];
