@@ -5,7 +5,6 @@
     # Core Nixpkgs channels
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
     # Top-level dendritic module system
     flake-parts = {
@@ -28,6 +27,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    # Keep llm-agents on its own locked inputs so prebuilt binaries hit cache.numtide.com.
+    llm-agents.url = "github:numtide/llm-agents.nix";
     noctalia = {
       url = "github:noctalia-dev/noctalia";
       # Match the system graphics drivers' libc when Noctalia loads them.
