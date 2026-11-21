@@ -11,7 +11,7 @@
         "/var/lib/colord"
         "/var/lib/nixos"
         "/var/lib/tailscale"
-        "/var/lib/systemd/coredump"
+        "/var/lib/systemd"
         "/var/lib/upower"
         "/root/.gnupg"
       ];

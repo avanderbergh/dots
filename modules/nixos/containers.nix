@@ -33,14 +33,9 @@
       runc
     ];
 
-    environment.persistence."/persist" = {
-      directories = [
-        "/var/lib/docker"
-        "/var/lib/containers"
-      ];
-      files = [
-        "/var/lib/systemd/credential.secret"
-      ];
-    };
+    environment.persistence."/persist".directories = [
+      "/var/lib/docker"
+      "/var/lib/containers"
+    ];
   };
 }
