@@ -60,6 +60,8 @@ in {
 
     services.udisks2.enable = true;
 
+    zramSwap.enable = true;
+
     environment = {
       systemPackages = with pkgs; [
         git

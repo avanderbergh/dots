@@ -46,7 +46,7 @@ usage() {
 Usage: nix-dev-check.sh [options] [-- <extra nix flake check args>]
 
 Options:
-  --check             Run alejandra in check mode (do not modify files).
+  --check             Run read-only checks (alejandra --check and no git add -A).
   --skip-parse        Skip syntax checks for changed .nix files.
   --skip-lint         Skip statix lint checks.
   --lint-all          Run statix on the whole repository.
@@ -61,6 +61,7 @@ while (($# > 0)); do
   case "$1" in
     --check)
       MODE="check"
+      AUTO_GIT_ADD=0
       shift
       ;;
     --skip-parse)

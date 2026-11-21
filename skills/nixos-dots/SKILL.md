@@ -44,7 +44,7 @@ Follow this sequence:
 
 ## Options
 
-- `--check`: Run `alejandra --check .` instead of modifying files.
+- `--check`: Run `alejandra --check .` without modifying files or running `git add -A`.
 - `--skip-parse`: Skip syntax parsing of changed `.nix` files.
 - `--skip-lint`: Skip `statix` lint checks.
 - `--lint-all`: Run `statix` against the full repository instead of changed files.

@@ -24,6 +24,10 @@
         connect-timeout = 5;
         download-buffer-size = 134217728;
       };
+      optimise = {
+        automatic = true;
+        dates = ["Sun 04:30"];
+      };
     };
     programs.nh = {
       enable = true;
