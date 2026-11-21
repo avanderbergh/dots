@@ -16,11 +16,17 @@
         __VK_LAYER_NV_optimus = "NVIDIA_only";
       };
 
-    # Niri recommends nested Gamescope for fullscreen games that need reliable
-    # cursor confinement. Use this as a Steam launch option: niri-game %command%
+    # Niri recommends nested Gamescope for games that need cursor confinement.
+    # Use niri-game %command% or niri-game --windowed %command% in Steam.
     niri-game = pkgs.writeShellScriptBin "niri-game" ''
+      window_mode=--fullscreen
+      if [ "''${1-}" = "--windowed" ]; then
+        window_mode=--borderless
+        shift
+      fi
+
       if [ "$#" -eq 0 ]; then
-        echo "usage: niri-game <game> [arguments...]" >&2
+        echo "usage: niri-game [--windowed] <game> [arguments...]" >&2
         exit 64
       fi
 
@@ -36,7 +42,7 @@
 
       # Steam's sandbox rejects the wrapper that raises CAP_SYS_NICE.
       exec ${lib.escapeShellArg config.security.wrappers.gamescope.source} \
-        --fullscreen \
+        "$window_mode" \
         --force-grab-cursor \
         -- \
         ${pkgs.gamemode}/bin/gamemoderun "$@"
