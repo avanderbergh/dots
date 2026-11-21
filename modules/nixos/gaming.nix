@@ -34,7 +34,8 @@
         export __VK_LAYER_NV_optimus=NVIDIA_only
       ''}
 
-      exec /run/wrappers/bin/gamescope \
+      # Steam's sandbox rejects the wrapper that raises CAP_SYS_NICE.
+      exec ${lib.escapeShellArg config.security.wrappers.gamescope.source} \
         --fullscreen \
         --force-grab-cursor \
         -- \
