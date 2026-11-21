@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   ...
 }: let
@@ -17,18 +16,6 @@ in {
       type = types.listOf types.str;
       default = ["x86_64-linux"];
       description = "Systems exposed through flake-parts perSystem outputs.";
-    };
-
-    desktops = mkOption {
-      type = types.listOf types.str;
-      default = ["1" "2" "3" "4" "5" "6" "7" "8" "9" "10"];
-      description = "Workspace names shared by host monitor metadata.";
-    };
-
-    colors = mkOption {
-      type = types.attrs;
-      default = import (inputs.self + /lib/theme/colors.nix);
-      description = "Shared theme color constants.";
     };
 
     ownerSshKey = mkOption {

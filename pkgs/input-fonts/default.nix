@@ -1,12 +1,11 @@
 {
   stdenvNoCC,
-  pkgs,
+  unzip,
 }:
 stdenvNoCC.mkDerivation {
   pname = "input-fonts";
   version = "1.0";
-  nativeBuildInputs = [pkgs.unzip];
-  buildInputs = [pkgs.unzip];
+  nativeBuildInputs = [unzip];
 
   src = ./src/Input-Font.zip;
   sourceRoot = ".";
@@ -18,6 +17,6 @@ stdenvNoCC.mkDerivation {
 
     mv ./Input_Fonts "$out/share/fonts/truetype"
 
-    runHook postInstal
+    runHook postInstall
   '';
 }

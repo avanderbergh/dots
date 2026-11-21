@@ -19,7 +19,6 @@ in {
       nixos.networking
       nixos.nix
       nixos.openssh
-      nixos.security
       nixos.sops
       nixos."systemd-boot"
       nixos.users

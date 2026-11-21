@@ -76,7 +76,7 @@
         vimdiffAlias = true;
         withNodeJs = true;
         withPython3 = true;
-        withRuby = true;
+        withRuby = false;
 
         extraPackages = with pkgs; [
           # LSP servers
@@ -238,9 +238,10 @@
         sensibleOnTop = true;
         clock24 = true;
         keyMode = "vi";
-        terminal = "screen-256color";
+        terminal = "tmux-256color";
         historyLimit = 100000;
         extraConfig = ''
+          set -ag terminal-overrides ",xterm-256color:RGB,xterm-kitty:RGB"
           set -g mouse on
           set -g set-clipboard on
           set -g base-index 1

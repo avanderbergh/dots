@@ -37,6 +37,8 @@ in {
     ];
 
     programs = {
+      git.settings.core.editor = "code --wait";
+
       kitty = {
         enable = true;
         settings = {

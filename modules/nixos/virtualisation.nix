@@ -1,5 +1,9 @@
 {
-  flake.modules.nixos.virtualisation = {pkgs, ...}: {
+  flake.modules.nixos.virtualisation = {
+    config,
+    pkgs,
+    ...
+  }: {
     virtualisation.libvirtd = {
       enable = true;
       qemu = {
@@ -11,7 +15,7 @@
 
     programs.virt-manager.enable = true;
 
-    users.users.avanderbergh.extraGroups = ["kvm" "libvirtd"];
+    users.users.${config.local.users.ownerName}.extraGroups = ["kvm" "libvirtd"];
 
     environment.systemPackages = with pkgs; [
       cdrkit
