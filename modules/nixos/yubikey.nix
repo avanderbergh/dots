@@ -3,16 +3,18 @@
     # Enable smartcard daemon for YubiKey
     services.pcscd.enable = true;
 
-    # Add udev rules for YubiKey
+    # Add udev rules for YubiKey and FIDO2 tokens
     services.udev.packages = with pkgs; [
-      yubikey-personalization
+      libfido2
       libu2f-host
+      yubikey-personalization
     ];
 
     # Add YubiKey related packages
     environment.systemPackages = with pkgs; [
-      yubikey-personalization
+      libfido2
       yubikey-manager
+      yubikey-personalization
     ];
 
     # We use a socket directory that persists across reboots
