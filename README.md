@@ -68,9 +68,3 @@ If a raw helper file is ever needed under an imported tree, place it under a pat
 
 The local disk backup policy and recovery instructions are in
 [docs/LOCAL_BACKUP.md](docs/LOCAL_BACKUP.md).
-
-### Import GPG Keys
-
-```sh
-gpg --keyserver keyserver.ubuntu.com --recv-keys 741eda0a1f942978d0e612ed938036d74671d8d5
-```

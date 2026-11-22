@@ -1,26 +1,19 @@
 {
   flake.modules.nixos.yubikey = {pkgs, ...}: {
-    # Enable smartcard daemon for YubiKey
+    # Enable smartcard daemon for YubiKey PIV (age-plugin-yubikey) and ykman.
     services.pcscd.enable = true;
 
-    # Add udev rules for YubiKey and FIDO2 tokens
+    # Add udev rules for YubiKey and FIDO2 tokens.
     services.udev.packages = with pkgs; [
       libfido2
       libu2f-host
       yubikey-personalization
     ];
 
-    # Add YubiKey related packages
+    # Add YubiKey and FIDO2 management packages.
     environment.systemPackages = with pkgs; [
       libfido2
       yubikey-manager
-      yubikey-personalization
     ];
-
-    # We use a socket directory that persists across reboots
-    programs.gnupg.agent.settings = {
-      default-cache-ttl = 3600;
-      max-cache-ttl = 7200;
-    };
   };
 }

@@ -6,7 +6,6 @@
   inherit (config.flake.modules) nixos;
 in {
   flake.modules.nixos.base = {
-    lib,
     modulesPath,
     pkgs,
     ...
@@ -39,12 +38,6 @@ in {
 
     programs = {
       fish.enable = true;
-      gnupg.agent = {
-        enable = true;
-        pinentryPackage = lib.mkDefault pkgs.pinentry-curses;
-        enableSSHSupport = true;
-        enableExtraSocket = true;
-      };
       nix-ld = {
         enable = true;
         libraries = with pkgs; [
@@ -66,9 +59,7 @@ in {
       systemPackages = with pkgs; [
         git
         parted
-        pass
         pciutils
-        pinentry-all
         sbctl
       ];
     };

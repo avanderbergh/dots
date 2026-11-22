@@ -18,8 +18,6 @@
       # xdg-document-portal requires fusermount3 to hand selected files back to
       # portal clients such as Chrome.
       fuse.enable = true;
-
-      gnupg.agent.pinentryPackage = pkgs.pinentry-gnome3;
     };
 
     services.upower.enable = true;
@@ -27,7 +25,7 @@
     services = {
       gnome = {
         gnome-keyring.enable = true;
-        # Keep keyring secrets support, but avoid stealing SSH_AUTH_SOCK from gpg-agent.
+        # Keep keyring secrets support, but avoid stealing SSH_AUTH_SOCK from OpenSSH ssh-agent.
         gcr-ssh-agent.enable = false;
       };
     };

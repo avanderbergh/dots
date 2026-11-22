@@ -1,5 +1,7 @@
 {
   flake.modules.homeManager."profile-ssh" = _: {
+    services.ssh-agent.enable = true;
+
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
@@ -12,6 +14,10 @@
           ServerAliveCountMax = 3;
           Compression = false;
           AddKeysToAgent = "yes";
+          IdentityFile = [
+            "~/.ssh/id_ed25519_sk_primary"
+            "~/.ssh/id_ed25519_sk_backup"
+          ];
           HashKnownHosts = false;
           UserKnownHostsFile = "~/.ssh/known_hosts";
           ControlMaster = "no";
