@@ -18,10 +18,21 @@ in {
       description = "Systems exposed through flake-parts perSystem outputs.";
     };
 
-    ownerSshKey = mkOption {
+    ownerSshKeys = mkOption {
+      type = types.listOf types.str;
+      default = [
+        # Primary YubiKey 5C NFC (FIDO2 resident ed25519-sk)
+        "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIHkQacpGJ9DDm7jMUbmFZ3ymdgU9br6j/riAvV39dyIpAAAABHNzaDo= avanderbergh@yk5-15282904"
+        # Backup YubiKey 5C (FIDO2 resident ed25519-sk)
+        "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIGBANjFRrz+t95yrXcsQwnpNTWu+RRmh8wm/xyK75mtxAAAABHNzaDo= avanderbergh@yk5-13075747"
+      ];
+      description = "Owner SSH public keys shared across authorized_keys and Git allowed_signers.";
+    };
+
+    ownerGitSigningKey = mkOption {
       type = types.str;
-      default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC70ed167oK/Ka8JTMCLF3mH+kUO7SRirjkFRu4zRgQBhTVTVwuHm8TLi0Jzs+PBbTBXDlomSTS5ft6hs4xt+VQagRh2mrekfPGbAeE9NBWhHhujkMu4jT9q4nS6qTzaw9m+LiwXpZz0SP6SV9jFL78TTFUqtSAF2qSHIOHDVJFYra2Co0UHeJv1zYKx3bVJ5KXOXzP7jgNKDk6o5xtoS0owL3jxXPdpbr1qV3jAQik5acH0NYaNgbgwVoHEMJ14O5GzH705wTZR0ljW1Ysl+/tqY0mRhwMneyPp6tyzgF56UMSjfTCJCCGPwJxYnhEOm1D3tB2f2ZARmcLCknWF1LzCCKKyR5qULv3ffQ8U+3R56051QHh9Qjt+5dDWuRnj1m2Zd2WbfUl0ZtejKWTPzXLE6ABb9SX7eNbFonK+3mRLLvrFd+pFIAKmDORVPVBhy/na/1C//HotmzlAQ4nwRVGzXVvjiZIrEHfdbrCBQO3aYFIFSWqwckRuO3fjya4N8lVigq+LqavrcuGdBdg2/Y+HCvSzQxBKPgzGdjPACpIraQHG7LwigCRnDNB4myIoni40bdR7OHh3ZL4315mxscbhyjdKuBuMQI8U4An059MR29AqLU8KplSooPSEs1ERJ8XKnJeFK16W4s08+zVExJNDJm8dXAQJXbgIPKPepO0Mw==";
-      description = "Owner SSH public key shared across authorized_keys and Git commit signing.";
+      default = builtins.head config.dots.ownerSshKeys;
+      description = "Owner SSH public key used as the default Git commit signing key.";
     };
 
     hostConfigs = mkOption {

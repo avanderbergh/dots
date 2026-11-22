@@ -1,5 +1,5 @@
 {config, ...}: let
-  inherit (config.dots) ownerSshKey;
+  inherit (config.dots) ownerGitSigningKey ownerSshKeys;
 in {
   flake.modules.homeManager."profile-git" = {
     config,
@@ -7,9 +7,9 @@ in {
     pkgs,
     ...
   }: let
-    allowedSignersFile = pkgs.writeText "git-allowed-signers" ''
-      avanderbergh@gmail.com ${ownerSshKey}
-    '';
+    allowedSignersFile = pkgs.writeText "git-allowed-signers" (
+      lib.concatMapStrings (key: "avanderbergh@gmail.com ${key}\n") ownerSshKeys
+    );
   in {
     programs.git = {
       enable = true;
@@ -25,7 +25,7 @@ in {
       };
       signing = {
         format = "ssh";
-        key = "key::${ownerSshKey}";
+        key = "key::${ownerGitSigningKey}";
         signByDefault = true;
       };
     };

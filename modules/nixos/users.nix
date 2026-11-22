@@ -1,5 +1,5 @@
 {config, ...}: let
-  inherit (config.dots) ownerSshKey;
+  inherit (config.dots) ownerSshKeys;
 in {
   flake.modules.nixos.users = {
     config,
@@ -35,7 +35,7 @@ in {
         ];
         shell = pkgs.fish;
         hashedPasswordFile = "/persist/passwords/${owner}";
-        openssh.authorizedKeys.keys = [ownerSshKey];
+        openssh.authorizedKeys.keys = ownerSshKeys;
       };
     };
   };

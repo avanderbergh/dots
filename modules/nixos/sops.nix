@@ -22,6 +22,4 @@
       pkgs.sops
     ];
   };
-
-  flake.modules.homeManager."integration-sops" = inputs.sops-nix.homeManagerModules.sops;
 }

@@ -2,7 +2,6 @@
   hm = config.flake.modules.homeManager;
 
   shared = [
-    hm."integration-sops"
     hm."user-avanderbergh"
     hm."profile-console"
     hm."profile-git"

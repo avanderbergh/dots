@@ -13,7 +13,6 @@
         "/var/lib/tailscale"
         "/var/lib/systemd"
         "/var/lib/upower"
-        "/root/.gnupg"
       ];
       files = [
         "/var/lib/NetworkManager/secret_key"
