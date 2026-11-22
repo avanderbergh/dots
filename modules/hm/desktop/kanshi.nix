@@ -1,28 +1,52 @@
 {
-  flake.modules.homeManager."profile-desktop-kanshi" = _: {
+  flake.modules.homeManager."profile-desktop-kanshi" = {
+    config,
+    lib,
+    ...
+  }: let
+    homeMonitor = "Samsung Electric Company C49RG9x H1AK500000";
+    homeMode = "5120x1440";
+    homeScale = 4.0 / 3.0;
+
+    # Niri replaces its live output configuration when kanshi applies a
+    # profile. Restore the mode for the disconnected Samsung before hotplug.
+    restoreHomeMode = lib.escapeShellArgs [
+      (lib.getExe config.wayland.windowManager.niri.package)
+      "msg"
+      "output"
+      homeMonitor
+      "mode"
+      homeMode
+    ];
+  in {
+    # Initialize the DRM surface at the native mode so Niri can retry buffer
+    # allocation with a compatible modifier before the kanshi profile applies.
+    wayland.windowManager.niri.settings._children = [
+      {
+        output = {
+          _args = [homeMonitor];
+          mode = homeMode;
+          scale = homeScale;
+        };
+      }
+    ];
+
     services.kanshi = {
       enable = true;
-      # Output names are intentionally aligned with the old autorandr setup.
-      # If names differ on first boot, update with: niri msg outputs
+      # Match external displays by EDID so the profiles survive USB-C port
+      # changes and DRM connector renumbering.
       settings = [
         {
           profile = {
             name = "mobile";
+            exec = restoreHomeMode;
             outputs = [
               {
-                criteria = "eDP-1-1";
+                criteria = "eDP-1";
                 status = "enable";
                 mode = "3840x2400";
                 position = "0,0";
                 scale = 2.0;
-              }
-              {
-                criteria = "DP-1-1";
-                status = "disable";
-              }
-              {
-                criteria = "DP-1-3";
-                status = "disable";
               }
             ];
           };
@@ -32,18 +56,18 @@
             name = "home";
             outputs = [
               {
-                criteria = "DP-1-1";
+                criteria = homeMonitor;
                 status = "enable";
-                mode = "5120x1440";
+                mode = homeMode;
                 position = "0,0";
-                scale = 1.0;
+                scale = homeScale;
               }
               {
-                criteria = "eDP-1-1";
+                criteria = "eDP-1";
                 status = "enable";
-                mode = "1920x1200";
-                position = "5120,0";
-                scale = 1.0;
+                mode = "3840x2400";
+                position = "3840,0";
+                scale = 2.625;
               }
             ];
           };
@@ -51,19 +75,20 @@
         {
           profile = {
             name = "portable_monitor";
+            exec = restoreHomeMode;
             outputs = [
               {
-                criteria = "eDP-1-1";
+                criteria = "eDP-1";
                 status = "enable";
                 mode = "3840x2400";
                 position = "0,0";
                 scale = 2.0;
               }
               {
-                criteria = "DP-1-3";
+                criteria = "* M173F01 *";
                 status = "enable";
                 mode = "1920x1080";
-                position = "3840,0";
+                position = "1920,0";
                 scale = 2.0;
               }
             ];

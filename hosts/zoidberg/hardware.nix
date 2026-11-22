@@ -44,11 +44,20 @@
       };
 
       nvidia = {
-        open = true;
-        powerManagement.enable = true;
+        # Turing needs the proprietary module without GSP for runtime D3.
+        open = false;
+        gsp.enable = false;
+        moduleParams.nvidia.NVreg_EnableGpuFirmware = 0;
+        powerManagement = {
+          enable = true;
+          finegrained = true;
+        };
         prime = {
-          offload.enable = false;
-          sync.enable = true;
+          offload = {
+            enable = true;
+            enableOffloadCmd = true;
+          };
+          sync.enable = false;
           nvidiaBusId = "PCI:1:0:0";
           intelBusId = "PCI:0:2:0";
         };
