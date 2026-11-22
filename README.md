@@ -68,3 +68,17 @@ If a raw helper file is ever needed under an imported tree, place it under a pat
 
 The local disk backup policy and recovery instructions are in
 [docs/LOCAL_BACKUP.md](docs/LOCAL_BACKUP.md).
+
+### YubiKey SSH & SOPS (New Machine Setup)
+
+SSH keys are FIDO2 resident `ed25519-sk` credentials stored on the YubiKeys, and user-level `sops` loads the plugged-in YubiKey PIV slot dynamically via `age-plugin-yubikey --identity` (no local SOPS key file required).
+
+On a freshly provisioned machine, plug in a YubiKey and run:
+
+```sh
+# Immediate session access (no local stub file needed):
+ssh-add -K
+
+# Or download the local key handle stub so ssh-agent auto-loads it on boot:
+mkdir -p ~/.ssh && chmod 700 ~/.ssh && (cd ~/.ssh && ssh-keygen -K)
+```
